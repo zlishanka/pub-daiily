@@ -1,0 +1,68 @@
+# CUDA fundamentals 
+
+	Source - https://www.youtube.com/watch?v=4APkMJdiudU&list=PLC6u37oFvF40BAm7gwVP7uDdzmW83yHPe
+
+	## CPU - Designed to minimize latency 
+		- majority of silicon area dedicated to 
+			- Advanced Control Logic
+			- Large on-chip cache
+			- works well for general purpose program like OS
+
+	
+	## GPU - designed to maximize throughput
+		- majority of silicon area dedicated to
+			- Massive number of Cuda cores
+			- well suited to data parallel computations 
+			- memory access latency can be hidden with calculation instead of big caches
+			- program must be decomposed into a large number of threads that can be run concurrently
+			- In Cuda, these threads are defined by special functions called kernels
+
+
+		### Kernels
+			- functions that run on the GPU
+			- execution of a kernel is called launching a kernel 
+			- kernels execute as a set of "threads"
+
+		### Thhreads
+			- Each thread is mapped to a single CUDA core on the GPU
+			- CUDA is designed to execute 1000's of Threads
+			- CUDA threads execuate in a SIMD fashion
+				- Nvidia calls this SIMT (Single Instruction Multiple Thread)
+			- Threads are similar to data-parallel tasks 
+				- each thread performs the same operation on a subset of data
+				- threads execute independently
+			- Threads do not execute at the same rate
+				- Different paths taken in if/else statements
+				- Different number of iterations in a loop, etc. 
+
+			#### Organization of Threads (Hierarchy of threads, thread --> block --> grid)  
+				- Threads 
+					- each kernel (thread) is launched on a "single Cuda core" for individual data set
+				- Blocks 
+					- Threads are grouped into blocks
+					- when kernel launched, blocks are mapped to a "set of Cuda cores"
+				- Grids
+					- Blocks are grouped into Grids
+					- Each kernel launch creates a single Grid which is mapped onto the entire GPU and its memory 
+
+			#### Dimensions of Grids and Blocks
+				- Grid Dimension
+					- Block structure of each Grid
+					- 1D,2D or 3D
+
+				- Block dimension
+					- Thread structure of each block
+					- 1D,2D or 3D
+
+	## CUDA programming model
+		- two main hardware pieces are CPU & GPU  (connected thru PCI-Bus) 
+			- Host: CPU + its on chip memory 
+			- Device: GPU + dedicated RAM  
+		- each has its own dedicated memory
+		- Want offload massive parallel portions of code on the GPU
+		- "Heterogeneous" parallel programming
+			- Host + Device, take advantage of the best of each
+		- CUDA 
+			- C with extensions
+			- allows for Heterogeneous programming  
+		 

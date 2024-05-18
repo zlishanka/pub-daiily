@@ -1,0 +1,63 @@
+# Telesurgery communication stacks 
+
+	## Communication Stacks:
+
+		### WebRTC (Web Real-Time Communication) 
+			- free, open-source framework allowing browsers to handle audio, video, and data channels directly. 
+			- It offers low latency communication and is a great choice for peer-to-peer connections.
+			- Libraries like aiortc (Python) or easyrtc (Javascript) can simplify WebRTC integration.
+			
+			#### Native WebRTC library
+				- To use webRTC in your desktop application, you'll need a library that provides 
+					"bindings for your chosen programming language". Here are some popular options:
+
+				- C++: The official WebRTC library (https://webrtc.github.io/webrtc-org/native-code/native-apis/) 
+						offers the most comprehensive functionality.
+				- Python: aiortc (https://github.com/topics/webrtc?l=python) is a good choice for asynchronous programming.
+				- C#: SipSorcery (https://github.com/sipsorcery-org) offers WebRTC capabilities along with 
+					other communication features.
+				- Go: Pion (https://github.com/pion/webrtc) is a well-maintained library for WebRTC integration.
+				- Rust: Webrtc-rs (https://github.com/webrtc-rs/webrtc) provides a modern approach for Rust developers.
+				
+
+		### Signaling Server
+			- WebRTC requires a signaling server to establish connections between peers.
+			- facilitates communication about session creation,
+			- exchanging ICE candidates (connection details), 
+			- and negotiation of media types. 
+
+			- You can build your own server using "frameworks like Socket.IO or XMPP", 
+				or leverage services from "providers like Agora.io or Twilio". 
+			- These services offer pre-built signaling infrastructure and additional features like recording and encryption.
+
+		### Security
+			- Implement strong encryption for both data and signaling channels using libraries like SRTP (https://datatracker.ietf.org/doc/html/rfc3711).
+			
+		### Network Management: 
+			- Address potential issues like firewalls and NAT traversal that might hinder peer-to-peer connections. 
+				Consider using libraries like STUN/TURN servers for assistance.	
+
+	## User interfaces
+
+		### Basic video call interface 
+		- This is the foundation, allowing users to see and hear each other. 
+		- Popular open-source libraries can be used to build a cross-platform desktop application.
+			- like "Electron" or 
+			- "Qt, GTK"
+
+		### VR integration
+		- For VR functionality, consider using "Unity or Unreal Engine"
+		- These game development engines have VR toolkits that can integrate with your communication stack 
+			for a more immersive experience.
+
+		### Text chat 
+		- A simple chat window using standard UI elements will suffice. 
+		- Consider adding features like emojis and file sharing for a richer experience. 
+
+
+	## Integrate the Library and Server
+	
+		### Develop the Communication Logic
+			- Use the WebRTC library's functions to handle media capture (audio/video)
+			- connection establishment (using the signaling server), 
+			- "data channel" creation for text chat, and media stream management.	

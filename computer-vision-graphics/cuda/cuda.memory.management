@@ -1,0 +1,66 @@
+#  CUDA memory management
+
+	Source - https://developer.ridgerun.com/wiki/index.php/NVIDIA_CUDA_Memory_Management
+
+	CUDA memory management programming paradigm, specially for Jetson TX2 and Xavier board
+
+	## Zero-Copy Memory (ZC)
+
+		- Enables GPU threads to directly access host memory (CPU)
+		- In this programming model CPU and GPU use pinned memory (i.e, same physical memory).
+		
+		// Set flag to enable zero copy access
+		cudaSetDeviceFlags(cudaDeviceMapHost);
+		// Allocate host memory using CUDA allocation calls
+		cudaHostAlloc((void **)&h_in,  sizeIn,  cudaHostAllocMapped);
+		cudaHostAlloc((void **)&h_out, sizeOut, cudaHostAllocMapped);
+
+		// Get device pointer from host memory. No allocation or memcpy
+		cudaHostGetDevicePointer((void **)&d_in,  (void *) h_in , 0);
+		cudaHostGetDevicePointer((void **)&d_out, (void *) h_out, 0);
+ 
+		// Launch the GPU kernel
+		kernel<<<blocks, threads>>>(d_out, d_in);
+
+		// No need to copy d_out back
+		// Continue processing on host using h_out 
+
+
+	## Unified Memory Programming (UM)
+
+		- the CPU and the GPU could share a coherent "virtual" memory region with a common address space
+		- UM eliminates the need for explicit data copy routines (cudaMemcpy*)
+		- Data movement, of course, still takes place, so a program’s "run time typically does not decrease"
+		- benefit of UM programming is to enable the "writing of simpler and more maintainable code".
+
+
+		__global__ void add(int n, float *x, float *y)
+		{
+		 int index = blockIdx.x * blockDim.x + threadIdx.x;
+		 int stride = blockDim.x * gridDim.x;
+		 for (int i = index; i < n; i += stride)
+		   y[i] = x[i] + y[i];
+		}
+
+		// Allocate Unified Memory -- pointers accessible from CPU or GPU
+ 		cudaMallocManaged(&x, N*sizeof(float));
+ 		cudaMallocManaged(&y, N*sizeof(float));
+
+		// initialize x and y arrays on the host (CPU)
+ 		for (int i = 0; i < N; i++) {
+   			x[i] = 1.0f;
+   			y[i] = 2.0f;
+ 		}		
+
+		// Launch kernel on 1M elements on the GPU
+ 		int blockSize = 256;
+ 		int numBlocks = (N + blockSize - 1) / blockSize;
+ 		add<<<numBlocks, blockSize>>>(N, x, y);
+
+		// Wait for GPU to finish before accessing on host**
+ 		cudaDeviceSynchronize();
+
+	## NVIDIA Jetson AGX Xavier
+		
+		- Starting with CUDA 9.x, and from Xavier on, "cache coherence" between CPUs and GPU is done via hardware through the the host (CPU) cache.
+		- Zero-copy memory programming can be used to share physical memory between processing units,

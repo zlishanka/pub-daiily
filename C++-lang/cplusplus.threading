@@ -1,0 +1,63 @@
+# C++ Threading 
+	
+	source - https://www.youtube.com/watch?v=LL8wkskDlbs&list=RDCMUCEOGtxYTB6vo6MQ-WQ9W_nQ&index=1
+
+	## Process vs thread
+		- Process, interprocess communication: pipe, file, message queue, socket etc. 
+		- Thread, lightweight process, shared memory
+			- Pros: Fast to start, (shared memory vs interprocess comm)  low overhead
+			- Cons: Difficult to implement, can't run on distributed system
+
+	## Thread management
+		- Thread by default is passing by value
+		- if want to pass by reference, need to use std::ref()
+			thread t1(func, std::ref(arg)); 
+		- g++ -std=c++17 
+		- How many threads to run in parallel? 
+			- std::thread::hardware_concurrency(); # indication of number of thread 
+
+	## Data race and mutex
+		- always use lock_guard to prevent possible exception   
+			- std::mutex mtx; 
+			  std::lock_guard<std::mutex> lck (mtx);
+
+	## Deadlock 
+		- to avoid deadlock, prefer locking single mutex;
+		- to avoid locking a mutex and then calling a user provided function
+		- lock the mutex in the same order 
+			std::Mutex mu1, mu2;	
+			std::lock(mu1, mu2);
+
+	## unique_lock<std::mutex> 
+	
+	## Conditional variables 
+		- avoid busy waiting
+		- synchronize the threads on acquaring data 
+		- use 
+			std::condition_variable cond;
+			cond.notify_one();  // notify one waiting thread, if there is one 
+			cond.notify_all(); 
+
+			std::lock_guard<mutex> lck(mu1, std::adopt_lock); 
+			std::lock_guard<mutex> lck(mu2, std::adopt_lock); 
+	
+	## Future and Promise and async() 
+		- use async to launch thread, to get promise, main thread will wait until the promise is realized in future
+		- std::future<int> fu = std::async(std::launch::deferred | std::launch::async, factorial, 4); 
+			std::launch::async -  create seperate thread
+			std::launch::deferred - not creating thread
+			std::launch::deferred | std::launch::async  - runtime TBD
+
+		- std::promise<int> p; 
+		- std::future<int> f = p.get_future();
+
+		- std::future<int> fu = std::async(...) ; 
+		  p.set_value(4); // async will starts to run once promise it set
+		  fu.get() // future to get the promise value that was set 
+
+		- if promised is not realized, exception (std::future_errc::broken_promise) would be thrown
+
+		- shared_future() = f.share()	
+
+	## Using callable objects
+		-  

@@ -1,0 +1,38 @@
+## C++ Programming best practices 
+
+    - Google's C++ Programming style guide 
+        https://google.github.io/styleguide/cppguide.html 
+
+    - Effective Modern C++ 
+        Scott Meyers  
+
+
+    # Examples of best practices 
+
+        - use deque<bool> for boolean arrays, rather than vector<bool>. The latter is not an STL container, and does not really hold bools. 
+
+        - Input arguments to functions are either values or const references. 
+
+    # C++11 constructs 
+
+        - the auto attribute assigns the type of a variable based on the initializer expression 
+        - The enhanced range-based for-loop for easy insertion over list of elements 
+        - The emplace_front and emplace_back methods add new elements to the beginning and end of the container. 
+        - The array type is similar to ordinary arrays, but supports .size() and boundary checking
+        - The tuple type implements an ordered set. 
+        - Anonymous functions ("lambdas") can be written via the [] notation. 
+        - An initializer list uses the {} notation to avoid having to make explicit calls to constructors when building list-like objects
+        
+    # C++ for Java developers 
+    
+        - Operators in C++ can be overloaded. i.e., < can be applied to comparing BigNumber objects. 
+        - Java's HashMap and HashSet corresponds to C++'s unordered_map and unordered_set, respectively
+        - Java's TreeMap and TreeSet corresponds to C++'s set and map.
+        - The :: notation is used to invoke a static member function or refer to a static field 
+        - C++ has built-in pair class used to represent arbitrary pairs
+        - a static_cast is used to cast primitive types, e.g., int to double, as well as an object to a derived class. 
+          The latter is not checked at runtime. THe compiler checks obvious incompatibilities at compile time. 
+        - A unique_ptr is a smart pointer that retains sole ownership of an object through a pointer and 
+          destroys that object when the unique_ptr goes out of scope 
+        - A shared_ptr is smart pointer with a reference count which the runtime system uses to implement automatic garbage collection
+        

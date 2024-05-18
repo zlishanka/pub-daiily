@@ -1,0 +1,657 @@
+## advanced python talk
+   from James Powell
+    https://www.youtube.com/watch?v=cKPlPJyQrt4 
+
+## find python module path 
+    python -c "import django; print(django.__path__)" 
+
+## python naming conventions 
+    https://www.python.org/dev/peps/pep-0008/ 
+    pep 8 -  Style guide for python code 
+    
+    Indentation - Use 4 spaces per indentation level 
+    Line length - Limit all lines to a maximum of 79 characters 
+    Blank lines - Surround top-level function and class definitions with two blank lines.
+    Source File Coding - Code in the core Python distribution should always use UTF-8 
+
+
+## logging
+     import logging
+     logging.basicConfig(filename=settings.EVENT_LOGGING, level=logging.INFO)
+     logging.info("%s [pid=%s] starts to ingest events to db...", str(datetime.now()), os.getpid())
+
+     - logging rotation and format setup
+
+      def logging_setup(log_file, log_level):
+        log_handler = logging.handlers.TimedRotatingFileHandler(log_file, when='midnight')
+        formatter = logging.Formatter(fmt='%(asctime)s.%(msecs)03d program_name [%(process)d]: %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+        formatter.converter = time.gmtime  # if you want UTC time
+        log_handler.setFormatter(formatter)
+        logger = logging.getLogger()
+        logger.addHandler(log_handler)
+        logger.setLevel(log_level)
+
+## multithreading  
+    import threading
+   
+    # worker thread 
+    def worker(arg):
+        t = threading.Thread(target=worker, args=(arg,))
+        t.start() 
+
+    # timer thread   
+    class ThreadTimerScheduler(object):
+        """Creates a recurring Timer thread and executes callback
+        at the specified interval.
+        """
+        def __init__(self, interval, callback):
+            self._timer = None
+            self.interval = interval
+            self.callback = callback
+
+        @property
+        def running(self):
+            return self._timer is not None
+
+        def start(self):
+            self.stop()
+            self._timer = threading.Timer(self.interval, self._execute)
+            self._timer.daemon = True
+            self._timer.start()
+
+        def stop(self):
+            if self._timer is not None:
+                self._timer.cancel()
+                self._timer = None
+
+        def _execute(self):
+            self.callback()
+            self.start()
+    
+## multiprocess
+
+   (1) through Popen
+
+     from subprocess import Popen
+     processes = [cmd1, cmd2,...,cmdn]
+     procs = [ Popen(proc, shell = True, stdout=subprocess.PIPE, stderr=subprocess.PIPE) for proc in processes ]
+     for p in procs:
+       out, err = p.communicate()
+     p.wait()
+       print out[0].split('\r')[-1]
+
+   (2) through Process
+
+    from multipleprocessing import Process
+
+    # Define an output queue
+    output = mp.Queue()
+
+    def worker(arg, output):
+      ...
+
+      ...
+      # output the worker's results to the queue, results should contain the data structure (likely a dict) to differentiate the process
+      output.put(results)
+      pass
+
+     #make worker function using dictionary as argument
+
+     args = [arg1, arg2, arg3...]
+     processes  = []
+     for arg in args:
+       p = Process(target = worker, args=(arg,))
+       p.start()
+       processes.append(p)
+
+     for p in processes:
+       p.join()
+
+     # Get process results from the output queue
+     results = [output.get() for p in processes] 
+
+##  flask framework
+   # flask is microframework for python based Werkzeug
+   from flask import Flask
+   from flask import request
+   from flask_restful import Api, Resource
+
+   app =  Flask(__name__)
+   api = Api(app)
+
+   # add endpoint for flask framework
+   api.add_resource(ProgramSchedulerResource, '/program/scheduler/heartbeat')
+   ....
+   # start up the restful service
+   app.run(threaded=True, debug=True, host=host, port=port)
+
+   class ProgramSchedulerResource(Resource):
+
+     def get(self):
+       ...
+     def put(self):
+
+## Python instantiate/import a data object from json object, export a data object to json object
+
+     class DataObject(object):
+
+       @staticmethod
+           def getAttributeFromJson(key, json_obj, default_value):
+             if json_obj.get(key, None) == None:
+               return default_value
+             else:
+               return json_obj[key]
+
+     class CSGOProMatchStaticInfoDataObject(DataObject):
+
+    def __init__(self):
+      self.v1 = None
+        self.v2 = ...
+
+        ...
+
+      def toJson(self):
+            return {
+              Key.k1 : self.v1,
+              Key.k2 : self.v2,
+              ...
+            }
+
+    @staticmethod
+    def fromJson(json_obj):
+      obj = CSGOProMatchStaticInfoDataObject()     # beatiful to intantiate a class object inside a static method of class itself !!!
+        try:
+              obj.v1 = json_obj[Key.k1]
+              obj.v2 = json_obj[Key.k2]
+              ...
+
+            except:
+              return False, None
+            return True, obj
+
+##  python static class (only instantiate once and only exsiting object)
+ 
+ class GamificationManager:
+   _initialized = False
+   _internal_data = ...
+ 
+   @staticmethod
+   def initialize():
+     if GamificationManager._initialized:
+       return True
+     success = GamificationManager._doing_internal_jobs
+     GamificationManager._intialized = success
+     return success 
+
+## install the latest python
+ 
+   sudo apt-get install build-essential checkinstall
+   sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+   Then download using the following command:
+ 
+   version=2.7.13
+   cd ~/Downloads/
+   wget https://www.python.org/ftp/python/$version/Python-$version.tgz
+   Extract and go to the directory:
+ 
+   tar -xvf Python-$version.tgz
+   cd Python-$version
+   Now, install using the command you just tried, using checkinstall instead to make it easier to uninstall if needed:
+ 
+   ./configure
+   make
+   sudo checkinstall
+   Change version to whichever version you need (version=2.7.1 or version=3.6.0, for example).
+ 
+   apt-cache policy python
+ 
+   python get-pip.py
+
+ ## creating a virtual environment (go to your project directory first)
+
+     python 2
+         python2 -m virtualenv env
+     python 3
+         python3 -m venv env
+
+
+    # activate a virtual environment
+
+     source env/bin/activate
+
+    # deactivate a virtual environment
+
+     deactivate
+
+## Installing Pipenv
+
+    pip install --user pipenv 
+
+## Installing virtualenv 
+
+    pip install virtualenv 
+
+    # test your installation 
+    
+    virtualenv --version
+
+## install pipenv to run env shell  
+    pip install pipenv  
+    pipenv shell 
+
+## install jupyter, matplotlib numpy pandas scipy scikit-learn 
+
+    pip3 install --upgrade jupyter matplotlib numpy pandas scipy scikit-learn 
+
+## instruction to get init_hook with visual studio and python package 
+    https://stackoverflow.com/questions/51095449/pylint-false-positive-e0401-import-errors-in-vscode-while-using-venv 
+
+
+## python interface 
+
+    # https://realpython.com/python-interface/
+    
+    Informal interfaces
+
+        class InformalParserInterface:
+            def load_data_source(self, path: str, file_name: str) -> str:
+                """Load in the file for extracting text."""
+                pass
+
+            def extract_text(self, full_file_name: str) -> dict:
+                """Extract text from the currently loaded file."""
+                pass
+
+        class PdfParser(InformalParserInterface):
+            """Extract text from a PDF"""
+            def load_data_source(self, path: str, file_name: str) -> str:
+                """Overrides InformalParserInterface.load_data_source()"""
+                pass
+
+            def extract_text(self, full_file_path: str) -> dict:
+                """Overrides InformalParserInterface.extract_text()"""
+                pass
+
+        >>> issubclass(PdfParser, InformalParserInterface)
+            True
+        >>> PdfParser.__mro__
+            (<class '__main__.PdfParser'>, <class '__main__.InformalParserInterface'>, <class 'object'>)
+
+    formal interfaces - Using abc.ABCMeta 
+   
+        class FormalParserInterface(metaclass=abc.ABCMeta):
+            @classmethod
+            def __subclasshook__(cls, subclass):
+            return (hasattr(subclass, 'load_data_source') and 
+                callable(subclass.load_data_source) and 
+                hasattr(subclass, 'extract_text') and 
+                callable(subclass.extract_text) or 
+                NotImplemented)
+
+            @abc.abstractmethod
+            def load_data_source(self, path: str, file_name: str):
+                """Load in the data set"""
+                raise NotImplementedError
+
+            @abc.abstractmethod
+            def extract_text(self, full_file_path: str):
+                """Extract text from the data set"""
+                raise NotImplementedError
+
+## python memory leak
+
+    http://tech.labs.oliverwyman.com/blog/2008/11/14/tracing-python-memory-leaks/ 
+    (1) some low level C library is leaking
+    (2) your Python code have global lists or dicts that grow over time, and you forgot to remove the objects after use
+    (3) there are some reference cycles in your app
+    # circular reference  
+        http://engineering.hearsaysocial.com/2013/06/16/circular-references-in-python/ 
+        objgraph.show_refs(
+            [e],
+            max_depth=4,
+            extra_ignore=[id(type(e)), id(e.args)], filename='/opt/build/ditto/ditto-reconstruction/objgraphs/exception-ref-graph-%s-full.png' % str(t0)
+        )
+
+
+
+    # use gdb debug the problem 
+
+    pdb ./myserver.py
+    import sys
+    (Pdb) r
+    (Pdb) import objgraph
+    (Pdb) objgraph.show_most_common_types(limit=20)
+        dict                       378631
+        list                       184791
+        builtin_function_or_method 57542
+        tuple                      55478
+        Message                    48129
+        function                   45575
+        instancemethod             31949
+        NonBlockingSocket          31876
+        NonBlockingConnection      31876
+        _socketobject              31876
+        _Condition                 28320
+        AMQPReader                 14900
+        cell                       9678
+
+    https://stackoverflow.com/questions/1435415/python-memory-leaks 
+
+    # pympler 
+    from pympler.tracker import SummaryTracker
+    tracker = SummaryTracker()
+        #some code you want to investigate ...
+    tracker.print_diff()
+
+    https://tech.buzzfeed.com/finding-and-fixing-memory-leaks-in-python-413ce4266e7d
+    https://docs.python.org/3/library/tracemalloc.html 
+
+    # show_refs 
+        objgraph.show_refs(), # show 
+
+    # garbage collector 
+        gc.is_tracked() 
+        gc.collect()
+
+    # tracemalloc 
+
+    # handle exception leak in python  
+        https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+
+    # nicely clear exception tracebacks to fix memory leak
+        except ScalingFailedError as e:
+            e.__traceback__ = None
+
+        Fix a memory leak that occurred when running repeated reconstructions where the card or iris detection failed on the scale frame. The leak appears to be related to cyclic references 
+        within stack traces stored by the exceptions as described here (https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/).
+
+        When the card/iris detection fails, wait_for_scale_frame_detection() raises an exception which is caught in the main body of reconstruction_and_scale_from_cdr() in init.py. 
+        The stack frame where the exception was caused is attached to this exception and because of the cyclic reference issue, the exception is not cleaned up by the garbage collector 
+        once it falls out of scope and the memory associated with that stack frame is never deallocated.
+
+        The fix is to set the traceback member of the exception to None after the exception is handled. This allows the garbage collector to clear that memory.
+## Python gdb to check with core dump
+
+    apt-get install python2.7-dbg 
+    apt-get install python3.6-dbg
+
+    gdb python3.6-dbg core-dump-file
+
+
+## Install Pyenv 
+
+    # install pyenv on ubuntu linux 
+        - https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
+        pyenv install --list 
+        ~/.pyenv/versions/3.6.0/
+
+    # show what versions are currently installed 
+        ls ~/.pyenv/versions/ 
+
+    (1) install pyenv, pyenv-virtualenv  
+        brew install pyenv 
+        brew install pyenv-virtualenv 
+
+    (2) add env var to .pyenv_rc (i.e. .bash_profile): 
+
+        export PYENV_ROOT="$HOME/.pyenv" 
+        eval "$(pyenv init -)" 
+        eval "$(pyenv virtualenv-init -)"
+
+    (3) At top level ~/.bash_profile  
+         source ~/.pyenv_rc  
+
+    (4) Install different versions of python using pyenv  
+        pyenv install 3.7.2  
+        pyenv install 2.7.16 
+
+    (5) set global and local  
+        pyenv global 3.7.2
+
+    (6) To set a Python version for a specific project, cd into your project and then run:
+        pyenv local <python-version>  
+
+    (7) install virtualenvwrapper 
+         pip install virtualenvwrapper 
+
+    (8) set environment variables 
+            export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+            export WORKON_HOME=$HOME/.venvs
+            pyenv virtualenvwrapper_lazy 
+
+    (9) mkvirtualenv
+        deactivate  3.8.2_venv
+        workon 3.8.2_venv
+        rmvirtualenv 
+
+
+# Create Virtual Environment 
+https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtualenv-ec583b92934c 
+
+    pyenv virtualenv <python-version> <name>
+    pyenv install 3.7.2     # install python version 
+    pyenv virtualenv 3.7.2 django-2.2   # create new virtual environment 
+    pyenv activate django-2.2           # activate virtual environment 
+    pip install django==2.2             # install the package on this new virtual environment 
+    pyenv deactivate                    # deactivate current virtual environment
+
+
+# use system python version 
+
+    pyenv local system 
+
+# Celery (software) 
+    Celery is an open source asynchronous task queue or job queue which is based on distributed message passing. While it supports scheduling, its focus is on 
+    operations in real time. 
+
+    The execution units, called tasks, are executed concurrently on one or more worker nodes using multiprocessing, eventlet 
+
+    Tasks can execute asynchronously (in the background) or synchronously (wait until ready). Celery is used in production systems, for instance Instagram, 
+    to process millions of tasks every day
+   
+     https://realpython.com/asynchronous-tasks-with-django-and-celery/ 
+
+# uWSGI 
+
+    - uWSGI is a software application that "aims at developing a full stack for building hosting services".
+    - It is named after the Web Server Gateway Interface (WSGI), kwhich was the first plugin supported by the project.  
+    - uWSGI is often used for serving Python web applications in conjunction with web servers such as Cherokee 
+      and Nginx, which offer direct support for uWSGI's native uwsgi protocol.
+
+    - uWSGI is a fast, self-healing and developer/sysadmin-friendly application container server coded in pure C. 
+    - use Django with uWSGI  https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/uwsgi/ 
+    - uWSGI operates on a client-server model. Your Web server (e.g., nginx, Apache) communicates with a django-uwsgi “worker” process to serve dynamic content.
+
+    Python/uWSGI
+
+        https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html 
+
+        uwsgi --http :9090 --wsgi-file foobar.py --master --processes 4 --threads 2
+
+    # Deploying Django
+ 
+        uwsgi yourfile.ini 
+    
+    # Deploying Flask
+    #   myflaskapp.py
+    #
+        from flask import Flask
+
+        app = Flask(__name__)
+
+        @app.route('/')
+        def index():
+            return "<span style='color:red'>I am app 1</span>"
+
+
+        uwsgi --socket 127.0.0.1:3031 --wsgi-file myflaskapp.py --callable app --processes 4 --threads 2 --stats 127.0.0.1:9191
+# full stack python 
+
+        - https://www.fullstackpython.com/uwsgi.html 
+        - https://uwsgi.readthedocs.io/en/latest/tutorials/Django_and_nginx.html 
+        - Configure nginx for your site
+            the upstream component nginx needs to connect to
+            upstream django {
+                # server unix:///path/to/your/mysite/mysite.sock; # for a file socket
+                server 127.0.0.1:8001; # for a web port socket (we'll use this first)
+            }
+
+
+# argparse (argument parsing) 
+
+        import argparse 
+
+        parser = argparse.ArgumentParser() 
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--host', '-H', help='host help')
+        parser.add_argument('--partner', '-p', help='partner help')
+        parser.add_argument('--api-version', '-A', help='api-version help')
+        args = vars(parser.parse_args()) 
+
+        if args['host'] is not None: 
+            HOST = args['host']
+
+# hivemind Singleton 
+
+        class AuthManager(object):
+            """Manages getting auth keys and checking for updates."""
+            __metaclass__ = Singleton
+
+
+# What does built-in class attribute __dict__ do in Python?
+
+        class MyClass(object):
+            class_var = 1
+
+        def __init__(self, i_var):
+            self.i_var = i_var
+
+    foo = MyClass(2)
+    bar = MyClass(3)
+
+    print MyClass.__dict__
+    print foo.__dict__
+    print bar.__dict__
+
+{'__module__': '__main__', 'class_var': 1, '__dict__': <attribute '__dict__' of 'MyClass' objects>, '__weakref__': <attribute '__weakref__' of 'MyClass' objects>, '__doc__': None, '__init__': <function __init__ at 0x0000000004E55CF8>}
+{'i_var': 2}
+{'i_var': 3}
+
+# functools.wraps()
+    This is a convenience function for invoking update_wrapper() as a function decorator when defining a wrapper function.  
+
+    from functools import wraps
+    def my_decorator(f):
+        @wraps(f)
+         def wrapper(*args, **kwds):
+             print 'Calling decorated function'
+             return f(*args, **kwds)
+         return wrapper
+
+    # example to have a time_taken wrapper 
+    def time_taken(fn):
+        @wraps(fn)
+        def wrapped(*args, **kwargs):
+            start = datetime.datetime.now()
+            fn(*args, **kwargs)
+            elapsed = (datetime.datetime.now() - start)
+            milliseconds_elapsed = elapsed.total_seconds() * 1000
+            print("Function %s elapsed %s "%(fn.__name__, milliseconds_elapsed))
+        return wrapped
+ 
+    @time_taken
+    def test_sleep_func():    
+
+## Pip usage 
+
+    # pip install from nexus private package servers 
+
+        pip install ditto-tupperware==1.2.0 --extra-index-url=https://artifacts.ditto.com/repository/pypi-release/simple --extra-index-url=https://artifacts.ditto.com/repository/pypi-test/simple 
+        pip install -e .   # manually install packages specified in setup.py
+        pip install ditto-math-library==2.0.2 --extra-index-url=https://artifacts.ditto.com/repository/pypi-release/simple 
+        pip install ditto-auth==3.0.1 --extra-index-url=https://artifacts.ditto.com/repository/pypi-release/simple --extra-index-url=https://artifacts.ditto.com/repository/pypi-test/simple 
+        pip install ditto-message==1.5.6 --extra-index-url=https://artifacts.ditto.com/repository/pypi-release/simple --extra-index-url=https://artifacts.ditto.com/repository/pypi-test/simple
+     
+    # pip reinstall 
+
+        pip install awscli --force-reinstall --upgrade --user
+        pip install --upgrade 
+        pip list                    # list installed packages 
+        pip search package_name     # Search package_name 
+        pip show package_name       # display detailed information of the package 
+        pip install -r requirements.txt     # install packages from a requirements file 
+        pip freeze > requirements.txt       # create a requirements.txt 
+        pip list --outdated
+        pip install -e path/to/package      # install a specified package in "editable" mode 
+# pip.conf (~/.pip/pip.conf) to point index server url 
+    [global]
+    format = columns
+    timeout = 60
+
+    extra-index-url =
+      https://artifacts.ditto.com/repository/pypi-release/simple
+      https://artifacts.ditto.com/repository/pypi-test/simple
+
+# indent whole block of code in vscode  
+    indent a whole block manually: select the whole block, and then click tab
+    if you want to indent backward, you do it with with shift + tab 
+
+# generate signature using ditto-auth
+    (1) get latest id, secrets 
+       aws s3 ls s3://ditto-configs-staging/auth/
+    (2) turn ditto-auth command like following 
+        python command_line.py -k ~/bin/published_20200617094250 -m user_ping_test -i 0fec203f26663312
+        user_ping_test.1598626585.zWCyxNJ49BlQGYtjW5nXoYgILPu_VQSv70sWQrgR9DzFpWDHviyBGsZHI2Z1MiFfBAXnKonTjqlSo4DoCkO-Jw
+
+# site packages 
+    - site-packages is the target directory of manually built Python packages. 
+    - When you build and install Python packages from source (using distutils, probably by executing python setup.py install), 
+    - you will find the installed modules in site-packages by default.
+    
+    # on Linux (i.e., ubuntu) machine
+        /usr/local/lib/python2.7/dist-packages/
+        exec-prefix/lib/pythonX.Y/site-packages 
+    # on deployed machine 
+      /home/cluster/venvs/farm/lib/python2.7/site-packages/ 
+        
+    # find site-packages 
+      python -m site --user-site
+      python -c "import site; print(site.getsitepackages())"
+
+    # python3.6 location 
+        /.local/lib/python3.6/site-packages/
+        /home/roy/.local/lib/python2.7/site-packages
+
+
+    # install python version say python3.9 
+        sudo apt update
+        sudo apt install software-properties-common 
+        sudo add-apt-repository ppa:deadsnakes/ppa
+        sudo apt install python3.9
+
+    # update python version as alternatives 
+
+        sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1 
+        sudo update-alternatives --config python3
+
+        sudo apt install python3.9-distutils 
+
+        sudo rm /usr/bin/python3
+        sudo ln -s python3.9 /usr/bin/python3
+
+    # force to reinstall pip3 
+
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        python3 get-pip.py --force-reinstall
+
+    # upgrade pip 
+        python3 -m pip install --user --upgrade pip
+
+	# install from requirements.txt
+		pip install --no-cache-dir -r requirements.txt 
+
+	# build CRUD API services with Python Django
+		https://dev.to/francescoxx/python-crud-rest-api-using-django-postgres-docker-and-docker-compose-4nhe
+
+    # find the import path
+    	importlib.util.find_spec('supervision')

@@ -1,0 +1,42 @@
+
+## Java is a general-purpose computer programming language originally developed by James Gosling.
+
+    concurrent         - high performance
+    class-based       - robust, secure
+    object-oriented  - simple, object-oriented and familiar
+    Cross-platform,   - architecture-neutral  “write once, run anywhere” - WORA
+
+
+## Portability
+
+    - Achieved by compiling the Java code into intermediate representation called Java bytecode, instead of directly to architecture-specific machine code.
+    - Java Bytecode are intended to be executed by a virtual machine (VM) written specifically for the host hardware
+    - End user uses Java Runtime Environment (JRE) or web browser (Java applets) to run 
+    - Just-in-Time (JIT) compilers to compile bytecodes into machine codes during runtime
+
+## Memory Management 
+
+    - Use automatic garbage collector to manage memory. 
+    - memory leak may still occur if a programmer's code holds a reference to an object that is no longer needed 
+    - Garbage collection may happen at any time. Ideally, it will occur when a program is idle. 
+    - It is guaranteed to be triggered if there is insufficient free memory on the heap to allocate a new object; 
+      this can cause a program to stall momentarily.
+    - For 90% of applications in Java, the Concurrent Mark-Sweep garbage collector is sufficient. Oracle aims to replace (CMS) with the Garbage-first collector (G1)
+
+## Data types 
+
+    java is statically typed and also a strongly typed language.   
+
+    primitive data types 
+        byte, short, int, long, float, double, boolean, char 
+    
+    Non-Primitive data types (Objective data types )
+        String, Class, Object, Interface, Array, 
+
+# HashMap works in Java 
+
+    A HashMap in Java stores key-value pairs. The HashMap requires a hash function and uses hashCode and equals methods, in order to put and 
+    retrieve elements to and from the collection respectively.
+
+
+

@@ -1,0 +1,17 @@
+## OpenGL Rendering Pipeline 
+
+    http://www.songho.ca/opengl/gl_pipeline.html 
+
+    # Two graphical information 
+        - Series of processing stages in order. 
+        - Two graphical information, vertex-based data and pixel-based data, are processed through the pipeline, combined together then written into the frame buffer. 
+        - Notice that OpenGL can send the processed data back to your application.
+
+    
+    # Vertex Operation 
+
+        - Vertex Operation Each vertex and normal coordinates are transformed by GL_MODELVIEW matrix (from object coordinates to eye coordinates).
+
+    # Primitive Assembly 
+
+        - After vertex operation, the primitives (point, line, and polygon) are transformed once again by projection matrix then clipped by viewing volume clipping planes; from eye coordinates to clip coordinates

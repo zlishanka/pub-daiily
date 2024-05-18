@@ -1,0 +1,227 @@
+Source - https://www.youtube.com/watch?v=bFtkHJy9kIU
+
+# What Is actual Use Of friend Function And Classes In C++?
+	- friend fuction must to be declared in the class definition
+	class Base { 
+		int x;
+	public:
+		Base() {}
+		Base(int x): x(x) {}
+		friend void fun(Base &);
+	}
+	
+	void fun (Base &obj) {
+		obj.x = 20;		# friend function can access private member x
+	}   
+
+# auto Keyword In C++11
+	- used for type detection
+	- compiler will generate int for x, double for y, Base obj for b
+	-  auto x = 20; auto y = 20.5; auto b = Base(); 
+		typeid(x).name:  i typeid(y).name: d typeid(b).name : 4Base
+
+# Code Bloating
+	- waste of initialization
+	- unnecessary writing extra code
+	- string str("Exit")
+	  cout << str << endl;
+	- "inline" function defined in class definition (waste of mem)
+
+# const_cast in C++, const_cast<T>
+	- can be used to change "const or volatile" qualifiers of pointers or references	 
+	- T must be a pointer, reference, or pointer-to-member
+	- use only when the actual refered object/variable is not const
+	- often use with third-party API as "non-const"
+	- int a1 = 10;
+	  const int *b1 = &a1;
+	  int *d1 = const_cast<int*> (b1);
+      *d1 = 15; // valid, not valid if "const int a1"
+
+# decltype 
+	- used to check the type of expression
+	- template<typename T1, typename T2> 
+	  auto add(T1 a, T2 b) -> decltype(a+b) {
+         return a+b;
+      }
+
+# Difference between reference and pointer in C++
+	- int i = 10; int *p = nullptr; int &r = i;
+	- p = &i; // "allowed"
+	- r = i; // not "allowed"
+	- cannot initialize nullptr to reference 
+	- reference not allowed for "arithmtic op", p++
+
+# dynamic_cast<new type> 
+	- used at run time to find out correct down-cast
+	- base --> derived (up-cast), drived --> base down-cast
+	- need at least one "virtual function" in base class
+
+# What is explicit constructor in C++
+	- it avoids implicit call to the constructor
+	- class Base { int b_var; public: Base(int var) : b_var(var) {}};
+	- "explicit Base (int var) : b_var(var) {}"
+	- Base obj1(10);
+	  Base obj2 = 20  // "implicit call to constructor"
+
+# extern c in C++
+	- include C code in C++
+	- extern "C" {
+		#include "cfile.h"
+	  }
+
+# What is function chaining 
+	- it gives good code analysis power, show the sequence
+	- class Base { int _a, _b; public: Base& seta(int a) {_a = a; return *this;} Base& setb(int b) {_b=b; return *this;} void print() {}};
+	- return "*this" pointer  
+	- Base b; b.seta(5).setb(9).print()
+	- in order to call print, you have to call both seta and setb
+
+# What is function hiding
+	- Base and derived class both have the same named non-virtual function
+	- Derived class object always call its own
+	- Base class function is then hidden
+	- d.Base::fun(1) , the way to call Base class functions
+	- "using Base::fun"; to make it "overloading" in derived class
+ 
+# Function pointer in C++
+	- int add (int a , int b) {return a+b;}
+	- int (*fun) (int, int) = add; // "function pointer fun"
+	  int c = (*fun) (1,2);
+	- passing function pointer as parameter
+	- int fun1 (int (*somefun) (int, int)) {
+	  		int c = somefun(1,2);
+		    return c;
+	  }
+	  void main() { int c = func1(add);}
+	- array of function pointers
+		typedef int(*mathFun) (int, int);
+	    mathFun Arr[2] = {add, sub}	
+	 
+# Functor in C++
+	- it works as function, and achieved by overloading "operator ()" in some class
+	- class Mul { int _val; public: Mul() {} Mul(int val): _val{val} {} int operator() (int val) { return val*_val;}}
+	- int operator() (int val) {
+		return val*_val;
+	  }
+         
+# How to delete[] know how many objects to delete
+	- Base *bp = new Base[n];
+	  delete[] bp;
+
+# How static variable behaves in Template class and Template functions
+	- template<typename T>
+      void print(const T x) {
+        static int var = 10;
+        cout << ++var << endl;
+	  }
+	- print(1); print(2); print('x'), print(1.5); 
+	- 11,12, 11,11
+	- static var will be different for all "T" types
+	- same will be applied to "class"
+
+# What is this pointer in C++
+	- passed as hidden argument to non static member functions
+	- is a "const pointer" which holds the address of current object 
+
+# How to call some function before main()
+	- use global variable OR static data member of class
+	- class Base {
+        public Base() { func(); }
+	  };
+      Base b;
+      int main() {...}
+
+# How to check two different objects belong to the same class in C++
+	- use typeid
+	- class A {}; class B{};
+	  A a1, a2;
+	  B b1, b2;
+	  if (typeid(a1) == typeid(b1))
+
+# How to overload pre and post operator in C++
+	class Int {
+		int elem;
+    public:
+        Int() {}
+        Int & operator++() { elem++; return *this}	// "pre"
+		Int & operator++(int dummy) {Int tmp = *this; ++(*this); return tmp;} // "post"
+
+# How To Stop Someone From Copying Your Objects?
+	- keep copy constructor and assignment operator as private
+	- class Base { int _x; public Base() {} Base(int x) : _x(x) {}
+		private: 
+			Base(const Base& obj) : _x(obj._x} {}
+			Base& operator = {const Base& rhs) { _x=rhs._x; return *this;}
+
+
+# How to stop someone inheriting from you class 
+	- use "final" keyword
+	- class Base final {...}; 
+
+# Compiler explorer
+	godbolt.org - explore the 
+
+# What Is Name Mangling In C++
+	nm app1.o 
+	- function overloading 
+	- compiler takes care of name mangling
+
+# reinterpret_cast 
+	- it performs dangerous conversions because it can typecast any pointer to any other pointer
+	-	Mango* m = new Mango(); 
+		Banana *newbanana = reinterpret_cast<Banana*> (m);
+	- useful when access different type of struct element 
+		struct a {int x; int y; char c; bool d;}
+
+# static_cast
+	- it performs implicit conversions between types 
+	- 
+
+# what is override keyword in C++
+	- Testing becomes easy with this 
+	- compile time check can be performed (future error could be reduced) 
+	- class Base { virtual void fun() {}} 
+	  class Drived : public Base { void fun() override {}} 
+	  override forces compiler to check fun() to match signature of virtual fun from Base
+
+# structual padding and packing in C&C++
+	- it's way to speed up CPU optimization (reduce read operation, 32 bit processor always read 4 bytes together)
+	- align with larger primitive data type (int, float instead of char, short)
+	- use #pragma pack(1) to disable padding
+
+# What is the difference between Enum class and Normal Enum in C++
+	- In class Enum, you have to use Scope operator
+	- Better practice is to use class Enum 
+	- enum Colors1 {red, green, blue}
+	- Color1 c1 = red
+	- enum class Colors2 {red, green, blue}
+	- Color2 c2 = Color2::red  // has to use class scope "::"	
+	 
+# Two ways to return multiple variables from functions in C++
+	- Use some struct/class and fill the values 
+	- use tuple in C++11
+	- std::tuple<int, char, std::string> fun(bool flg) {
+			return make_tuple(1, 'x', "Good");
+	  }
+
+# What Are All Those Places Where Initialiser List Is Must In C++
+	- class has const data member
+	- class has reference data member 
+	- class doesn't have default constructor  # it is alway good to have default constructor
+
+# What is drawbacks of vector C++
+	- it over allocates memory, not good on performance
+	- whenever capacity of vector increases it copy all element from previous vector to new vector
+
+# why vector was introducted in C++
+	- it gives advantage of using array and linked list both
+
+# What is difference between struct and class in C++
+	- by default, struct has public data member whereas class has private data member
+	- by default, struct inherit struct with public whereas class inherit privately
+
+# size of emtpy struct and empty class in C++
+	- empty struct : 1 
+	- empty class : 1
+
+

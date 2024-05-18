@@ -1,0 +1,259 @@
+## Top C Programming Interview Questions 
+
+    https://www.edureka.co/blog/interview-questions/c-programming-interview-questions/ 
+    https://www.tutorialspoint.com/cprogramming/cprogramming_interview_questions.htm 
+
+    # Q1. What are the basic Datatypes supported in C Programming Language? 
+
+        - Basic Datatypes
+        - Derived Datatypes
+        - Enumerated Datatypes
+        - Void Datatypes 
+
+        The Basic Datatypes supported in C Language are as follows: 
+        short, unsigned short, char, unsigned char, int , unsigned int, long, unsigned long, float, doubble 
+
+
+    # Q2. What do you mean by Dangling Pointer Variable in C Programming? 
+
+        - A Pointer in C Programming is used to point the memory location of an existing variable. 
+        - In case if that particular variable is deleted and the Pointer is still pointing to the same memory location, 
+        - then that particular pointer variable is called as a Dangling Pointer Variable. 
+
+    # Q3. What do you mean by the Scope of the variable? What is the scope of the variables in C? 
+
+        - Scope of the variable can be defined as the part of the code area where the variables declared in the 
+          program can be accessed directly. In C, all identifiers are lexically (or statically) scoped.
+
+    # Q4. What are static variables and functions? 
+
+        - The variables and functions that are declared using the keyword Static are considered as Static Variable and Static Functions. 
+        - Static variables have a property of preserving their value even after they are out of their scope!
+            - A static int variable remains in memory while the program is running.  
+            - Static variables are allocated memory in data segment, not stack segment.
+            - Static variables (like global variables) are initialized as 0 if not initialized explicitly. 
+            - In C, static variables can only be initialized using constant literals 
+            - Static variables should not be declared inside structure. 
+                - compiler requires the entire structure elements to be placed together (i.e.) memory allocation for structure members 
+                  should be contiguous. 
+
+
+        - In C, functions are global by default. The “static” keyword before a function name makes it static.  
+        - Unlike global functions in C, access to static functions is restricted to the file where they are declared. 
+        - Therefore, when we want to restrict access to functions, we make them static 
+
+
+    # Q5. Differentiate between calloc() and malloc() 
+        
+         - calloc() and malloc() are memory dynamic memory allocating functions. 
+         - The only difference between them is that calloc() will load all the assigned memory locations with value 0 
+              but malloc() will not.
+
+    # Q6. What are the valid places where the programmer can apply Break Control Statement? 
+
+         - Break Control statement is valid to be used inside a loop and Switch control statements. 
+
+    # Q7. How can we store a negative integer? 
+
+        - To store a negative integer, we need to follow the following steps. Calculate the two’s complement of the same positive integer. 
+        -  
+
+    # Q8. Differentiate between Actual Parameters and Formal Parameters. 
+
+        - The Parameters which are sent from main function to the subdivided function are called as Actual Parameters and 
+        - the parameters which are declared a the Subdivided function end are called as Formal Parameters. 
+
+    # Q9. Can a C program be compiled or executed in the absence of a main()? 
+
+        - The program will be compiled but will not be executed. To execute any C program, main() is required. 
+
+    # Q10. What do you mean by a Nested Structure? 
+        
+        - When a data member of one structure is referred by the data member of another function, then the structure is called a Nested Structure.
+        - Structure written inside another structure is called as nesting of two structures. Nested Structures are allowed in C Programming Language.
+
+    # Q11. What is a C Token?
+    
+        -  Keywords, Constants, Special Symbols, Strings, Operators, Identifiers used in C program are referred to as C Tokens. 
+
+    # Q12. What is Preprocessor? 
+
+        - A Preprocessor Directive is considered as a built-in predefined function or macro that acts as a directive to the compiler 
+          and it gets executed before the actual C Program is executed. 
+
+    
+    # Q13. Why is C called the Mother of all Languages? 
+
+        - C introduced many core concepts and data structures like arrays, lists, functions, strings, etc. Many languages designed 
+          after C are designed on the basis of C Language. Hence, it is considered as the mother of all languages.
+
+    # Q14. Mention the features of C Programming Language.
+
+        - Memory management, High level language, strutured language, fast, pointers 
+
+    # Q15. What is the purpose of printf() and scanf() in C Program?
+
+        - printf() is used to print the values on the screen. To print certain values, and on the other hand, scanf() is used to scan the values.  
+
+    # Q16. What is an array? 
+
+        - The array is a simple data structure that stores multiple elements of the same datatype in a reserved and sequential manner.  
+
+    # Q17. What is /0 character? 
+
+        - The Symbol mentioned is called a Null Character. 
+        - It is considered as the terminating character used in strings to notify the end of the string to the compiler.
+
+    # Q18. What is the main difference between the Compiler and the Interpreter?
+    
+        - Compiler is used in C Language and it translates the complete code into the Machine Code in one shot. 
+        - On the other hand, Interpreter is used in Java Programming Langauge and other high-end programming languages. 
+          It is designed to compile code in line by line fashion
+
+    # Q19. Can I use int datatype to store 32768 value? 
+
+        No, Integer datatype will support the range between -32768 and 32767.  
+
+    # Q20. How is a Function declared in C Language? 
+
+        return_type function_name(formal parameter list)
+        {
+               Function_Body;
+        } 
+
+    # Q21. What is Dynamic Memory allocation? Mention the syntax.  
+
+        - Dynamic Memory Allocation is the process of allocating memory to the program and its variables in runtime.  
+        - Dynamic Memory Allocation process involves three functions for allocating memory and one function to free the used memory. 
+
+            ptr = (cast-type*) malloc(byte-size);
+            ptr = (cast-type*)calloc(n, element-size);
+            ptr = realloc(ptr, newsize); 
+
+            free(ptr);  
+
+    # Q22. What do you mean by Dangling Pointer Variable in C Programming?  
+
+        - A Pointer in C Programming is used to point the memory location of an existing variable. 
+        - In case if that particular variable is deleted and the Pointer is still pointing to the same memory location, 
+          then that particular pointer variable is called as a Dangling Pointer Variable. 
+
+    # Q23. Where can we not use &(address operator in C)? 
+
+        We cannot use & on constants and on a variable which is declared using the register storage class.
+
+    # Q24. Write a simple example of a structure in C Language 
+
+        Structure is defined as a user-defined data type that is designed to store multiple data members of the different data types as a single unit. 
+
+    # Q25. Differentiate between call by value and call by reference. 
+
+    
+    # Q26. Differentiate between getch() and getche().
+    
+    # Q27. Explain toupper() with an example. 
+
+    # Q28. Write a code to generate random numbers in C Language. 
+
+    # Q29. Can I create a customized Head File in C language? 
+
+        - It is possible to create a new header file. Create a file with function prototypes that need to be used in the program. 
+        - Include the file in the ‘#include’ section in its name. 
+
+    # Q31. Explain Local Static Variables and what is their use? 
+
+        - A local static variable is a variable whose life doesn’t end with a function call where it is declared. 
+        - It extends for the lifetime of the complete program. 
+
+    # Q32. What is the difference between declaring a header file with < > and ” “? 
+
+        - If the Header File is declared using < > then the compiler searches for the header file within the Built-in Path. 
+        - If the Header File is declared using ” ” then the compiler will search for the Header File in the current working directory 
+          and if not found then it searches for the file in other locations. 
+
+    # Q33. When should we use the register storage specifier? 
+
+        We use Register Storage Specifier if a certain variable is used very frequently. 
+
+    # Q34. Which statement is efficient and why? x=x+1; or x++; ? 
+
+        x++; is the most efficient statement as it just a single instruction to the compiler while the other is not. 
+
+    # Q35. Can I declare the same variable name to the variables which have different scopes? 
+
+        Yes, Same variable name can be declared to the variables with different variable scopes as the following example. 
+
+    # What is a void pointer? Can you dereference a void pointer without knowing its type? 
+
+        - A void pointer is a pointer that can be used to point to any data of any arbitrary type. 
+        - A void pointer can be dereferenced only after explicit casting. 
+
+    # What are dangling pointers? How are dangling pointers different from memory leaks? 
+
+        - Dangling pointers are those that point to memory locations which have already been freed. For example:
+
+            int *a = malloc(sizeof(int));
+            free(a);
+            // a is now a dangling pointer 
+        
+        - Memory leaks are quite the opposite of dangling pointers. Memory leaks happen when memory locations are not freed, 
+          but there is no way to refer to them (i.e., no pointers are pointing to them).
+
+            int *a = malloc(sizeof(int));
+            a = 0;
+            // now a no longer points to the memory that we just allocated, causing a memory leak 
+
+        Unlike higher-level languages with garbage collectors, it is critical to always keep track of allocated memory when programming in C. 
+
+    # What is being declared in the following statement? 
+
+        char (*x) (char*); 
+
+        The statement above declares x as a pointer to a function that takes a single character-pointer argument, and returns a character. 
+
+    # What will be the output when the following code is executed? Explain. 
+
+        #include <stdio.h>
+        #define SQUARE(a) (a)*(a)
+
+        int main() {
+            printf("%d\n", SQUARE(4));
+            int x = 3;
+            printf("%d\n", SQUARE(++x));
+        } 
+
+        The answer is infact undefined, and depends on the compiler being used. Some compilers will result in 16 and 20, while others will produce 16 and 25. 
+
+        - macros are processed by the preprocessor, a step that takes place before actual compilation begins. 
+        - a step that takes place before actual compilation begins. 
+        - Expanding the second macro will show what actually gets compiled:
+
+            (++x)*(++x) 
+
+    # What is the difference between structs and unions?
+
+        - A struct is a complex data type that allows multiple variables to be stored in a group at a named block of memory. 
+        - Each member variable of a struct can store different data, and they all can be used at once. 
+        - A union, on the other hand, stores the contents of any member variable at the exact same memory location. 
+
+    # This code snippet converts a floating point number to an integer using casting: 
+
+        float f = 1.0;
+
+        int i1 = (int) f;
+        int i2 = * (int *) &f;
+
+        printf("%d\n, i1);
+        printf("%d\n, i2); 
+
+        The following output is produced:
+
+        1
+        1065353216 
+
+        - The second conversion, however, is first casting a float pointer to an integer pointer which is then dereferenced to get the final result. 
+        - Although this particular code is unlikely, it demonstrates one of the risks involved in typecasting when only a pointer to the variable 
+          to be cast is available. In practice, the pointer must be dereferenced before it is cast. 
+
+
+    #     

@@ -1,0 +1,123 @@
+
+## wiki page 
+
+    # 3D reconstruction from multiple images 
+        https://en.wikipedia.org/wiki/3D_reconstruction_from_multiple_images 
+
+        It is the creation of three-dimensional models from a set of images. It is the reverse process of obtaining 2D images from 3D scenes.  The essence of an image is a projection 
+        from a 3D scene onto a 2D plane, during which process the depth is lost.
+
+        - From a single image, it is impossible to determine which point on this line corresponds to the image point.  
+        - If two images are available, then the position of a 3D point can be found as the intersection of the two projection rays. This process is referred to as triangulation. 
+        - The key for this process is the relations between multiple views which convey the information that corresponding sets of points must contain some structure and 
+          that this structure is related to the poses and the calibration of the camera. 
+
+        Many existing systems for constructing 3D models are built around specialized hardware (e.g. stereo rigs) resulting in a high cost, which cannot satisfy the requirement of its 
+        new applications. This gap stimulates the use of digital imaging facilities (like a camera). 
+
+        - An early method was proposed by Tomasi and Kanade.[2] They used an affine factorization approach to extract 3D from images sequences. 
+        - However, the assumption of orthographic projection is a significant limitation of this system. 
+
+        processing 
+
+            - Camera calibration consists of intrinsic and extrinsic parameters, 
+            - Depth determination serves as the most challenging part in the whole process, The correspondence problem, finding matches between two images so the position 
+              of the matched elements can then be triangulated in 3D space is the key issue here.
+            - Once you have the multiple depth maps you have to combine them to create a final mesh by calculating depth and projecting out of the camera – registration. 
+            - By the stage of Material Application you have a complete 3D mesh, which may be the final goal, but usually you will want to apply the color from the original 
+                photographs to the mesh
+## talks 
+     
+    # methods for 3D Reconstruction from multiple images 
+
+     https://people.csail.mit.edu/sparis/talks/Paris_06_3D_Reconstruction.pdf
+
+     Introduction
+
+        - Existing solutions are not fully satisfying
+            - User-driven modeling: long and error-prone
+            - 3D scanners: costly and cumbersome 
+
+        - Alternative: analyzing image sequences 
+            - Cameras are cheap and lightweight
+            - Cameras are precise (several megapixels) 
+
+
+    # multi-view 3D reconstructon 
+
+        https://vision.in.tum.de/research/image-based_3d_reconstruction/multiviewreconstruction
+
+        - 3D Reconstruction from multiple views 
+           
+    # cource work and report 
+    
+        https://cvgl.stanford.edu/teaching/cs231a_winter1415/prev/projects/CS231a-FinalReport-sgmccann.pdf 
+
+        The objective of this report is to identify the various approaches to generating sparse 3D reconstructions using
+
+        - the Structure from Motion (SfM) algorithms and 
+        - the methods to generate dense 3D reconstructions using the Multi View Stereo (MVS) algorithms.
+
+        existing open-source 
+
+        - majority of the current toolkits are based on the Bundler package. Bundler generates a sparse 3D reconstruction of the scene. For dense 3D reconstruction, 
+        the preferred approach seems to be to use the multi view stereo packages CMVS and PMVS, developed by Y. Furukawa 
+
+            Bundler: https://www.cs.cornell.edu/~snavely/bundler/ 
+
+        - Several packages are available for visualization of point clouds, notably MeshLab, CloudCompare and the Point Cloud Library (PCL) which integrates nicely with OpenCV. 
+
+        - technical approach (implement the Structure from Motion algorithms) 
+            -   Sorting the Photo Collection 
+            -   Feature Detection and Matching  
+            -   Structure From Motion 
+            -
+    # stackoverflow recommendations 
+        https://stackoverflow.com/questions/7705377/3d-reconstruction-how-to-create-3d-model-from-2d-image 
+
+
+    # youtube 
+   
+        https://www.youtube.com/watch?v=5TJqQczwsUQ 
+            OpenCV and C++ 
+
+        https://www.youtube.com/watch?v=O7B2vCsTpC0 
+            Stereo 3D Vision  
+
+        https://www.youtube.com/watch?v=cb8JDjnwgts 
+            Stereo Vision 
+
+        2D TO 3D FACE-BUILDER IN BLENDER!
+            https://www.youtube.com/watch?v=5WH7s-IPIeM 
+
+
+    # 3-D reconstruction with Vision (interesting article to read, vision vs sensor in autonomous driving) 
+        https://towardsdatascience.com/3-d-reconstruction-with-vision-ef0f80cbb299 
+       
+        - Depth Perception with Deep Learning
+        - beings with vision and so as Elon said, ‘these costly sensors would become pointless once we solve vision’.
+        -  There’s huge research going on in this field of depth perception with vision, especially with the advancements in Machine Learning and 
+            Deep Learning we are now able to compute depth just from vision at high accuracy.
+
+## Papers 
+    
+        https://www.cv-foundation.org/openaccess/content_cvpr_2016/app/S15-20.pdf
+
+        Automated 3D Face Reconstruction from Multiple Images using  Quality Measures 
+            - Algorithms that reconstruct 3D faces from images by fitting a deformable face model, such as a 3D Morphable Model (3DMM), rely on a relatively precise initial positioning 
+                of the face [7] or on a set of feature point coordinates [8]. 
+            - The feature point detection is a non-trivial task, especially if the image material includes complex lighting, facial expressions, wrinkles, eye glasses or facial hair
+            -
+
+        https://gravis.dmi.unibas.ch/publications/pami03.pdf 
+
+        Face Recognition Based on Fitting a 3D Morphable Model (3DMM) 
+
+            - Complete separation of shape and orientation is achieved by fitting a deformable 3D model to images
+            - The face recognition system presented in this paper combines deformable 3D models with a computer graphics simulation of projection and illumination
+            - give a comprehensive description of the algorithms involved in 
+                1) constructing the morphable model from 3D scans (Section 3), 
+                2) fitting the model to images for 3D shape reconstruction (Section 4), which includes a novel algorithm for parameter optimization (Appendix B), and 
+                3) measuring similarity of faces for recognition (Section 5).
+
+

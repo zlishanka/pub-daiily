@@ -1,0 +1,20 @@
+## Support Vector Machine
+
+    https://en.wikipedia.org/wiki/Support_vector_machine 
+
+
+    In machine learning, support-vector machines (SVMs, also support-vector networks[1]) are supervised learning models with associated learning algorithms that analyze data 
+    used for classification and regression analysis.
+
+    - The Support Vector Machine (SVM) algorithm is a popular machine learning tool that offers solutions for both classification and regression problems.
+
+    - one of the most robust prediction methods, based on the statistical learning framework or VC theory proposed by Vapnik and Chervonekis (1974) and Vapnik (1982, 1995).
+
+    - an SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier
+
+    - In addition to performing linear classification, SVMs can efficiently perform a non-linear classification using what is called the kernel trick, 
+        implicitly mapping their inputs into high-dimensional feature spaces.
+
+    - When data are unlabelled, supervised learning is not possible, and an unsupervised learning approach is required. 
+
+

@@ -1,0 +1,57 @@
+# CUDA programming model 
+	
+	Source - https://www.youtube.com/watch?v=cKI20rITSvo&list=PLC6u37oFvF40BAm7gwVP7uDdzmW83yHPe&index=2
+
+	## Program Flow 
+
+		- Host code 
+			- Serial 
+			- Runs on CPU
+			- do dequential stuff
+			- prepare for kernel launch
+
+		- "ALlocate meory on Device"
+			cudaMalloc(...);
+			"cudaMalloc( LOCATION, SIZE)"; 
+				- memory location on Device to allocate memory
+				- An address in the GPU's memory
+				- number of bytes to allocate 
+			"cudaFree();"
+	
+		- Copy Data Host --> Device 
+			- copy data from CPU to GPU 
+			cudaMemcpy(...); 
+			"cudaMemcpy(dst, src, numBytes, direction);"
+			- direction
+					
+		- launch kernel 
+			- execute threads on the GPU in parallel 
+			kernel_0<<<grid_size,block_size>>>(...);
+			  
+		- Device code 
+			- Parallel
+			- Runs on GPU 
+
+		- main function "does not wait" for kernel code's completion 
+		
+		- 
+			int *h_c, *d_c;
+		  	cudaMalloc( (void**)&d_c, sizeof(int) ); 
+		  	cudaMemcpy(d_c, h_c, sizeof(int), cudaMemcpyHostToDevice);
+			dim3 grid_size(1); dim3 block_size(1);
+			kernel<<<grid_size, block_size>>>(...);
+			cudaMemcpy(h_c, d_c, sizeof(int), cudaMemcpyDeviceToHost);
+			cudaFree(d_c); free(h_c); 
+
+				
+	## Kernel Launch Syntax
+		- Like calling any C function
+		- // launch kernel
+		  dim3 grid_size(x,y,z);
+		  dim3 block_size(x,y,z);
+		  kenelName<<< grid_size, block_size >>>(...); 
+		- Must specify the Configuration (block, grid) parameters 
+			<<<grid_size, block_size>>>
+		- dim3 - CUDA data structure, default (1,1,1)
+
+	## 

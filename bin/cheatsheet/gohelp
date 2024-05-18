@@ -1,0 +1,268 @@
+
+# Exported names
+
+  In Go, a name is exported if it begins with a capital letter.
+
+# functions
+
+   - type comes after the variable name.
+
+    func add(x int, y int) int {
+      return x + y
+    }
+
+   - a function can return any number of results
+
+    func swap(x, y string) (string, string) {
+	      return y, x
+    }
+
+# Short variable declarations
+
+  :=   - short assignment statement can be used in place of a var declaration with implicit type
+  k := 3
+  Type inference - variables's type is inferred from the value on right hand side.
+
+# Basic types
+
+  bool, string
+  int  int8  int16  int32  int64
+  uint uint8 uint16 uint32 uint64 uintptr
+  byte // alias for uint8
+  rune // alias for int32
+      // represents a Unicode code point
+  float32 float64
+  complex64 complex128
+
+# Defer
+
+  A defer statement defers the execution of a function until the surrounding function returns.
+  Deferred function calls are pushed onto a stack. When a function returns, its deferred calls are executed in last-in-first-out order.
+
+# Pointer
+
+  A pointer holds the memory address of a value.  The type *T is a pointer to a T value. Its zero value is nil.
+
+  var p *int
+
+  The & operator generates a pointer to its operand. The * operator denotes the pointer's underlying value.
+
+  i := 42
+  p = &i
+  *p = 21         // set i through the pointer p
+
+# Struct
+
+  A struct is a collection of fields.  Struct fields are accessed using a dot.
+  Struct fields can be accessed through a struct pointer.
+
+# Array
+
+  The type [n]T is an array of n values of type T.  An array has a fixed size. A slice, on the other hand, is a dynamically-sized,
+  flexible view into the elements of an array. In practice, slices are much more common than arrays.
+
+  var a [10]int
+  a[low : high]
+
+  Slices are like references to arrays. Changing the elements of a slice modifies the corresponding elements of its underlying array.
+  A slice has both a length and a capacity.
+
+
+  Creating a slice with make
+  a := make([]int, 5)  // len(a)=5
+
+# Range
+
+  The range form of the for loop iterates over a slice or map.
+  When ranging over a slice, two values are returned for each iteration. The first is the index, and the second is a copy of the element at that index.
+
+  You can skip the index or value by assigning to _.
+
+  for i, _ := range pow
+  for _, value := range pow
+
+  If you only want the index, you can omit the second variable.
+  for i := range pow
+
+# Map
+
+  A map maps keys to values.
+
+  The zero value of a map is nil. A nil map has no keys, nor can keys be added.
+  The make function returns a map of the given type, initialized and ready for use.
+
+  Test that a key is present with a two-value assignment:
+
+    elem, ok = m[key]
+
+  check if map has key
+
+    if val, ok := dict["foo"]; ok {
+       //do something here
+    }
+
+# Function values
+
+  Functions are values too. They can be passed around just like other value
+
+# Methods
+
+  Go does not have classes. However, you can define methods on types.
+  (1) a method is just a function with a receiver argument.
+  (2) cannot declare a method with a receiver whose type is defined in another package.
+  (3) The receiver appears in its own argument list between the func keyword and the method name.
+
+  type Vertex struct {
+	  X, Y float64
+  }
+  func (v Vertex) Abs() float64 {
+	  return math.Sqrt(v.X*v.X + v.Y*v.Y)
+  }
+  v := Vertex{3,4}
+  v.Abs()
+
+  the Abs method has a receiver of type Vertex named v.
+
+# Pointer receivers
+
+  You can declare methods with pointer receivers.
+  Methods with pointer receivers can modify the value to which the receiver points
+
+# Methods and pointer indirection
+
+  Comparing the previous two programs, you might notice that
+  (1) functions with a pointer argument must take a pointer:
+
+      func ScaleFunc(v *Vertex, f float64) {
+	      v.X = v.X * f
+	      v.Y = v.Y * f
+      }
+
+  (2) while methods with pointer receivers take either a value or a pointer as the receiver when they are called
+
+      func (v *Vertex) Scale(f float64) {
+	      v.X = v.X * f
+	      v.Y = v.Y * f
+      }
+
+  (3) There are two reasons to use a pointer receiver.
+
+      The first is so that the method can modify the value that its receiver points to.
+
+      The second is to avoid copying the value on each method call. This can be more efficient if the receiver is a large struct, for example.
+
+# Interfaces
+
+  (1) An interface type is defined as a set of method signatures.
+  (2) Interfaces are implemented implicitly. A type implements an interface by implementing its methods.
+      There is no explicit declaration of intent, no "implements" keyword.
+  (3) Calling a method on an interface value executes the method of the same name on its underlying type
+  (4) A nil interface value holds neither value nor concrete type. Calling a method on a nil interface is a run-time error.
+
+  A type assertion provides access to an interface value's underlying concrete value.
+
+  t := i.(T)
+  t, ok := i.(T)
+
+# Goroutines
+
+  A goroutine is a lightweight thread managed by the Go runtime.
+  go f(x, y, z)
+  Goroutines run in the same address space, so access to shared memory must be synchronized.
+
+# Channels
+
+  Channels are a typed conduit through which you can send and receive values with the channel operator, <-.
+
+  ch <- v    // Send v to channel ch.
+  v := <-ch  // Receive from ch, and assign value to v.
+
+  Like maps and slices, channels must be created before use:
+  ch := make(chan int)
+
+  By default, sends and receives block until the other side is ready.
+  This allows goroutines to synchronize without explicit locks or condition variables.
+
+# Chan Chan's in go
+
+  A channel describes a transport of sorts. You can send a thing down that transport. When using a chan chan,
+  the thing you want to send down the transport is another transport to send things back.
+
+  They are useful when you want to get a response to something, and you don’t want to setup two channels
+  (it’s generally considered bad practice to have data moving bidirectionally on a single channel)
+
+# Range and Close
+
+  A sender can close a channel to indicate that no more values will be sent.
+  Receivers can test whether a channel has been closed by assigning a second parameter to the receive expression: after
+
+  v, ok := <-ch
+
+# Select
+
+  The select statement lets a goroutine wait on multiple communication operations.
+  A select blocks until one of its cases can run, then it executes that case. It chooses one at random if multiple are ready.
+  The default case in a select is run if no other case is ready.
+
+# sync.Mutex
+
+  Go's standard library provides mutual exclusion with sync.Mutex and its two methods:
+  Lock
+  Unlock
+
+# Context 
+
+    In Go servers, each incoming request is handled in its own goroutine. Request handlers often
+    start additional goroutines to access backends such as databases and RPC services.
+    
+    The set of goroutines working on a request typically needs access to request-specific values such 
+    as the identity of the end user, authorization tokens, and the request's deadline.
+
+    When a request is canceled or times out, all the goroutines working on that request should exit quickly 
+    so the system can reclaim any resources they are using.
+
+    // A Context carries a deadline, cancelation signal, and request-scoped values
+    // across API boundaries. Its methods are safe for simultaneous use by multiple
+    // goroutines.
+    type Context interface {
+        // Done returns a channel that is closed when this Context is canceled
+        // or times out.
+        Done() <-chan struct{}
+
+        // Err indicates why this context was canceled, after the Done channel
+        // is closed.
+        Err() error
+
+        // Deadline returns the time when this Context will be canceled, if any.
+        Deadline() (deadline time.Time, ok bool)
+
+        // Value returns the value associated with key or nil if none.
+        Value(key interface{}) interface{}
+    }
+
+    ctx, cancel := context.WithCancel(context.Background())
+    defer concel() 
+
+# Closure 
+
+    A closure is a function value that references variables from outside its body 
+
+# Build shared library with go
+
+  go build -buildmode=c-shared -o libadd.so libadd.go
+
+# to export go 1.11 module to pion examples to work
+
+  export GO111MODULE=on
+
+# to unset GO111MODULE
+
+  export GO111MODULE=auto
+
+# export PKG_CONFIG_PATH
+
+  export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/local/opt/libffi/lib/pkgconfig"
+
+# run pion go webrtc examples
+
+  echo $BROWSER_SDP | go run *.go

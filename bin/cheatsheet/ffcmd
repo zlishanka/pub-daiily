@@ -1,0 +1,340 @@
+
+# play back from cloud front, test  
+	ffplay http://ddwok94le1461.cloudfront.net/ 
+	ffplay -fflags nobuffer http://ddwok94le1461.cloudfront.net/
+
+# play back from cloud front, beta 
+	ffplay http://d3j0xy8o488abn.cloudfront.net/vidnas94wa8xp73s6hn/1920s/
+
+# ffprobe for video file 
+	ffprobe -v quiet -print_format json -show_format -show_streams 
+
+# Push rtmp stream 
+	ffmpeg -re -i csgo_cbbl_synced_06.mp4 -acodec copy -vcodec copy -f flv rtmp://ec2-54-153-8-245.us-west-1.compute.amazonaws.com/live-http-origin-loc-a/vidc87yke3x5um83cfv
+
+# transcoding with specific codec 
+	ffmpeg -i minecraft-statue.mp4 -vcodec libx265 -b:v 10000k -bufsize 10000k minecraft-statue.10m.mp4 
+	ffmpeg -i csgo_cbbl_synced_06.mp4 -vcodec libx264 -slices 24 -x264opts b-pyramid=0:no-cabac:weightb=0:weightp=0 -acodec copy csgo_cbbl_synced_06_x264opts.mp4
+
+# transcoding with specific bitrate and quality 
+
+	ffmpeg -i 4k_test_video_60fps.mp4 -codec:v libx264 -profile:v main -preset slow -b:v 4500k -vf scale=-1:1024 -threads 0  -codec:a libfdk_aac -b:a 160k 2k_test_video.mp4 
+        ffmpeg -i input -c:v libx264 -profile: v main -preset slow -b:v 2800k -threads 0 -c:a aac -b:a 128k output.mp4 
+	ffmpeg -i 2017_DH_Austin_Trailer.mp4 -c:v libx264 -profile:v main -preset slow -b:v 2800k -threads 0 -c:a aac -b:a 128k v.ogg 
+
+# transcoding to webm and ogg codec 
+        #use linux static build 
+ 	#https://www.johnvansickle.com/ffmpeg/
+	ffmpeg -i 2017_DH_Austin_Trailer.mp4 -q:v 10 -c:v libtheora -c:a libvorbis v.ogg 
+        ffmpeg -i 2017_DH_Austin_Trailer.mp4 -q:v 10 -c:v libvpx -c:a libvorbis v.webm 
+       
+# remux to ts file 
+	ffmpeg -i input.mp4 -c copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls v.m3u8 
+
+# remux to fmp4 m4s file 
+	ffmpeg -i input.mp4 -c copy -hls_segment_type fmp4 -f hls v.m3u8 
+
+    ffmpeg -y -i 49ers_vs_steels_09222019.mp4 -force_key_frames "expr:gte(t,n_forced*2)" -sc_threshold 0 -c:v copy -c:a copy -hls_time 6 -hls_playlist_type event  -hls_segment_type fmp4 -hls_segment_filename "fileSequence%d.m4s" prog_index.m3u8 
+
+# mix video and audio into file 
+	ffmpeg -i input-video.mp4 -i input-audio.m4a -c:v copy -c:a copy output.mp4 
+
+# relay rtmp stream 
+	ffmpeg -i rtmp://ec2-54-153-15-63.us-west-1.compute.amazonaws.com/live-iem-csgo-pip/vid9z7khhd10x56u0s8 -c:v copy -c:a copy -f flv rtmp://localhost:1935/live-360/vid9z7khhd10x56u0s8 
+	ffmpeg -i rtmp://localhost:1935/live/ori_4k_feed -codec:v libx264 -profile:v main -preset slow -b:v 4500k -vf scale=-1:1024 -threads 0 -acodec copy -f flv rtmp://localhost:1935/live/test_2k_feed 
+	ffmpeg -i rtmp://localhost:1935/live/ori_4k_feed -codec:v libx264 -profile:v main -preset slow -b:v 7500k -vf scale=-1:2048 -threads 0 -acodec copy -f flv rtmp://localhost:1935/live/test_4k_feed 
+
+# relay hls steram 
+
+  ffmpeg -i https://live1-slivertv.akamaized.net/hls/live/593044/hls_1_streamer_003@593044/chunklist.m3u8 -c copy test.m3u8  
+
+# cascading small clip into big file 
+        ffmpeg -f concat -i list.txt -c copy longplay_450minutes.mp4 
+	list.txt - file 'video.mp4' 
+		   file 'video1.mp4'.. 
+
+# get ffmpeg static image and then create symlink  
+	sudo wget http://ffmpeg.gusari.org/static/64bit/ffmpeg.static.64bit.latest.tar.gz /usr/local/bin/. 
+	sudo ln -s /usr/local/bin/ffmpeg /usr/bin/ffmpeg
+	sudo ln -s /usr/local/bin/ffprobe /usr/bin/ffprobe
+
+#split the big video into small pieces 
+	ffmpeg -v quiet -y -i vid3qyviek184ggceii.mp4 -vcodec copy -acodec copy -ss 15:00:00 -t 00:30:00 -sn vid3qyviek184ggceii_2.mp4  
+	ffmpeg -i combined_output.mp4 -vcodec copy -acodec copy -segment_time 120 -f segment output-%03d.mp4
+
+#use wall clock as timestamp 
+	ffmpeg -use_wallclock_as_timestamps 1 -i <rest of input options>  -vcodec copy -acodec copy -f flv rtmp:// 
+	ffmpeg -use_wallclock_as_timestamps 1 -i wwfeed_700_minutes.mp4 -acodec copy -vcodec copy -f flv rtmp://104.155.41.237:1935/live/wwfeed 
+
+# suppress the console output 
+        -loglevel panic 	
+        -loglevel quiet 	 
+
+# find libraries ffmpeg is using 
+	ldd `which ffmpeg`
+
+# extract audio in mp3 format from a video file 
+
+  ffmpeg -i video.mp4 -f mp3 -vn music.mp3 	 
+
+# transcode live rtmp stream into live HLS stream using ffmpeg 
+#
+# https://stackoverflow.com/questions/19658216/how-can-we-transcode-live-rtmp-stream-to-live-hls-stream-using-ffmpeg
+# https://sonnati.wordpress.com/2011/08/30/ffmpeg-%E2%80%93-the-swiss-army-knife-of-internet-streaming-%E2%80%93-part-iv/
+
+# convert mp4 into hls  
+ffmpeg -i input.mp4 -profile:v baseline -level 3.0 -s 1920x1080 -start_number 0 -hls_time 10 -hls_list_size 0 -f hls index.m3u8
+
+# http-flv live 
+  rtmp://35.233.188.11:1935/myapp/iemstream 
+  http://35.233.188.11:8080/live?port=1935&app=myapp&stream=iemstream 
+  http://35.233.188.11:8080/hls/iemstream/index.m3u8
+  http://35.233.188.11:8080/dash/iemstream.mpd   
+
+# enable dash playback in ffplay 
+ ./configure --enable-demuxer=dash --enable-libxml2
+ ./configure --enable-shared --enable-libx264 --enable-libx265 --enable-gpl --enable-demuxer=dash --enable-libxml2 --enable-pic 
+ make
+
+# enable mp3 encoder 
+ ./configure --enable-demuxer=dash --enable-libxml2 --enable-libmp3lame 
+ make 
+
+# convert mp4 into dash (keep audio/video intact) 
+ffmpeg -i SSTVUHD7WondersDocumentaryEp1Kor_15Mbps.mp4 -vcodec copy -acodec copy -f dash output/output.mpd
+
+ffmpeg -i SSTVUHD7WondersDocumentaryEp1Kor_15Mbps.mp4 -vcodec copy -acodec copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls hls_output/index.m3u8 
+
+multiple bitrate streams 
+
+ffmpeg -i $inputFile \
+  -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0  \
+  -b:v:0 350k  -c:v:0 libx264 -filter:v:0 "scale=320:-1"  \
+  -b:v:1 1000k -c:v:1 libx264 -filter:v:1 "scale=640:-1"  \
+  -b:v:2 3000k -c:v:2 libx264 -filter:v:2 "scale=1280:-1" \
+  -b:v:3 245k  -c:v:3 libvpx-vp9 -filter:v:3 "scale=320:-1"  \
+  -b:v:4 700k  -c:v:4 libvpx-vp9 -filter:v:4 "scale=640:-1"  \
+  -b:v:5 2100k -c:v:5 libvpx-vp9 -filter:v:5 "scale=1280:-1"  \
+  -use_timeline 1 -use_template 1 -window_size 6 -adaptation_sets "id=0,streams=v  id=1,streams=a" \
+  -hls_playlist true -f dash output/output.mpd
+
+
+ffmpeg -i SSTVUHD7WondersDocumentaryEp1Kor_15Mbps.mp4 \
+  -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0 -map 0:v:0 -map 0:a\?:0  \
+  -b:v:0 8000k  -c:v:0 libx265 -filter:v:0 "scale=3840:-1"  \
+  -f dash output/output.mpd
+
+# list capture devices
+ ffmpeg -f avfoundation -list_devices true -i ""
+ ffmpeg -f avfoundation -y -t 5 -r 3 -i "Give the external input" 
+ ffmpeg -f avfoundation -framerate 30 -i "0" -target pal-vcd test.mp4  
+ ffmpeg -f avfoundation -i video="FaceTime HD Camera":audio="MacBook Pro Microphone"  -target pal-vcd test.mp4  
+
+ https://gist.github.com/docPhil99/d8667de1e8c5e96e2203f2bc0f28f89d 
+
+    # live HLS streaming 
+    https://www.martin-riedl.de/2018/08/24/using-ffmpeg-as-a-hls-streaming-server-part-1/ 
+
+    # aligned hls ABR streams 
+    https://ffmpeg.org/pipermail/ffmpeg-user/2016-April/031655.html 
+
+    # ffmpeg stream webcam 
+    http://4youngpadawans.com/stream-camera-video-and-audio-with-ffmpeg/ 
+    https://ffmpeg.org/ffmpeg-devices.html 
+
+    ffmpeg -f avfoundation -framerate 30 -i "0:0" out.avi
+ 
+    ffmpeg -f avfoundation -framerate 30 -i "0:0" -c:v libx264 -crf 21 -preset veryfast \
+    -c:a aac -b:a 128k -ac 2 \
+    -f hls -hls_time 4 -hls_playlist_type event stream.m3u8 
+    
+  ffmpeg -f avfoundation -list_devices true -i ""
+ ./ffmpeg -listen 1 -i rtmp://martin-riedl.de/stream01 \
+    -c:v libx264 -crf 21 -preset veryfast \
+    -c:a aac -b:a 128k -ac 2 \
+    -f hls -hls_time 4 -hls_playlist_type event stream.m3u8 
+
+# get the location of key frames 
+ ffprobe -select_streams v -skip_frame nokey -show_frames -v quiet video.mp4 | grep '^pkt_pts_time’ | sed 's/pkt_pts_time=//'
+
+# create fragmented mp4 streaming 
+ ffmpeg -i rtmp://ip of server:1935/name/streamkey -vcodec copy -acodec copy -nal-hrd cbr -movflags isml+frag_keyframe+separate_moof -f ismv http://url of entry point/entry-point.isml/Streams(feed1) 
+
+ffmpeg -i /tmp/hls/vid4w3knq5ru5s7ce03_src.m3u8 -codec copy -f hls http://p-ep2006536.i.akamaientrypoint.net/2006536/ 
+
+# ffmpeg push HLS stream to akamai entrypoint 
+#
+ffmpeg -i vid4w3knq5ru5s7ce03_src.m3u8 -vcodec copy -acodec copy -f hls -hls_time 2 -hls_list_size 3 -start_number $(date "+%s") -method PUT -http_persistent 1 -hls_segment_filename "http://p-ep2006536.i.akamaientrypoint.net/2006536/hls_1_streamer_europe_west_025/file-%08d.ts" "http://p-ep2006536.i.akamaientrypoint.net/2006536/hls_1_streamer_europe_west_025/chunklist.m3u8" 
+
+ffmpeg -i vid4w3knq5ru5s7ce03_src.m3u8 -vcodec copy -acodec copy -f hls -hls_time 2 -hls_list_size 3 -start_number $(date "+%s") -method PUT -http_persistent 1 -hls_segment_filename "http://p-ep2007797.i.akamaientrypoint.net/2007797/hls_1_streamer_us_west_039/file-%08d.ts" "http://p-ep2007797.i.akamaientrypoint.net/2007797/hls_1_streamer_us_west_039/chunklist.m3u8"   
+
+# A web-based video inspector 
+http://thumb.co.il/ 
+
+# ffmpeg stream video from the FaceTime camera
+ffmpeg -r 30 -f avfoundation -i "0" -pix_fmt yuv420p -c libx264 -preset ultrafast -g 30 -keyint_min 30 -crf 25 -f mpegts tcp://localhost:1234
+
+# ffmpeg to have simple realtime overlay
+
+ffmpeg -f lavfi -re -i smptebars=duration=6000:size=320x200:rate=30 -f lavfi -i sine=frequency=1000:duration=6000:sample_rate=48000 -pix_fmt yuv420p -c:v libx264 -b:v 180k -g 60 -keyint_min 60 -profile:v baseline -preset veryfast -c:a aac -b:a 96k -vf "drawtext=fontfile=/Library/Fonts/Arial.ttf: text=\'Local time %{localtime\: %Y\/%m\/%d %H.%M.%S} (%{n})\': x=10: y=10: fontsize=16: fontcolor=white: box=1: boxcolor=0x00000099" -f mpegts - | bin/manifest-generator -p ./results/ffmpeg -p ./results/live 
+
+#ffmpeg to push rtmp test stream 
+ffmpeg -f lavfi -re -i smptebars=duration=6000:size=320x200:rate=30 -f lavfi -i sine=frequency=1000:duration=6000:sample_rate=48000 -pix_fmt yuv420p -c:v libx264 -b:v 180k -g 60 -keyint_min 60 -profile:v baseline -preset veryfast -c:a aac -b:a 96k -vf "drawtext=fontfile=/Library/Fonts/Arial.ttf: text=\'Local time %{localtime\: %Y\/%m\/%d %H.%M.%S} (%{n})\': x=10: y=10: fontsize=16: fontcolor=white: box=1: boxcolor=0x00000099"  -f flv rtmp://localhost/sliver/lowlatency
+
+# optional parameters 
+#   crf - constant rate factor, use this mode if you want to keep the best quality and don't care about the file size, 
+#       - The range of the CRF scale is 0–51, where 0 is lossless, 23 is the default, and 51 is worst quality possible.  
+#   preset - preset is a collection of options that will provide a certain encoding speed to compression ratio.
+#          - ultrafast, superfast, veryfast, faster, fast, medium (default), slow, slower, veryslow 
+#   profile - limit the output to a specific H.264 profile, baseline, main, high, high10, high422, high444 
+#   x264-params - to replace x264opts 
+#               - nal-hrd - cbr, vbr, ...
+#               - bufsize - is the "rate control buffer" 
+#               - keyint=GOPSIZE:min-keyint=GOPSIZE
+#               - scenecut=0,-1 
+#               - force_key_frames expr:gte(t,n_forced*GOP_LEN_IN_SECONDS) -  insert a keyframe every N seconds 
+#   -b:v 800k   - video bitrate 
+#   -b:a 128k   - audio bitrate  
+
+# brew install prerequist 
+ 
+brew install automake fdk-aac git lame libass libtool libvorbis libvpx opus sdl shtool texi2html theora wget x264 x265 xvid nasm
+
+# mac webcam live capture  
+
+    # HLS 
+         ffmpeg -f avfoundation -framerate 30 -i "0:0" \
+         -force_key_frames "expr:gte(t,n_forced*10)" -strict -2 \
+      -c:v libx264 \
+        -c:a aac -b:a 96k \
+     -f segment \
+     -segment_time 4 \
+     -segment_format mpegts \
+     -segment_list "index.m3u8" \
+     -segment_list_type m3u8 \
+     "sequence%d.ts"  
+
+    # HLS, forced 2 seconds segments, VOD 
+       ffmpeg -f avfoundation -framerate 30 -i "0:0" \
+        -force_key_frames "expr:gte(t,n_forced*10)" -strict -2 \
+        -c:a aac -c:v libx264 \
+        -f segment -segment_list_type m3u8 -segment_list_size 0 -segment_time 4.0 -segment_time_delta 0.1 \
+        -segment_list index.m3u8 test%02d.ts 
+
+       ffmpeg -f avfoundation -framerate 30 -i "0:0" \
+       -c:v libx264 -s 640x360 -crf 21 -maxrate 1M -bufsize 2M -preset veryslow -keyint_min 100 -g 100 -sc_threshold 0  \
+        -c:a aac -b:a 128k -ac 1 \
+        -f hls -hls_time 4 -hls_playlist_type vod  \
+        index.m3u8
+
+    # HLS live, 640x360 
+        ffmpeg -f avfoundation -framerate 30 -i "0:0" \
+       -c:v libx264 -s 640x360 -crf 21 -maxrate 1M -bufsize 2M -preset veryfast -keyint_min 100 -g 100 -sc_threshold 0  \
+        -c:a aac -b:a 128k -ac 1 \
+        -f hls -hls_time 4  \
+        index.m3u8
+
+    # list of capture devices 
+        ffmpeg -f avfoundation -list_devices true -i "" 
+
+    # playbacak 
+
+        https://d13g1bckr2b3ft.cloudfront.net/livetest4/index.m3u8 
+        https://d13g1bckr2b3ft.cloudfront.net/livetest5/index.m3u8 
+        https://d13g1bckr2b3ft.cloudfront.net/livetest6/index.m3u8 
+
+    # resize the image 
+        ffmpeg -i 1.jpg -vf scale=1920:1080 2.jpg 
+        
+    # fmp4 
+
+    ffmpeg -f avfoundation -framerate 30 -i "0:0" \
+    -keyint_min 48 -sc_threshold 0 \ 
+    -c:v libx264 -c:a aac -b:v:0 2000k -b:a 128k \
+    -map 0:v -map 0:a \
+    -f hls -var_stream_map "v:0, a:0" \
+    -hls_flags single_file -hls_segment_type fmp4 \
+    -hls_list_size 0 -hls_time 4 -master_pl_name master.m3u8 \
+     -hls_init_time 4 -hls_list_size 10 \
+    v_%01d.m4s
+
+    # curlcmd to switch to face-on camera 
+    curl -X 'POST' 'http://127.0.0.1:5001/availcv/imm/montage' -H 'accept: */*' -H 'Content-Type: application/json' -d \
+            '{ "layout": "l1", "tiles": [ {"source": {"name": "FaceTime HD Camera (Built-in)", "title": "op1"}}],
+            "final_image_colorspace":"BGRA"}'
+
+    curl -X 'POST' 'http://127.0.0.1:5001/availcv/imm/montage' -H 'accept: */*' -H 'Content-Type: application/json' -d \
+            '{ "layout": "l2", "tiles": [ {"source": {"name": "MINRRAY-TOP", "title": "op1", "crop_image":false}},
+             {"source": {"name": "MINRRAY-TOP #2", "title": "op2","crop_image":false}}], "final_image_colorspace":"BGRA"}'
+
+    # ffmpeg to capture video from camera 
+        [11:54 AM] Chaman Verma
+        The following script may give performance equal or better than navailCV. If it does then we can dig into the causes of delay in OpenCV. 
+        ffmpeg -thread_queue_size 2048 \
+        -video_size 1920X1080 \
+        -framerate 30 \
+        -f avfoundation \
+        -i 2:0 \
+        -thread_queue_size 2048 \
+        -video_size 1920X1080 \
+        -framerate 30 \
+        -f avfoundation \
+        -i 3:0 \
+        -filter_complex "[0:v]pad=iw:ih:0[left];[left][1:v]overlay=W/2.0[fileout]" \
+        -map "[fileout]"\
+        -r 24 \
+        -pix_fmt yuv420p \
+        -preset ultrafast \
+        -tune zerolatency \
+        -f rawvideo - | \
+        ffplay \
+        -probesize 32 \
+        -f rawvideo \
+        -pix_fmt yuv420p \
+        -s 1920x1080 \
+        -i -
+
+        [11:55 AM] Chaman Verma
+        Just change -i 2:0 and -i 3:0.  The number 2 and 3 are camera indexes.
+
+    # convert image jpg to png 
+        
+        ffmpeg -i input.png -preset slow output.jpg
+
+    # build ffmpeg from source 
+        https://trac.ffmpeg.org/wiki/CompilationGuide/macOS 
+
+        ./configure  --prefix=~/Downloads/roy/ffmpeg --enable-gpl --enable-nonfree --enable-libass \
+--enable-libfreetype --enable-libmp3lame \
+--enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-libopus --enable-libxvid \
+--samples=fate-suite/
+
+    # convert jpg image from png and scale to width 
+    ffmpeg -i deep-learning-development-phases.png -vf scale=960:-1 deep-learning-development-phases.jpg 
+
+    # Creating a video from a single image for a specific duration 
+    ffmpeg -loop 1 -i image.png -c:v libx264 -t 15 -pix_fmt yuv420p -vf scale=320:240 out.mp4
+    ffmpeg -loop 1 -i ~/Documents/PHIData1-1080p/Image028.png -c:v libx264 -t 15 -pix_fmt yuv420p -vf scale=1920:1080 image028.mp4
+
+	# extract key frame from video file 
+		ffmpeg -i input.mp4 -vf "select=eq(pict_type\,I)" -vsync vfr frame-%02d.png
+
+		# output the key frame in terms of seconds from the start
+		ffprobe -select_streams v -skip_frame nokey -show_entries frame=pkt_pts_time -of csv "input.mp4" > timestamps.txt
+			use best_effort_timestamp_time or pkt_dts_time instead
+
+		# Output the frame and offset information
+			ffprobe -show_frames -select_streams v -read_intervals "%+#1" -print_format csv input.mp4
+ 
+		ffmpeg -i input.mp4 -vf "select=eq(pict_type\,I),metadata:s=s:s:f=1/FLOAT" -vsync vfr -ffprobe /path/to/timestamps.txt -select "v:0[f];[f]metadata:s=c=t" -map "[v] frame_%03d.png" 
+
+		# based on time interval
+			# Extract every 1 second
+				ffmpeg -i input.mp4 -vf "setpts=1*PTS" -vsync vfr frame-%02d.png
+
+			# Extract every 5th frame
+				ffmpeg -i input.mp4 -vf "select=mod(n\,5)==0" -vsync vfr frame-%02d.png	
+
+		# extract scene change
+			time ./ffmpeg -i ./VIDEO.mp4 -vf "select=gt(scene\,0.4),scale=160:-1,tile=6x80" -frames:v 1 -qscale:v 3 preview.jpg
+			time ./ffmpeg -f lavfi -i "movie=VIDEO.mp4,scdet=s=1:t=14" -vf "scale=160:-1,tile=6x85" -frames:v 1 -qscale:v 3 preview.jpg

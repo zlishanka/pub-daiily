@@ -1,0 +1,83 @@
+## OpenCV
+
+# online tutorial 
+    https://docs.opencv.org/3.4/d9/df8/tutorial_root.html 
+
+# header 
+    #include <opencv2/opencv.hpp>
+    using namespace cv; 
+
+# installation on macos 
+    - CMake 3.9 or higher
+    - Git
+    - Python 2.7 or later and Numpy 1.5 or later
+
+    # cmake --version 
+        brew install cmake  
+    # download source code 
+        git clone https://github.com/opencv/opencv.git   
+
+# display image 
+    image = imread( argv[1], 1 ); 
+
+# image wirte
+    Mat mat(480, 640, CV_8UC4); // Create a matrix with alpha channel
+ 
+    vector<int> compression_params;
+    compression_params.push_back(IMWRITE_PNG_COMPRESSION);
+    compression_params.push_back(9); 
+    
+    bool result = imwrite("alpha.png", mat, compression_params);     
+    # write multiple image 
+    vector<Mat> imgs;
+    imgs.push_back(mat);
+    imgs.push_back(~mat);
+    imgs.push_back(mat(Rect(0, 0, mat.cols / 2, mat.rows / 2)));
+    imwrite("test.tiff", imgs); 
+
+# create image with alpha channel 
+    Mat mat(480, 640, CV_8UC4); 
+
+# video capture 
+    VideoCapture cap;
+ 
+    int deviceID = 0;             // 0 = open default camera
+    int apiID = cv::CAP_ANY;      // 0 = autodetect default API
+    cap.open(deviceID, apiID);
+    # in a loop 
+    Mat frame; 
+    cap.read(frame);
+    if (!frame.empty()) imshow("Live", frame);
+    if (waitKey(5) >= 0)
+        break;
+	// rewind movie file to the beginning 	
+	cap.set(CAP_PROP_POS_FRAMES, 0); 
+
+    # wait for the key to press to exit loop 
+    while cv2.waitKey(1) < 0:
+        success, frame = cap.read()   
+
+# create and read image 
+  	cv::Mat image1(240,320,CV_8U,100);
+	cv::Mat image3 = cv::imread("puppy.bmp"); 
+  	cv::Mat image2(240,320,CV_8UC3,cv::Scalar(0,0,255));
+  	image3.copyTo(image2);
+  	cv::Mat image5= image3.clone();
+
+# rectangle 
+	cv::Rect roi(ymin, xmin, width, height); 
+	auto roiImg = srcImg(roi);
+
+# convert color space 
+	cvtColor( inImg, srcImg, COLOR_BGR2GRAY ); # convert inImg from BGR to srcImg as Graylevel 
+	cvtColor( srcImg, srcImg, COLOR_GRAY2BGR ); 
+	cvtColor( bigImg, finalImg, COLOR_BGR2BGRA);  
+
+# python rectangle, text, circle overlay on frame
+    cv2.rectangle(frame,
+                  (int(box[0]), int(box[1])),
+                  (int(box[2]), int(box[3])),
+                  (0,0,255),
+              thickness=2) 
+    cv2.putText(frame, str(prob), (int(box[2]), int(box[3])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2, cv2.LINE_AA)
+    cv2.circle(frame, (int(ld[0][0]), int(ld[0][1])), 5, (0,0,255),-1) 

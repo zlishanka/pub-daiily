@@ -1,0 +1,224 @@
+## Search tricks 
+	- limit keyword search 
+		"AGI threat"
+	- intitle, limit title 
+		intitle:iphone15 sale 
+	- intitle plus limited keywoard - 
+		intitle:"iphone 15 deal" 
+	- allintitle: multiple keywords
+		allintitle:word1 word2 word3
+	- intext 
+		intitle:"Elon MUSK" intext:"SpaceX Starship"
+		intitle:"Qigong Zheng" intext:"UMD"
+	- inurl : limited url 
+		Elon MUSK inurl:youtube intext:youtube
+	- site:
+		Elon Musk site:youtube.com 
+		Qigong Zheng site:umd.edu
+		little cat site:pexels.com
+		little cat site:pixabay.com
+		little cat site:gettyimages.com
+	- imagesize: size of image
+		elon musk imagesize:2560x1440 
+	- filetype
+		large language model filetype:pdf
+		arrow filetype:png
+
+
+## Define ChatGPT Role 
+	Act as a Linux Terminal 
+	Act as "Position" interviewer ` 
+	Act as an Excel Sheet
+	Act as an English Teacher
+
+## Learn from ChatGPT 
+	Explain clearly, uniquely, detailed like I'm 5, with examples, to 5th grades, like Elon Musk, detailed with example, to high schoolers 
+
+## Use temparature 
+	Give me short paragraph on why AI will continue to gain popularity. Use a temperature of 10.0
+	Give me short paragraph on why AI will continue to gain popularity. Use a temperature of 0.1 
+
+## Train ChatGPT to write its own prompts for you 
+	What's the best prompt for chatGPT to learn my writing styles and respond to my emails for me? 
+
+## Create unique business ideas 
+	Generate unique angles or strategies for the topic 'How to increase your creative output.' 
+	# simulate an expert and then engage in conversation 
+		As a Harvard Marketing graduate and skilled content creator, guide me in crafting social media content that resonates with AI enthusiasts. 
+		Emphasize uncommon and expert questions to ask
+
+	# Generate new ideas 
+		I am building a [insert thing]. Give me a list of 10 ideas for [insert thing]
+		I am building a landing page for fintech app. Give me a list of 10 persuasive and cathy headlines for the page. 
+	
+	# Help ChatGPT help you 
+		I am a marketer and I am new to using GPT. Can you give me a list of essential GPT prompts that will help marketer and get more done save time.
+
+	# help to interview people 
+		I am hiring a [insert job title]. I have no experience of hiring this position. Give me a list of questions for how I should evaluate them, along with scoring criteria. 
+
+## Generate responses table format  
+	Create a table for top AI tools. Include the following columns: Name, Category, and Oneliner. Here are the Tools that I want to summarize: 
+
+	
+## Chained Prompt 
+	write an article about ChatGPT, first give me the outline which consists of a headline, a teaser, and several subreadings
+	# after output 
+	now write 5 different subheadings 
+	# after output 
+	add 5 keywords for each subheadings 
+
+## Prompt for developers 
+	Develop an architecture and code for a <description> website with Javascript 
+	help me find mistakes in the following code <paste code below> 
+	I want to implement a stikcy header on my website, can you provide an example using CSS and Javascript 
+	please continue write code for Javascript <Paste code below> 
+
+## The way to learn a new concept or  
+
+    1. Copy a lesson and paste it on ChatGPT.
+    2. Ask it to formulate questions about the lesson. (ask me 3 questions about his summary)
+    3. Answer the questions and ask ChatGPT to evaluate your answer.
+    
+## 10 ways to improve productivity of your coding through chatGPT 
+
+    https://www.youtube.com/watch?v=uZUcZEDdseY 
+    1. Paste the code and ask it to explain function 
+    2. Ask it to extend the functionality. Say to add exception handling, etc.  
+    3. Ask it to rewrite code in a , (refactoring according to the certain convention...) 
+        # Rewrite the code below following the Google style guidelines for JavaScript 
+    4. Ask it to simply the complex code for you (use ``` ... ``` as delimeter for code) 
+    5. Ask it to write few test cases
+        # Write test cases for the main edge cases that could happen to the below code snippet. 
+        # First outline the test cases you'll write. Second, write the test cases in Javascript using the Jest Framework 
+    6. Ask it to optimize the code (write an alternative version of the function..) 
+    7. Ask it to translate one programing language to another one (javascript to python..) 
+    8. Ask it to write documentation of your function
+        # Regenerate the code snippet below, but please include comments on each line of code {enter code} 
+    9. Ask it to track down the bug 
+    10. Ask it to upload your file s3 storage (hahaha..) 
+    11. Translate this code from Javascript to Python {enter code} 
+
+## Cit command generator 
+    I want you to act like a Git commands generator. I'll explain what I need you to do and you will provide me with the 
+    right Git command. My first requirement is 
+
+## What are the milestone like papers in deep learning that have great impact  
+
+## Google like pro - ALl advanced search operators Tutorial 
+    https://www.youtube.com/watch?v=BRiNw490Eq0 
+    
+    # AI and "semantic search" - RankBrain + Hummingbird 
+    # Ask the right question 
+        - Begin with simple query, be precise, avoid redundant or unnessary terms, break query into small questions 
+        - Watch your world, terms matter, order matters  
+
+
+## machine learning programming 
+    # build a model  using pytorch that does multi label classification over 10 classes and take as input two things, 
+    # an RGB image of size 320 by 320 and a vector of length 128.
+
+    # how do I solve this error -----------
+    # help me document this code 
+    # write unit test for the following code 
+    # quickly summarize a large texts 
+    #  
+# Word meaning and list of examples 
+    - synonym for sagacious 
+    - Now use it for 10 sentences  
+
+# write a 12 month lease agreement 
+    - write a motivating email with quote from Nelson mandela explaining that 
+      all employees in the company will get a pay cut 20% so that top executives can get 
+      larger Christmas bonus. Make it inspiring and positive. 
+
+# solve a course problem and coding problem 
+
+# Translate to another language, english to Chinese, Chinese to english, etc. 
+
+# instructional guide 
+    - how to formulate a word in MLA 
+
+# how to make dinner from available ingredients 
+    - 
+
+# Extraction information 
+    - now output that as a python variable  
+
+# Examine the smart contract 
+    - This is a solidity contract. Can you help me review it and let me know if there are security vulnderabilities? 
+
+# Checklist 
+    - Create a checklist for preparing for a job interview.
+# Scorecard 
+    - Can you generate output in a scorecard format on how apple stocks performed against tesla in past 5 years. 
+
+# JSON 
+    - Can you provide details of the last 2 FIFA world cup winners in JSON format? 
+    - I want the following to include a date, opponent name, winner name, score, and stadium name. 
+# Chart 
+    - Johnny made $50k sale in Jan, $40K in Feb and $30k in March. 
+    - Shaun made $60k sale in Jan, $20K in Feb and $75k in March. 
+    - Can you put this data in a bar chart? 
+# CSV 
+# XML/ YAML 
+# SVG
+# Diagrams     
+
+# Generate regexes 
+
+## improve your decision making ability
+# Seek advice from industry experts 
+    Prompt: "Imagine you could consult [industry expert] on [specific decision]. What questions would you ask them, " 
+            "and what insights do you think they would share?"
+# Improve your decision-making
+    Prompt: "I am trying to decide if I should [insert decision]. Give me a list of pros and cons that will help me decide why I should or shouldn't make this decision."
+
+# Reverse engineer succes 
+    Prompt: "Study a successful individual or company in [industry/field] and identify the key factors and decisions that contributed to their success." 
+            "How can these insights be applied to [your situation]?"
+
+# Utilize the Six Thinking Hats technique
+    Prompt: "Apply the Six Thinking Hats technique to [decision/problem] and provide a summary of the insights gathered from each hat."
+
+# Explore alternative perspectives
+    Prompt: "Provide three different perspectives on [decision/problem] and evaluate the pros and cons of each approach."
+
+# Evaluate long-term consequences
+    Prompt: "Consider the long-term implications of [decision] for [individual/company]. What possible outcomes could arise, and how might they impact future success?" 
+
+# Identify and challenge cognitive biases
+    Prompt: "Evaluate the possible consequences of [decision] in the short term (10 minutes), medium term (10 months), and long term (10 years). " 
+            " How should these timeframes affect my perspective on the decision?"
+
+# Seek feedback from diverse sources
+    Prompt: "Identify three individuals with different backgrounds or perspectives who could provide valuable input on [decision/problem]. " 
+            " What questions should I ask them, and how could their insights inform my decision-making process?" 
+
+# Perform a pre-mortem analysis
+    Prompt: "Imagine that [decision/project] has failed in the future. Conduct a pre-mortem analysis to identify potential causes of failure "
+            "  and develop strategies to address them before they become issues."
+
+# Simplify any complex information or topic.
+    Prompt: "Break down the (topic) into smaller, easier-to-understand parts. Use analogies and real-life examples to simplify the concept and make it more relatable."
+
+# Turn ChatGPT into your personal intern
+    Prompt: "I am creating a report about [insert topic]. Research and create an in-depth report with a step-by-step guide that will help readers understand how to [insert outcome]."
+
+# Learn any new skill
+    Prompt: "I want to learn [insert skill]. Generate a 30 day plan that will help a beginner like me learn the skill from scratch."
+
+# Get short and insight-packed book summaries
+    Prompt: "Summarize the book [insert book] by the author [insert author] and give me a list of the most important learnings and insights."
+
+# Enhance your problem solving skills
+    Prompt: "Your role is that of a problem solver. Give me a step-by-step guide to solving [insert your problem]."
+
+# Use the 80/20 method to learn anything faster
+    Prompt: "I want to learn about [insert topic]. Identify and share the most important 20% of learnings from this topic that will help me understand 80% of it."
+
+# Use first principle thinking
+	Prompt: "I have difficulty learning AI. Help me understand it better uing First Priciple Thinking" 
+   
+
+

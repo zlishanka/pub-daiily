@@ -1,0 +1,67 @@
+# Cuda memory model 
+
+	Source - https://www.youtube.com/watch?v=OSpy-HoR0ac&list=PLC6u37oFvF40BAm7gwVP7uDdzmW83yHPe&index=5
+
+	## Thread-Memory Correspondence 
+
+		- Threads <---> Local Memory (and Registers) 
+			scope: private to its corresponding thread 
+			lifetime: thread
+			- "on-chip" Device memory
+			- Memory not on SM is "off-chip"
+		- Blocks <---> Shared Memory
+			scope: Every Thread in the Block has access 
+			lifetime: Block
+
+		- Grids <---> Global memory
+			scope: Every thread in all Grids have access
+			lifetime: Entire program in Host code - main()	
+
+	## Memory Speed 
+		- Registers (8TB/s, 1 clock)	
+		- Shared (1.5 TB/s, 32 clocks) 
+		- Local Glocal (200GB/s, 800 clocks)
+		- Host (PCIe)  (5GB/s) 
+
+	## Global Memory 
+		- access with cudaMalloc, cudaMemset, cudaMemcpy, cudaFree
+		- "off-chip DRAM"
+		- cannot be avoided since we have to transfer data between host and device
+		- goal is to minimize global memory space 
+
+	## Registers and Local Memory
+		- Variables declared in a Kernel are stored in Registers
+			- "on-chip"
+			- Fastest form of memory
+
+		- Arrays too large to fit into registers, spill over into Local memory
+			- "off-chip"
+			- compiler controlled
+			- local refers to scope, not location
+				- local to each thread
+
+	## Shared memory
+		- Allows threads within a Block to communicate with each other
+			- use synchronization
+		- very fast, (like L1 cache)
+			- only registers are faster
+		- Can use as "Scratch-pad" memory 
+		- Using shared memory 
+
+		__global__ void kernel (int* in, int N) {
+			int i = threadIdx.x + blockDim.x * blockIdx.x;
+			// allocate a shared array
+			__shared__ int shared_array[N];
+			
+			// each thread writes to one element of shared_array
+			shared_array[i] = in[i];
+			// do other stuff
+			// ...
+		}
+
+	## Constant Memory
+		- Special region of Device memory
+			- used for data with unchanging contents throughout kernel execution
+			- read-only from kernel
+		- off-chip
+		- constant memory is aggressively cached into on-chip memory

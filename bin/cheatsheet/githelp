@@ -1,0 +1,329 @@
+## git cheatsheet 
+https://cheatography.com/itsellej/cheat-sheets/git-commands/ 
+
+## clone respository 
+    # use SSH key 
+    git clone git@gitlab.com:availmedsys/avail-media/availcv.git -b release/6.5 soft-9826
+    # use https 
+    git clone https://github.com/slivertv/backend-streaming-utils.git 
+
+## configuration of git 
+
+    git config --list
+    git config --global --list
+    git config --global user.name "rzheng" 
+    git config --global user.email "rzheng@avail.io" 
+
+## set remote url
+    git remote set-url origin git@gitlab.com:availmedsys/avail-media/availcv.git
+	git remote set-url origin git@github.com:zlishanka/daiily.git 
+	git remote -v  	# disply URLs of all remote repos, notes if it's https://, you won't be able to use ssh key authentication 
+	git remote get-url origin 
+
+## snaphots the file in preparation of versioning 
+    git add [file]
+
+## discard all commits in a branch  
+
+    git reset --hard origin/master
+
+## unstages the file, but preserve its contents 
+    git reset [file] 
+    git restore --staged [file] 
+
+## records file snapshots premanently in version history 
+    git commit -m "[descriptive message]" 
+
+## lists version history for the current branch
+    git log 
+
+## remove file form git repository 
+
+    git rm -r backend/http 
+    git rm file  
+
+## Staging Modified files 
+    git add [file] 
+    git commit -m "[description]"
+    git push origin [branch]
+
+## check the current working branch 
+    git branch 
+
+## create new branch from existing one 
+
+    git checkout -b myFeature dev 
+    git commit -am "Your message"
+    git push origin myFeature 
+
+## fetch new info from github 
+    git fetch 
+    git checkout 
+
+## merge the master branch into the feature branch  
+    git checkout master 
+    git pull origin master 
+    
+    git checkout feature1
+    git merge master 
+
+## merge the feature branch into the master branch  
+    git checkout feature1 
+    git pull origin feature1 
+    
+    git checkout master 
+    git merge feature1  
+
+## merge the master branch into th feature branch 
+    git checkout master 
+    git pull origin master 
+
+    git checkout feature1 
+    git merge master 
+
+## downloads bookmark history and incorporate changes 
+    git clean -d -fx ""
+    git pull  
+
+## clear the untracked files from the local 
+    git clean  -d  -f . 
+
+## discards local changes and sync with repository 
+    git checkout -f another-branch
+
+    git clean -d -fx ""
+    git pull 
+
+## diff on between two different commits on the same branch 
+
+    git diff HEAD^^ HEAD filename 
+    git diff HEAD^^..HEAD -- filename 
+    git difftool revision_1:file_1 revision_2:file_2 
+  
+## uploads all local branch commits to GitHub 
+    git push [alias][branch]
+    git push origin master 
+
+## ustage the 'git add' changes 
+    git reset HEAD <file> 
+
+## create a new repository on the command line
+
+	echo "# backend-streaming-manager" >> README.md
+	git init
+	git add README.md
+	git commit -m "first commit"
+	git remote add origin https://github.com/slivertv/backend-streaming-manager.git
+	git push -u origin master
+ 
+## resolve merging issue 
+    git merge --abort 
+    git pull (to be sure you're up-to-date) 
+
+## give up most recent commit 
+    git reset --soft HEAD 
+
+## remove most recent commits 
+    git reset --hard HEAD^    # remove all changes as well  
+    git reset --hard HEAD~2   # remove the last two commits 
+
+## recommit 
+     git reset --soft HEAD 
+     ... do something else to come up with the right tree ... 
+     git commit -c ORIG_HEAD 
+
+## recover the removed commits 
+    git reset --hard 31e92cf 
+    [daft-242-add-partner-prefix 31e92cf] 
+
+## give up most recent add 
+    git reset file
+    git reset  
+
+## show the difference between commits 
+    git show e1e893621c2429e5119febf74897f499eccc073b
+
+## list branch of a repo 
+    git branch -av
+    git brach --all
+    
+## force correct login when multiple github accounts existing 
+    git remote set-url origin https://username@github.com/username/repo-name.git 
+    git remote set-url origin https://zlishanka@github.com/zlishanka/flask-project.git
+
+## delete a branch locally  
+    git branch -d localBranchName 
+
+## delete a branch remotely 
+    git push origin --delete remoteBranchName 
+
+## pull request 
+    Pull requests let you tell others about changes you've pushed to a branch in a repository on GitHub.  
+    https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request 
+
+    # Creating a pull request from a fork 
+        https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork 
+
+## resolve error 'Encountered 1 file that should have been pointers, but weren't' 
+    brew install git-lfs
+    git lfs uninstall 
+    git reset --hard 
+    git lfs install 
+    git lfs pull 
+
+## git tagging 
+    git tag                 # list existing tag  
+    git tag -l "v1.8.5*"    # list existing tag with wild card 
+    git tag -a v1.4 -m "my version 1.4"     # create an annotated tag
+    git tag -d v1.4-lw      # delete a tag 
+    git push origin v1.5 
+
+## force git commit w/o pre-commit 
+    PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit -m "Add API route 1.4 and functional tests" 
+
+## delete untracked files 
+    git clean  -d  -f .
+
+## run precommit 
+    pre-commit run --files creations/errors/__init__.py 
+    isort 
+    black 
+
+## merge pull request into other branches other than master
+    GitHub allows changing the target branch of a pull request via the GUI
+
+## squash and merge 
+    Say your bug fix branch is called bugfix and you want to merge it into master:
+
+    git checkout master
+    git merge --squash bugfix
+    git commit 
+
+    This will take all the commits from the bugfix branch, squash them into 1 commit, and merge it with your master branch. 
+
+## vie wthe latest change for a specific pull request 
+    https://github.com/dittovto/ditto-creation-api/pull/188/files
+
+
+## git config tool 
+    lg = !git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ci)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(    auto)%d%C(reset)' --al
+    .gitconfig
+
+## git revert 
+    git revert HEAD [master b9cd081] Revert "prepend content to demo file" 
+
+
+## git rebase  
+    # When you’re working on a feature branch and you need changes from the main master branch, 
+    # I would suggest using rebase. Merge can be used when you want to merge a feature branch back into your master branch.
+    https://jeffkreeftmeijer.com/git-rebase/  
+    git rebase origin/vto-2034-camera-angle-support
+
+    # (1) pull the branch you want to merge to  
+    git pull origin release/6.0
+    git checkout 
+    git checkout dev/RZ/SOFT-2851
+    git rebase release/6.0
+    git status
+    ... 
+        resolve the confilted_file 
+    ...
+    git add conflicted_file 
+    git rebase --continue 
+
+    # (2) repeat the (1) until there are no conflict 
+    git commit 
+    git push origin dev/RZ/SOFT-2851 
+ 
+## git stash - Stash the changes in a dirty working directory away 
+    git stash show 
+    git stash drop  # drop latest stash by one  
+    git stash push  -   git stash 
+    git stash apply 
+
+    git stash
+    git pull
+    git stash pop
+    git stash list
+
+## check local github repo origin's url 
+    git remote get-url origin 
+
+## git log with graph logging  
+    git log --oneline --graph
+
+
+## gitlab clone branch directly 
+
+    git clone git@gitlab.com:availmedsys/avail-media/availcv.git -b dev/CS/MEDIA-2401_LZ4 
+    git clone https://gitlab.com/availmedsys/avail-media/availcv.git -b dev/CS/SOFT-8456 
+
+## recover git reset wrong doing 
+
+    git fsck --lost-found 
+
+## mergetool 
+
+    brew intall meld 
+    https://stackoverflow.com/questions/34119866/setting-up-and-using-meld-as-your-git-difftool-and-mergetool 
+
+## Checkout From Specific Git Commit ID 
+    https://devopscube.com/checkout-clone-specific-git-commit-id-sha/ 
+
+    1 Clone the repository or fetch all the latest changes and commits.
+    2 Get the commit ID (SHA) that you want to checkout. 
+    
+        git log 
+   
+     3 Copy the commit (SHA) id and checkout using the following command 
+     
+        git checkout 28cd74decb47d8a5294eb59e793cb24a0f242e9e 
+ 
+    4 You need to be very careful with this checkout. It will be in the detached HEAD mode. 
+    5 If you want to make changes from the commit ID checkout, you need to create a branch, as shown below. 
+
+        git checkout -b <new-branch-name> <commit-id-sha> 
+        
+## access the repo through access token 
+
+    git clone https://oauth2:ACCESS_TOKEN@gitlab.com/availmedsys/avail-media/availvideobuffer.git 
+    git clone https://oauth2:glpat-iMBWiPRUacy5NeLzqi_W@gitlab.com/availmedsys/avail-media/availcv.git  -b release/6.5 soft-9xxx 
+
+## revert recent merge request 
+    git fetch upstream
+    git checkout upstream/master -b revert/john/foo_and_bar 
+    # then look at the commit log
+    git revert -m 1 b76a5f1f5d3b323679e466a1a1d5f93c8828b269 
+
+## change the git log message / author using rebase
+    git rebase -i d404136ea905ce3ecd6b20bd0b3bc4bd0aa3f871~
+    # change the log message by replacing "pick" with "reword"
+    git commit --amend
+    # change the author
+    git commit --amend --author="New Author Name <email@address.com>"
+    git commit --continue
+
+## access the github(zlishanka) through access token 
+
+    git clone https://zlishanka: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@github.com/zlishanka/opencv-examples- -b opencv-examples-main 
+
+## use "beyond compare" to graphically view the differences of two git branch
+#
+
+## comment out pre-commit white-space, run-test
+     ./.git/hooks/pre-commit
+
+## verify the fingerprint of the ssh keys 
+    ssh-keygen -l -E md5 -f ~/.ssh/id_ed25519 
+
+## two-factor recovery code 
+    335e9476d1359bce
+    e01e274ed9c8c2a2
+    bcc0dcc1af64e888
+    966466f62e930f49
+    cdfdbcfc35874aab
+    2ca2917168aee4ab
+    8fd49700ec71518c
+    ae3878f2c51e9956
+    4289dbf9b3866dff
+    8e8cb9eed732339c

@@ -1,0 +1,11 @@
+## OpenGL Transformation 
+
+    # OpenGL Projection Matrix 
+
+        - A computer monitor is a 2D surface. A 3D scene rendered by OpenGL must be projected onto the computer screen as a 2D image. 
+        - GL_PROJECTION matrix is used for this projection transformation. 
+            - First, it transforms all vertex data from the eye coordinates to the clip coordinates. 
+            - Then, these clip coordinates are also transformed to the normalized device coordinates (NDC) by dividing with w component of the clip coordinates.
+
+        - Therefore, we have to keep in mind that both clipping (frustum culling) and NDC transformations are integrated into GL_PROJECTION matrix. 
+        - The following sections describe how to build the projection matrix from 6 parameters; left, right, bottom, top, near and far boundary values.

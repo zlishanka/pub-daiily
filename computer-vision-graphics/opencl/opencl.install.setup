@@ -1,0 +1,11 @@
+# OpenCL install & setup
+
+	- First of all you need to download the newest drivers to your graphics card.
+	- The major graphic vendors NVIDIA and AMD have both released implementations of OpenCL for their GPUs.
+		- Intel OpenCL
+		- AMD OpenCL
+		- Nvidia OpenCL
+			- https://developer.nvidia.com/opencl
+	- The installation steps differ for each SDK and the OS you are running.
+
+	 

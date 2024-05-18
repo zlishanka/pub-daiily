@@ -1,0 +1,21 @@
+# Brew install 
+brew install gstreamer 
+
+# Build and Install gstreamer producer plugin (kvssink) 
+https://github.com/awslabs/amazon-kinesis-video-streams-producer-sdk-cpp
+
+cd amazon-kinesis-video-streams-producer-sdk-cpp 
+export GST_PLUGIN_PATH=`pwd`/build
+export LD_LIBRARY_PATH=`pwd`/open-source/local/lib
+
+# test 
+gst-inspect-1.0 kvssink 
+
+# identify available media devices 
+gst-device-monitor-1.0
+
+# command line 
+
+gst-launch-1.0 autovideosrc ! videoconvert ! video/x-raw,format=I420,width=640,height=480,framerate=30/1 ! vtenc_h264_hw allow-frame-reordering=FALSE realtime=TRUE max-keyframe-interval=45 bitrate=500 ! h264parse ! video/x-h264,stream-format=avc,alignment=au,profile=baseline ! kvssink stream-name=avail-cv-ml-streaming-test1 storage-size=128 access-key="AKIAX2OTA7CPET5KSS7G" secret-key="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"
+
+gst-launch-1.0 -v avfvideosrc ! videoconvert ! vtenc_h264_hw allow-frame-reordering=FALSE realtime=TRUE max-keyframe-interval=45 ! kvssink name=sink stream-name="avail-cv-ml-streaming-test1" access-key="AKIAX2OTA7CPET5KSS7G" secret-key="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" osxaudiosrc ! audioconvert ! avenc_aac ! queue ! sink.

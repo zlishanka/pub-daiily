@@ -1,0 +1,73 @@
+## find java version and set up JAVA_HOME, CLASSPATH
+    /usr/libexec/java_home -V
+    export JAVA_HOME=`/usr/libexec/java_home`
+    export CLASSPATH=${CLASSPATH}:.
+    export CLASSPATH=$CLASSPATH:~/WorkArea/daily/LinuxProg/interviewQuestions/leetCode
+
+## Sorting library
+    ArrayList<Integer> a 
+    Collections.sort(a) 
+
+## ArrayList 
+
+    - part of collection framework. 
+    - provides dynamic arrays 
+    - may be slower than standard arrays 
+    - helpful in programs with lots of manipulation in the array 
+
+    ArrayList<String> str = new ArrayList<String>();
+    ArrayList<Integer> n1 = new ArrayList<Integer>(Arrays.asList(9,2,4,5,1));  // initialized with values  
+    str.add(0,"Geek")   // add at the beginning 
+    List gfg = new ArrayList<>(collection); // initialize with another collection  
+
+    a.get(i) 
+    a.set(i, 1) 
+    a.add(0, 1)     // add at the top of array 
+    a.add(1)        // add at the end of array 
+
+## array 
+
+    int[] a, int[][] b
+
+    a.length        // length of array     
+    b.length        //  number of row 
+    b[0].length     // number of col 
+
+    int[] b = new int[a.length];   // create new array as the same size of a
+    
+    boolean[] charTable = new boolean[256]; 
+    Arrays.fill(charTable, false);      // fill arrays with initial value 
+
+## String 
+
+   String s 
+   s.charAt(i)      // character at location i of string  
+   s.length()       // get string length 
+   
+## HashMap  
+
+    HashMap<Character, Integer> hm = new HashMap<>();
+
+    hm.containsKey(s.charAt(i)) 
+    hm.put(s.charAt(i), 1)      // set value at key s.charAt(i)
+    hm.get(s.charAt(i))         // get value at key s.charAt(i) 
+
+## Assertions 
+
+    Assertion is achieved using the assert statement in Java. While executing assertion, it is believed to be true. 
+    If it fails, JVM throws an error named AssertionError. 
+
+    assert(prob.length == num.length);
+
+## Math 
+
+    double ran = Math.random();         // give a uniformly generated number between [0,1]
+    Integer.MAX_VALUE, Integer.MIN_VALUE    // convenient constant used to get max, min 
+
+
+## Thread 
+
+    Runnable task = new Runnable() { ... } ;        // Runnable to create task  
+    Thread innerThread = New Thread(task)           // attach task to create new Thread 
+    innerThread.start();                            // start the thread 
+    

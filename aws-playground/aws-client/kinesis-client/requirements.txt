@@ -1,0 +1,6 @@
+boto3
+cryptography
+pygobject
+
+# brew install gobject-introspection
+# brew install gstreamer

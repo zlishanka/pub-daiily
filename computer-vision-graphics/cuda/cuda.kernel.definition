@@ -1,0 +1,31 @@
+# Cuda kernel definition 
+
+	Source - https://www.youtube.com/watch?v=BSzoEXqP9aU&list=PLC6u37oFvF40BAm7gwVP7uDdzmW83yHPe&index=3
+
+	## Kernel definition 
+		__global__ void kernel(int *d_out, int *d_in) 
+		{
+			// Perform this operation for every thread
+		}
+
+		- "__global__" is a "Declaration Specifier" that alerts the compiler that a function should 
+			be compiled to run on device 
+		- kernels must return type "void" 
+		- variables operated on in the kernel need to "be passed by reference"
+	
+	## Thread Index
+		- Each Thread has its own thread index
+			- accessible within a Kernel through the built-in threadIdx variable
+		- Thread Blocks can have as many as 3-dimensions, therefore there is corresponding index for each dimension
+			threadIdx.x, threadIdx.y, threadIdx.z
+
+		- Index of Block 
+			dim3 blockIdx;
+			int blockIdx.x, blockIdx,y, blockIdx.z
+			dim3 threadIdx		
+			int threadIdx.x, threadIdx,y, threadIdx.z
+
+		- Indexing with Grid
+			- threadIdx is only unique within its own Thread Block
+			- To determine the unique Grid Index of a thread 
+				"i = threadIdx.x + blockIdx.x *  blockDim.x;"

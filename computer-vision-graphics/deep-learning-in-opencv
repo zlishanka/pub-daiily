@@ -1,0 +1,15 @@
+
+## Deep learning in openCV 
+
+    https://github.com/opencv/opencv/wiki/Deep-Learning-in-OpenCV
+
+    # DNN module in library 
+
+        - Deep Learning is the most popular and the fastest growing area in Computer Vision nowadays. 
+        - Since OpenCV 3.1 there is DNN module in the library that implements forward pass (inferencing) with deep networks, pre-trained using 
+            some popular deep learning frameworks, such as Caffe. 
+        - In OpenCV 3.3 the module has been promoted from opencv_contrib repository 
+        - import cv2 print cv2. __version__
+
+
+ 

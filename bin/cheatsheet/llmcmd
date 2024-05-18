@@ -1,0 +1,190 @@
+# LLM related quick reference 
+
+## HF env setup
+	from dotenv import load_dotenv
+
+	load_dotenv() 
+	access_token = os.getenv("ACCESS_TOKEN")
+
+## import packages 
+
+	pip install transformers trl accelerate torch bitsandbytes peft datasets -qU
+	pip install flash-attn --no-build-isolation 
+
+
+## Dataset
+	from datasets import load_dataset # HF datasets package
+
+	### load dataset 
+	instruct_tune_dataset = load_dataset("mosaicml/instruct-v3")
+
+	### randomly pick sub sample
+	rand_idx = np.random.randint(24999, size=N) 
+
+	### filter out subset of datasets 
+	instruct_tune_dataset = instruct_tune_dataset.filter(lambda x: x["source"] == "dolly_hhrlhf")
+	
+	### read from local sql DB
+	import pandas as pd
+	connection = sqlite3.connect("crypto-news.db")
+	train_df = pd.read_sql_query("SELECT * from train", connection)
+	dataset = {
+    	"train": Dataset.from_pandas(train_df),
+    	"validation": Dataset.from_pandas(val_df),
+    	"test": Dataset.from_pandas(test_df)
+	}	
+
+
+## Formatting Prompt 
+
+	def create_prompt(sample):
+		bos_token, eos_token = "<s>", "</s>"
+		system_message = "[INST]Use the provided input to create an instruction that..."
+		input = sample["response"]
+		response = sample["prompt"].replace(original_system_message, "").replace("\n\n### Instruction\n", "").replace("\n### Response\n", "").strip()
+
+		full_prompt = ""
+		full_prompt += bos_token
+		full_prompt += system_message
+		full_prompt += "\n" + input + "[/INST]" + response + eos_token 
+		
+## Loading Tokenizer
+
+	tokenizer = AutoTokenizer.from_pretrained(model_id)
+
+	tokenizer.pad_token = tokenizer.eos_token
+	tokenizer.padding_side = "right"
+
+## Tokenization 
+
+	def tokenize_prompts(prompt):
+    	return tokenizer(create_prompt(prompt))
+
+	# create tokenizered prompts for both train/test datasets	
+	tokenized_train_dataset = instruct_tune_dataset["train"].map(tokenize_prompts)
+	tokenized_val_dataset = instruct_tune_dataset["test"].map(tokenize_prompts)	
+
+## Loading the base Model (checkpoint)
+	
+	model_id = "mistralai/Mixtral-8x7B-v0.1"
+	from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+	### quantization config
+	nf4_config = BitsAndBytesConfig(
+	   load_in_4bit=True,
+	   bnb_4bit_quant_type="nf4",
+	   bnb_4bit_use_double_quant=True,
+	   bnb_4bit_compute_dtype=torch.bfloat16
+	)
+
+	### model config 
+	model = AutoModelForCausalLM.from_pretrained(
+		model_id,
+		device_map='auto',
+		quantization_config=nf4_config,
+		use_cache=False,
+		attn_implementation="flash_attention_2"
+	)
+	
+	for Apple silicon, use device_map='mps'
+
+## Fine tunning setup 
+
+	from peft import LoraConfig, get_peft_model, TaskType
+
+	peft_config = LoraConfig (
+		r=128,
+		lora_alpha=128,
+		target_modules=[
+			"self_attn.q_proj",
+			"self_attn.k_proj",
+			"self_attn.v_proj",
+			"self_attn.o_proj",
+			"mlp.gate_proj",
+			"mlp.up_proj",
+			"mlp.down_proj"
+		],
+		lora_dropout=0.1,
+		bias="none",
+		task_type=TaskType.CAUSAL_LM,
+	)
+
+	model = get_peft_model(model, lora_config)
+	model.print_trainable_parameters()  # Get the number of trainable parameters and percentage
+	
+## Hyper-paramters for training
+
+	num_train_epochs/max_steps
+
+	if torch.cuda.device_count() > 1: # If more than 1 GPU
+		print(torch.cuda.device_count())
+		model.is_parallelizable = True
+		model.model_parallel = True
+
+
+## Trainer set up
+
+	from transformers import TrainingArguments
+
+	args = TrainingArguments(
+	  output_dir = "Mixtral_Alpace_v2",
+	  #num_train_epochs=5,
+	  max_steps = 1000, # comment out this line if you want to train in epochs
+	  per_device_train_batch_size = 32,
+	  warmup_steps = 0.03,
+	  logging_steps=10,
+	  save_strategy="epoch",
+	  #evaluation_strategy="epoch",
+	  evaluation_strategy="steps",
+	  eval_steps=10, # comment out this line if you want to evaluate at the end of each epoch
+	  learning_rate=2.5e-5,
+	  bf16=True,
+	  # lr_scheduler_type='constant',
+	)
+
+	from trl import SFTTrainer  # Supervised Fine-Tuning Trainer
+
+	max_seq_length = 1024
+
+	trainer = SFTTrainer(
+	  model=model,
+	  peft_config=peft_config,
+	  max_seq_length=max_seq_length,
+	  tokenizer=tokenizer,
+	  packing=True,
+	  formatting_func=create_prompt, # this will aplly the create_prompt mapping to all training and test dataset
+	  args=args,
+	  train_dataset=instruct_tune_dataset["train"],
+	  eval_dataset=instruct_tune_dataset["test"]
+	)
+
+	trainer.train()
+
+	### Push to hugging-face hub
+		pip install huggingface-hub 
+		trainer.push_to_hub(model_name)	
+	
+## merge base and fine-tuned model
+  
+	base_model = AutoModelForCausalLM.from_pretrained(...) 
+	model = PeftModel.from_pretrained(base_model, "crypto-sentiment-model")
+	merged_model = model.merge_and_unload()
+
+	tokenizer = AutoTokenizer.from_pretrained("crypto-sentiment-model", trust_remote_code=True)
+
+
+## Generate response 
+
+	def generate_response(prompt, model):
+	  # encode prompt	
+	  encoded_input = tokenizer(prompt,  return_tensors="pt", add_special_tokens=True)
+	  model_inputs = encoded_input.to('cuda')
+	  # input ids
+	  generated_ids = model.generate(**model_inputs,
+									 max_new_tokens=150,
+									 do_sample=True,
+									 pad_token_id=tokenizer.eos_token_id)
+	  # batch_decode 
+	  decoded_output = tokenizer.batch_decode(generated_ids)
+
+	  return decoded_output[0]	

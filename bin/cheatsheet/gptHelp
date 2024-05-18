@@ -1,0 +1,59 @@
+## Threads of knowing ChatGPT
+    - https://twitter.com/thealexbanks/status/1624400368728944642
+    - ChatGPT is a type of LLM.
+    - LLMs consume vast amounts of text and identify connections between words in the text.
+    - The goal is to generate predictions about the likelihood of a word occurring in the text, given the context of the surrounding words.
+    - The LLM prediction is compared to the actual words in the text until it can generate accurate responses.
+    - This is known as next-token prediction and masked-language modelling.
+    - RNNs have difficulty handling long sequences of text. They use a type of memory called a "hidden state" which can only retain information for a limited amount of time.
+    - Transformers were first introduced in a 2017 paper by a team at Google.  It was titled “Attention is All You Need.”
+    - The paper proposed a new architecture for language models called a transformer.
+    - Transformer memory overcame the limitations of RNNs and enabled massive improvements.
+    - Its attention mechanism allowed for the processing of longer text.
+
+## Generative Pretrained Transformer (GPT)
+    - GPT models were first launched by OpenAI in 2018.
+    - All GPT models use the transformer architecture for natural language processing tasks such as:
+        • Language generation
+        • Translation
+        • Question and answering
+    - Generative
+        - Generative refers to the model's ability to generate new text based on patterns it has learned from its training data.
+        - A generative language model like GPT is capable of producing coherent text in response to a prompt rather than selecting a predefined response
+    - Pre-trained
+        - Pre-trained means that the model has already been trained on a large amount of text data before it is fine-tuned for specific tasks.
+        - This allows it to learn faster and have better results than starting from scratch.
+    - Transformer
+        - The transformer is the architecture used in GPT models.
+        - It is a type of neural network that has become the gold-standard architecture.
+        - Unlike RNNs, a transformer can effectively process long sequences of text without losing information.
+    - ChatGPT
+        - ChatGPT is a spinoff of InstructGPT.
+        - InstructGPT was released in January 2022 from OpenAI by fine-tuning GPT-3 to follow instructions using human feedback.
+        - This better aligns the model's output with user intent.
+        - There is a billion-dollar opportunity right now to fine-tune large language models and use human feedback.
+
+## what are the most efficient, accurate deep learning models for object detection
+    // as for Jan 13, 2023
+    YOLO (You Only Look Once) and its variants such as YOLOv2, YOLOv3, YOLOv4
+    RetinaNet
+    Faster R-CNN and its variants such as Mask R-CNN
+    Single Shot MultiBox Detector (SSD)
+
+## What are the challenges of identifying persons in surgical operating room?
+
+    Masks obstructing facial features.
+    Poor lighting conditions.
+    High-stress environment leading to quick changes in facial expressions.
+    Similar attire among medical staff.
+    Privacy and security concerns with biometric identification.
+    Risk of infection transmission with biometric devices.
+    Limited time for identification during surgeries.
+
+## what are the benefit using vision transformer compared to CNN
+
+    Scale-invariance
+    Global context
+    Fewer parameters
+    Better performance
+    Attention mechanism

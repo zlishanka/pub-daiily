@@ -1,0 +1,33 @@
+## Machine learning github repos 
+
+# Best of all things Machine learning in one GitHub Repo
+	https://github.com/ml-tooling/best-of-ml-python#machine-learning-frameworks 
+
+# Image data, computer vision 
+	https://github.com/facebookresearch/detectron2  	# Facebook AI Research's next generation library 
+	https://github.com/open-mmlab/mmdetection 			# MMDetection is an open source object detection toolbox based on PyTorch 
+	https://github.com/PaddlePaddle/PaddleDetection 	# Object Detection toolkit based on PaddlePaddle.
+	https://github.com/mdbloice/Augmentor				# image augmentation library in Python for machine learning
+	https://github.com/lucidrains/vit-pytorch			# Implementation of Vision Transformer
+
+    https://github.com/facebookresearch/segment-anything #SAM: Segment Anything Model from FAIR.  Foundation model for image segmentation.
+
+# LLM related 
+	https://github.com/nomic-ai/gpt4all 				# gpt4all; a chatbot trained on massive collection of clean data
+	https://twitter.com/karpathy/status/1645115622517542913	
+	https://colab.research.google.com/drive/1SiF0KZJp75rUeetKOWqpsA8clmHP6jMg?usp=sharing # tiny GPT from Karpathy 
+
+# ML papers of the week 
+	https://github.com/dair-ai/ML-Papers-of-the-Week
+	https://arxiv.org/abs/2304.01852 					# Summary of ChatGPT/GPT-4 Research and perspective towards the future of LLMs
+    https://arxiv.org/pdf/2304.02643v1.pdf              # Segment Anything, meta
+
+# Online courses 
+	https://www.youtube.com/playlist?list=PLp-0K3kfddPwgBSCbDtT6NaVOd-gIHVMW 	# Introduction to Deep Learning, Carnegie Mellon 2022-23
+	https://github.com/aamini/introtodeeplearning								# Lab Materials for MIT 6.S191: Introduction to Deep Learning
+	http://introtodeeplearning.com/												# MIT lecture and slides 
+
+
+# Midjourney
+	https://twitter.com/tristwolff/status/1645839296778076161 					# V5 cheat sheet
+	https://twitter.com/javilopen/status/1643528046551486464					# midjourney style

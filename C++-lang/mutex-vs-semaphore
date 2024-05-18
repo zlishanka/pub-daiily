@@ -1,0 +1,16 @@
+# Mutex vs Semaphore
+	https://www.youtube.com/watch?v=kd8b9Fr0Xbo 
+
+	- both are to help synchronization 
+	- mutex 
+		- allows one thread into critical section
+		- locked/unlocked
+		- locking mechanism
+		- used for mutual exclusion
+ 
+	- semaphore 
+		- allows multiple threads into their own critical sections
+		- use count 
+		- singaling mechanism 
+		- might have multiple resources shared by multiple threads
+			only allow limited count of threads to access resources

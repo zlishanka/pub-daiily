@@ -1,0 +1,93 @@
+
+## docker help 
+Dockerfile 
+-------------------------
+FROM golang:onbuild
+EXPOSE 8080 
+-------------------------
+
+# Docker Desktop for mac 
+    https://hub.docker.com/editions/community/docker-ce-desktop-mac/ 
+
+# Good docker cheat sheet 
+    https://github.com/wsargent/docker-cheat-sheet 
+
+# Pull docker image from docker hub and run locally 
+    docker pull swaggerapi/swagger-editor
+    docker run -d -p 80:8080 swaggerapi/swagger-editor
+
+# Build docker 
+    docker build . -t muxinc/chunked-transfer-demo
+    docker build - < Dockerfile>
+	docker build -t docker-image:test . 
+	docker build -t avail-cv-ml-docker-phi-text-test1 .
+
+	# inside dir that has Dockerfile
+	docker build -t avail-media-api-test:latest .
+	docker run -p 5002:5002 avail-media-api-test:latest
+
+# run docker image 
+    docker run -p 8080:8080 muxinc/chunked-transfer-demo:latest 
+	docker run -p 9000:8080 docker-image:test
+	docker run -p 5002:5002 avail-media-api-test
+
+	# test endpoint (lambda) 
+	curl "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+
+# Run a Container in the Background (Detached Mode) 
+    docker container run -d [docker_image]
+
+# Run a Container Interactively 
+    docker container run -it [docker_image] /bin/bash
+    docker container run -it ubuntu-16-04-ar-dev /bin/bash  
+
+# show running docker images (container ids) 
+    docker ps -a 
+
+# stop the running docker 
+    docker stop container_id
+
+# docker images 
+	docker images 
+
+# remove unused images 
+	docker rmi 7ed6e7202eca 
+	# Stopped containers, dangling images
+	docker image prune -a
+	# remove all stopped containers, all images not used by at least one container 
+	docker system prune -a 
+
+# verfiy docker daemon is running properly on your machine 
+    ps aux | grep dockerd
+
+# docker version 
+    docker -v 
+
+# swaggerapi/swagger-editor 
+
+   7a7116ec0f69    swaggerapi/swagger-editor   "sh /usr/share/nginx…"   About a minute ago   Up About a minute   80/tcp, 0.0.0.0:80->8080/tcp   zealous_chebyshev 
+
+# mount a durectiry 
+    docker run -t -i -v /Users/royzheng/Downloads:/mnt/Downloads  qyjdefdocker/lite.ai.toolkit-onnx-hub:v0.1.22.01.08  /bin/sh
+
+# Check if the Docker daemon is running
+	systemctl status docker
+
+# Start the docker
+	systemctl start docker
+
+# check docker sock permissions
+	ls -al /var/run/docker.sock
+
+# check docker running logs 
+	docker logs -f container_id
+
+# push command to build and push to ECR
+	aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 537850345630.dkr.ecr.us-west-2.amazonaws.com
+	docker build -t avail-cv-ml-docker-phi-text-test1 .
+	docker tag avail-cv-ml-docker-phi-text-test1:latest 537850345630.dkr.ecr.us-west-2.amazonaws.com/avail-cv-ml-docker-phi-text-test1:latest
+	docker push 537850345630.dkr.ecr.us-west-2.amazonaws.com/avail-cv-ml-docker-phi-text-test1:latest
+
+# Configuration error fix
+	sudo ln -sf /Applications/Docker.app/Contents/Resources/bin/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login 
+	https://github.com/docker/for-mac/issues/7109 

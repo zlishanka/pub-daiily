@@ -1,0 +1,620 @@
+# Python cheatsheet
+http://quickref.me/python
+
+# array fast iteration 
+	[f.strip() for f in a.split(',')]
+
+# ast module to eval python data type 
+	ast.literal_eval raises an exception if the input isn't a valid Python datatype, so the code won't be executed if it's not. 
+	ast.literal_eval(m.get_body()) 
+
+# set operations 
+	resolutions = set(['source','1920s','1440s','960s']) 
+        r in resolutions 
+    a = set() 
+    a.add(1), a.add(2)
+    a.remove(1)
+    a=set([1, 2]) 
+    a&b     # intersection 
+    a|b     # union
+    a-b     # deduction 
+    len(a)  # length  
+    list(a) # get the list of set 
+
+# generate random number 
+
+    from random import randrange 
+    randrange(10)   # random number 0,1,...,9
+    x = random.randint(0,50) 
+
+# interactive shell for debugging, dev 
+
+    python -i function.py   # say has def add(...): func 
+    >>> add(1,2)
+    3
+# use unverified ssl you can add following code
+
+    import ssl 
+    ssl._create_default_https_context = ssl._create_unverified_context 
+
+# pdb debugger 
+    
+    import pdb 
+    pdb.set_trace() 
+
+# compile a Python script 
+
+  python -m py_compile script.py 
+  pylink 
+  
+# curl request and json response 
+  import json  
+  response = requests.get(url) 
+  response.raise_for_status()
+  return response.json() 
+
+# exception handling 
+	import traceback 
+        try: 
+    	    [do sth] 
+        except IOError as e:
+            print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        except: 
+	        traceback.print_exc() 
+
+# fix python indentation
+	pip install autopep8
+	autopep8 script.py    #  print only
+	autopep8 -i script.py # write file
+
+# join string with separators 
+    a = ['workArea', 'daily', 'python-lang', 'drills'] 
+    '/'.join(a) 
+    'workArea/daily/python-lang/drills'
+    
+# string  startswith() method
+
+    # get chunks from chunk_paris where key starts with certain prefix
+    chunks = [v for k, v in chunk_pairs if k.startswith(chunk_key_prefix)]
+
+# from char to ASCII value 
+    ord('9') = 57 
+
+# from ASCII to char 
+    chr(ord('9')) = '9' 
+    
+# list copy  
+    list = [1,2,3] 
+    temp = sol.copy() 
+    
+# two dimentional arrays 
+    m, n = 4, 3
+    a = [[0] * m for i in range(n)]   # use generators
+    a = [[]]
+    board[][] : mxn array 
+    check_board = [[True] * len(board[0]) for _ in range(len(board))]
+    dp = [[False] * (n + 1) for _ in range(m + 1)]  
+
+# float number format 
+  '{:4.2f}'.format(float(100*len(retented_user_ids)/float(num_users)))
+  '{:10}'.format('test')    ----> 'test      '  # align to the left 
+  '{:>10}'.format('test')   ---->       test    # align to the right  
+  '{:4d}'.format(42)        ----> '  42' 
+
+# install python pip on ubuntu 
+
+  sudo apt-get install python-pip 
+
+# variables to swap values 
+
+    a, b = b, a 
+    a[1], a[3] = a[3], a[1]   # element in array to swap 
+
+# range value 
+    for i in range(5): 
+        i = 0, 1, 2, 3, 4
+    for i in range(1,5): 
+        i = 1, 2, 3, 4
+    for i in reversed(range(4)): 
+        i = 3,2,1,0 
+    for i in range(6,-1,-1): 
+        i = 6,5,4,3,2,1,0 
+
+# list comprehension 
+	construct lists in a very natural, easy way, 
+	S = [x**2 for x in range(10)] 
+	M = [x for x in S if x % 2 == 0] 
+        [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+    # python to check if any element n list satisfies a condition
+    if any ([x is None for x in (a,b,c,d)]):
+        raise exception  
+
+# intialize a list array with value
+    arr = [0] * 100 
+    a = [True]*20 
+
+# easy to create list of tuple (index, value) from array 
+    nums = [3, 2, 4]
+    nums_index = [(v, index) for index, v in enumerate(nums)]
+    nums_index [(3, 0), (2, 1), (4, 2)]
+
+# list files in a directory with pattern 
+  sorted(glob.glob(directory+'/'+file_ext),key=os.path.getmtime) 
+  os.listdir(dir_name) 
+  os.mkdir(path) 
+  os.rmdir(path) 
+
+# mysql integration 
+	import MySQLdb 
+	db = MySQLdb.connect(host, user, passwd, database)
+    cursor = db.cursor() 
+	cursor.execute(query_str) 
+	results = cursor.fetchall()
+	
+# partial list, partial array 
+	a[start_index : end_index]
+
+# string to number  
+    from string import atoi  
+    atoi("256", 10) 
+    atoi("FF", 16) 
+
+# list/array operations 
+    a = [] 
+    a.append(2)         # add at the end of array 
+    a.pop()             # remove from the end 
+    a.pop(0)            # remove from the front 
+    a.insert(index, 2)  # insert at the index with value 
+    a.insert(0, 2)      # insert at the front 
+    del(a[index])       # remove at index  
+    a.remove(val)       # remove val in the list if val is found  
+    a[::-1]             # get the reverse of list  
+
+# split string into bytes 
+
+    a = '112133' 
+    b  = list(a) 
+    >>> b 
+    ['1', '1', '2', '1', '3', '3'] 
+
+# string to lower case 
+    
+    s = s.lower() 
+    
+# set operations 
+    a = set() 
+    a.add(num)          # add into set 
+    if num in a:        # test if num in set a 
+        # do something if num in the set 
+    else: 
+        # do something else 
+
+# check if variable is instance of a class 
+    isinstance(curr, TreeNode) 
+
+# check the data type 
+    type(i) is int
+    type(i) is float
+    
+# assign number as binary 
+    num = 0b111101      # use prefix 0b or 0B
+    bin(num)            # convert to binary number  
+
+# child class super call 
+    #Without super, you are limited in your ability to use multiple inheritance:
+    class ChildB(Base):
+        def __init__(self):
+            super().__init__()      # call Base.__init__()
+        def add(self, x): 
+            super().add(x)          # call Bae.add(x) 
+
+# String formatting 
+  url = '{}/{}'.format('http://localhost:8080/json', ip)
+  ditto_prefix = '{}/{}/{}'.format(VTO_STORAGE, partner_id, ditto_id) 
+
+# dir function 
+  dir(obj) is a powerful inbuilt function in Python3, which returns list of the attributes and methods of any object
+
+# sort on dict 
+	sorted_geos = sorted(geo_info, key = get_info.get, reverse=True) 
+	m = sorted(m.items(), key=lambda x: x[0]) 
+	m.sort(lambda x:x[0])
+
+# sort on list 
+    s = ['ate', 'bat', 'eat', 'nat', 'tan', 'tea']
+    s.sort() 
+    >>> s
+    ['ate', 'bat', 'eat', 'nat', 'tan', 'tea']
+	# sort based on key
+	points = [[1,4], [2,3], [3,0]]
+	points.sort(key=lambda x:x[1])
+	[[1, 4], [2, 3], [3, 0]] 
+
+# sort on class object 
+
+  list_objects = [Student('john', 'A', 15), Student('jane', 'B', 12), Student('dave', 'B', 10)] 
+  sorted(list_objects, key=lambda, student: student.age) # sort by age, low to high  
+  sorted(list_objects, key=lambda, student: student.age, reverse=True) # sort by age, high to low   
+  # sort by start
+  intervals.sort(key=lambda x: x.start)
+
+# lambda expression 
+
+  add2 = lambda x,y : x + y
+  same def add2(x,y) 
+
+# check python library etc. 
+
+  python3 -c "import jupyter, matplotlib, numpy"
+  python3 -c "import pandas, scipy, sklearn"
+
+# check the python module on site 
+
+  python -m site 
+  python -m django --version    # check django version  
+  
+# check pip installed modules 
+
+  pip freeze
+
+# max, min integers 
+
+  sys.maxint, -sys.maxint   # python 2 
+  sys.maxsize, -sys.maxsize # python 3
+  float('int') # python3 
+
+# declare nonlocal variables
+	nonlocal min_val # for variable inside inner function 
+
+# dictionary  operation
+    ditc = {} 
+    if key in dict: # has_key is moved out of python3 
+    dict.values()
+    dict.keys()
+    del dict[key]   # delete a key in dictionary 
+
+# use -1 index 
+    a = [1,2,3,4]   # -1 to get last element of array  
+    a[-1] = 4 
+
+# use inner function 
+
+    An inner function is simply a function that is defined inside another function. The inner function is able to access   
+    the variables that have been defined within the scope of the outer function, but it cannot change them.
+
+# string literals 
+    from __future__ import unicode_literals 
+
+# decorator 
+    A decorator is a function that receives another function as argument.
+
+    def mydecoratorfunction(some_function): # function to be decorated passed as argument
+    def wrapper_function(): # wrap the some_function and extends its behaviour
+        # write code to extend the behaviour of some_function()
+        some_function() # call some_function
+        return wrapper_function # return wrapper function
+
+# @property decorator is a built-in decorator in Python for the property()
+    class person:
+    def __init__(self):
+        self.__name=''
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, value):
+        self.__name=value 
+
+# add comment #noqa  
+    Adding # noqa to a line indicates that the linter (a program that automatically checks code quality) should not check this line
+
+
+# metaclass 
+    A metaclass is a class whose instances are classes 
+    #Python3
+    class MyClass(BaseClass, metaclass=Singleton):
+        pass
+# run single test case through pytest 
+    pytest -s daft/models/tests/test_integration.py 
+    pytest -q daft/models/tests/test_integration.py 
+    pytest test_tile_change.py::test_zoom_error  # run single finction in a test case 
+ 
+# pytest setup(), teardown()
+    import pytest  
+    def setup_module(module)
+        # run only once for all test cases in the file 
+    def teardown_module(module):
+    def setup_function()
+        # run every time for each test case in the file 
+    def teardown_function():
+
+# __setattr__()  
+     __setattr__() wants to assign to an instance attribute,
+    Instead, it should insert the value in the dictionary of instance attributes, 
+    e.g., self.__dict__[name] = value. 
+
+    >>> # this example uses __setattr__ to dynamically change attribute value to uppercase
+    >>> class Frob:
+    ...     def __setattr__(self, name, value):
+    ...         self.__dict__[name] = value.upper()
+    ...
+    >>> f = Frob()
+    >>> f.bamf = "bamf"
+    >>> f.bamf
+    'BAMF'
+
+# package import options 
+    try:
+        from cStringIO import StringIO
+    except ImportError:
+        from io import BytesIO as StringIO
+
+# BytesIO to concatenate the bytes together
+    from io import BytesIO
+
+    chunks = [string_bytes1, string_bytes2, string_bytes3, ....] 
+    chunks = BytesIO(''.join(chunks)) 
+
+# argument parser
+    import argparse 
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--cascade_path', type=str)
+    parser.add_argument('video_file', type=file)
+    parser.add_argument('-s', '--show', action='store_true')
+    parser.add_argument('-o', '--jpg_destination_path', type=str)
+    args = parser.parse_args() 
+    
+    main(): 
+        if args.cascade_path is not None:
+
+# compile python proto
+    protoc -I=$SRC_DIR --python_out=$DST_DIR $SRC_DIR/addressbook.proto
+    protoc -I=. --python_out=. ./addressbook.proto
+
+
+# format string 
+    _err_msg = 'parameter {}={} is invalid' 
+    _err_msg.format(k,v)
+
+# get elapsed time 
+    start = datetime.datetime.now() 
+    ... 
+    elapsed = (datetime.datetime.now() - start).total_seconds() * 1000 
+
+# write binary bytes into file
+    cdr_sent = bytes_block
+    with open(CDR_FILE, 'wb') as pb_file:
+            pb_file.write(cdr_sent)
+
+# join path 
+    os.path.join(dir1+file)
+
+# sleep 
+    import time
+    time.sleep(0.1)
+    # get timestamp 
+    time.now()
+
+# isort to fix errors when importing 
+    isort testing.py
+
+# black to fix styleguide for python files (for stickler CI errors) 
+    black testing.py 
+
+# loop without variable, use _ instead of variable i that is not used  
+    for _ in range(10):
+        do_something_without_referring_i()
+
+# list/array unpack 
+    a = [0,1,2,3]
+    top_x, top_y, bottom_x, bottom_y = a 
+
+# pre-commit 
+    pre-commit run --files creations/errors/__init__.py
+
+
+# getattr and setattr 
+    crop_resize_attributes = ('original_width', 'original_height', 'origin_x', 'origin_y', 'crop_width', 'crop_height', 'resize_ratio')
+    for attribute in crop_resize_attributes:
+        val = getattr(camera_angle_params, attribute)
+        setattr(create_ditto_request.crop_resize_params, attribute, val)
+
+    getattr(object, name[, default])
+        
+# check package with import 
+     python -c "import jupyter, matplotlib, numpy, pandas, scipy, sklearn"
+
+# check file exist
+    os.path.exists(dirname) 
+    os.path.isfile(filename) 
+    os.path.isdir(dirname) 
+    if os.path.isfile(filename):
+       
+# regular expression to extract number from url
+    res = re.search(r'/api/([0-9]+\.?[0-9]*)/', request.path) 
+    if res: 
+        return float(res.group(1))
+
+	# split string based on delimeters
+	re.split(r"[,\'"]", string) 
+# create and write file 
+    f = open("profile_avaicv.txt", "w")
+    f.write("Now the file has more content!")
+    f.close()
+ 
+# use enum 
+    import enum
+    class NosePadEnum(enum.Enum):
+        plastic = 'plastic'
+        adjustable = 'adjustable'
+        unknown = 'unknown'
+
+# usage of  *args and **kwargs 
+    - *args and **kwargs are mostly used in function definitions. 
+    - *args and **kwargs allow you to pass an unspecified number of arguments to a function 
+
+    def test_var_args(f_arg, *argv):
+        print("first normal arg:", f_arg)
+        for arg in argv:
+            print("another arg through *argv:", arg)
+
+    test_var_args('yasoob', 'python', 'eggs', 'test')
+
+    def myFun(*args,**kwargs):
+        print("args: ", args)
+        print("kwargs: ", kwargs)
+
+    myFun('geeks','for','geeks',first="Geeks",mid="for",last="Geeks")
+
+    output:
+        args: ('geeks', 'for', 'geeks')
+        kwargs {'first': 'Geeks', 'mid': 'for', 'last': 'Geeks'}
+
+
+## python profiler 
+   scalene 
+   https://pypi.org/project/scalene/0.9.16/
+
+   cProfiler 
+   python -m cProfile domath.py 
+
+## running pdb 
+    python3 -m pdb app.py arg1 arg2  
+
+    # insert followig pdb before the code you want to debug and then run unit test 
+    import pdb; pdb.set_trace()
+    l(ist) list 11 lines surrounding the current line
+    w(here) display the file and line number of the current line
+    n(ext) execute the current line
+    s(tep) step into functions called at the current line
+    r(eturn) execute until the 
+    c(continue) 
+
+## matplotlib related 
+    import matplotlib
+    matplotlib.use("TkAgg")
+    from matplotlib import pyplot as plt
+    import numpy as np 
+
+    fig, (cpu_usage, sys_usage) = plt.subplots(1,2)     # multiple plots left, right 
+    cpu_usage.plot(x,process_data[pid]['data'],legends[count])      # plot with legend 
+    sys_usage.legend(['idle','load_avg'])               # add legend 
+    sys_usage.set_xlabel("time")                        # set x,y label
+    sys_usage.set_ylabel("System CPU Usage")
+    # Pie-chart, Polar Scatter Plot 
+    https://twitter.com/akshay_pachaar/status/1643591835535949824
+
+## pandas related 
+    # display data in the form of columns 
+    pd.DataFrame(result, columns=['bbox', 'text','score']) 
+
+## psutil for profiling 
+    psutil.cpu_count(logical=False) 
+    p = psutil.cpu_times_percent(percpu=False)
+    p.idle  
+
+## *args and **kwargs 
+    *args and **kwargs are special syntax used when defining a function that allows passing a variable number of arguments 
+    *args is used to pass a variable number of non-keyworded arguments to a function. 
+    **kwargs, on the other hand, allows you to pass a variable number of keyword arguments to a function. 
+    def func(a, b=2, *args, **kwargs):
+    ...     print(a,b,args, kwargs)
+    ...
+    >>> func(1,3,4,5,c=6,d=7)
+    1 3 (4, 5) {'c': 6, 'd': 7}
+
+## weakref 
+
+    weakref – Garbage-collectable references to objects
+
+    Proxies can be used as though they were the original object 
+
+    obj = ExpensiveObject('My Object')
+    r = weakref.ref(obj)
+    p = weakref.proxy(obj)
+
+
+    print 'via obj:', obj.name
+    print 'via ref:', r().name
+    print 'via proxy:', p.name
+    del obj
+    print 'via proxy:', p.name
+
+    If the proxy is access after the referent object is removed, a ReferenceError exception is raised.
+
+## pip uninstall multiple packages 
+
+    pip freeze | grep pyobjc-framework | xargs pip uninstall -y 
+
+## get the list of built-in functions 
+	import sys
+	print(dir(sys.builtins))
+
+## post image 
+
+   xttps://stackoverflow.com/questions/29104107/upload-image-using-post-form-data-in-python-requests 
+
+## zip 
+	The zip() function in Python is used to combine two or more iterables into a single iterable
+	It is often used to combine data from multiple sources, or to iterate over multiple sequences in parallel.
+
+	names = ['Mukesh', 'Roni', 'Chari']
+	ages = [24, 50, 18]
+	for i, (name, age) in enumerate(zip(names, ages)):
+    	print(i, name, age)
+	
+	0 Mukesh 24
+	1 Roni 50
+	2 Chari 18
+
+## heapq 
+	import heapq 
+	>>> a = [3,2,6,1,7,9,8]
+	heapq.heapify(a)
+	>>> a
+	[1, 2, 6, 3, 7, 9, 8]
+	heapq.heappush(a, 4)
+	heapq.heappop(a)
+	2
+
+## graph 
+		from collections import defaultdict, deque
+		graph = defaultdict(list) 
+		grpah[key].append(value)
+
+		from collections import defaultdict
+		graph = defaultdict(dict)
+		for (a,b), value in zip(equations, values):
+		  graph[a][b] = value
+		  graph[b][a] = 1.0/value
+
+## Counter
+	from collections import Counter
+	Counter("mississippi")		# input as string
+	Counter({'i': 4, 's': 4, 'p': 2, 'm': 1})
+	a = ['bob', 'far', 'boo', 'bob', 'far'] 	# input as list
+	Counter(a)
+	Counter({'bob': 2, 'far': 2, 'boo': 1}
+
+## d2l torch library 
+	https://github.com/d2l-ai/d2l-en/blob/master/d2l/torch.py
+	from d2l import torch as d2l
+
+## numba
+	https://www.youtube.com/watch?v=-lcWV4wkHsk 
+	- Python package that translates a subset of Python and NumPy code into fast machine code
+	- JIT, Numba compiles the code at runtime
+	- Take advantage of multiple cores and GPUs
+
+	from numba import vectorize
+	from numba import cuda, jit
+
+	@jit(target_backend='cuda') # or
+	@cuda.jit(device=True)		# or	
+	@vectorize(["float32(float32,float32)"], target='cuda')
+	
+	def MultiplyVectors(a,b):
+		return a*b
+	

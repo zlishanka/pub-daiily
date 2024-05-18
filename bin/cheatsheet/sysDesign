@@ -1,0 +1,20 @@
+## youtube Sources  
+	https://www.youtube.com/@ByteByteGo 
+
+## 10 things remember while creating microservices 
+	# https://medium.com/javarevisited/10-things-to-keep-in-mind-while-designing-and-developing-microservices-8336ac1b7387 
+	Design your services around business capabilities, not technical capabilities
+	Define the boundaries of your microservices
+	Design for resiliency
+	Use lightweight communication protocols
+	Use asynchronous communication between services
+	Ensure data consistency between services
+	Implement security measures
+	Ensure scalability and performance
+	Implement monitoring and logging
+	Plan for testing and deployment
+	Choose the right technology stack
+
+## Design a Message Queue
+	https://twitter.com/javinpaul/status/1642792690000580608
+

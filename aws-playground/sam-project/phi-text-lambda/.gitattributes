@@ -1,0 +1,5 @@
+*.py tabwidth=4
+*.cpp tabwidth=4
+*.cc tabwidth=4
+*.h tabwidth=4
+*.hpp tabwidth=4

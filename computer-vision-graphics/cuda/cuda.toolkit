@@ -1,0 +1,34 @@
+# CUDA tookkit 
+	Source - https://www.youtube.com/watch?v=H3AQnlpxk0c
+			- https://docs.nvidia.com/cuda/
+ 
+	Two major parts
+		- toolkit  - package of utilities compilers and libraries 
+		- driver
+
+	## programming guide to using the CUDA Toolkit
+		https://docs.nvidia.com/cuda/pdf/CUDA_C_Best_Practices_Guide.pdf	
+		CUDA Installation Guide
+			- 
+		CUDA C++ Programming Guide
+			- https://docs.nvidia.com/cuda/cuda-c-programming-guide/ 
+			- https://docs.nvidia.com/cuda/pdf/CUDA_C_Programming_Guide.pdf
+		CUDA C++ Best Practices Guide
+			- https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/
+		CUDA Toolkit Reference Manual		
+
+	## Tookkit 
+		- package of utilities compilers and libraries 
+		- Libraries (e.g. Image processing & math) 
+		- Development tools (e.g., profiler & debugger) 
+		- CUDA runtime API
+		- Versioned in a.b.(.c) format (e.g., 12.0 or 11.4.3) 
+
+	## Driver 
+		- User mode driver (UMD)
+			- provides developers a set of APIs to access the underlying hardware 
+		- Kernel model driver (KMD) 
+			- handles all data transfer, housekeeping 
+			- a standard display driver that used across all of Nvidia GPUs and version in an increment by fiver major minor patch form
+			
+	 

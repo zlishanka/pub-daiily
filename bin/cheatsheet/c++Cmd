@@ -1,0 +1,550 @@
+# static_cast, dynamic_cast, const_cast
+	https://www.youtube.com/watch?v=UfrR1nNfoeY&list=PLE28375D4AC946CC3&index=17
+	# static_cast - object casting
+	float f = static_cast<float> (i)
+	dog d1 = static_cast<dog> (string("Bob");
+	dog* pd = static_cast<dog*> (new yellowdog());
+
+	# dynamic_cast - run time type check, only works for pointer, need at least one virtual function (polymorphcism)
+	dog* pd = new yellowdog();
+	yellowdog py = dynamic_cast<yellowdog*> (pd);
+
+	# const_cast
+	const char* str = "hello world!";
+	char* modifiable = const_cast<char*> (str);   // cast away constness of the object being pointed to
+
+	# reinterpret_cast - can work for any other type of pointer
+	# C-Style casting
+	short a = 2000;
+	int i = (int) a;
+
+# nullptr
+    nullptr to replace NULL in C++ 03
+    void foo(int i)  {...}
+    void foo(char* pc) {...}
+    foo(nullptr);   # call foo(char*), no ambiguity as compared to call foo(NULL);
+
+# enum class
+    enum class apple  {green, red};
+    apple a = apple::green;
+
+# static assert
+    # run-time assert
+        assert( mypointer != NULL);
+    # static_assert, compile time assert, C++ 11
+        static_assert(sizeof(int) == 4)
+
+# virtual function override
+    # use keyword override, C++ 11, safty of type-checking at compile time
+    class dog { virtual void A(int); }
+    class yellowdog : public dog { virtual void A(float) override; // Error, no function to override};
+    # use keyword final
+    class dog final {...} // no class can be derived from dog
+    class dog { virtual void bark() final;  // no class can override bark()}
+    # force to generate default constructor
+    dog() = default;
+    # delete, remove such type of contructor
+    dog(int age) {}
+    dog(double ) = delete;                  // delete constructor with double input
+    dog& operator=(const dog&) = delete;    // delete assignment operator
+
+# constexpr, computed at compile time
+    constexpr int A{} {return 3;} #force the computation to happen at compile time
+    int arr[A()+3]  // create an array of 6
+
+# lambda function
+    cout << [](int x, int y) { return x+y; } (3,4) << endl;
+    auto f = [](int x, int y) { return x+y; };
+    cout << f(3,4) << endl;
+
+    template <typename func>
+    void filter(func f, vector<int> arr) {
+        for (auto i : arr) {
+            if (f(i)) cout << i << " ";
+        }
+    }
+
+    vector<int> v = {1,2,3,4,5,6};
+    filter([], (int x) {return (x>3);}, v );    // output: 4, 5, 6
+    filter([], (int x) {return (x>2 && x < 5);}, v );    // output: 3, 4
+    int 4 = 4;
+    filter([&] (int x) {return (x>y);}, v); // [&] tells compiler that we want variable capture
+
+# common include
+    #include <iostream>
+    using namespace std;
+
+
+# compile code
+    g++ -o example.exe example.cpp
+    g++ -o run_thread.out -std=c++0x run_thread.cpp
+    g++ -std=c++0x -lpthread test.cpp
+    g++ -std=c++17 -lpthread test.cpp
+    g++ -std=c++2a -pthread  -O2 -Wall -Wextra -pedantic -pthread -pedantic-errors main.cpp -lm  -latomic -lstdc++fs  && ./a.out
+    g++ -o w.out -std=c++2a -O2 -Wall -Wextra -pedantic -pthread -pedantic-errors shm_cbuf_w.cpp -lm -lboost_system
+    g++ -o r.out -std=c++2a -O2 -Wall -Wextra -pedantic -pthread -pedantic-errors shm_cbuf_r.cpp -lm -lboost_system
+    g++ -o cond.out -std=c++2a -O2 -Wall -Wextra -pedantic -pthread -pedantic-errors shm_cond.cpp -lm -lboost_system
+
+# convert char to int and int to char
+    char(currentColumn + int('A'))
+
+# get line from cin to a string
+    string str;
+    getline(cin, str);
+
+# declare an array of doubles
+    std::array<double ,4>
+
+# change integer to string
+    std::to_string(numInImages)
+
+# pragma once
+	 prevent header files from being included multiple times. 
+
+# inline function
+    When you call this function, the whole code of the inline function gets inserted
+
+#ifndef
+     #define
+     #endif
+
+# abstract class
+   a class having at least one pure virtual function is abstract class too.
+
+# new and malloc
+    new is an operator;             malloc() is a function
+    It calls the constructor        The malloc function doesn’t call the constructor
+    no need to specify memory size  specify the memory size
+    can be overloaded               can never be overloaded
+
+# friend function
+    a friend function as a function that can access private, public and protect members of the class
+
+# Constructor
+    # copy constructor
+    a member function that initializes an object using another object within the same class.
+    #  delegating constructor
+    class dog{ public: dog() {...} dog(int a) : dog() { doOtherThings(); } };
+    # data member can be initialized in declaration
+    class dog {public: int age = 9;...};
+
+# Books
+    Read Effective C++ by Scott Meyers
+    FAQ Lite C++ FAQ
+
+# prefix and postfix
+    ++i - first increments the value then assign
+    i++ - firts assign then increment
+
+# parse command line
+    int main(int argc, char *argv[]) {
+    std::copy(argv, argv + argc, std::ostream_iterator<char *>(std::cout, "\n"));
+    // ...
+
+# curly brace initialization
+	class dog { public: dog(int age, string name) {...};};
+	dog d1 = {5, "Henry"};
+
+# unordered_map operation
+    unordered_map<int, int> m;
+    for (auto i : m) cout << i.first << "   " << i.second << endl;
+    for (auto i = m.begin(); i != m.end(); i++) cout << i->first << "   " << i->second << endl;
+    for( auto keyval : cam) { auto srcname = keyval.first; ....}    // only access the key of the map
+    if (m.count(key) == 1)  // check map contains key
+	m.erase(key) 	# erase the key from map
+
+	unordered_map<int, pair<int, list<int>::iterator>> cache; # design map to save the pointer of list
+	
+	
+# vector operations
+	# C++ 11 initializer list
+	vector<int> v = {3,4,1,5}; # vector sorting
+    sort(v.begin(), v.end()); 					# ascending
+	sort(v.begin(), v.end(), greater<int>()); 	# descending 
+	# vector traverse, use auto type
+	for (auto it = vec.begin(); it != vec.end(); ++ it)
+		m_vec.push_back(*it);
+	# for each, works on any class that has begin() and end()
+	for (auto i: v) {}
+	for (auto &i:v) {} 	// change the values in v
+	# initialization 
+	vector<int> myVector(n + 1, 0);  # Initialize with zero
+	vector<vector<bool>> flip(m, vector<bool>(n, false)); # 2D array
+	# summation 
+	accumulate(myVector.begin(), myVector.end(), 0);
+	# insert element into vector
+	myVector.insert(myVector.begin() + 2, 42); 
+	# back(), pop_back()
+	myVector.back(); myVector.pop_back()
+	myVector.front();
+	# remove the first element
+	myVector.erase(myVector.begin()); 
+	# remove the element 
+	vector<int>::iterator pos = find(myVector.begin(), myVector.end(), key);
+    myVector.erase(pos);	
+
+	# get the last iterator of vector
+	prev(myVector.end()) 	# returns an iterator pointing to the last element in the container.
+	
+	# sort based on values of vector
+	bool static comparePoints(const vector<int>& p1, const vector<int>& p2) {
+        return p1[1] < p2[1];
+    } 
+	sort(points.begin(), points.end(), comparePoints);
+
+	# hard copy of a vector 
+	std::copy(vec1.begin(), vec1.end(), std::back_inserter(vec2));
+
+	# get the maximal element
+	*max_element(vec.begin(), vec.end()); 
+
+	# get the minimal among elements
+	min({dp[i-1][j-1], dp[i-1][j], dp[i][j-1]}) 
+
+	# Sort in ascending order based on the second element
+    sort(myVector.begin(), myVector.end(),  {
+        return left[1] < right[1];
+    });	
+# list operations
+
+	list<int> order;					# use list to easily implement queue operation 
+	unordered_map<int, pair<int, list<int>::iterator> cache;
+	order.erase(cache[key].second);		# remove key from list using iterator
+	order.push_back(key);				# push back the key to the queue		
+	int lru_key = order.front();
+    order.pop_front();					# remove the key at the front of queue
+
+	cache[key] = {value, prev(order.end())}; 	# save key, value pair along with key pointer of queue
+		
+	# remap the pointer of LRU
+	order.push_back(key);
+    cache[key] = {val, prev(order.end())};
+
+# map vs unordered_map
+    # a huge difference between maps and unordered maps
+    Self balancing BST vs Hash Table
+    log(n) vs O(1), O(n)
+    if memory is no issue, unordered_map is always faster if you want single element access.
+
+# HPC Focuses on Hardware
+    std::thread::hardware_concurrency
+    std::hardware_destructive_interference_size
+    std::hardware_consructive_interference_size
+
+# concept of VTABLE and VPTR
+
+    - If object of that class is created then a virtual pointer(VPTR) is inserted as a data member of the class to point to VTABLE of that class.
+    - For each new object created, a new virtual pointer is inserted as a data member of that class.
+    - Irrespective of object is created or not, a static array of function pointer called VTABLE where each cell contains the address of each
+      virtual function contained in that class.
+
+# Overhead of calling virtual function
+
+    - Virtual methods are commonly implemented via so-called virtual method tables (vtable for short), in which function pointers are stored.
+      This adds indirection to the actual call
+    - However, it is not necessarily the primary cause of slowness. The real problem is that the compiler (generally/usually)
+      cannot know which function will be called. So it can't inline it or perform any other such optimizations.
+    -
+
+
+    # Questions to ask
+        Understanding of pointers, through sample code.
+        Understanding of run time type identification. Through examples.
+        Understanding of static/ const etc. concepts.
+        STL understanding, selecting between various containers.
+        Function pointers .
+        Calling conventions.
+        OOP concepts.
+        Concepts like copy constructor and assignment operator. These questions bring many other concepts like shallow/ deep copy, memory allocation, shared resources.
+        Questions related to any of the performance optimization related real life problem solved by the candidate.
+        Give assignment based on design problem.
+        Writing code for multi threading.
+        Knowledge of standard algorithms available in std algorithms library.
+        How do someone iterates over containers. What is good way to do so.
+        C++ 11/ 14.
+
+
+	# Check if Xcode command line is installed
+
+		xcode-select -p
+		xcode-select -p 1>/dev/null;echo $?  0: exists, 2: not exists
+
+
+    # Objective-C Environment Setup
+
+
+    # run the command line in C++
+
+        std::string cmd;
+        cmd = "ffmpeg -hide_banner -f avfoundation -list_devices true -i \"\" >& device.txt ";
+        system(cmd.c_str());
+
+    # shared pointer in C++
+
+        std::shared_ptr is a smart pointer that retains shared ownership of an object through a pointer. Several shared_ptr objects may own the same object.
+        The object is destroyed and its memory deallocated when either of the following happens:
+            - the last remaining shared_ptr owning the object is destroyed;
+            - the last remaining shared_ptr owning the object is assigned another pointer via operator= or reset().
+
+        example:
+            struct ImageSource {
+                ...
+                static std::shared_ptr<ImageSource> newObject();
+                ...
+            }
+            // return a shared pointer of ImageSource object
+            ImageSourcePtr ImageSource :: newObject()
+            {
+                return make_shared<ImageSource>();
+            }
+
+        using ImageTilePtr = std::shared_ptr<ImageTile>;
+
+    # unique pointer in C++
+        // exclusive ownership, light weight smart pointer
+        unique_ptr<Dog> pd (new Dog("Gunner"));
+        unique_ptr<Dog> pd2 (new Dog("Smokey"));
+        pd2 = move(pd)  // transfer ownership
+        // Smokey is is destroyed, pd becomes empty, pd2 owns Gunner
+
+    # Use thread in C++
+
+        std::thread *workThread = nullptr;
+        // assign the thread to process  in a class
+        workThread =  new thread( &ImageMontage::process, this);
+        // assign the thread to func
+        workThread =  thread( func);
+        // release thread
+        if( workThread ) {
+            workThread->join();
+            delete workThread;
+            workThread = nullptr;
+        }
+
+    # C++ profiler
+        clion profiler
+        https://plugins.jetbrains.com/plugin/8182-rust/docs/rust-profiler.html
+
+        Instruments
+            https://stackoverflow.com/questions/11445619/profiling-c-on-mac-os-x
+            https://newbedev.com/profiling-c-on-mac-os-x
+            instruments -l 30000 -t Time\ Profiler -p 5773
+
+    # using lldb to debug
+        (1) put Info.plist into working directory
+        (2) defaults write Info.plist CFBundleExecutable -string imtile
+        (3) lldb <executable file>
+        (4) run
+        (5) bt
+
+    # Google unit test
+
+        - https://github.com/google/googletest
+          https://google.github.io/googletest/primer.html
+        - find_package( GTest REQUIRED)  #package
+        - both ${GTEST_INCLUDE_DIR} and ${GTEST_LIBRARY} should be resolved with above pakage
+        - #include "gtest/gtest.h"
+            class ImageSourceTest : public::testing::Test
+            {
+              public:
+                ImageSource source;     # test instance
+              protected:
+                virtual void SetUp(); TearDown();
+            }
+            TEST_F(ImageSourceTest, test1)
+            {
+                EXPECT_EQ (1, source.isActive());
+                EXPECT_EQ (1, source.isEmpty());
+            }
+
+
+    # guard mutex
+        std::mutex mtx;
+        std::lock_guard<std::mutex> lck (mtx);
+
+    # scoped_lock
+        (1) When a scoped_lock object is created, it attempts to take ownership of the mutexes it is given.
+        (2) When control leaves the scope in which the scoped_lock object was created, the scoped_lock is destructed and the mutexes are released.
+        (3) is a strictly superior version of lock_guard that locks an arbitrary number of mutexes all at once
+            (using the same deadlock-avoidance algorithm as std::lock).  In new code, you should only ever use scoped_lock.
+        # acquire two locks without worrying about deadlock
+        std::scoped_lock lock(e1.m, e2.m);
+
+    # shared memory
+        shmget, shmat, shmdt
+
+        // shmget returns an identifier in shmid
+        int shmid = shmget(key,1024,0666|IPC_CREAT);
+        // shmat to attach to shared memory
+        char *str = (char*) shmat(shmid,(void*)0,0);
+        //detach from shared memory
+        shmdt(str);
+        // destroy the shared memory
+        shmctl(shmid,IPC_RMID,NULL);
+
+    # named_mutex (boost::interprocess::named_mutex)
+        A mutex with a global name, so it can be found from different processes.
+        #include <boost/interprocess/sync/named_mutex.hpp>
+        named_mutex mutex_video_bufffer(open_or_create, "avail_videobuffer_lock");
+
+        # perform the scoped_lock
+        boost::interprocess::scoped_lock<named_mutex> lock(mutex_video_bufffer);
+
+        # shared memory IPCs  boost named_mutex, named_condition, interprocess_mutex, ...
+        https://stackoverflow.com/questions/50026772/boost-interprocess-mutexes-and-condition-variables
+
+    # named_semaphore (boost::interprocess::named_semaphore)
+
+        # Shared memory IPC synchronization using semaphore for producer/consumer
+        https://yajin.org/os2018fall/07_synchronization_examples.pdf
+
+    # diff between semaphore and mutex
+        A mutex is an object but semaphore is an integer variable. ... A mutex object allows multiple process threads to access a single shared resource
+        but only one at a time. On the other hand, semaphore allows multiple process threads to access the finite instance of the resource until available.
+
+        https://stackoverflow.com/questions/62814/difference-between-binary-semaphore-and-mutex
+
+    # C++ structure with initial values
+        struct cameraProperty {
+            unit32_t width = 1920;
+            unit32_t height = 1080;
+            unit32_t fps = 30;
+            unit32_t fourcc;
+        }
+        using CaptureDevicePtr = std::shared_ptr<CaptureDevice>;
+        CaptureDevicePtr  getCamera(const std::string &name, const CameraProperty &camProp=CameraProperty());
+
+    # memcpy
+        void* memcpy( void* dest, const void* src, std::size_t count );
+
+    # ninja build
+        ninja -C build -j 20
+
+    # cmake clean
+        rm -rf CMakeCache.txt CMakefiles cmake_install.cmake Makefile build
+        ccmake ..       # interactive configuration
+
+    # cmake with dynamic, static, code coverage
+        cmake . -DENABLE_COVERAGE=1
+        cmake . -DSTATIC_LIBS=1
+
+    # save image
+        void  writeImg(cv::Mat img) { cv::imwrite("final.png", img); }
+
+    # signal handling
+
+        struct sigaction act;
+        memset(&act, 0, sizeof(act));
+        act.sa_handler = sighandler;
+
+        sigaction(SIGINT,  &act, 0);
+        sigaction(SIGTERM, &act, 0);
+
+    # C++ const usage
+
+        - Always take const & as argument as to avoid extra copies of the same object
+        - use unordered_map as its always faster to use
+
+    # C++ get epoch in milliseconds
+
+        long ms = std::chrono::system_clock::now().time_since_epoch().count();
+
+    # traverse map
+
+        std::unordered_map<string, int> mydata;
+        ...
+        for (auto const & [k, v] : mydata)  {...}
+
+    # use tuple
+        std::make_tuple(fname, filename_t())
+        auto [has_intersect, intersect_roi] = find_intersect(img_bb, tile_bb);  # function return tuple
+
+    # use lldb to attach the running image
+        build debug image first and run the image
+        if image get stuck, run
+            lldb -p pid
+# Use queue 
+	#include <queue>
+	queue<string> q
+	q.push(str1); int size = q.size(); q.front(); q.pop();
+
+# unordered_set operation
+	unordered_set<string> stringSet;
+	stringSet.insert("code");
+	stringSet.find(key) == stringSet.end() # not find key
+	stringSet.count(key)		# key exists?
+	stringSet.erase("code");	# erase key 
+	# convert vector into set quickly
+	vector<string>& bank;
+	unordered_set<string> bankSet(bank.begin(), bank.end());
+	# initialization
+    unordered_set<string>New_set({element1, element2, element3, element4}); 
+    unordered_set<string>New_set = {element1, element2, element3, element4}; 
+	
+# swap function
+	swap(nums[i], nums[level])
+
+# priority queue to implement min heap
+	# min_heap, max_heap 
+	priority_queue<int, vector<int>, greater<int>> min_heap;
+	priority_queue<int, vector<int>> max_heap;
+
+	min_heap.push(nums[i]);
+	min_heap.pop()		# pop out smallest value in heap 		 
+	min_heap.top() 		# return smallest value in heap
+
+# String operation
+	a.size()
+	a[i] - '0'
+	to_string(1) # from number to string
+	stoi("1") 	# from string to number
+	reverse(result.begin(), result.end());  # reverse a string
+	string(s.begin() + start, s.begin() + end); # get the substring of s from begin to end
+ 	original.substr(start, end - start)	 # substring, not including the end index 
+
+# alnum, lower
+	isalnum(',') == false
+	tolower('A') = 'a'
+
+# maximal integer
+	INT_MAX = 2147483647 				# for 32 bit number
+	INT_MAX = 9,223,372,036,854,775,807 #for 64-bit Integers 
+
+# throw() declaration  
+	void MyFunction(int i) throw(); 
+		specifies that the function MyFunction does not throw any exceptions 
+
+	void processFile(const string& filename) throw(BadFilename, FileNotFound)
+		specifies tat function may throw "BadFilename", "FileNotFound" exceptions but nothing else
+	
+# ListNode 
+	struct ListNode {
+		int val;
+		ListNode* next;
+		ListNode() : val(0), next(nullptr) {}
+		ListNode(int x): val(x), next(nullptr) {}
+		ListNode(int x, ListNode* next) : val(x), next(next) {}
+	};
+
+# TreeNode 
+	struct TreeNode {
+	 	int val; 
+		TreeNode* left;
+		TreeNode* right;
+		TreeNode () : val(0), left(nullptr), right(nullptr) {};
+		TreeNode(int x) : val(x), left(nullptr), right(nullptr) {};
+		TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {};
+	}
+
+# byte alignment sizeof struct2 == 12 bytes
+ struct struct2 {
+    char a; char b; // 2 bytes padding 
+	int c; // 2 bytes of padding	short d;
+ }; 
+
+# nm s1.o s1  
+	dump name mapping on object code / executable	
+
+# size_t 
+	- It is an unsigned integer type, which means that it can only store positive values
+	- size_t is a useful type for representing the size of objects in memory

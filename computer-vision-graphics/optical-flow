@@ -1,0 +1,58 @@
+## Optical flow 
+
+    https://www.mathworks.com/discovery/optical-flow.html 
+
+    https://docs.opencv.org/3.4/d4/dee/tutorial_optical_flow.html 
+
+    # what is optical flow 
+
+        - Optical flow is the distribution of the apparent velocities of objects in an image. 
+        - By estimating optical flow between video frames, you can measure the velocities of objects in the video. 
+        - In general, moving objects that are closer to the camera will display more apparent motion than distant objects that are moving at the same speed.
+
+    # How is it used 
+
+        - Optical flow estimation is used in computer vision to characterize and quantify the motion of objects in a video stream, often for motion-based object detection and tracking systems. 
+        - Optical flow has many applications in areas like :
+
+            - Structure from Motion
+            - Video Compression
+            - Video Stabilization ...
+
+    # Optical Flow equation 
+
+        Optical flow works on several assumptions:
+
+            - The pixel intensities of an object do not change between consecutive frames.
+            - Neighbouring pixels have similar motion.
+
+        Consider a pixel I(x,y,t) in first frame (Check a new dimension, time, is added here. Earlier we were working with images only, so no need of time). 
+        It moves by distance (dx,dy) in next frame taken after dt time. So since those pixels are the same and intensity does not change, we can say,
+
+            I(x,y,t)=I(x+dx,y+dy,t+dt)
+
+        Then take taylor series approximation of right-hand side, remove common terms and divide by dt to get the following equation:
+
+            fxu+fyv+ft=0
+
+        where 
+            fx  and fy, they are image gradients. Similarly ft is the gradient along time,  
+            But (u,v) is unknown. We cannot solve this one equation with two unknown variables. So several methods are provided to solve this problem and one of them is Lucas-Kanade. 
+
+
+   # Lucas-Kanade method 
+
+        - We have seen an assumption before, that all the neighbouring pixels will have similar motion. 
+        - Lucas-Kanade method takes a 3x3 patch around the point. So all the 9 points have the same motion. - 
+        - We can find (fx,fy,ft) for these 9 points. So now our problem becomes solving 9 equations with two unknown variables which is over-determined. 
+        - A better solution is obtained with least square fit method. Below is the final solution which is two equation-two unknown problem and solve to get the solution.
+
+        So by applying Lucas-Kanade there, we get optical flow along with the scale. 
+
+    # Dense Optical Flow in OpenCV 
+
+        - Lucas-Kanade method computes optical flow for a sparse feature set (in our example, corners detected using Shi-Tomasi algorithm).  
+        - OpenCV provides another algorithm to find the dense optical flow. It computes the optical flow for all the points in the frame. 
+        - It is based on Gunner Farneback's algorithm which is explained in "Two-Frame Motion Estimation Based on Polynomial Expansion" by Gunner Farneback in 2004. 
+
+

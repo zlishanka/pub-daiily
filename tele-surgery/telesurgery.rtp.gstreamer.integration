@@ -1,0 +1,63 @@
+# GStreamer SRTP integration 
+
+
+	## GStreamer Libraries
+
+		- GStreamer provides various libraries for building custom multimedia applications. 
+			The key libraries you'll need for this task include
+
+		### gstbase
+	
+			- Provides core GStreamer functionalities like element creation, pipeline management, and type handling
+		
+		### gstelement
+
+			- Offers functionalities specific to working with GStreamer elements
+			- including creating, linking, and configuring them within your pipeline
+
+		### gstrtp
+
+			- This library provides support for the RTP protocol, including creating and manipulating RTP packets. 
+			- (For SRTP functionality, you'll need an additional library)
+
+
+		### gstrtpbin
+
+			- offers a convenient container element for handling RTP and related protocols within your pipeline.
+
+
+	## Basic integration flow 
+
+		- Include necessary GStreamer headers
+			- gstbase.h, gstelement.h, gstrtp.h
+
+		- Initialize GStreamer: 
+			- Use "gst_init" to initialize the GStreamer library
+
+		- "Create pipeline elements":
+			- Use GStreamer element factories to create the elements for your pipeline 
+			- (h264parse, rtph264pay, srtpenc (from plugin or library), and udpsink).
+
+		- Configure elements
+			-  Set properties on the rtph264pay element to specify payload type and configure timestamp handling based 
+				on your approach (using appsrc or custom caps).
+
+		- Link elements
+			- Link the elements together to form your pipeline (h264parse -> rtph264pay -> srtpenc -> udpsink)
+
+		- Set SRTP key
+			- Use the chosen SRTP integration method to set the encryption key for secure communication.
+
+		- Set pipeline state
+			- Set the pipeline to the "playing" state to start processing and sending the SRTP encapsulated video stream.
+	
+		- Handle data flow
+			- Implement logic to feed your H.264 video frames (with timestamps and sequence numbers) into the pipeline. 
+			- You can use "appsrc" or a custom GStreamer source element for this purpose.
+		
+		- Cleanup: 
+			- When finished, stop the pipeline and clean up the allocated resources using GStreamer functions.	
+
+	## Sample code for RTP handling 
+	
+		- 

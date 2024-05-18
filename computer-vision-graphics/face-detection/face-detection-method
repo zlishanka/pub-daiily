@@ -1,0 +1,18 @@
+## face detection with dlib, OpenCV and Python 
+
+https://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python/ 
+
+    # What are facial landmarks? 
+
+        Detecting facial landmarks is therefore a two step process:
+
+            Step #1: Localize the face in the image.
+            Step #2: Detect the key facial structures on the face ROI.
+
+   
+
+    # Perform Face Detection with Deep Learning 
+    
+        https://machinelearningmastery.com/how-to-perform-face-detection-with-classical-and-deep-learning-methods-in-python-with-keras/ 
+
+

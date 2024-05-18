@@ -1,0 +1,334 @@
+## General C++ concepts 
+
+	# What are the different data types present in C++?
+
+		- C++ offers a variety of data types to represent different kinds of information, These data types can be grouped into two main categories:
+			- Fundamental data types: These are built-in data types that are predefined by the language
+				- Arithmetic data types: integer, floating point, boolean
+				- Character data types:  char, wchar_t
+				- void data type: void data type is used to indicate that a function does not return any value.
+
+			- Derived data types
+				- Arrays: Arrays are collections of elements of the same data type.
+				- Pointers: Pointers are variables that store the memory address of another variable.
+				- References: References are aliases for other variables.
+				- Functions: Functions are blocks of code that perform specific tasks.
+				- Structures: Structures are user-defined data types that group related variables together.
+				- Classes: Classes are user-defined data types that group related variables and functions together.
+				- Enumerations: Enumerations are user-defined data types that define a set of named constants.
+				- Unions: Unions are user-defined data types that allow a single memory location to store different data types.
+	
+	# What is the difference between struct and class?
+
+		- Default member access: By default, members of a struct are public, while members of a class are private.
+		- In general, structs are used to group data that is simple and does not require any special access control. 
+			Classes, on the other hand, are used to encapsulate data and protect it from unauthorized access.
+		Feature				Struct	Class
+		Default 	  member access	Public	Private
+		Encapsulation		Weak	Strong
+		Flexibility			Limited	Extensive
+		Typical use	Simple data grouping	Encapsulation and data management
+
+	
+	# What is the operator overloading? 
+
+		- Operator overloading is a feature of C++ that allows programmers to define custom behavior for operators. This means that you can use existing 
+		  operators, such as +, -, *, and /, with your own data types. For example, you could define an operator + for a class called Complex to add two complex numbers together.
+		- Operator overloading is implemented using special functions called operator functions. For example, the operator function for the + operator is called operator+().
+		- Operator overloading is resolved using a process called overload resolution. 
+
+	# What is polymorphism in C++?
+
+		- Polymorphism is a fundamental concept in object-oriented programming (OOP) that allows objects of different classes to respond to the same method call in different ways.  
+		- In C++, polymorphism is achieved through two main mechanisms: function overloading and virtual functions.
+			- Function overloading - allows you to define multiple functions with the same name but different parameter lists.
+			- Virtual functions - allow you to override the behavior of a function in a derived class
+		- Benefits of polymorphism
+			- Code reusability
+			- Flexibility
+			- Extensibility
+	
+	# Explain constructors in C++
+
+		- In C++, constructors are special member functions that are automatically called when an object of a class is created.
+		- Types of constructors
+			- Default constructors: These constructors do not take any arguments and are used to initialize an object to its default values.
+			- Parameterized constructors: These constructors take one or more arguments and are used to initialize an object with specific values.
+			- Copy constructors
+		- Overloading constructors
+			- You can define multiple constructors for a class, as long as they have different parameter lists.
+		- Constructor initialization lists
+			- initialize the data members of an object in a constructor
+	
+		- Destructors
+			- Destructors are special member functions that are automatically called when an object of a class is destroyed
+			- They are used to perform any necessary cleanup, such as freeing memory or releasing resources.
+	
+	# What is a virtual function? 
+
+		- In C++, a virtual function is a member function of a base class that can be overridden in derived classes.
+		- Virtual functions are one of the key features of object-oriented programming (OOP) in C++, and they are used to achieve polymorphism.
+		- function call can be resolved at runtime to the correct implementation, even if the function is called through a base class pointer or reference.
+	
+
+	# Please Compare compile-time polymorphism and runtime polymorphism.
+		
+		- Compile-time polymorphism, also known as static polymorphism, is a type of polymorphism that is resolved by the compiler at compile time
+			- Function overloading
+			- Operator overloading
+		- Runtime polymorphism, also known as dynamic polymorphism, is a type of polymorphism that is resolved at runtime.
+			- Runtime polymorphism is achieved through inheritance and virtual functions. 
+	
+	# What are friend classes and friend functions?
+	
+		- Special types of relationships between classes and functions that allow them to access each other's private and protected members.
+		- friend class Transaction; // Declare Transaction as a friend class
+		- friend void printStudentInfo(Student& student); // Declare printStudentInfo as a friend function
+
+	# What are the C++ access specifiers?
+		
+		- Public: Members declared as public are accessible from anywhere in the program.
+		- Private: Members declared as private are only accessible from within the class itself. 
+		- Protected: Members declared as protected are accessible from within the class itself and from derived classes.
+		- Purpose of Access Specifiers
+			- Control Access to Data
+			- Encapsulate Implementation Details
+			- Promote Code Reusability
+			- Enhance Code Maintainability
+	
+	# What are inline functions
+
+		- Inline function is a function that is inserted directly into the caller's code at the point of the function call
+		- are typically used for small, frequently called functions, where the overhead of a function call would be significant. 
+		- Advantages of Inline Functions
+			- Reduced function call overhead
+			- Improved code readability
+			- Potential for compiler optimization
+	
+		- Disadvantages of Inline Functions
+			- Increased code size
+			- Reduced flexibility
+		-   inline int square(int x) {
+  				return x * x;
+			}
+
+	# What is a reference in C++?
+
+		- In C++, a reference is a type of variable that acts as an alias for another variable. 
+		- It provides a direct connection to the original variable, allowing you to modify the original variable directly through the reference
+		- References are often used to pass arguments to functions and to access members of objects.
+		
+		- Key characteristics of references:
+			- Alias for another variable: A reference is an alias for another variable, meaning it shares the same memory location as the original variable.
+			- Immutable: Once a reference is initialized to a variable, it cannot be changed to refer to a different variable.
+			- Direct access: Modifications made through a reference directly affect the original variable.
+
+		- Benefits of using references
+			- Performance: References avoid the overhead of copying data 
+			- Prevention of dangling pointers
+
+		- Comparison with pointers:
+			- Im mutability , References cannot be reassigned, while pointers can be changed to point to different memory locations.
+			- Data access: References directly access the original variable
+			- References cannot be assigned null values, while pointers can be assigned nul
+	
+	# What do you mean by abstraction in C++?
+
+		- Abstraction in C++ refers to the process of hiding the implementation details of a class and exposing only the necessary interface to users.
+		- Data Abstraction
+			- hiding the details of how data is stored and managed 
+			- allowing programmers to focus on using the data without understanding its underlying representation
+		- Control Abstraction
+			- hiding the details of how a class performs its operations
+			- allowing programmers to call functions without understanding their internal implementation
+				- This is achieved through inheritance and virtual functions
+		- Examples of Abstraction in C++:
+			- Classes and Objects
+			- Inheritance and Polymorphism
+			- Interfaces
+			- Abstract Classes: Abstract classes contain at least one pure virtual function
+			- Templates: Templates provide generic implementations of classes and functions
+
+	# Is destructor overloading possible?
+
+		- No, destructor overloading is not possible in C++. This means that a class can only have one destructor, 
+		- destructors are automatically called when an object goes out of scope or is explicitly destroyed using the delete
+		- The compiler needs to know which destructor to call for a particular object
+
+## Memory management and pointers
+
+	# What is a pointer?
+		- A pointer is a variable that stores the memory address of another variable
+			- Memory management
+			- Passing arguments to functions
+			- Accessing arrays and other data structures
+			- Returning values from functions
+		- Pointer arithmetic:
+			- ptr++; increments the pointer ptr to point to the next element in an array:
+			- Pointer dereferencing 
+				- The process of accessing the data stored at the memory address pointed to by a pointer is called pointer dereferencing. 
+				- int *ptr = &i; std::cout << *ptr << std::endl;
+	
+	# How do you allocate and deallocate memory in C++?
+
+		- In C++, memory is allocated dynamically using the new operator i.e., int *p = new int;
+		- Deallocation using the delete operator. delete p;
+		- Using Smart Pointers
+			- Smart pointers are a type of pointer that automatically manages memory allocation and deallocation.
+			- std::unique_ptr
+			- std::shared_ptr A shared pointer shares ownership of an object with other shared pointers. 
+
+	# What is the difference between a single-level pointer and a multi-level pointer?
+
+		- Multi-level pointers can be used to access data that is nested within other data structures. 
+		- 
+
+	# What is a dangling pointer?
+
+		- In programming, a dangling pointer is a pointer that points to a memory location that has been deleted or freed. 
+		- This means that the pointer is no longer pointing to valid data, 
+		- and if the pointer is dereferenced, it could lead to a program crash or other unexpected behavior.
+
+		- Dangling pointers can occur in a number of situations, such as
+			- Deleting the memory that a pointer points to without updating the pointer
+			- Returning a pointer from a function that deallocates the memory that the pointer points to.
+			- Deleting the memory that a pointer points to without updating the pointer
+				int *p = new int;
+				*p = 10;
+				delete p;
+				// use p = nullptr
+
+			- Returning a pointer from a function that deallocates the memory that the pointer points
+				int *f() {
+  					int *p = new int; 	// use shared_ptr<int> p
+  					*p = 10;
+  					return p;
+				}
+	
+	# Why memory leak happens
+		
+		- Not deallocating memory that is no longer needed
+		- Returning pointers to allocated memory 
+		- Leaking memory from temporary variables
+
+		# There are a number of ways to prevent memory leaks, including
+
+		- Using smart pointers - automatically manages the lifetime of the allocated memory.
+		- Using RAII (Resource Acquisition Is Initialization) - RAII is a programming idiom that ensures that resources are properly released when they are no longer needed.
+		- Using valgrind: Valgrind is a memory debugger that can be used to identify memory leaks
+
+	# How do you prevent memory leaks?
+		
+			- Use Smart Pointers:
+			- Encapsulate Memory Management
+			- Use Resource Acquisition Is Initialization (RAII) - This pattern ensures that memory is not leaked even if exceptions occur.
+			- Practice Proper Object Destruction - Ensure that object destructors properly release any allocated memory associated with the object
+			- Validate Pointer References - Before dereferencing pointers, ensure they point to valid memory locations
+			- Utilize Memory Debugging Tools
+			- Write Well-Structured Code
+			- Regularly Review Code for Memory Management
+			- Maintain a Unit Test Suite
+
+	# What is the difference between a shallow copy and a deep copy? 
+
+		- shallow copy - creates a new copy of the object's reference 
+		- deep copy - creates a new copy of the data pointed to by the reference
+
+	# What is the rule of five? 
+
+		- Rule of Five is a guideline for implementing copy and move operations for user-defined classes. It states that if a class has any of the following special member functions, it must have all five:
+			- Copy constructor: Creates a new object from an existing object of the same class.
+			- Copy assignment operator: Assigns the value of an existing object to another object of the same class.
+			- Move constructor: Transfers ownership of resources from an existing object to a new object, leaving the existing object in a valid but unspecified state.
+			- Move assignment operator: Transfers ownership of resources from an existing object to another objec
+
+
+## Templates and the Standard Template Library (STL)
+	
+		# In C++, templates are a powerful feature that allows you to write generic code that can work with a variety of data types.
+		 - This means that you can write a single function or class that can be used with different types of data
+
+		Example: 
+
+		template <typename T>
+		void swap(T& a, T& b) {
+		  T temp = a;
+		  a = b;
+		  b = temp;
+		}
+	
+		# Templates can also be used to define generic classes.
+
+		template <typename T>
+		class Vector {
+		public:
+		  Vector();
+		  Vector(size_t size);
+		  ~Vector();
+
+		  T& operator[](size_t index);
+		  const T& operator[](size_t index) const;
+
+		  size_t size() const;
+
+		private:
+		  T* data;
+		  size_t capacity;
+		};
+
+	# How do you use templates to write generic code?
+
+		- Identify the common operations
+		- Define template parameters
+		- Write generic code
+		- Instantiate templates
+	
+	# What is the Standard Template Library (STL)?
+		- It provides a variety of container classes, algorithms, and iterators that can be used to manage and manipulate data efficiently. 
+		
+		# Components of the STL
+			- Containers
+			- Algorithms
+			- Iterators
+
+	# What are some of the commonly used STL containers and algorithms? 
+
+		- Vector - A dynamic array that grows and shrinks as needed
+		- List - A doubly linked list
+		- Map - An associative container that maps keys to values.
+		- Set - An unordered associative container that stores unique values
+		- Queue: A first-in, first-out (FIFO) 
+		- Stack 
+
+		Algorithms 
+			- sort, find, binary_search on sorted container, copy, fill, remove, reverse, unique
+
+	# How can you use the STL to improve the efficiency and readability of your code?4
+
+		- Use STL containers for data storage and management 
+		- Leverage STL algorithms for common operations
+		- Write generic code using templates
+		- Adopt STL idioms and patterns
+		- Utilize iterators for container traversal
+		- Benefit from STL standardization
+		- Maintain clear and concise code
+		- Document STL usage
+	
+	# What is RAII (Resource Acquisition Is Initialization)?
+
+		- RAII, which stands for Resource Acquisition Is Initialization, is a programming technique used in various object-oriented languages 
+			to manage resources that must be acquired before use and released later
+
+		- The fundamental principle of RAII is to tie the lifetime of a resource to the lifetime of an object. 
+			- When an object is created, it acquires the necessary resources
+			- when the object is destroyed, those resources are automatically released
+		
+		- RAII is particularly valuable for managing resources that require explicit acquisition and release, such as:
+			- Memory: Allocating memory using new and releasing it using delete
+			- File handles: Opening files using fopen and closing them using fclose
+			- Locks: Acquiring locks using synchronization primitives and releasing them when done
+			- Database connections: Establishing connections to databases and closing them when done
+			- Network sockets: Creating network sockets for communication and closing them when finished
+
+
+

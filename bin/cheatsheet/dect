@@ -1,0 +1,49 @@
+#### API curl 
+# start the call 
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/init  -d '{"layout": "l1", "tiles": [{"source": {"name": "Input1.mp4", "title": "Input1"}}]}' 
+
+# stop the call 
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/stop 
+
+# change layout
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l1", "tiles": [{"source": {"name": "Input2.mp4", "title": "Input2"}}]}' 
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l1", "tiles": [{"source": {"name": "Input3.mp4", "title": "Input3"}}]}' 
+
+# Reset the phi-text
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/phi-text  -d '{"title": "Input1", "action" : "reset"}' 
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/phi-text  -d '{"title": "Input1", "action" : "bbox_on"}' 
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/phi-text  -d '{"title": "Input1", "action" : "redact_on"}' 
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/phi-text  -d '{"title": "Input1", "action" : "redact_off"}' 
+
+# update the phi-text
+	curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/phi-text  -d '{"title": "Input2", "action" : "update", "add":[], "remove":[]}'
+
+# healthcheck of servies  
+curl -X 'GET' 'http://127.0.0.1:5002/healthcheck/phi-text' -H 'accept: */*'
+curl -X 'GET' 'http://127.0.0.1:5005/healthcheck/segmentation' -H 'accept: */*'
+
+##  text detection 
+
+  curl -i -X  'POST' http://127.0.0.1:5006/text  -H 'accept: */*' -H 'Content-Type: application/json' -d '{"action" : "on"}'
+  curl -i -X  'POST' http://127.0.0.1:5006/text  -H 'accept: */*' -H 'Content-Type: application/json' -d '{"action" : "off"}' 
+
+## segmentation 
+  
+  curl -i -X  'POST' http://127.0.0.1:5006/segmentation  -H 'accept: */*' -H 'Content-Type: application/json' -d '{"action" : "set"}'
+  curl -i -X  'POST' http://127.0.0.1:5006/segmentation  -H 'accept: */*' -H 'Content-Type: application/json' -d '{"action" : "on"}'
+  curl -i -X  'POST' http://127.0.0.1:5006/segmentation  -H 'accept: */*' -H 'Content-Type: application/json' -d '{"action" : "off"}'
+
+  curl -X 'PUT' http://127.0.0.1:5006/segmentation -H 'accept: */*' -H 'Content-Type: application/json' -d '{"points": [[500, 300]]}'
+  curl -X 'PUT' http://127.0.0.1:5006/segmentation -H 'accept: */*' -H 'Content-Type: application/json' -d '{"points": [[500, 500]]}'
+  curl -X 'PUT' http://127.0.0.1:5006/segmentation -H 'accept: */*' -H 'Content-Type: application/json' -d '{"bbox": [[1200, 30, 1600, 700]]}'
+  curl -X 'PUT' http://127.0.0.1:5006/segmentation -H 'accept: */*' -H 'Content-Type: application/json' -d '{"bbox": [[1200, 30, 1600, 1000]]}'
+
+# get segmentation result 
+curl -X 'GET' 'http://127.0.0.1:5005/segmentation' -H 'accept: */*'
+
+# send segmentation prompt, point 
+ curl -X 'PUT' 'http://127.0.0.1:5005/segmentation' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"id" : "450566df-d086-4e6b-882b-fa651ec5ca1a", "points": [[500, 300]]}'
+ curl -X 'PUT' 'http://127.0.0.1:5005/segmentation' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"id" : "450566df-d086-4e6b-882b-fa651ec5ca1a", "points": [[500, 500]]}'
+
+# send segmentation prompt, bbox 
+ curl -X 'PUT' 'http://127.0.0.1:5005/segmentation' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"id": "450566df-d086-4e6b-882b-fa651ec5ca1a", "bbox": [[450, 280, 510, 350]]}'

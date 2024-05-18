@@ -1,0 +1,18 @@
+# Nvidia Jetson Orin NX Camera Interface
+
+	
+	Jetson developer kits have multiple interfaces for connecting a camera, including USB, Ethernet, and MIPI CSI-2
+		
+	## MIPI CSI-2
+	
+		- a camera interface that connects an image sensor to an embedded board
+		- low-cost, low-latency, and low-power interface 
+		- maximum bandwidth of 10 Gb/s with four image data lanes, and each lane can transfer data up to 2.5 Gb/s
+		- Most CSI-2 cameras employ on-sensor compression techniques like Bayer Pattern Order (BPO) or YCbCr color space conversion
+			- typically under 3 Gbps for 1080p 30 fps
+		- 2 data lanes on the CSI-2 interface might be sufficient for transmitting the compressed video stream (1080p, 30fps)
+		- Github source: https://github.com/JetsonHacksNano/CSI-Camera
+		- Jetson™ TX2 NX module supports up to 5 (2-lane) MIPI CSI cameras and can stream up to 12 MIPI CSI cameras via virtual channel support. 
+		-  
+
+	## 

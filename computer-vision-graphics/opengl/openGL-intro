@@ -1,0 +1,26 @@
+## openGL introduction  
+
+    https://learnopengl.com/ 
+
+    free book online 
+    https://learnopengl.com/book/book_pdf.pdf
+
+    # what is openGL
+
+        - is a cross-language, cross-platform application programming interface (API) for rendering 2D and 3D vector graphics. The API is 
+            typically used to interact with a graphics processing unit (GPU), to achieve hardware-accelerated rendering.
+        - Silicon Graphics, Inc. (SGI) began developing OpenGL in 1991 and released it on June 30, 1992. applications use it extensively in the fields 
+            of computer-aided design (CAD), virtual reality, scientific visualization, information visualization, flight simulation, and video games
+        - Since 2006, OpenGL has been managed by the non-profit technology consortium Khronos Group 
+
+    # GLUT - The OpenGL Utility Toolkit 
+
+        - is a library of utilities for OpenGL programs, which primarily perform system-level I/O with the host operating system. 
+        - Functions performed include window definition, window control, and monitoring of keyboard and mouse input.
+        - Routines for drawing a number of geometric primitives (both in solid and wireframe mode) are also provided, including cubes, spheres and the Utah teapot. 
+            GLUT also has some limited support for creating pop-up menus. 
+        - The two aims of GLUT are to allow the creation of rather portable code between operating systems (GLUT is cross-platform) and to make learning OpenGL easier.
+        - The original GLUT library by Mark Kilgard supports the X Window System (GLX) and was ported to Microsoft Windows (WGL) by Nate Robins
+
+
+

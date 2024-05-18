@@ -1,0 +1,50 @@
+## Camera Calibration
+
+    
+    https://docs.opencv.org/3.4/d4/d94/tutorial_camera_calibration.html
+
+    https://www.mathworks.com/help/vision/ug/camera-calibration.html 
+
+    # What is camera calibration ? 
+
+        Camera calibration is the process of estimating intrinsic and/or extrinsic parameters. 
+        The extrinsic parameters represent a rigid transformation from 3-D world coordinate system to the 3-D camera’s coordinate system
+
+
+        - Intrinsic parameters 
+            - The intrinsic parameters represent a projective transformation from the 3-D camera’s coordinates into the 2-D image coordinates.
+            - Intrinsic parameters deal with the camera's internal characteristics, such as, its focal length, skew, distortion, and image center. 
+                fx, fy : focal length in pixels 
+                fx = F/Px : F focal length in world units, Px size of pixel in world units 
+                cx, cy : optical center (principal point) in pixels 
+                s : skew coefficients, which is non-zero if the image axes are not perpenticular 
+                s = fx * tan(a)
+
+        - Extrinsic parameters 
+
+            - Extrinsic parameters describe its position and orientation in the world. 
+            - The extrinsic parameters represent a rigid transformation from 3-D world coordinate system to the 3-D camera’s coordinate system
+            - The extrinsic parameters consist of a rotation, R, and a translation, t. The origin of the camera’s coordinate system is at its 
+                optical center and its x- and y-axis define the image plane. 
+
+      
+    # Distortion in Camera Calibration 
+
+        - Radial distortion 
+            Radical distortion occurs when light rays bend more near the edges of a lens than they do at its optical center. The smaller the lens, the greater the distortion.
+        - Tangential Distortion 
+            Tangential distortion occurs when the lens and the image plane are not parallel. The tangential distortion coefficients model this type of distortion.
+
+        - distortion_coefficients=(k1,k2, p1, p2, k3) 
+
+
+    # Calibration procedure 
+
+        The process of determining these two matrices is the calibration. Calculation of these parameters is done through basic geometrical equations. 
+        The equations used depend on the chosen calibrating objects. Currently OpenCV supports three types of objects for calibration:
+
+            Classical black-white chessboard
+            Symmetrical circle pattern
+            Asymmetrical circle pattern
+
+        

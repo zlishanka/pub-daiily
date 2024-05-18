@@ -1,0 +1,73 @@
+## GStreamer on video editing 
+
+	# Importing 
+		- demuxing and decoding  plugin
+			- a wide variety of media formats like MP4, AVI, MKV, etc.
+			- import these files, extract the video/audio streams, 
+			- decode them into raw frames/samples.
+
+		- "uridecodebin" element 
+			- Decodes data from a URI into raw media
+			- https://gstreamer.freedesktop.org/documentation/playback/uridecodebin.html?gi-language=c 
+	# Processing 
+		- apply various effects and transformations to the raw video/audio
+			- Scaling, color correction, filters, mixing
+		- "Filters", apply effects and modifications
+			- "videoscale", for video resizing
+			- "audioecho", for audio echo effect
+			- "videofiltets" , for color balancing, blurring etc
+		- "Converters", transform raw media from one format to another
+			- "audioresample", for audio sample rate conversion
+			- "videoconvert", for converting between video formats
+		- "Mixers" , allow blending and mixing of multiple audio/video streams
+			- "Compositors", for mixing multiple video streams with effects
+			- "audiomixers", for audio mixing
+		- "Encoders",  encode processed raw media into compressed formats
+			- "x264enc", for H264/AVC video encoding
+			- "opusenc", for Opus audio encoding
+		- "Pipelines", connect these elements into complex pipelines using pads, caps negotiation
+
+	# Exporting
+		- encoder and muxer plugins 
+			- can be used to encode the final video/audio into target output formats and container format
+			- handle compression 
+			- multiplexing audio/video
+			- metadata handling
+
+		- "Muxers", multiplex different media streams like video, audio and subtitles into a container format
+			- "matroskamux", for mkv/webm containers
+			- "mp4mux" for MP4 containers
+			- "qtmux" for QuickTime MOV containers
+		- "Encoders" , compress raw media into end-user formats before muxing
+			- "x264enc" for H264 video encoding
+			- "lamemp3enc" for mp3 audio encoding
+			- "aacenc" for AAC audio encoding
+		- "Taggers", "metadata injectors" , To inject metadata like title, comments into file containers and streams
+			- "id3mux", for injecting ID3 tags into audio streams
+			- "xmpmux", for embedding XMP metadata
+		- "Sinks", output encoded media streams to files, HTTP or other storage
+			- "filesink" , for outputting to local video file
+			- "souphttpsrc", for uploading to web server via HTTP
+		- "Multi-threading and parallelism" , Split export into multiple threads and processes for accelerated performance.
+
+	# Transcoding
+		- format conversion, changing codecs, birate
+		- during import and export
+	
+	# Previewing
+		- quickly display video previews during editing 
+		- avoid fully encoding videos for preview
+
+	
+	# zero-copy data transfer and batch encoding capabilities
+		- transfer of media buffers between pipeline elements via memory sharing instead of memcpy
+		- mapping buffers received from GStreamer directly into application address space for processing
+
+		- "encodebin" element (batch encoding)
+			- handle encoding multiple inputs to multiple targets in parallel using encoding profiles
+			- Automatically spawns encoder instances to maximize parallelism
+			- use case  
+				- doing operations like transcoding entire directories of media files
+			- leverage all CPU cores by running multiple encoder instances
+			- Queues up multiple encode jobs and handles them concurrently
+			- Many input sources (files, streams, cameras) and output formats supported

@@ -1,0 +1,33 @@
+console 155:                        829 342 995, password: Avail000155 Mac: 14:9d:99:7b:26:11, consoleID: oj5GK2JWaL6OwNWk hostname: AC150VB000155
+console 408:                        716 325 795, pass: Avail000408
+Console AC200PM000412 TeamViewerID: 274080018 password: Avail000412
+Console Avail000406                1024071545           Avail000406 
+Console 178: 			865061717   	Avail000178 
+Console 220:                902159480    Avail000220
+
+Console 404:    AC200PM000404 Lab: 415983992 Pwrd: avail123
+
+subbu test console:                 491 868 634, password: ctm6dxdx
+macMini:                            606 122 976 , passwd: Avail@000222 
+
+media team build server:        977 055 783, password: Avl21Mds43#
+
+access token (expire on 02/28): glpat-zt8NiYAhEDQ-z2ZjPKFB 
+
+zheng438@yahoo.com , passwd: g/qaU%+g#S.HS3z, two factor recovery: HSHQ X8BX 8HX5 R9R0
+
+Splunk logging check - 
+
+index="aux" availcv | spath subcomponent | search subcomponent=AvailCV| spath hostname | search hostname=AC150VB000155
+
+
+build server: TeamViewerID: 977 055 783 password: Avl21Mds43# 
+
+M1 Team viewer info: AC200PM000398: ID: 889 776 246 pwd: Avail000403
+
+Roy's MacMini team viewer: ID: 1896378955 pwd: rg16ft51 
+Katie's macbook air team viewer: ID : 1 756 184 598 pwd: 8ddgqrc8
+
+
+
+

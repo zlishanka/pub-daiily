@@ -1,0 +1,66 @@
+# Nvidia CUDA toolkit
+	https://docs.nvidia.com/cuda/index.html 
+
+	- a comprehensive development environment for C and C++ developers building GPU-accelerated applications
+	- The toolkit includes 
+		- GPU-accelerated libraries, 
+		- debugging and optimization tools, 
+		- a C/C++ compiler, 
+		- and a runtime library to deploy your application 
+	- The CUDA development environment relies on tight integration with the host development environment 
+		- including the host compiler and C runtime libraries, 
+		- and is therefore only supported on qualified distribution versions 
+		- x86_64 : Ubuntu 20.04.z (z <= 6) LTS
+	
+
+	 ## Host Compiler Support
+	 	- In order to compile the CPU “Host” code in the CUDA source 
+			- CUDA compiler NVCC requires a compatible host compiler to be installed on the system.
+			- For GCC and Clang on (x85, Arm64, Power9 distributionetc)
+			- Supported C++ Dialects
+				- NVCC and NVRTC (CUDA Runtime Compiler) support the following C++ dialect: C++11, C++14, C++17, C++20
+
+	## Pre-installation actions
+		- Verify You Have a CUDA-Capable GPU
+			- "lspci | grep -i nvidia"
+		- Verify You Have a Supported Version of Linux
+			- "uname -m && cat /etc/*release" 
+		- Verify the System Has gcc Installed
+			- "gcc --version"
+		- Verify the System has the Correct Kernel Headers and Development Packages Installed
+			- "uname -r"
+			
+
+   ## CUDA profiling, debugging, and optimizing
+   		- Nsight, system-wide performance analysis tool designed to visualize an application’s algorithms
+			
+		### Profile the System
+			- visualizes unbiased, system-wide activity
+			- low-overheard performance analysis that visualizes otherwise hidden layers of events and metrics
+				- CPU parallelization and core utilization, 
+				- GPU streaming-multiprocessor (SM) optimization
+				- system workload and CUDA libraries trace
+
+		### Visualize CPU-GPU Interactions
+			- expose GPU and CPU activity, events, annotations, throughput, and performance metrics
+			- GPU workloads are further correlated with in-application CPU events
+
+		### Track GPU Activity 
+			- plot low-level input/output (IO) activity
+			- ensor Core activity
+
+		### Trace GPU Workloads
+			- investigating the CUDA API and tracing CUDA librarie
+			- cuBLAS, cuDNN, and NVIDIA TensorRT
+			- graphics computing, Nsight Systems supports profiling Vulkan, OpenGL, DirectX 11, DirectX 12
+
+		### Optimize Python for AI and Deep Learning
+			- helps you write Python applications that maximize GPU utilization
+			- Backtraces and automatic call stack sampling
+
+		### Detect Frame Stutter and Bottlenecks
+			- automatically detects slow frames
+			- automatically reports CPU times per frame
+
+	## Nsight Compute
+		- interactive Kernel profiler	

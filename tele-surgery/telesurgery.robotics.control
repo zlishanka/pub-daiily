@@ -1,0 +1,42 @@
+# Telesurgery Robotics Control
+
+	 ## Serial arm robot kinematics
+
+        - https://www.youtube.com/watch?v=gXprzY8UcTU
+        -  "Degrees of freedom (DOF)" of a robot arm determine the number of independent motions it can perform.
+        - Forward Kinematics of Robot Arm
+            - process of calculating the "position/orientation" of robot's "end effector"
+            - Use robot's kinematic equations and known joint parameters (theta1, theta2, theta3...)
+            - Forward kinematics can be calculated using online tools or libraries such as "OpenRave", ROS MoveIt!,
+                "Matlab Robotics Toolkit", or Orocos
+        - Inverse Kinematics
+            - calculates the "joint parameters" needed to achieve a specified "end effector" position
+
+        Robot parameters  <--> End-effector's location & orientation
+            - Mark out fixed axis of robot (x,y,z)
+            - start from the base of robot and move towards the end-effector
+            - use homogeneous transforms 
+
+    ## Modern servo control systems
+
+        - takes a "desired position" or motion as input (think target angle for a robotic arm)
+        - then compares this with the "actual position" (feedback from sensors) and makes adjustment
+        - control the motor driving the movement until the desired state is achieved.
+        - creates a "closed-loop control system"
+
+        ### Key components
+            - Controller - receives the desired position/motion input, analyzes the sensor feedback
+                (position, velocity, etc.), and calculates the needed motor control signals.
+            - Motor and Driver - provides the muscle for movement. driver amplifies the controller's signals to power the motor
+            - Sensors - provide real-time feedback on the actual position, velocity,
+
+        ### Advancements in Modern Servo Systems
+            - Digital Control - Microprocessor-based controllers enable complex algorithms and precise control.
+            - Communication Interfaces - These allow for integration with supervisory control systems and remote monitoring.
+            - Networked Control Systems -  Multiple servo systems can be coordinated over a network for complex tasks.
+
+        ### Applications
+            - Industrial robots: For precise assembly, welding, and material handling tasks.
+            - Autonomous vehicles: For steering, braking, and throttle control.
+            - Robotics surgery: For precise manipulation of surgical instruments.
+            - Camera stabilization systems: For smooth video recording on drones and gimbals.

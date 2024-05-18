@@ -1,0 +1,23 @@
+export PATH=$PATH:/bin:/usr/bin:/usr/local/bin:/sbin
+export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+export PATH=$PATH:~/workArea/workspace/daiily/bin
+export PATH=$PATH:/opt/homebrew/bin
+
+CHEATSHEET=~/workArea/workspace/daiily/bin/cheatsheet
+
+alias handy="vim $CHEATSHEET/linux_handyman"
+alias pycmd="vim $CHEATSHEET/pycmd"
+alias pyhelp="vim $CHEATSHEET/pyhelp"
+alias githelp="vim $CHEATSHEET/githelp"
+alias ccmd="vim $CHEATSHEET/c++Cmd"
+alias cvcmd="vim $CHEATSHEET/cvcmd"
+alias ffcmd="vim $CHEATSHEET/ffcmd"
+alias torchcmd="vim $CHEATSHEET/torchcmd"
+alias gptp="vim $CHEATSHEET/gptPrompt"
+alias condahelp="vim $CHEATSHEET/condahelp"
+alias javahelp="vim $CHEATSHEET/javahelp"
+alias gocmd="vim $CHEATSHEET/gocmd"
+alias gohelp="vim $CHEATSHEET/gohelp"
+alias javahelp="vim $CHEATSHEET/javahelp"
+alias awscli="vim $CHEATSHEET/awscli"
+alias dect="vim $CHEATSHEET/dect"

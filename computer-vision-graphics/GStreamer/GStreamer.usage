@@ -1,0 +1,44 @@
+# GStreamer Usage 
+
+## Importing 
+	- extract the video/audio streams for a live stream video (.m3u8), and decode them into raw frames/samples.
+	
+	gst-launch-1.0 souphttpsrc location=http://example.com/stream.m3u8 ! hlsdemux ! tsdemux ! 
+		queue ! h264parse ! avdec_h264 ! videoconvert ! appsink emit-signals=true caps="video/x-raw"
+	gst-launch-1.0 souphttpsrc location=http://example.com/stream.m3u8 ! hlsdemux ! tsdemux !  
+		queue ! aacparse ! avdec_aac ! audioconvert ! audioresample ! appsink emit-signals=true caps="audio/x-raw"
+
+	- "souphttpsrc": Loads M3U8 playlist and segments from HTTP server
+	- "hlsdemux": Demuxes the M3U8 playlists and TS (MPEG-TS) chunks
+	- "tsdemux": Demuxes the individual TS media streams
+	- h264parse: Parses the H.264 video stream
+	- avdec_h264: Hardware accelerated H.264 video decoding
+	- aacparse: Parses AAC audio stream
+	- avdec_aac: Hardware accelerated AAC audio decoding\
+	- appsink at the end captures the raw video/audio frames and samples for further processing in the application.
+
+	The queues handle stream synchronization. videoconvert and audioconvert adapt media formats.
+	This demonstrates how modular elements in GStreamer pipelines can handle loading, demuxing, decoding and transforming live streams efficiently.
+
+
+## Processing
+	
+	- Take 4 live video feeds from local cameras and compose them into 2x2 virtual camera
+
+	gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! videoscale ! video/x-raw,width=1280,height=720 ! videobox border-alpha=0 top=-360 left=-480 ! videomixer name=mix ! xvimagesink sync=false
+	gst-launch-1.0 v4l2src device=/dev/video1 ! videoconvert ! videoscale ! video/x-raw,width=1280,height=720 ! videobox border-alpha=0 top=0 left=-480 ! mix. 
+	gst-launch-1.0 v4l2src device=/dev/video2 ! videoconvert ! videoscale ! video/x-raw,width=1280,height=720 ! videobox border-alpha=0 top=-360 left=0 ! mix.
+	gst-launch-1.0 v4l2src device=/dev/video3 ! videoconvert ! videoscale ! video/x-raw,width=1280,height=720 ! videobox border-alpha=0 top=0 left=0 ! mix.
+
+	- Uses 4 "v4l2src" elements to capture live video from 4 local cameras /dev/video0 to /dev/video3
+	- Scales each video to 1280x720 resolution
+	- Uses "videobox" to position each video feed into a quadrant
+	- Sends the 4 positioned feeds into a "videomixer" element to composite them based on position
+	- Finally displays the 2x2 composited video on screen using "xvimagesink"
+
+
+	(1) Run each "gst-launch" pipeline in its own process using multiprocessing. 
+	(2) Use "gst_parse_launch()" to build the full pipeline programmatically in C code.
+	(3) Use a multithreaded capable sink like "multisocketsink" at the end instead of xvimagesink.  
+
+

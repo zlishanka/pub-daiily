@@ -1,0 +1,41 @@
+# Endscopic image denoising 
+
+	Endoscopic images are particularly challenging for denoising due to factors like 
+		- limited illumination, 
+		- complex internal environments, 
+		- and variations in noise characteristics. 
+
+	## General algorithms
+		
+		### Non-local Means (NLM) Filtering
+			- leverages the redundancy in images by comparing a pixel with similar patches elsewhere in the image
+			- averaging those similar patches to reduce noise while preserving details
+
+		### Block-matching and 3D filtering
+			- searches for similar image blocks and averages them for denoising
+			- effective for complex textures but may introduce artifacts at block boundaries
+
+		### Convolutional Neural Networks (CNNs)
+			- CNNs can be trained on large datasets of noisy and clean images to learn the patterns of noise and remove it.
+			- Variations like blind denoising CNNs that can operate without requiring perfectly noise-free training data
+
+		### Deep Image Prior (DIP)
+			- an iterative approach to reconstruct a clean image from a noisy one
+			- It utilizes a deep network to learn the prior distribution of clean images and 
+			- progressively refines the noisy image based on this learned prior.
+
+	## Implementation, papers, repos
+	
+		### NLM 
+		- https://docs.opencv.org/3.4/d5/d69/tutorial_py_non_local_means.html
+		
+		### Papers 
+		- Deep Denoising of Endoscopic Images Using Convolutional Neural Networks" (Fu et al., 2018)
+		- Blind Denoising of Endoscopic Images with Deep Residual Learning" (Jiang et al., 2020)
+		- Deep Image Prior for Single-Image Denoising" (Shen et al., 2018)
+
+		### Endoscopic images github
+		- https://github.com/topics/endoscopic-images
+		- https://github.com/med-air/Endo-FM
+i		- https://github.com/topics/endoscopy
+	

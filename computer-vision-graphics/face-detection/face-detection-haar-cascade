@@ -1,0 +1,12 @@
+## Haar cascade classifier 
+
+
+    # Tutorial 
+    
+    https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html 
+
+    # trained classifiers for detecting objects 
+
+    https://github.com/opencv/opencv/tree/3.4/data 
+
+

@@ -1,0 +1,164 @@
+# good references
+	https://stackoverflow.com/questions/74953489/aws-cli-ec2-get-the-state-of-list-of-instances#:~:text=You%20can%20use%20describe%2Dinstance,the%20status%20of%20running%20instances.
+
+# get user identity
+	aws sts get-caller-identity
+
+# describe regional ec2 status
+	aws ec2 describe-instances --region us-west-2 --query 'Reservations[].Instances[*].{Type: InstanceType, Id: InstanceId, State: State.Name, Ip: PublicIpAddress}' --output table
+
+# list s3 bucket
+  	aws s3 ls s3://mybucket
+	aws s3 ls s3://input.video.sliver.tv
+	aws s3 ls s3://orig.video.sliver.tv
+
+# s3 create index or s3 tag for the object
+	text_value = json_data['text']
+
+	s3.put_object(
+   		Bucket='mybucket',
+   		Key='template/object1',
+   		Body=json.dumps(json_data),
+   		Tagging='Text=' + text_value
+	)
+	This adds a "Text" tag with the text value. You can then search for objects by tag:
+
+	s3.get_object(Bucket='mybucket', TagFilters=[{'Key':'Text', 'Value':'Noise Reduction On'}])
+
+# set cache-control on s3 bucket
+
+	./s3cmd --recursive modify --add-header="Cache-Control:max-age=86400" s3://yourbucket/
+
+# download a file from s3 bucket
+	aws s3 cp s3://BUCKET/ folder --exclude "*" --include "2015-08-15*" --recursive
+
+# download directory and sync files
+
+	aws s3 sync s3://BUCKET/folder/  localfolder
+	aws s3 sync s3://avail-cv-ml/PHIData1-1080p  PHIData1-1080p
+
+# delete files under s3 bucket (very careful)
+	aws s3 rm s3://mybucket/ --recursive --exclude "*.jpg"
+
+# upload a file to s3 bucket (a folder needs end up with /)
+	aws s3 cp ESLProLeague2016Final_2DPiP_trimmed.mp4  s3://sliver-event-recordings-backup/backup_videos/
+
+# install aws cli on amazon linux
+	$ curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+	$ unzip awscli-bundle.zip
+	$ sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+
+# upload a directory to s3 bucket
+	aws s3 cp myfolder s3://mybucket/myfolder --recursive
+
+# upload a file to s3 bucket
+        aws s3 cp IEM_2D_trailer_v01.mp4 s3://input.video.beta.sliver.tv
+
+# sync local folder with a copy in s3 bucket
+  	aws s3 sync myfolder s3://mybucket/myfolder --exclude *.tmp
+
+# the operations for a service,
+  	aws autoscaling help
+
+# show the EC2 instance status
+        aws ec2 describe-instances --region us-west-1 --instance-ids i-07e913ddfe0e8e991
+		aws ec2 describe-instances --region us-west-2 --instance-ids i-056e4372034f3f378    # rzheng-ml
+
+# start the EC2 instance
+        aws ec2 start-instances --region us-west-1 --instance-ids i-09b3f28ef5b113abc
+		aws ec2 start-instances --region us-west-2 --instance-ids i-056e4372034f3f378    # rzheng-ml
+
+# stop the EC2 instance
+        aws ec2 stop-instances --region us-west-1 --instance-ids i-09b3f28ef5b113abc
+		aws ec2 stop-instances --region us-west-2 --instance-ids i-056e4372034f3f378    # rzheng-ml
+
+# debug option to get more info about what's going wrong.
+
+    aws --debug s3 ls s3://
+
+#  grant public read of the s3 bucket
+
+    aws s3api put-object-acl --bucket DOC-EXAMPLE-BUCKET --key exampleobject --acl public-read
+
+# edit the bucket policy
+    https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html#example-bucket-policies-use-case-2
+
+# create boto3 client (s3)
+
+    import boto3
+    session = boto3.Session(
+        aws_access_key_id=ACCESS_KEY,
+        aws_secret_access_key=SECRET_KEY,
+        aws_session_token=SESSION_TOKEN
+    )
+    sedev_s3_client = session.client('s3')
+    sedev_s3_client.list_buckets()
+
+
+# sqs receive message
+	aws sqs receive-message --queue-url avail-cv-ml-service-phi-text-queue
+
+# AWS lambda event source mappings 
+	aws lambda list-event-source-mappings --function-name phi-text-lambda
+
+# Add SQS trigger for existing lambda
+	aws lambda create-event-source-mapping \
+    	--function-name avail-cv-ml-phi-text-container \
+    	--event-source-arn arn:aws:sqs:us-west-2:537850345630:avail-cv-ml-service-phi-text-queue\
+    	--batch-size 10
+
+# Configure AWS API gateway to trigger lambda using async invocation
+	https://www.youtube.com/watch?v=kj0wH1g3DpQ
+	header: InvocationTye : Event
+
+# install AWS cli
+
+	$ curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+	$ sudo installer -pkg AWSCLIV2.pkg -target /
+	# install on linux
+	$ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+	unzip awscliv2.zip
+	sudo ./aws/install
+
+# AWS ECR get the details of repositories
+	aws ecr describe-images --repository-name phitextlambda0ac72b3b/phitextfunctiona7c5bd60repo	
+
+# AWS ECR to create repository	
+	aws ecr create-repository --repository-name avail-cv-ml-phi-text-lambda-test
+
+# AWS ECR push
+	aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 537850345630.dkr.ecr.us-west-2.amazonaws.com
+	docker build -t avail-cv-ml-docker-phi-text-test1 .
+	docker tag avail-cv-ml-docker-phi-text-test1:latest 537850345630.dkr.ecr.us-west-2.amazonaws.com/avail-cv-ml-docker-phi-text-test1:latest
+	docker push 537850345630.dkr.ecr.us-west-2.amazonaws.com/avail-cv-ml-docker-phi-text-test1:latest
+
+# AWS CDK installation
+	npm install -g aws-cdk
+
+# AWS CDK init
+	cdk init app --language typescript
+
+	## Useful commands
+
+	* `npm run build`   compile typescript to js
+	* `npm run watch`   watch for changes and compile
+	* `npm run test`    perform the jest unit tests
+	* `cdk deploy`      deploy this stack to your default AWS account/region
+	* `cdk diff`        compare deployed stack with current state
+	* `cdk synth`       emits the synthesized CloudFormation template
+
+	## deployment
+
+	cdk bootstrap --region us-west-2
+
+# AWS serverless lambda tool SAM
+	sam init
+	sam build
+	sam local invoke PhiTextFunction -e events/event.json
+	sam list
+	sam delete project-name
+	sam validate
+	sam deploy 
+
+	sam deploy --image-repositories PhiTextFunction=537850345630.dkr.ecr.us-west-2.amazonaws.com/avail-cv-ml-phi-text-lambda-test:latest

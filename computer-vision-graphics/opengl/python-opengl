@@ -1,0 +1,33 @@
+## Python openGL binder 
+
+    http://pyopengl.sourceforge.net/ 
+   
+    - PyOpenGL is the most common cross platform Python binding to OpenGL and related APIs 
+    - Python code that acts like a sort of wrapper around native code, so you can manipulate OpenGL within the context of Python.
+
+    # Related packages 
+
+        install_requires=[
+            # 3rd party libraries.
+            'opencv-python == 3.3.0.10',  # Pinned because of our internal build.
+            'pathlib2 ~= 2.3.0',
+            'PyOpenGL ~= 3.1.0',
+            'PyOpenGL-accelerate ~= 3.1.0',
+            'numpy ~= 1.13.3',
+        ],
+
+        pip install PyOpenGL PyOpenGL_accelerate 
+
+        - PyOpenGL, the "OpenGL" package when installed, provides GL, GLES1, GLES2, GLES3, GLUT, GLU, GLE, WGL, EGL and GLX subpackages 
+        - The code for OpenGL_accelerate is in the core PyOpenGL repository, but is distributed as a separate Python package and installs as OpenGL_accelerate
+
+    # Initialize the GLUT  
+
+        def init_glut():
+            glut.glutInit()
+            glut.glutInitDisplayMode(
+                    glut.GLUT_RGBA | glut.GLUT_DEPTH | glut.GLUT_3_2_CORE_PROFILE)
+            glut.glutInitWindowSize(GLUT_WIDTH, GLUT_HEIGHT)
+            glut.glutCreateWindow('OpenGL Render') 
+
+

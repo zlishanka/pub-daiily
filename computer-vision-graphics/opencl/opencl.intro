@@ -1,0 +1,30 @@
+# OpenCL introduction
+
+	# source 
+		https://www.eriksmistad.no/getting-started-with-opencl-and-gpu-computing/ 
+		
+	- The Bottleneck: CPUs and Sequential Processing
+		- 
+	- Parallel Processing Power: Enter GPUs
+		- This is parallel processing, and that's the strength of a Graphics Processing Unit (GPU). 
+		- GPUs have many cores designed for handling multiple tasks concurrently, making them much faster for specific workloads.
+
+	- The Challenge: Different Devices, Different Languages
+		- CPUs and GPUs speak different languages and have different architectures. 
+
+	## OpenCL: The Universal Translator
+		- OpenCL acts as a translator
+		- It provides a common language (based on C) that lets you write programs that can run on various devices (CPUs, GPUs, etc.)
+		- OpenCL takes care of translating your code into the specific language each device understands.
+
+	## Kernels: Dividing the Workload
+		- OpenCL programs are built around functions called kernels.
+		- These kernels are essentially the tasks you want to distribute among the different processing units. 
+		- OpenCL helps you send these kernels to the most suitable device (CPU or GPU) for efficient execution. 
+
+	## Benefits: Faster Performance and Flexibility
+		- Leverages the parallel processing power of GPUs
+		- Allows you to achieve significant speedups for tasks suited for parallel processing, like image or video editing
+		- provides a single programming model for diverse devices, making development easier and more portable.
+
+	  

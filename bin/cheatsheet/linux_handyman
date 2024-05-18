@@ -1,0 +1,575 @@
+
+# check disk usage of directory 
+    du -ah | sort -nr | head -20  
+    du -sh | sort -nr | head -20  
+    du -shx *  | sort -nr
+    du -a . | sort -nr | head -n 100 
+    # delete top files 
+    du -a . | sort -nr | head -n 20 | tail -n +21 | cut -f 2- -d ' ' | xargs rm -f
+# check disk space usage 
+    df -h  
+
+# check linux system display 
+    sudo lshw -c display
+    sudo lspci | grep VGA 
+
+# check linux system modules 
+    sudo lsmod 
+
+# check and locate shared libraries 
+    locate libGL.so. 
+
+# check ubuntu packages 
+    sudo apt-cache search opengl 
+    sudo apt-cache search ...
+
+# check already installed on machine 
+    apt list --installed  
+ 
+# check ubuntu version 
+    lsb_release -a   
+
+# chrome browser debugging 
+    chrome://net-internals/          
+
+# config nginx module with rtmp and secure link 
+    ./configure --with-http_secure_link_module --with-http_ssl_module --add-module=../nginx-rtmp-module-master 
+    echo -n "mysecretkeylive/eslfeed1501284588" | openssl dgst -md5 -binary | openssl enc -base64 | tr '+/' '-_' | tr -d '=' 
+    echo -n "mysecretkeylive/wwfeed1501284588" | openssl dgst -md5 -binary | openssl enc -base64 | tr '+/' '-_' | tr -d '=' 
+    echo -n "mysecretkeylive/slivertest1501284588" | openssl dgst -md5 -binary | openssl enc -base64 | tr '+/' '-_' | tr -d '=' 
+    pushlish rtmp url: 
+      rtmp://ingest_ip/live/eslfeed?e=1501284588&st=BAIh1iMFHKFVEUN33hNhTQ 
+      rtmp://ingest_ip/live/wwfeed?e=1501284588&st=VbXUazKD9oec-qoIVvIZDw
+      rtmp://ingest_ip/live/slivertest?e=1501284588&st=TQQr1owbbdGrTgGNg8LU9A 
+ 
+# export private key from java key store 
+    keytool -importkeystore -srckeystore existing-store.jks -destkeystore new-store.p12 -deststoretype PKCS12 
+    openssl pkcs12 -in keystore.p12  -nodes -nocerts -out key.pem 
+    keytool -list -v -keystore /usr/local/WowzaStreamingEngine/conf/ssl.sliver.tv.jks 
+
+# import existing SSL certificate into a keystore 
+    keytool -importkeystore -destkeystore ssl.sliver.tv.jks  -srckeystore ssl.sliver.tv.p12 -srcstoretype PKCS12
+    openssl pkcs12 -export -in star_sliver_tv.cer -inkey ssl.sliver.tv.pem  -name live2.slive.tv -out ssl.sliver.tv.p12 
+    keytool -importkeystore -destkeystore ssl.sliver.tv.jks -srckeystore ssl.sliver.tv.p12 -srcstoretype PKCS12 
+
+# generate private key and certificate signing request 
+    openssl genrsa -des3 -passout pass:x -out server.pass.key 2048 
+    openssl rsa -passin pass:x -in server.pass.key -out server.key
+    rm server.pass.key
+    openssl req -new -key server.key -out server.csr
+    openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt 
+
+# get the utc timing 
+    date -u  
+    date -r 1234567890 
+    date -r 1479247731 +'%Y-%m-%d %H:%M:%S'
+    date +%s 
+    date -d@1479247731
+
+# find files that get modified in last x minutes / x days 
+    find . -mmin -60 -type f | xargs ls -l 
+    find . -mmin -60 -type f -exec ls -l {} + 
+    find . -mtime -2 -type f  # file (not directory) changed in the last 2 days  
+    find . -name \*.xml -mtime -4   # file with *.py changed   
+    find . -name \*.log -mmin -60 | xargs ls -l  
+    find . -name '*.so' 
+
+# find system/shared libraries in linux 
+    sudo find /usr -iname "*libGL.so*" -exec ls -l {} \; 
+
+# create symlink into /usr/bin 
+    ln -s src dst  
+    ln -s /usr/local/bin/ffmpeg /usr/bin/ffmpeg  
+    rm /usr/bin/ffmpeg 
+ 
+# check network port status 
+    netstat -lpn 
+    netstat -nap  
+    # show only sockets currently listening
+    netstat -ltun  
+    # show all sockets currently in use 
+    netstat -atun  
+    # show all sockets in tcp/udp etc 
+    netstat -tulpn
+    
+# check routing table 
+    netstat -nr 
+
+# recursively delete certain pattern file 
+    find . -name '*.o' -exec rm -r {} \; 
+    find . -name '*.pyc' -exec rm -r {} \; 
+
+# recursively chmod file mode to be executable 
+    find . -name "*.dll" -exec chmod +x {} \; 
+
+# remove symbolink link 
+
+# remove ssh key from terminal 
+    ssh-add -D 
+
+# total lines of codes in a code base 
+    find . -name \*.py | xargs wc -l  
+
+# display the first few lines of  file 
+    head -lines filename  
+
+# enable ntp service  
+    sudo apt install ntp 
+    sudo update-rc.d ntp defaults 
+
+# monitor processes and threads being managed by Linux Kernel 
+    pidstat -d 2 
+    pidstat -t -p 8197 1 3 
+    pidstat -t -p 14716  
+
+#$ running background daemon under linux 
+    nohup python get_live_stats.py > /dev/null 2>&1 & 
+
+# check file system on disk / mount disk  
+    lsblk 
+    sudo  file -s /dev/xvdf 
+    sudo mkdir /data      # mount point 
+    sudo mount /dev/xvdf /data 
+    sudo mount /dev/xvdg /media 
+
+# kill a process that bind to port 80 
+
+    sudo fuser -k 80/tcp 
+
+# To run a program with a certain nice value, we can use the nice command:
+
+  nice -n 15 command_to_execute
+
+# run freegeoip service locally on default port 8080 
+
+    sudo ./freegeoip -http 0.0.0.0:9090 -silent -quota-max 0 > /dev/null 2>&1 &  
+
+# show process priority 
+
+    ps -e -o uid,pid,ppid,pri,ni,cmd 
+    ps -ef | grep Webcall     # to get the details of process  
+
+# show processes in PID, PGID 
+    ps x -o "%p %r %c"  
+    ps -C node -o %cpu,%mem,cmd 
+    ps -p pid -o %cpu,%mem 
+
+# show system performance and usage 
+     sudo yum install sysstat 
+     sudo vi /etc/default/sysstat
+     sar -V
+     sar 1 3 
+     sadf -j -s 22:10:00 -e 22:20:00  
+
+# send terminate signal to process with name 
+    pkill proc-name 
+    pkill -f proc* 
+
+# screen the terminal 
+    screen -ls
+    @creation  
+    screen -S gamification-server 
+    screen -S gamification-client 
+    @detach the screen session 
+    screen -d -r gb.server  
+    @kill the screen session  
+    screen -S 23536 -X quit 
+    @exit the screen session without killing 
+    ctrl+a then ctrl+d
+    @scroll the screen,activate copy mode  
+    ctrl+a and then [
+
+   
+# force vpn to be full tunnel mode 
+    route change default -interface utun0 
+
+# kill a process and all its decendent processes   
+    pkill -TERM -g pgid 
+
+# redirect output to /dev/null 
+    xxx > /dev/null 2>&1 
+
+# rsync to download files 
+    rsync -Pavux ec2-user@54.175.182.62:/disk1/media/ephemeral0/recordings/liveorigin/vidpdsg3g00r8jwat5m_2016-*.mp4   /cygdrive/d/Sliver/AutoVideo/ESL_NYC/
+    rsync -avzhe ssh local_dir root@192.168.0.101:/home/
+    rsync -avzhe ssh -i ~/.ssh/live-streaming-source.pem theta-player ubuntu@13.56.211.35:~/ 
+    rsync -avzhe ssh avail-media-recorder ubuntu@52.53.252.36:~/Env/recorder-env/ 
+
+# vim to shift block 
+    # first set indent to be 4  
+    :set ts=4 sw=4
+    # in vim command mode, type number of lines followed by '>>' 
+    21>> 
+
+    # move to the beginning of line 
+        shift + i or ^ or 0
+    # move to the end of line 
+        $ 
+    # remove leading/trailing white spaces in vim
+        :g/\s$/norm $diw
+
+# vim to edit two files at the same time 
+    vim -o file1 file2  
+    crtl+w to toggle between file1 and file2  
+
+# change indention of vim editor 
+
+    :set tabstop=2
+    :set expandtab
+    :%retab
+ 
+    or save the first lines in ~/.vimrc 
+
+xterm on mac  
+
+    1. install XQuartz on mac 
+    2. ssh -i ~/.ssh/*.pem -X user@remote.ip 
+
+tcpdump to a file 
+    sudo tcpdump -A -w tcpdump-resultfile 
+    sudo tcpdump -i any -s 0 -w capture.pcap 
+    sudo tcpdump host consoleapi.titan-qa.avail.io -w /tmp/tcpdump.pcapng 
+
+sort files in a directory based on size 
+
+    find . -type f -printf "%s\t%p\n" | sort -n 
+    du -a * | sort -r -n | head -20 
+    du -a * | sort -r -n | head -30 | tail -10    # files 21-30 
+
+check the kernal message that kill a process 
+
+    dmesg | grep -E -i -B100 'killed process'
+
+test bandwidth and bitrate between two network nodes (iperf3)  
+
+    iperf3 -s -p 5908 (server) 
+    iperf3 -c remoteServer -i 1 -t 30 -p 5908 (client)   
+
+tmux to have multiple terminal sessions 
+
+    tmux a -t 0 
+    tmux a -t 1  
+
+    ctrl+b, d 
+
+truncate the log file when it grows too big 
+
+    truncate -s 0 .forever/*.log
+
+ELB heartbeat selftest 
+
+    curl -ivso /dev/null https://172.31.34.78:8700/ping -k 
+
+check the open connections on user microservice (java) 
+
+    [ec2-user@devops.east.01.sliver.tv ~]$ sudo salt -E 'prod.useast1.user*' cmd.run "lsof|grep TCP|grep java|awk '{print \$1}'|sort|uniq -c"  
+
+# delete file older than x Days 
+
+    find /path/to/files* -mtime +5 -exec rm {} \; 
+
+config the firewall through iptable 
+
+sudo iptables -A INPUT -p tcp -s 12.199.204.162/32 --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT  
+sudo iptables -A INPUT -p tcp -s 12.199.204.162/32 --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT  
+sudo iptables -A INPUT -p tcp -s 12.199.204.162/32  --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT  
+DROP       tcp  --  anywhere             anywhere             tcp dpt:ssh ctstate NEW,ESTABLISHED
+DROP       tcp  --  anywhere             anywhere             tcp dpt:6008 ctstate NEW,ESTABLISHED
+
+
+# GET certificate from a server 
+
+  echo -n | openssl s_client -showcerts -connect lab1-ucn.thetatoken.org:6008  2>/dev/null  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' 
+
+# Check certificate issuer 
+
+  echo -n | openssl s_client -showcerts -connect lab1-ucn.thetatoken.org:6008  2>/dev/null  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | openssl x509 -noout -text | grep "CA Issuers" | head -1 
+
+# npm uninstall all modules in package.json 
+
+    for package in `ls node_modules`; do npm uninstall $package; done;
+
+    npm i natives  
+
+  installing the package "natives" works 
+
+# start grunt server (example dash.js)  
+    npm install -g grunt-cli
+    grunt dev 
+
+# capture network traffic through wireshark 
+
+    tcpdump -i any -s 0 -w captureFile.pcap
+
+# shell scrip to loop over batch files 
+    for fn (*output.txt); do echo $fn; done 
+   
+# reinstall xcode command line tool 
+    rm -rf /Library/Developer/CommandLineTools 
+    xcode-select --install 
+    /Library/Developer/CommandLineTools/SDKs/  
+
+# install Unix tools on mac 
+    brew install automake
+    brew install autoconf
+    brew install libtool
+    brew install --formula 3rdParty/opencv.rb 
+    brew install --formula 3rdParty/harfbuzz.rb 
+    brew install opencv@4.5.5       # install specific version  
+
+    sh ./install.sh derekwang test 123 uninstall 
+    sh clear.sh 
+    sh build.sh 
+
+# install coreutils like realpath on mac 
+    brew install coreutils
+    # To force the link and overwrite all conflicting files:
+    brew link --overwrite opencv
+    # To list all files that would be deleted:
+    brew link --overwrite --dry-run opencv 
+ 
+# run ngrok as proxy (local service port) 
+    ngrok http 80  
+
+# brew install ffmpeg with all options 
+    brew install ffmpeg $(brew options ffmpeg | grep -vE '\s' | grep -- '--with-' | tr '\n' ' ')
+
+# Grep files with wild card pattern
+    grep -R --include="*.txt" "pattern" /path/to/dir 
+    grep -R --include="*.txt" "foo" ~/projects/
+    grep -R --include "setup.py" "ditto.hydra" repo/
+    grep -Ri  --include=\*.{py,pl,sh,cfg} "main" /raid6/projects/sysmanagement/
+
+    # grep  pattern like qa-ditto-creation-api-Ditto 
+    grep 'qa.*creation.*api' 
+
+# Linux to stop the daemon service 
+   sudo systemctl status creation_daemon@8000.service
+   sudo systemctl start creation_daemon@8000.service
+   sudo systemctl stop creation_daemon@8000.service
+
+# Linux resource limit to check 
+   ulimit -a
+    
+# check core dump is enabled or not 
+   ulimit -c
+   ulimit -c unlimited  # enable core dump 
+
+# redict top to a file 
+    top -b -n 100 > top_out.txt     # 100 is the number of snapshots of top (refresh every 3 seconds)  
+
+# top command column meanings
+    https://askubuntu.com/questions/176001/what-do-virt-res-and-shr-mean-in-the-top-command
+
+# dpkg command 
+    dpkg -l
+    dpkg -l | less
+    dpkg -l '*apache*'
+    dpkg -l | grep -i 'sudo'
+
+    apt list --installed    # list all packages installed 
+
+
+# check mac wifi mac address 
+
+    networksetup -getmacaddress en0 
+
+# quick remove files from a list (seperated by lines)  
+
+    xargs rm < install_manifest.txt 
+
+    cat install_manifest.txt | sudo xargs rm
+    cat install_manifest.txt | xargs -L1 dirname | sudo xargs rmdir -p 
+
+# check what shell 
+    echo "$SHELL"  
+    ps -p $$ 
+
+# change the shell to bash 
+    chsh -s /bin/bash
+
+# profile the process with sample 
+    sample [PID] -f test.out 
+
+# check the dependencies from executable (dynamic or static libs)  
+    otool -L xxx
+    ldd xxx
+    otool -L availcvserver  | grep gflags
+
+# macOS Shared memory tuning 
+    sudo sysctl -w kern.sysv.shmmax=33554432 
+    sudo sysctl -w kern.sysv.shmall=16294400 
+        kern.sysv.shmmax - This variable defines the maximum size, in bytes, of a single shared memory segment 
+
+# Check machine dependency and support on avx 
+	sysctl machdep.cpu.features | grep -i avx 
+
+# macOS to open application 
+    open -n /Applications/Webcall.app 
+
+# macOS to close application using osascript 
+    osascript -e 'quit app "Webcall.app"'
+
+# splunk to filter logs 
+    index="aux" availcv | spath subcomponent | search subcomponent=AvailCV| spath hostname | search hostname=AC150VB000155
+    index="aux" availcv | spath subcomponent | search subcomponent=AvailCV | spath hostname | search hostname=AC200PM000404 
+
+    index="aux" callSessionId="us.1055427d-8809-4be5-8fbd-d6826f3bfad1" component="media" message="*stop*" 
+    # look at the montage change request detail
+    index="aux" callSessionId="us.1055427d-8809-4be5-8fbd-d6826f3bfad1" component="media" message="*ImageMontage::setConfig()*" 
+ 
+    # module name, hostname, processId,  
+    index="aux" availcv | spath subcomponent | search subcomponent=AvailCV | search processId=3800 
+    index="aux" webcall | spath component | search component = webcall  | spath feature | search feature=CVMixer
+    index IN (aux,main) callSessionId="*5f45c" "ExternalInputSaga()"  
+    index = "aux" component="media" message="info" callSessionId="us.9c0bc35c-7fb7-47cb-beb7-98883ce05ab0"
+    
+    # for production
+    index IN (aux,main) callSessionId="us.283db615-071a-4a3a-99eb-ba9584a0f6d7" component="media" message="tile=Input 3*first_crop point*"
+
+    # call session ID  
+    index IN (aux,main) component="webcall" callSessionId="us.0f24a09b-f963-4ed3-a3ce-1992479aac4d" 
+ 
+    # call trace ID
+    index="aux" container_name="*controller" x_avail_traceid="*-AC200PM000408"  
+    index="aux" component="media" callSessionId="us.e39d9bed*"| spath "X-AVAIL-TRACEID" | search "X-AVAIL-TRACEID"="fd6b2448-9f4a-fa2b-21a6-e6bc195a04b5-CVID-AC200PM000408" 
+
+    index IN (aux,main) callSessionId="us.4ede5c07-694b-4da7-9f9b-e28fc5fcba21" component="media" | spath availTraceId | search availTraceId="dfecc7f8-afde-9fc8-e9c5-127f8e4cc89f-CVID-AC200PM000406" 
+    # trace long dely for webcall API calls for montage change, freeze frame 
+    index="aux" callSessionId="us.393e3011-9681-4b28-a815-746426166343" component="webcall" message="*apiTracing*montage*"
+    index="aux" callSessionId="us.393e3011-9681-4b28-a815-746426166343" component="webcall" message="*apiTracing*freeze*"
+ 
+    # client service monitor log
+    index IN (aux,main) component="servicemonitor" serialNumber="AC200PM000412"  
+    index IN (aux,main) component="webcall" callSessionId="us.0f24a09b-f963-4ed3-a3ce-1992479aac4d"  
+    https://avail.splunkcloud.com/en-US/app/search/clients_service_monitor_log_viewer_clone[…]ervicemonitor&form.Time.earliest=-15m&form.Time.latest=now 
+
+    # last 24 hours long latency of req 
+    https://avail.splunkcloud.com/en-US/app/search/foo?form.field1.earliest=-24h%40h&form.field1.latest=now 
+
+    index=_* OR index=* | where hostname = "AC200PM000402" 
+    | rex "timeMS\S\":(?<time_ms>\w+)"
+    | rex "url\S\":\S\"(?<url>https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))"
+    | where tic <= 1671221634654 and tic > 1671221621091 
+    | sort tic
+    | reverse
+    | table _time, tic, message, time_ms
+    
+# check the modules running on console 
+     ps ax | grep 'VDC\|availcvserver\|asm'  
+     /bin/sh /Applications/Avail/ASM/dist/runasm.sh
+
+# unload asm 
+    ls /Library/LaunchAgents/io.avail.asm.plist
+    /Library/LaunchAgents/io.avail.asm.plist
+
+# stop remove ASM from system Agent launchctl
+    launchctl unload ~/Library/LaunchAgents/io.avail.asm.plist; 
+    launchctl load ~/Library/LaunchAgents/io.avail.asm.plist; 
+
+# install & launch ASM manually 
+    /Applications/Avail/ASM/dist/
+    Make sure to select the correct/desired ASMConfxxx.json and put at the same level as the dist folder 
+    copy the io.avail.asm.plist file to ~/Library/LaunchAgents/io.avail.asm.plist
+
+# run system.log with a process 
+    g++ syslog.cpp -o availcvserver 
+    log stream --info --debug --predicate "process == 'availcvserver'"  
+
+# convert *.png to *.gif file 
+    convert $(ls *.png | sort -V) out.gif 
+ 
+# availcv run install/uninstall scripts on console or laptop 
+    sh install.sh test stage 123 uninstall
+    sh install.sh test stage 123
+    sh install.sh
+    sh build.sh 
+
+# employee ID 
+    AVAM6000
+
+# upload to aws
+    elastic ip: 35.164.201.24 
+    host name: ec2-35-164-201-24.us-west-2.compute.amazonaws.com 
+    scp bin.013123.tar ubuntu@35.164.201.24:/home/ubuntu/. 
+
+# open image on ubuntu 
+    xdg-open $file   
+
+# check intel processor type on mac 
+    sysctl -n machdep.cpu.brand_string 
+
+# 2x2 curl cmd 
+   curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l22", "final_image_colorspace" : "BGRA", "tiles": [{"source": {"name": "MINRRAY-TOP", "title": "Top"}}, {"source": {"name": "FHD Camera", "title": "Front"}}, {"source": {"name": "Depstech webcam", "title": "AvSDI"}}, {"source": {"name": "FHD Camera", "title": "4K"}}]}' 
+
+   curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l22", "final_image_colorspace" : "BGRA", "tiles": [{"source": {"name": "AV.io SDI Video", "title": "SDI"}}, {"source": {"name": "AV.io 4K Video", "title": "4K"}}, {"source": {"name": "MINRRAY-FRONT", "title": "Front"}}, {"source": {"name": "MINRRAY-TOP", "title": "Top"}}]}' 
+   curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l22", "final_image_colorspace" : "BGRA", "tiles": [{"source": {"name": "MINRRAY-TOP", "title": "Top"}}, {"source": {"name": "MINRRAY-FRONT", "title": "Front"}}, {"source": {"name": "MINRRAY-TOP", "title": "AvHD"}}, {"source": {"name": "MINRRAY-FRONT", "title": "Uvchd"}}]}' 
+
+# l2 curl cmd 
+   curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l2", "tiles": [{"source": {"name": "Depstech webcam", "title": "Top"}}, {"source": {"name": "FHD Camera", "title": "Front"}}]}'  
+   curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l12", "tiles": [{"source": {"name": "MINRRAY-TOP", "title": "Top"}}, {"source": {"name": "MINRRAY-TOP", "title": "Bot"}}, {"source": {"name": "MINRRAY-FRONT", "title": "Front"}}]}'  
+   curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l1", "tiles": [{"source": {"name": "MINRRAY-TOP", "title": "Top"}}]}'  
+   curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l1", "tiles": [{"source": {"name": "brain_overlay.mp4", "title": "op1"}}]}' 
+   
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l12", "tiles": [{"source": {"name": "AV.io 4K Video", "title": "4K"}}, {"source": {"name": "AV.io SDI Video", "title": "SDI"}}, {"source": {"name": "MINRRAY-FRONT", "title": "Front"}}]}'  
+
+  curl -i -X  'POST' http://127.0.0.1:5001/availcv/imm/montage  -d '{"layout": "l12", "tiles": [{"source": {"name": "AV.io 4K Video", "title": "4K"}}, {"source": {"name": "AV.io SDI Video", "title": "SDI"}}, {"source": {"name": "MINRRAY-FRONT", "title": "Front"}}]}' 
+ 
+   curl -i -X 'GET' http://127.0.0.1:5001/availcv/imm/tile_mode -d '{"title":"Front"}' 
+   curl -i -X 'POST' http://127.0.0.1:5001/availcv/imm/tile_mode -d '{"title":"Front", "cap_resolution_auto":false}' 
+   curl -i -X 'POST' http://127.0.0.1:5001/availcv/imm/tile_mode -d '{"title":"4K", "cap_resolution_auto":true}' 
+   curl -i -X 'POST' http://127.0.0.1:5001/availcv/imm/tile_mode -d '{"title":"all", "cap_resolution_auto":true}' 
+   curl -i -X 'GET' http://127.0.0.1:5001/availcv/imm/tile_mode -d '{"title":"all"}' 
+
+# Download image using wget
+ 	wget -q https://media.roboflow.com/notebooks/examples/dog.jpeg
+
+# check system shared memory 
+   sysctl -a | grep shm
+
+# VS code to exclude folder like __pycache__
+	Cmd+Shift+P > Preferences > Open User Settings 
+	search for "files.exclude"
+	add pattern
+
+# kill process VDC
+    sudo kill -9 $(pgrep VDCAssistant)
+
+# Check GPU usage
+    nvidia-smi --id=0 --loop=5 --query --display=UTILIZATION
+
+# check if GPU is cuda capable
+	lspci | grep -i nvidia 
+
+# install cuda 11.8 isntruction 
+	https://developer.nvidia.com/cuda-11-8-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=18.04
+	uname -m && cat /etc/*release 
+
+# check cuda library
+    ldconfig -p | grep cuda
+	/sbin/ldconfig -N -v $(sed 's/:/ /' <<< $LD_LIBRARY_PATH) 2>/dev/null | grep libcudnn
+
+# check nvidia library version 
+	dpkg -l | grep -i nvidia
+
+# remove cuda version  
+	sudo apt-get autoremove --purge cuda
+
+# install version of cuda
+	sudo apt-get install cuda-x.x
+
+# rlogin su as different username
+	su -l user1
+
+# install xrdp on ubuntu
+apt install ubuntu-desktop
+apt install xrdp
+adduser xrdp ssl-cert
+systemctl restart xrdp
+
+
+# vscode 
+select virtual env
+shift + alt + p   ---> select interpreter 
+
+

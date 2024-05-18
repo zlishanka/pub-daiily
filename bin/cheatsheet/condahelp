@@ -1,0 +1,39 @@
+
+# install pytorch using anaconda
+	conda install pytorch torchvision -c pytorch
+
+# create a conda virtual environment
+    conda create --name env-pytorch python=3.9.10
+
+# activate env
+	conda activate env-pytorch 
+
+# install miniconda3 with python3 
+	sh Miniconda3-latest-MacOSX-x86_64.sh -b
+
+# initialize shell so we can run conda directly 
+	~/miniconda3/bin/conda init 
+	- OR -
+	source <path to conda>/bin/activate 
+	conda init zsh
+
+# miniconda environment settings 
+	/Users/royzheng/miniconda3/envs/d2l 
+
+# create new environment like d2l, python version need to be current shell version  
+	conda create --name d2l python=3.9 -y
+
+# activate the d2l environment 
+	conda activate d2l 
+
+# install the framework and the d2l package 
+	pip install torch torchvision
+
+# -U: Upgrade all packages to the newest available version
+	pip install -U d2l
+
+# deactivate conda environment 
+	conda deactivate
+
+# remove the environment created 
+	conda remove --name d2l --all

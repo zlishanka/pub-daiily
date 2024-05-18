@@ -1,0 +1,56 @@
+# CUDA programming guide 
+
+	Source - https://docs.nvidia.com/cuda/cuda-c-programming-guide/
+
+	## A Scalable Programming Model
+		At its core, there are three key abstractions
+			- hierarchy of thread group
+			- shared memories
+			- barrier synchronization
+
+	## Programming model
+
+		### Kernels
+			- kernels,  C++ functions,  when called, are executed N times in parallel by N different CUDA threads
+			- kernel is defined using the "__global__" declaration specifier
+			- number of CUDA threads for a given kernel call is specified using a new <<<...>>>execution configuration
+			- Each thread that executes the kernel is given a unique thread ID "threadIdx.x" 
+
+		### Thread Hierarchy
+			- total number of threads is equal to the number of threads per block times the number of blocks.
+			- The number of threads per block and the number of blocks per grid specified in the <<<...>>>
+			- blockIdx.x * blockDim.x + threadIdx.x ---> unique ID built-in for each thread
+			- Threads within a block can cooperate by sharing data through some "shared memory" 
+			- "__syncthreads()" acts as a barrier at which all threads in the block must wait before any is allowed to proceed. 
+			- shared memory is expected to be a low-latency memory near each processor core (much like an L1 cache)
+
+		### Memory Hierarchy
+			- Each thread has private "local memory" (per thread)
+			- Each thread block has "shared memory" visible to all threads of the block and with the same lifetime as the block
+			- All threads have access to the same "global memory".
+			- two additional "read-only" memory spaces accessible by all threads: the "constant and texture memory" spaces.
+	
+			- both the host and the device maintain their own separate memory spaces in DRAM
+			- a program manages the global, constant, and texture memory spaces visible to kernels through calls to the CUDA runtime
+
+		### Asynchronous SIMT Programming Mode
+			- Asynchronous Barrier for synchronization between CUDA threads.
+			- A synchronization object could be a "cuda::barrier" or a "cuda::pipeline".
+			- Therad scope
+				cuda::thread_scope::thread_scope_thread
+				cuda::thread_scope::thread_scope_block
+				cuda::thread_scope::thread_scope_device
+				cuda::thread_scope::thread_scope_system
+
+	## Programming Interface
+	
+			CUDA C++ consists of a minimal set of extensions to the C++ language and a runtime library.
+			
+			### Compilation with NVCC
+				- kernels must be compiled into binary code by "nvcc" to execute on the device.
+
+			### CUDA Runtime
+				- The runtime is implemented in the cudart library
+				- linked to the application, either statically via "cudart.lib or libcudart.a" or dynamically via "cudart.dll or libcudart.so"
+				- 
+			

@@ -1,0 +1,152 @@
+Source - https://k21academy.com/docker-kubernetes/kubectl-cheatsheet/?gc_id=21032105012&g_special_campaign=true&gad_source=2&gclid=CjwKCAjw48-vBhBbEiwAzqrZVPEkFgXF1M_CvPqyre_v1d3HzKKiA-wx5WxlZ69WZ4AK-cwMwf5z7BoCc4YQAvD_BwE
+	https://www.youtube.com/watch?v=azuwXALfyRg
+
+# start minikube 
+	minikube start, stop, status, delete, dashboard 
+
+	minikube dashboard	# enables the minikube dashboard
+	minikube config set driver docker # To make docker the default driver
+	minikube start
+
+# addons 
+	minikube addons list 	# Lists all available minikube addons
+	kubectl get pod -n  kube-system 		
+	kubectl get po -A 
+
+# check version 
+	kubectl version
+
+# Cluster Management
+	kubectl cluster-info
+	kubectl config view
+	kubectl api-resources
+	kubectl get all --all-namespaces
+
+# Node Management
+	kubectl get node
+	kubectl taint node <node_name>
+	kubectl delete node <node_name>
+
+# Pod Management
+	kubectl get pod
+	kubectl delete pod <pod_name>
+	kubectl describe pod <pod_name>
+	kubectl create pod <pod_name>
+	kubectl exec <pod_name> -c <container_name> <command> # run a command for a container inside a pod
+		kubectl exec -it  nginx-depl-549d9fb597-gllx5 -- bin/bash	
+	kubectl exec -it <pod_name> /bin/sh				# get interactive shell on a pod
+	kubectl top pod 		# get resource usage (CPU/Mem/Storage) for Pods
+	kubectl annotate pod <pod_name> <annotation>  	# Add/update the annotations of a pod
+	kubectl label pod <pod_name>
+
+# Replication Controllers
+	kubectl get rc		# View the list of replication controllers
+	kubectl get rc --namespace=”<namespace_name>” 	# View the list of replication controllers by namespace
+
+# ReplicaSet Management
+	kubectl get replicasets 	# List all ReplicaSets
+	kubectl describe replicasets <replicaset_name> 	# View the detailed state of one or more ReplicaSets
+	kubectl scale --replicas=<expected_replica_num> replicaset <name>  	# Scale a ReplicaSet
+
+# Deployment Management
+	kubectl get deployment
+	kubectl describe deployment <deployment_name>
+	kubectl edit deployment <deployment_name>
+	kubectl create deployment <deployment_name> --image=image [--dry-run] [options]
+		kubectl create deployment nginx-depl --image=nginx 
+	kubectl delete deployment <deployment_name>
+	kubectl rollout status deployment <deployment_name>
+	kubectl top node
+	kubectl describe nodes | grep Allocated -A 5	# See resource allocation per node
+	kubectl get pods -o wide | grep <node_name> 	# List the pods running on a node
+	kubectl scale deployment <deployment-name> --replicas=<number-of-replicas> 	# Scale a Deployment
+
+# Secrets
+	kubectl create secret <name>
+	kubectl get secrets
+	kubectl describe secrets <name>
+	kubectl delete secret <secret_name>
+
+# Services
+	kubectl get services
+	kubectl describe services <name>	# View the detailed state of a service
+	kubectl expose deployment [deployment_name]		# Expose a replication controller, deployment or pod as a new Kubernetes service
+	kubectl edit service <name>			# Edit/update the definition of a service
+
+# Common Options
+	kubectl get pods -o wide	# –o Format of output.
+	 kubectl apply -f <xyz.yaml>	# Create any resource(pod/replicaset/deployment, etc) using a yaml/json file.
+	
+	
+	 
+
+# kubectl get status of nodes 
+	kubectl get nodes
+	kubectl get pod
+	kubectl get services 
+	
+	kubectl describe pod 
+	kubectl get pod -o wide  # details
+
+# create deployment 
+	kubectl create deployment nginx-depl --image=nginx 
+
+# replicaset
+	kubectl get replicaset
+ 
+		NAME                    DESIRED   CURRENT   READY   AGE
+		nginx-depl-6777bffb6f   0         0         0       62m
+		nginx-depl-6bdcdf7f5    1         1         1       3m11s
+
+# edit deployment
+	kubectl edit deployment nginx-depl
+	kubectl get pods 	# if change is made, notice new pod is created
+	
+# delete deployment 
+	kubectl delete deployment mongo-depl
+
+# apply configuration file
+	kubectl apply -f nginx-deployment.yaml
+
+# unset proxy
+	unset http_proxy
+ 	unset https_proxy	
+ 	unset all_proxy	
+
+# debug/check logs 
+	kubectl logs pod-id
+	kubectl logs nginx-depl-6bdcdf7f5-5hp58
+
+# describe a pod 
+	kubectl describe pod nginx-deployment-86dcfdf4c6-2pv65
+
+# get the pod terminal
+    kubectl exec -it mongo-depl-558475c797-hp45d -- bin/bash
+
+# create secret 
+    kubectl apply -f mongo-secret.yaml
+	kubectl get secret
+
+# create/get service 
+    kubectl apply -f mongo-service.yaml
+	kubectl get service
+	kubectl describe service mongodb-service
+
+# bring up external mongo-express-service
+	minikube service mongo-express-service#
+
+# create/get namespace 
+	kubectl get namespace
+	kubectl cluster-info
+	kubectl create namespace my-namespace
+
+# add ingerss controller addon through minikube 
+	minikube addons enable ingress
+	
+# Show what processes are running in namespace of kube-system
+	kubectl get pod -n kube-system 
+	kubectl get all -n kubernetes-dashboard 
+
+# apply ingress rule
+	kubectl apply -f dashboard-ingress.yaml
+	kubectl get ingress -n kubernetes-dashboard

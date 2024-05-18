@@ -1,0 +1,57 @@
+$ Real Time Operating System Intro
+
+	https://www.youtube.com/watch?v=F321087yYy4&list=PLEBQazB0HUyQ4hAPU1cJED6t3DU0h34bz
+
+	## General Purpose Operating System (GPOS) 
+
+		- Task Scheduling
+		- Resource management 
+			- virtual resources like Files, libraries, folders
+			- allow applications/processes to access
+		- Device drivers
+			- external diskes
+			- response to keyboard, mouses
+			- draw graph on monitor
+
+		- Windows, MacOS, Linux, IOS/Android
+		- human interaction are most import features
+			- sheduler is designed to prioritize these tasks, non-deterministic
+			- some tasks might be pushed back, lag
+
+	## Real Time Operating System (RTOS)
+		
+		- scheduler is desgined to meet scrict timing deadline
+		- might need to write device drivers, file system 
+		- Super loop structured (microcontroller) 
+		- ISR to handle external events, 
+		- ISR is also used for strict time constraint tasks ( < 1ms )
+		- For tasks like 100ns, might need custom hardware like FPGA
+		- Downside of Superloop - cannot run tasks concurrently
+	
+		- RTOS - running multiple tasks at the same time on multi-core processor
+			- microcontroller has limitation to run tasks on one core
+			- can also give higher priority to some tasks
+		
+		
+		### Why we need RTOS
+			- to be able to run multi tasks concurrently
+			- 
+
+	## Popular RTOS 
+
+		- FreeRTOS: Considered the most popular RTOS, 
+			- FreeRTOS is known for being free, open-source, and lightweight. 
+			- It's a great choice for microcontrollers with limited resources.		 
+
+		- Zephyr: Another open-source option, 
+			- Zephyr is gaining traction and is used by companies like Google and Meta.
+
+		- VxWorks: A commercial RTOS known for its reliability and maturity, 
+			- VxWorks is a good choice for demanding industrial applications.
+
+		- Micrium OS (includes µC/OS): A family of commercial RTOS options from Micrium, 
+			- offering different levels of features and complexity for various embedded system needs.
+
+		- ThreadX: Owned by Microsoft, 
+			- ThreadX is a commercial RTOS known for its good performance and ease of use.
+

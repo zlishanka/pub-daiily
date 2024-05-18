@@ -1,0 +1,48 @@
+#eval "$(/opt/homebrew/bin/brew shellenv)"
+
+CHEATSHEET=/username/repo/pub-daiily/bin/cheatsheet
+
+alias ffcmd="vim $CHEATSHEET/ffcmd"
+alias handy="vim $CHEATSHEET/linux_handyman"
+alias pyhelp="vim $CHEATSHEET/pyhelp"
+alias awscli="vim $CHEATSHEET/awscli"
+alias pycmd="vim $CHEATSHEET/pycmd"
+alias cvcmd="vim $CHEATSHEET/cvcmd"
+alias ccmd="vim $CHEATSHEET/c++Cmd"
+alias torchcmd="vim $CHEATSHEET/torchcmd"
+alias condahelp="vim $CHEATSHEET/condahelp"
+alias gohelp="vim $CHEATSHEET/gohelp" 
+alias gocmd="vim $CHEATSHEET/gocmd" 
+alias gptp="vim $CHEATSHEET/gptPrompt" 
+alias githelp="vim $CHEATSHEET/githelp" 
+alias handy="vim $CHEATSHEET/linux_handyman" 
+alias sysdesign="vim $CHEATSHEET/sysDesign" 
+alias mlhubs="vim $CHEATSHEET/mlhubs" 
+alias npcmd="open $CHEATSHEET/cheatsheet-numpy-pandas-maplotlib.pdf"
+alias torchhelp="open $CHEATSHEET/cheatsheet-pytorch.jpeg"
+alias cvhelp="open $CHEATSHEET/cheatsheet-opencv-python-v4.pdf"
+alias rayCli="vim $CHEATSHEET/rayCli"
+alias dockerhelp="vim $CHEATSHEET/docker_help"
+alias kubehelp="vim $CHEATSHEET/kubehelp"
+alias llmcmd="vim $CHEATSHEET/llmcmd"
+alias gcpcmd="vim $CHEATSHEET/gcloudcmd"
+
+alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+export PYTHONPATH="/Users/royzheng/repo/daiily/python-lang/drills"
+
+# for golang 
+export GOROOT=/usr/local/go
+export GOPATH=/Users/royzheng/WorkArea/workspace/golang
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin 
+
+# for java 
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home"
+export PATH="${JAVA_HOME}/bin:${PATH}"
+
+#export PATH="$PATH:/opt/homebrew/bin/"
+export PATH="$PATH:/Users/royzheng/repo/daiily/bin/"
+export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/"
+
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+#$eval "$(pyenv init --path)"

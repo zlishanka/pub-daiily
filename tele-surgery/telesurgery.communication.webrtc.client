@@ -1,0 +1,51 @@
+# Telesurgery WebRTC client stack integration on Embedded system
+
+	# Choose the right platform
+
+		- Select an embedded platform with sufficient processing power, memory, and networking capabilities to 
+			handle the WebRTC stack's requirements.
+		- Popular choices include ARM-based systems like Raspberry Pi, BeagleBoard, or embedded Linux boards.
+
+	# Obtain the WebRTC source code
+
+		- (https://webrtc.googlesource.com/src 
+
+	# Cross-compile the WebRTC stack
+
+		- embedded systems often use different CPU architectures and operating systems
+		- need to cross-compile the WebRTC stack for your target platform
+		- involves setting up a cross-compilation toolchain and configuring the WebRTC build system accordingly.
+
+	# Optimize for embedded systems
+
+		- optimize certain components for better performance and resource utilization on your embedded system
+		- This could include 
+			- disabling unnecessary features, 
+			- adjusting codec settings, 
+			- or implementing hardware acceleration for video encoding/decoding if supported by your platform.
+
+	# Integrate with your application
+	
+		- Once you have compiled the WebRTC stack for your embedded system, you can integrate it into your application.
+		- This typically involves creating a thin abstraction layer that - exposes the necessary APIs and functionality for 
+			- joining video conferences, 
+			- sending/receiving audio/video, 
+			- and transferring data.
+
+	# Handle network connectivity
+
+		- Ensure that your embedded system has reliable network connectivity
+		- either through Ethernet or Wi-Fi
+		- WebRTC requires a stable internet connection for peer-to-peer communication.
+
+	# Consider signaling and STUN/TURN servers:
+
+		- WebRTC relies on signaling and STUN/TURN servers for establishing peer-to-peer connections.
+		- You may need to set up your own servers or utilize existing cloud-based services, depending on your requirements.
+
+	# Optimize power consumption 
+	# Test and optimize
+
+	It's important to note that porting and optimizing WebRTC for embedded systems can be a challenging task, especially 
+	if you're working with resource-constrained devices
+ 

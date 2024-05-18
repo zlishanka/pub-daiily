@@ -1,0 +1,124 @@
+
+# ssh VM instance
+ 
+  gcloud compute --project "fluted-house-161501" ssh --zone "us-east1-c" "instance-1"
+  gcloud compute --project "fluted-house-161501" ssh --zone "europe-west1-c" "instance-2"
+  gcloud compute --project "fluted-house-161501" ssh --zone "europe-west1-b" "mediapro-stadium-feed"
+  gcloud compute --project "fluted-house-161501" ssh --zone "us-east4-a" "analytics-01" 
+
+  gcloud compute --project "fluted-house-161501" ssh --zone "us-west1-b" "chrome-client-1"
+
+  gcloud compute --project "fluted-house-161501" ssh --zone "us-east4-a" "sliver-bigq-ingestor01"
+  gcloud compute --project "fluted-house-161501" ssh --zone "us-east4-b" "sliver-bigq-ingestor02"
+  gcloud compute --project "fluted-house-161501" ssh --zone "us-east4-c" "sliver-bigq-ingestor03"
+  gcloud compute --project "fluted-house-161501" ssh --zone "us-east4-a" "sliver-bigq-ingestor04" 
+  
+  gcloud compute --project "fluted-house-161501" ssh --zone "us-west1-a" "streaming-manager-01" 
+  
+# use default key to ssh any VM instances 
+
+  ssh -i ~/.ssh/google_compute_engine  sliverbot@35.197.80.191 
+
+  $HOME/.ssh/google_compute_engine – private key
+  $HOME/.ssh/google_compute_engine.pub – public key  
+
+# stop/start a VM instance 
+
+  gcloud compute instances stop --project "fluted-house-161501" --zone "us-east1-b" "analytics-02" 
+  gcloud compute instances start --project "fluted-house-161501" --zone "us-east1-b" "analytics-02" 
+ 
+  https://www.googleapis.com/compute/v1/projects/fluted-house-161501/zones/us-east1-b/instances/analytics-02 
+
+# show zone status 
+
+  gcloud compute zones list
+
+# show instance status 
+
+  gcloud compute instances list 
+
+# show instance details 
+
+  gcloud compute instances describe wowza-ingestor-us-west-00 --format json  
+ 
+# select active account and project  
+  sudo pip install certifi, pyOpenSSL,, idna 
+  sudo pip install urllib3[secure]
+  sudo pip install pyOpenSSL ndg-httpsclient pyasn1
+
+
+# ssh VM instance
+ 
+	gcloud compute --project "fluted-house-161501" ssh --zone "europe-west1-c" "instance-1"
+
+
+# Storage url: 
+
+  storage.googleapis.com/[BUCKET_NAME]     
+
+# copy file to google storage 
+
+  gsutil cp bq_query.py gs://sliver_tv_analytics_table_backup/ 
+
+# scp file to gce 
+
+  gcloud compute scp local_file analytics-01:~/
+
+
+# assign VM to have cloud API access 
+
+  edit VM in compute engine console in "Cloud API access scopes" options choose following  
+
+  - Allow full access to all Cloud APIs
+
+# bigQuery --- 
+
+ prefix to use standard SQL 
+
+  #standardSQL 
+  #legacySQL  Runs the query using legacy SQL
+  #standardSQL  Runs the query using standard SQL 
+
+#  create dataset and table 
+   bq mk new_dataset
+   bq mk new_dataset.new_table
+ 
+#  update the dataset  
+   bq update --description "Dataset description" existing_dataset 
+
+#  load schema
+ 
+   load <destination_table> <source> [<schema>]
+ 
+   bq load ds.new_tbl ./info.csv ./info_schema.json  
+   bq load ds.new_tbl gs://mybucket/info.csv ./info_schema.json 
+
+# show the dataset 
+
+   bq show bigquery-public-data:github_repos
+
+# show the table 
+
+  bq show bigquery-public-data:github_repos.sample_contents    
+
+
+# show the table schema in json 
+
+  bq show --schema --format=prettyjson fluted-house-161501:sliver_tv_client_stats.video_player   
+
+#  preview the first n rows of table 
+
+  bq head -n 100 sliver_tv_analytics.user_event 
+
+ 
+# query limit
+
+
+https://cloud.google.com/bigquery/docs/writing-results#large-results 
+
+ using the partitioned table 
+
+ WHERE _PARTITIONTIME
+  BETWEEN TIMESTAMP(“20160101”)
+    AND TIMESTAMP(“20160131”)
+ 

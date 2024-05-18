@@ -1,0 +1,35 @@
+# Cuda thread synchronization and barriers
+
+	Source - https://www.youtube.com/watch?v=PJCISyoGpug&list=PLC6u37oFvF40BAm7gwVP7uDdzmW83yHPe&index=6
+
+	## Synchronzation
+		- Thread synchronization via explicit "Barrier"
+		- Threads need to synchronize with one another to avoid race conditions
+		- A barrier is a point in the kernel where all threads stop and wait on the others
+		- When all threads have reached the barrier they can proceed
+		- Barriers can be implemented with:
+			"__syncthreads();"
+		
+	## Syncthreads Example 
+		- shift the contents of an array to the left by one element 
+		
+		__global__ void kernel( int* a) 
+		{
+			int i = threadIdx.x + blockIdx.x * blockDim.x; 
+			if (i < 3) {
+				int temp = a[i+1];
+				__syncthreads;
+				a[i] = temp;
+				__syncthreads;
+			}
+		} 
+
+	## Implicit Barriers between Kernels
+		- Host and Device operates asynchronously
+		- Force host to wait on the completion of the kernel
+			- cudaDeviceSynchronize();  
+		 
+		
+	
+
+		

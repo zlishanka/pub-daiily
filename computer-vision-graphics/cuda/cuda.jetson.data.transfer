@@ -1,0 +1,24 @@
+# Data transfer between CPU and GPU on Jetson platform
+
+	- Nvidia Jetson platforms don't have a single, dedicated memory management module for CPU-GPU data transfer. 
+	- However, the system architecture facilitates this transfer through a combination of hardware and software features:
+
+	## Shared Memory
+		- Jetson uses a unified memory space
+		- Both CPU and GPU can access the same physical memory through the shared memory controller.
+
+	## Memory Management Unit (MMU)
+		- MMU translates virtual memory addresses used by software into physical memory addresses for hardware access.
+		- Allows the CPU and GPU to use different virtual addresses while accessing the same physical memory location 
+
+	## CUDA Programming Model
+		- Memory management is handled through CUDA APIs
+		- APIs allow allocating memory on the host (CPU) or device (GPU) and transferring data between them
+
+	## Unified Memory
+		- hardware cache coherence is available
+		- same virtual address space is used for both CPU and GPU.
+		- The system automatically manages data coherency behind the scenes
+
+
+		

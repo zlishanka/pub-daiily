@@ -1,0 +1,399 @@
+## 24 essential C++ interview questions 
+
+    # Is there a difference between class and struct? 
+
+        - The only difference between a class and struct are the access modifiers. 
+            - Struct members are public by default; 
+            - class members are private. 
+        - It is good practice to use classes when you need an object that has methods and structs when you have a simple data object. 
+
+    # What will the line of code below print out and why? 
+
+        #include <iostream>
+
+        int main(int argc, char **argv)
+        {
+            std::cout << 25u - 50;
+            return 0;
+        }
+
+        - The answer is not -25. Rather, the answer (which will surprise many) is 4294967271
+        - In C++, if the types of two operands differ from one another, then the operand with the “lower type” will be promoted 
+          to the type of the “higher type” operand
+        - using the following type hierarchy (listed here from highest type to lowest type): 
+            
+             long double, double, float, unsigned long int, long int, unsigned int, int
+
+        - 50 is promoted to also being an unsigned integer (i.e., 50u).
+        - Therefore, the result of 25u - 50u will itself be an unsigned integer as well
+        - So the result of -25 converts to 4294967271 when promoted to being an unsigned integer. 
+
+    # What is the error in the code below and how should it be corrected? 
+
+        my_struct_t *bar;
+        /* ... do stuff, including setting bar to point to a defined my_struct_t object ... */
+        memset(bar, 0, sizeof(bar)); 
+
+        - using *bar is absolutely safe within the call to sizeof, even if bar has not been initialized yet, since sizeof is a compile time construct.
+    
+    # What will i and j equal after the code below is executed? Explain your answer. 
+
+        int i = 5;
+        int j = i++; 
+
+        - When these operators precede a variable, the value of the variable is modified first and then the modified value is used. 
+        - However, when these operators follow a variable, the unmodified value of the variable is used and then it is incremented 
+
+    # Assuming buf is a valid pointer, what is the problem in the code below? What would be an alternate way of implementing this that would avoid the problem?
+
+        size_t sz = buf->size();
+        while ( --sz >= 0 )
+        {
+            /* do something */
+        }
+    
+        --sz >= 0 will always be true is that the type of sz is size_t. size_t is really just an alias to one of the fundamental unsigned integer types 
+
+    # Consider the two code snippets below for printing a vector. Is there any advantage of one vs. the other? Explain. 
+
+        vector vec;
+        /* ... .. ... */
+        for (auto itr = vec.begin(); itr != vec.end(); itr++) {
+            itr->print();
+        } 
+
+        vector vec;
+        /* ... .. ... */
+        for (auto itr = vec.begin(); itr != vec.end(); ++itr) {
+            itr->print();
+        } 
+
+        - both options will accomplish precisely the same thing, 
+        - second option is better from a performance standpoint. post-increment operator (i.e., itr++) is more expensive than pre-increment operator 
+        - post-increment operator makes a copy of the element before incrementing it and then returns the copy. 
+        - many compilers will automatically optimize the first option by converting it into the second 
+
+    # Implement a template function IsDerivedFrom() that takes class C and class P as template parameters. It should return 
+    # true when class C is derived from class P and false otherwise. 
+
+        - This question tests understanding of C++ templates. 
+        - An experienced developer will know that this is already a part of the C++11 std library (std::is_base_of) or 
+          part of the boost library for C++ (boost::is_base_of). 
+        -
+            template<typename D, typename B>
+            class IsDerivedFromHelper
+            {
+                class No { };
+                class Yes { No no[3]; };
+
+                static Yes Test( B* );
+                static No Test( ... );
+            public:
+                enum { Is = sizeof(Test(static_cast<D*>(0))) == sizeof(Yes) };
+
+                };
+
+
+            template <class C, class P>
+            bool IsDerivedFrom() {
+                return IsDerivedFromHelper<C, P>::Is;
+            }
+    # Implement a template boolean IsSameClass() that takes class A and B as template parameters. It should compare class A and B 
+    # and return false when they are different classes and true if they are the same class. 
+
+        - 
+            template <typename T, typename U>
+            struct is_same
+            {
+                static const bool value = false;
+            };
+
+            template <typename T>
+            struct is_same<T, T>
+            {
+                static const bool value = true;
+            };
+
+
+            template <class A, class B>
+            bool IsSameClass() {
+                return is_same<A, B>::value;
+            }
+
+    # Is it possible to have a recursive inline function? 
+
+       - Although you can call an inline function from within itself, the compiler may not generate inline code 
+         since the compiler cannot determine the depth of recursion at compile time. 
+
+       - A compiler with a good optimizer can inline recursive calls till some depth fixed at compile-time 
+         (say three or five recursive calls), and insert non-recursive calls at compile time for cases when the actual depth gets exceeded at run time.  
+
+    # What is the output of the following code: 
+
+        #include <iostream>
+
+        class A {
+        public:
+            A() {}
+            ~A() {
+                throw 42;
+            }
+        };
+
+        int main(int argc, const char * argv[]) {
+            try {
+                A a;
+                throw 32;
+            } catch(int a) {
+                std::cout << a;
+            }
+        }
+
+        - This program will terminate abnormally. 
+        - throw 32 will start unwinding the stack and destroy class A. The class A destructor will throw another exception 
+          during the exception handling, which will cause program to crash
+
+    # You are given library class Something as follows: 
+
+        class Something {
+        public:
+            Something() {
+                topSecretValue = 42;
+            }
+            bool somePublicBool;
+            int somePublicInt;
+            std::string somePublicString;
+        private:
+            int topSecretValue;
+        }; 
+
+        Implement a method to get topSecretValue for any given Something* object. The method should be cross-platform compatible 
+        and not depend on sizeof (int, bool, string). 
+
+        - Create another class which has all the members of Something in the same order, but has additional public method which 
+          returns the value. Your replica Something class should look like: 
+
+        class SomethingReplica {
+        public:
+            int getTopSecretValue() { return topSecretValue; }
+            bool somePublicBool;
+            int somePublicInt;
+            std::string somePublicString;
+        private:
+            int topSecretValue;
+        };
+
+        - Then, to get the value: 
+
+        int main(int argc, const char * argv[]) {
+            Something a;
+            SomethingReplica* b = reinterpret_cast<SomethingReplica*>(&a);
+            std::cout << b->getTopSecretValue();
+        }
+
+        It’s important to avoid code like this in a final product, but it’s nevertheless a good technique when dealing with legacy code,  
+
+    # Implement a void function F that takes pointers to two arrays of integers (A and B) and a size N as parameters. It then populates 
+    # B where B[i] is the product of all A[j] where j != i.  For example: If A = {2, 1, 5, 9}, then B would be {45, 90, 18, 10}.
+    
+        void F(int* A, int* B, int N) {
+            int prod = 1; 
+
+            for (int i = 0; i < N; ++i) {
+                B[i] = prod;
+                prod *= A[i]
+            }
+
+            prod = 1; 
+            for (int i = N-1; i >=0; --i) {
+                B[i] *= prod; 
+                prod *= A[i]
+            }
+        }
+
+        - The presented solution above has a Big O complexity of O(N).  
+        - 
+
+    # When you should use virtual inheritance? 
+
+        - While it’s ideal to avoid virtual inheritance altogether
+        - So when you have a class (class A) which inherits from 2 parents (B and C), both of which share a parent (class D), as demonstrated below:
+
+           error: non-static member 'foo' found in multiple base-class subobjects of type 'D':
+
+        - class C:  virtual public D {
+          };
+
+          class B:  virtual public D {
+          };
+
+    # What is the output of the following code: 
+    
+        #include <iostream>
+
+        int main(int argc, const char * argv[]) {
+            int a[] = {1, 2, 3, 4, 5, 6};
+            std::cout << (1 + 3)[a] - a[0] + (a + 1)[2];
+        }
+
+
+        - This question is testing pointer arithmetic knowledge, and the magic behind square brackets with pointers. 
+        - (1+3)[a] is the same as a[1+3] == 5 
+        - a[0] = 1 
+        - (a + 1)[2] is same as a[3] = 4 
+        - answer is 8 
+
+    
+    # What is the output of the following code: 
+
+        #include <iostream>
+
+        class Base {
+            virtual void method() {std::cout << "from Base" << std::endl;}
+        public:
+            virtual ~Base() {method();}
+            void baseMethod() {method();}
+        };
+
+        class A : public Base {
+            void method() {std::cout << "from A" << std::endl;}
+        public:
+            ~A() {method();}
+        };
+
+        int main(void) {
+            Base* base = new A;
+            base->baseMethod();
+            delete base;
+            return 0;
+        }
+
+        - the output should be 
+            from A
+            from A
+            from Base
+
+        - The important thing to note here is the order of destruction of classes and how Base’s method reverts back to its own 
+          implementation once A has been destroyed.
+
+    # How many times will this loop execute? Explain your answer. 
+
+        unsigned char half_limit = 150;
+
+        for (unsigned char i = 0; i < 2 * half_limit; ++i)
+        {
+            // do something;
+        }
+
+        - since i was declared as an unsigned char, the corrct answer is that this code will result in an infinite loop.
+        - The expression 2 * half_limit will get promoted to an int, 
+        - i is an unsigned char, it is rerepsented by an 8-bit value, reaching 255, will overflow (so it will go back to 0) and 
+          the loop will therefore go on forever. 
+
+    # How can you make sure a C++ function can be called as e.g. void foo(int, int) but not as any other type like void foo(long, long)? 
+
+        - Implement foo(int, int)…
+
+            void foo(int a, int b) {
+            // whatever
+            }
+
+        - …and delete all others through a template: 
+
+            template <typename T1, typename T2> void foo(T1 a, T2 b) = delete; 
+
+    # What is the problem with the following code? 
+
+        class A
+        {
+        public:
+        A() {}
+        ~A(){}
+        };
+
+        class B: public A
+        {
+        public:
+        B():A(){}
+        ~B(){}
+        };
+
+        int main(void)
+        {
+          A* a = new B();
+          delete a;
+        }
+
+        - The behavior is undefined because A’s destructor is not virtual. From the spec: 
+        - C++11 §5.3.5/3 ) if the static type of the object to be deleted is different from its dynamic type
+            - the static type shall be a base class of the dynamic type of the object to be deleted
+            - and the static type shall have a virtual destructor or the behavior is undefined.
+
+    # What is a storage class?
+
+        - A class that specifies the life and scope of its variables and functions is called a storage class.
+
+        - In C++ following the storage classes are supported: auto, static, register, extern, and mutable.
+
+        - Note, however, that the keyword register was deprecated in C++11. In C++17, it was removed and reserved for future use.
+
+    # How can a C function be called in a C++ program? 
+
+        Using an extern "C" declaration:
+
+    # What will be the output of the following program?
+    
+        #include <iostream>
+
+        struct A
+        {
+            int data[2];
+
+            A(int x, int y) : data{x, y} {}
+            virtual void f() {}
+        };
+
+        int main(int argc, char **argv)
+        {
+            A a(22, 33);
+
+            int *arr = (int *) &a;
+            std::cout << arr[2] << std::endl;
+
+            return 0;
+        }
+
+        - In the main function the instance of struct A is treated as an array of integer values 
+        - On 32-bit architectures the output will be 33, and on 64-bit architectures it will be 22 
+        - This is because there is virtual method f() in the struct which makes compiler insert a vptr pointer that 
+          points to vtable (a table of pointers to virtual functions of class or struct). 
+
+    # Are you allowed to have a static const member function? Explain your answer. 
+
+        - A const member function is one which isn’t allowed to modify the members of the object for which it is called. 
+        - A static member function is one which can’t be called for a specific object. 
+        - Thus, the const modifier for a static member function is meaningless, because there is no object associated with the call.
+        - Static member functions don’t have such a hidden argument, so there is no this pointer to be const or not.
+
+    # Explain the volatile and mutable keywords. 
+
+        - The volatile keyword informs the compiler that a variable may change without the compiler knowing it.
+        - Variables that are declared as volatile will not be cached by the compiler, and will thus always be read from memory.
+        - The mutable keyword can be used for class member variables. 
+        - Mutable variables are allowed to change from within const member functions of the class. 
+
+    # C++ supports multiple inheritance. What is the “diamond problem” that can occur with multiple inheritance? Give an example. 
+
+        - It means that we cannot create hybrid inheritance using multiple and hierarchical inheritance. 
+        - Let’s consider a simple example. A university has people who are affiliated with it.  
+            - Some are students, some are faculty members, some are administrators, and so on.
+            - So a simple inheritance scheme might have different types of people in different roles, all of whom inherit 
+              from one common “Person” class. 
+            - The Person class could define an abstract getRole() method which would then be overridden by its subclasses to 
+              return the correct role type. 
+            - But now what happens if we want to model the role of a Teaching Assistant (TA)?
+                - Typically, a TA is both a grad student and a faculty member.  
+                - This yields the classic diamond problem of multiple inheritance and the resulting ambiguity regarding the TA’s getRole() method:
+                - Which getRole() implementation should the TA inherit? That of the Faculty Member or that of the Grad Student? 
+                  The simple answer might be to have the TA class override the getRole() method and return newly-defined role called “TA”
+

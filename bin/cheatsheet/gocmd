@@ -1,0 +1,303 @@
+# online go playground
+
+  https://play.golang.org/
+
+# convert int to string
+
+  import "strconv"
+  a = strconv.Itoa(i) // a: string, i: integer
+  a = strconv.FormatInt(num,2)  // get binary representation of a int64
+
+# bitOps 
+
+  n = ((n & 0xcccccccc) >> 2) | ((n & 0x33333333) << 2) 
+  n = ((n & 0xaaaaaaaa) >> 1) | ((n & 0x55555555) << 1) 
+
+# Maximal, minimal 32, 64 bit integers
+
+  import "math"
+  math.MaxInt32, math.MinInt32, math.MaxInt64, math.MinInt64
+
+# type of rune 
+
+  rune literals are just 32-bit integer values. Rune is a Type. It occupies 32bit and is meant to represent a unicode codepoint.  
+  
+# string to trim whitespace
+
+  import "strings"
+  strings.TrimSpace(s)
+
+  s = strings.Replace(s, u, ",", -1)    // replace substring in a string 
+
+# extract byte from string - byte(r)
+
+  for i, r := range s  // s is string
+    byte(r)
+
+# Error handling
+
+  func Open(name string) (file *File, err error) // built in error type 
+  
+  f, err := os.Open("filename.ext")
+  if err != nil {
+    log.Fatal(err)
+  }
+# declare struct and create new object
+ 
+  type Queue struct {
+    nums []int
+  }
+  func NewQueue() *Queue {
+    return &Queue{nums: []int{}}
+  } 
+
+  a := NewQueue()    // create object 
+  b := newQueue()    
+
+# allocate 2-d array 
+  
+  dp := make([][]int, m)    // dp -  mxn int array 
+  for i := range dp { dp[i] = make([]int, n) } 
+
+# convert byte array (bytes) to string and vise versa
+
+  bytes []byte(s)       // string to bytes
+  string(bytes)         // bytes to string 
+
+# initialize 2-d arrays 
+
+    dp := make([][]int, n+1)
+	for i := range dp {
+		dp[i] = make([]int, n+1)
+	}
+
+# swap two variables
+
+  a[i], a[j] = a[j], a[i]   // swap array element
+  a, b = b, a   // swap two variables
+
+# generate a random integer between
+
+  import "math/rand" 
+  rand.Seed(time.Now().UnixNano()) 
+  rand.Intn(n)          // Intn returns, as an int, a non-negative pseudo-random number in [0,n) 
+
+  rand.Float32() 
+  rand.Float64()    // 0<f<0.1 
+
+# container objects 
+  // https://studygolang.com/articles/281 
+
+  import "container/list"   // list object 
+  list *list.List 
+  
+  list :=  list.New() 
+  list.PushBack(x)      // container list push
+  front = list.Front()  // peek   
+  list.Remove(front)    // pop  
+  list.Len() == 0       // empty ? 
+
+# create simple stack structure and its methods 
+
+    type Stack struct {
+	    s []*TreeNode
+    }
+
+    func NewStack() *Stack {
+	    s := []*TreeNode{}
+	    return &Stack{s}
+    }
+
+    func (stack *Stack) Push(n *TreeNode) {
+	    stack.s = append(stack.s, n)
+    }
+
+    func (stack *Stack) Pop() *TreeNode {
+	    if len(stack.s) > 0 {
+		    e := stack.s[len(stack.s)-1]
+		    stack.s = stack.s[:len(stack.s)-1]
+		    return e
+	    }
+	    return nil
+    }
+
+    func (stack *Stack) Empty() bool {
+	    return len(stack.s) == 0
+    }
+# nested function definition inside main function 
+
+    var dfs func(int, int)
+    dfs = func(idx, remain int)
+
+# set/clear bit at position for a number 
+ 
+    a |= (1 << pos)
+    a &= ^(1<<pos) 
+
+# Channel 
+  
+    Like maps and slices, channels must be created before use:
+
+    ch := make(chan int)
+
+    ch <- v    // Send v to channel ch.
+    v := <-ch  // Receive from ch, and assign value to v.
+ 
+# map operation (check key, remove key, traversal )  
+    # dict is a map 
+    
+    _, ok := dict["foo"] 
+    if ok { 
+        // has key
+    } else { 
+        // doesn't have key 
+    }
+
+   delete(dict, "moo");     // remove key from map 
+
+   for k := range dict {    // traverse a map 
+
+   }
+# split string 
+  
+  import "strings" 
+  parts := strings.Split(str, ",")      // "9,6,#,#" --->['9','6','#','#'] 
+  ps := strings.Split(pattern, "")      // "abcd" ---> ['a','b','c','d']
+
+# use array to implement stack  
+
+   cur = rightStack[len(rightStack)-1]              // pop up last one from stack
+   rightStack = rightStack[:len(rightStack)-1]      // adjust the top 
+
+   rightStack = append(rightStack, val)             // push to stack
+
+# remove first/last element of slice
+  temp = temp[1:]
+  temp = temp[:len(temp)-1]
+
+# integer to byte, byte to integer
+  byte(temp[i])
+  int(bsi[i] - '0')
+
+# deep copy of array 
+    
+  copy(temp, nums1)     // create temp array 
+
+# sorting
+
+  sort.Ints(nums)   // sort a int array
+  sort.Reverse
+  sort.Float64s(f)  // sort a float64 array
+  sort.Strings(str) // sort on a string array, str : []string
+
+  sort.Sort(sort.Reverse(sort.IntSlice(d)))     // sorting as descending order
+
+  sort.SearchInts(a []int, x) int     // searches x in a sorted array(slice) a and return the index to insert x  
+
+  sort.Slice(its, func(i int, j int) bool   // sort any structured object based on its attribute 
+
+# add element to a slice
+
+  res := [][]int{} 	// initialize 2-d slice (dynamic array) for the result
+  res = append(res, []int{nums[i], nums[l], nums[r]})
+
+# prepend (add at the beginning of slice )
+
+  var x []int  {1,2,3,4}
+  append([]int{0}, x...)    // add at the front
+
+# change upper to lower case
+  
+  s=strings.ToLower(s)      // to lower case 
+  s=strings.ToUpper(s)      // to upper case 
+
+# commmand line parser
+
+    import "flag"
+
+    var (
+	verbose            = flag.Bool("v", false, "enable to get verbose logging")
+	baseOutPath        = flag.String("p", "./results", "Output path")
+	chunkBaseFilename  = flag.String("f", "chunk_", "Chunks base filename")
+	chunkListFilename  = flag.String("cf", "chunklist.m3u8", "Chunklist filename")
+	targetSegmentDurS  = flag.Float64("t", 4.0, "Target chunk duration in seconds")
+    )
+
+    flag.Parse()
+
+# package time 
+    import "time" 
+
+    //Tick is a convenience wrapper for NewTicker providing access to the ticking channel only.
+    func Tick(d Duration) <-chan Time 
+    
+    // After waits for the duration to elapse and then sends the current time on the returned channel.
+    func After(d Duration) <-chan Time
+
+# Logger, Structured, pluggable logging for Go.
+
+    import "github.com/sirupsen/logrus"
+
+    var log = logrus.New()
+    if verbose {
+	    log.SetLevel(logrus.DebugLevel)
+    }
+    formatter := new(logrus.JSONFormatter)
+    formatter.TimestampFormat = "01-01-2001 13:00:00"
+    log.SetFormatter(formatter)
+    log.SetFormatter(&logrus.JSONFormatter{})
+
+# synchronization primitives such as mutual exclusion locks
+
+    import "sync" ---> https://golang.org/pkg/sync/
+
+    lock        *sync.RWMutex
+
+    f.lock.RLock()          ---> Read lock
+	defer f.lock.RUnlock()
+
+    f.lock.Lock()           ---> Write lock
+	defer f.lock.Unlock()
+
+# io module
+
+    func Copy(dst Writer, src Reader) (written int64, err error)
+    Copy copies from src to dst until either EOF is reached o
+
+    // Start writing to file without holding lock so that GET requests can read from it
+	io.Copy(f, r.Body)
+
+    // POST
+    io.Copy(ChunkedResponseWriter{w}, f.NewReader(basePath, w))
+
+# http server
+
+    import "net/http"       ---> HTTP client and server implementations
+    import "gorilla/mux"    ---> a request router and dispatcher            ----> Gorilla framework
+
+
+    func StartHTTPServer(basePath string, port int) error {
+        r := mux.NewRouter()
+
+        r.PathPrefix("/").Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+            defer w.(http.Flusher).Flush()
+            switch r.Method {
+            case http.MethodGet:
+                GetHandler(basePath, w, r)
+            case http.MethodHead:
+                HeadHandler(w, r)
+            case http.MethodPost:
+			    PostHandler(basePath, w, r)
+		    case http.MethodPut:
+			    PutHandler(basePath, w, r)
+		    case http.MethodDelete:
+			    DeleteHandler(basePath, w, r)
+		    case http.MethodOptions:
+			    OptionsHandler(w, r)
+            default:
+			    w.WriteHeader(http.StatusMethodNotAllowed)
+            }
+        })).Methods(http.MethodGet, http.MethodHead, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodOptions)
+
+        return http.ListenAndServe(":"+strconv.Itoa(port), r)
+    }

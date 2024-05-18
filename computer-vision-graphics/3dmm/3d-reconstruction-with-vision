@@ -1,0 +1,69 @@
+## 3D Reconstructino with vision 
+
+    https://towardsdatascience.com/3-d-reconstruction-with-vision-ef0f80cbb299 
+
+    https://www.youtube.com/watch?v=Ucp0TTmvqOE&t=8382s
+
+    Andrej Karapathy, director of AI at Tesla
+
+    # Background 
+
+        - 3-D reconstruction of an environment is possible through cameras, 
+        - but I was in a mindset that why would anyone risk using a normal camera when we’ve got such highly accurate sensors like LiDAR, Radar, etc. 
+        - that could give us an accurate presentation of the environment in 3-D with far less computation?
+        - The world around us was constructed by us for us, beings with vision and so as Elon said, ‘these costly sensors would become pointless once we solve vision’.
+        - huge research going on in this field of depth perception with vision, especially with the advancements in Machine Learning and Deep Learning 
+        - we are now able to compute depth just from vision at high accuracy.
+
+    # SfM(Structure from Motion) and SLAM(Simultaneous Localisation and Mapping)
+
+        # Camera model 
+
+            - When cameras generate a projected image of the world, 
+            - projective geometry is used as an algebraic representation of the geometry of objects, rotations and transformations in the real world.
+            - Thus these intrinsic and extrinsic matrices together can give us a relation between the (x,y) point in image and (X, Y, Z) point in real world. 
+            - This is how a 3-D scene point is projected onto a 2-D plane depending on the given camera’s intrinsic and extrinsic parameters.
+
+        # Fundamental Matrix 
+
+            - This imaginary line drawn from x is known as the epipolar line of x. 
+            - This epipolar line brings a fundamental constraint with it, that is, the match of a given point must lie on this line in another view. 
+            - It means that if you want to find x from the first image in the second image, you have to look for it along the epipolar line of x on the second image. 
+
+        # Matching Good Image Points using RANSAC 
+
+            - When two cameras observe the same scene, they see the same objects but under different viewpoints. 
+            - There are libraries like OpenCV in both C++ and Python that provide us with feature detectors that find us certain points with descriptors in images 
+            - that they think are unique to image and can be found if given another image of the same scene.
+
+            - RANSAC : a fundamental matrix estimation method based on RANSAC (Random Sampling Consensus) strategy has been introduced
+                    - The idea behind RANSAC is to randomly select some data points from a given set of data points and perform an estimation with only those.
+                    - The larger the support set, the higher the probability that the computed matrix is the right one.
+
+        # Computing Depth Map from Stereo Images 
+
+            - The reason humans have evolved to be species with two eyes is so that we can perceive depth.
+            - And when we organise cameras in a similar way in a machine, it’s called Stereo-Vision. 
+            - Fortunately, it is possible to rectify these images to produce horizontal epilines required by using a robust matching algorithm 
+            - which makes use of a fundamental matrix to perform the rectification.
+
+            - Now that we have successfully obtained a depth map from a given stereo pair. 
+            - Let us now try to re-project the obtained 2-D image points onto 3-D space by making use of a tool called 3D-Viz from opencv that will help us render a 3-D point cloud.
+
+        # Essential Matrix 
+
+            - The essential matrix can be seen as a fundamental matrix, but for calibrated cameras. 
+            - The idea is to show a set of scene points to the camera, the points for which we know their actual 3-D positions in the real world, 
+            - and then observing where these points are projected on the obtained image plane. With a sufficient number of 3-D points and associated 2-D image points, 
+            - we can abstract the exact camera parameters from a projective equation.
+
+            We are going to make use of the opencv’s calibration methods, one of which takes images of chessboards as input and returns us all the corners present.
+
+        # 3-D Scene Reconstruction
+
+            - we used calibrateCamera() function that takes the 3-D points and image points we’ve obtained above and 
+            - returns to us the 
+                - intrinsic matrix, 
+                - rotation vector(which describes rotation of the camera relative to scene points) and 
+                - translation matrix(describes the position of camera relative to scene points).
+

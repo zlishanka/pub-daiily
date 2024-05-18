@@ -1,0 +1,43 @@
+## Observer pattern 
+
+    - one-to-many relationship between objects such as if one object is modified, its depenedent objects are to be notified automatically.
+    - Observer pattern uses three actor classes. 
+        - Subject - Subject is an object having methods to attach and detach observers to a client object  
+        - Observer 
+        - Client 
+
+
+    # Subject 
+
+        - has list of observers and notifyAllObservers() method 
+
+        public class Subject {
+	
+           private List<Observer> observers = new ArrayList<Observer>();
+           private int state;
+
+           public int getState() {
+              return state;
+           }
+
+           public void setState(int state) {
+              this.state = state;
+              notifyAllObservers();
+           }
+        ... 
+
+    # Observer 
+
+        - public abstract class Observer {
+               protected Subject subject;
+               public abstract void update();
+            }  
+
+        - 
+
+    # public class BinaryObserver extends Observer{
+
+       public BinaryObserver(Subject subject){
+          this.subject = subject;
+          this.subject.attach(this);
+       }  

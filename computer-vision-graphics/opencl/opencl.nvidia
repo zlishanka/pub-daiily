@@ -1,0 +1,11 @@
+# Nvidia OpenCL 
+
+	OpenCL is a trademark of Apple Inc., used under license by Khronos.
+	Source: https://developer.nvidia.com/opencl
+
+	- low-level API for heterogeneous computing that runs on CUDA-powered GPUs.
+	- Using the OpenCL API, developers can launch compute kernels written using a limited subset 
+		of the C programming language on a GPU.
+	- NVIDIA is now OpenCL 3.0 conformant and is available on R465 and later drivers. 
+	- NVIDIA supports a variety of GPU-accelerated libraries and high-level programming solutions
+		 

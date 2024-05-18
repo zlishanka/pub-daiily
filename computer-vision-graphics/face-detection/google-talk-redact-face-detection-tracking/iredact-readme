@@ -1,0 +1,22 @@
+## iredact solution 
+https://www.youtube.com/watch?v=_wuyh37gO-4 
+
+    # facial embedding 
+        - create an equivalent fingerprint for the faces 
+        - uses Google FaceNet 
+        - tracking the detected face frame by frame based on face prints and their locations in the frame 
+            - check the distance of vectors to see if it's the same person (deep sort tracking) 
+            - person ID may change 
+            - uses 128-bytes per face 
+            - clustering 
+        - solution work on video to automatically generate a checkpoint file  
+
+
+    # demo 1 
+
+        - Video characteristics/Chanllenge 
+
+            - Moving people 
+            - Many faces 
+            - Different face sizes 
+            - Different camera angle, vantage points, zoom levels 

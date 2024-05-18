@@ -1,0 +1,38 @@
+# Installation
+
+	# For machine learning applications
+	pip install -U "ray[data,train,tune,serve]" 
+
+	# For general Python applications
+	pip install -U "ray[default]"
+
+	# Clean removal of previous install
+	pip uninstall -y ray
+
+	# Install Ray with support for the dashboard + cluster launcher
+	pip install -U "ray[default] @ LINK_TO_WHEEL.whl"
+
+
+# ray stack - Take a stack dump of all Python workers on the local machine.
+
+	ray stack [OPTIONS]
+
+# ray status - Print cluster status, including autoscaling info.
+
+	ray status [OPTIONS] 
+
+# ray summary - Summarize the task/actor/object state of the cluster. 
+	
+	ray summary actors
+	ray summary tasks
+	ray summary objects
+
+# ray list  - List all states of a given resource.
+
+	ray list actors
+	ray list actors --limit 50
+	ray list actors --limit 10 --filter "state=PENDING"
+	ray list actors --detail
+
+	
+

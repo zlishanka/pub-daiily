@@ -1,0 +1,34 @@
+# Data transfer between GPU and CPU 
+
+	data transfer between CPU and GPU memory is crucial for efficient OpenCL applications. Here's how OpenCL tackles this challenge
+
+	## Buffer Objects: Shared Memory Spaces
+		- OpenCL uses buffers as shared memory spaces.
+		- create buffers on the host (CPU memory) and then map them to the device (GPU memory)
+		- This creates a bridge between the two memories.
+
+	## Asynchronous Data Transfer: Overlapping Work
+		- CPU can initiate a data transfer (e.g., copying data from host memory to device memory)
+		- continue with other tasks while the transfer happens in the background.
+		- helps hide the latency (delay) associated with data transfer, improving overall performance
+
+	## DMA (Direct Memory Access): Leveraging Hardware
+		- Modern systems support DMA (Direct Memory Access), which allows the GPU to directly access 
+			host memory without involving the CPU
+		- OpenCL can leverage DMA for faster data transfers, further reducing the bottleneck
+
+	## Minimizing Transfers: Data Reuse
+		- OpenCL encourages data reuse within the device memory (GPU) whenever possible.
+		- This reduces the need for frequent transfers between CPU and GPU.
+
+	## Transfer Size Matters: Batching and Coalescing
+		- OpenCL allows you to batch data transfers. 
+		- Additionally, OpenCL can optimize data transfers for the GPU's memory access patterns (coalescing).
+
+	## Memory Management APIs: Fine-Tuning Access
+		
+
+	By combining these techniques, OpenCL strives to make data transfers between CPU and GPU as efficient as possible. 
+	However, it's important to remember that "some data movement is inevitable".
+		
+`

@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  PhiTextFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      ReservedConcurrentExecutions: 4
+      PackageType: Image
+      Timeout: 10
+      Architectures:
+        - x86_64
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./app
+      DockerTag: python3.11-v1

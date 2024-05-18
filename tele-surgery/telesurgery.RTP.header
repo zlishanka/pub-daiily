@@ -1,0 +1,38 @@
+# RTP RFC 
+
+	https://datatracker.ietf.org/doc/html/rfc3550
+
+# The RTP header format:
+
+	Source - https://en.wikipedia.org/wiki/Real-time_Transport_Protocol
+
+	## Version (2 bits): 
+		- Indicates the protocol version. The current version is 2.
+
+	## P (Padding, 1 bit): 
+		- If set to 1, it denotes the presence of padding at the end of the packet.
+
+	## X (Extension, 1 bit): 
+		- If set to 1, indicates an extra extension header between data and the basic header.
+
+	## Contributor count (4 bits): 
+		- Indicates the number of contributors (maximum 15).
+
+	## M (Marker, 1 bit): 
+		- Used as an end marker by applications to indicate the end of data.
+
+	## Payload type (7 bits): 
+		- Indicates the type of payload (e.g., audio, video).
+			- "HEVC: RFC 7798"
+			- "H.264: RFC 6184"
+			- "VP9, Alliance for Open Media, draft-ietf-payload-vp9-16"
+			- "AV1 (AOMedia Video 1): av1-rtp-spec"
+
+	## Sequence number (16 bits): 
+		- Provides serial numbers to RTP packets for sequencing and detecting lost packets.
+
+	## Timestamp (32 bits): 
+		- Establishes the relationship between times of different RTP packets.
+
+	## Synchronization Source Identifier (SSRC, 32 bits): 
+		- Identifies and defines the source.

@@ -1,0 +1,147 @@
+## pytorch 
+    
+    # tensor initialization, assignment  
+        torch.arange(1, 2.5, 0.5)   # return 1-D tensor of size (end-start)/step  
+        x = torch.arange(16, dtype = torch.float32).reshape((2, 8)) # reshape to (2,8) 2-D tensor 
+        x.shape, x.numel()  # numel, total number of tensor nodes 
+        x = torch.zeros((2,3,4)), x = torch.randn(3, 4), torch.ones(4)  
+        A.mean(), A.sum(),  A.sum(axis=0), torch.norm(u) # squared  𝐿2  norm    
+        torch.cat((X, Y), dim=0)    # cascade on dimension 0 (row) 
+        A = x.numpy(), torch.from_numpy(A)  # switch between tensor and numpy array 
+        torch.T, x.t()     # transpose 
+        x, y, torch.dot(x, y)   # dot product 
+        torch.mv(A, x), torch.mm(A, B)      # matrix and matrix multiplication 
+        A.clone() 
+		torch.abs(A).sum()
+        y_hat.argmax(axis=1)    # maximal value of each row 
+		torch.tensor.shape[-1] 	# last dimension of the tensor, 
+
+
+	# torch.tensor.shape[-1] , useful if want to iterate over the elements of a tensor
+		a = torch.randn(2,3,4) 
+	 	a.shape[-1] = 4 	# last dimension of the tensor	
+	 	a.shape[0] = 2		# first dimension of the tensor	
+
+	# torch.tensor.masked_fill_(), fill elements of a tensor with specified value where a mask if true
+		tensor = torch.randn(2, 3)
+		mask = torch.zeros(2, 3, dtype=torch.bool)
+		mask[0, 0] = True, mask[1, 1] = True
+		tensor.masked_fill_(mask, 9.9) 
+		tensor = tensor([[ 9.9000, -1.1367, -1.1901],
+        		[ 0.2282,  9.9000, -1.4128]])
+
+	# MSE loss function
+		import torch.nn as nn
+		def loss(self, y_hat, y):
+    		fn = nn.MSELoss()
+    		return fn(y_hat, y)
+
+	# torch.view()
+		# change the shape of a tensor. It takes a new shape as an argument and returns a new tensor
+		t = torch.randn(2, 3)	# Create a tensor
+		t = t.view(3, 2) 		# Reshape the tensor to (3, 2)
+		t = t.view(-1) 			# Flatten the tensor to (6,)
+        t = t.t() 				# Transpose the tensor to (2, 3)
+
+    # np array initialization 
+        x = np.arange(-7, 7, 0.01) 
+        p * np.exp(-0.5 / sigma**2 * (x - mu)**2)   # vector calculation of x  
+        
+    # pandas read cvs 
+        import pandas as pd 
+        data = pd.read_csv(data_file) 
+        data.iloc[:, 0:2]   # every row, from col 0 to 2 
+        inputs, outputs = data.iloc[:, 0:2], data.iloc[:, 2] 
+        tensor(inputs.values) 
+    
+    # initialize model parameters
+
+        # linear regression model W and b  
+        W = torch.normal(0, 0.01, size=(num_inputs, num_outputs), requires_grad=True)
+        b = torch.zeros(num_outputs, requires_grad=True)
+        # PyTorch does not implicitly reshape the inputs. Thus we define the flatten layer 
+        net = nn.Sequential(nn.Flatten(), nn.Linear(784, 10))
+
+        def init_weights(m):
+            if type(m) == nn.Linear:
+                nn.init.normal_(m.weight, std=0.01)
+ 
+        net.apply(init_weights);   
+        
+    # Softmax operation
+        def softmax(X):
+            X_exp = torch.exp(X)
+            partition = X_exp.sum(1, keepdim=True)
+            return X_exp / partition  # The broadcasting mechanism is applied here 
+
+    # Cross entropy 
+        def cross_entropy(y_hat, y):    # y is the array of index of output, y_hat is matrix of conditional prob
+            return - torch.log(y_hat[range(len(y_hat)), y]) 
+    
+    # normal and matmul 
+        X = torch.normal(0, 1, (num_examples, len(w)))  # a tensor of random numbers drawn from separate normal distributions 
+        y = torch.matmul(X, w) + b      # Matrix product of two tensors. 
+        def squared_loss(y_hat, y):  #@save
+            """Squared loss."""
+            return (y_hat - y.reshape(y_hat.shape)) ** 2 / 2
+    
+    # Automatic differentiation 
+        x = torch.arange(4.0) 
+        x.requires_grad_(True)  # # Same as `x = torch.arange(4.0, requires_grad=True)`
+        x.grad  # The default value is None 
+        y = 2 * torch.dot(x, x) 
+        # automatically calculate the gradient of y with respect to each component of x by calling the 
+        # function for backpropagation and printing the gradient.
+        y.backward() 
+        x.grad 
+        x.grad == 4 * x  
+ 
+    # neural network computational box  
+        from torch import nn
+        from torch.nn import functional as F  
+        net = nn.Sequential(nn.Linear(20, 256), nn.ReLU(), nn.Linear(256, 10)) 
+        class MLP(nn.Module): 
+            self.out = nn.Linear(256, 10) 
+            def forward(self, X): 
+                return self.out(F.relu(self.hidden(X))) 
+
+    # Foward propogation function, calculates the function  𝑓(𝐱,𝐰)=𝑐⋅𝐰⊤𝐱  
+        self.rand_weight = torch.rand((20, 20), requires_grad=False)  
+        X = self.linear(X) 
+        X = F.relu(torch.mm(X, self.rand_weight) + 1)
+
+    # convolutional neural network 
+        conv2d = nn.Conv2d(1,1, kernel_size=(1, 2), bias=False)
+        Y_hat = conv2d(X)
+        l = (Y_hat - Y) ** 2
+        conv2d.zero_grad()
+        l.sum().backward()
+        # Update the kernel
+        conv2d.weight.data[:] -= lr * conv2d.weight.grad    # lr : learning rate 
+
+    # details of output shape of each layer 
+        for layer in net:
+            X=layer(X)
+            print(layer.__class__.__name__,'output shape:\t',X.shape)
+
+    # flatten, dropout  
+        nn.Flatten() 
+        nn.Dropout(p=0.5) 
+
+	# check if metal based backend 
+		torch.backends.mps.is_available()
+
+	# check if cuda is used
+		torch.cuda.is_available() 
+
+	# Add tensor board in notebook and view the results of run
+		training_arguments = TrainingArguments(
+    		output_dir="experiments",
+    		num_train_epochs=1,
+			learning_rate=1e-4,
+			...
+			report_to="tensorboard",
+			...) 
+		%load_ext tensorboard
+		%tensorboard --logdir experiments/runs
+

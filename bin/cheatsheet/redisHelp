@@ -1,0 +1,34 @@
+
+##    https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298 
+
+##    By using Homebrew, you greatly reduce the cost of setting up and configuring the development environment on Mac OS X. 
+
+# homebrew install 
+
+    brew install redis 
+
+# Launch Redis on computer starts.
+
+    ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
+
+# Start Redis server via “launchctl”.
+
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+
+# Start Redis server using configuration file. 
+
+    redis-server /usr/local/etc/redis.conf
+
+# Stop Redis on autostart on computer start. 
+
+    launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+
+# Location of Redis configuration file.
+
+    /usr/local/etc/redis.conf
+
+# Get redis information 
+
+    brew info redis 
+
+

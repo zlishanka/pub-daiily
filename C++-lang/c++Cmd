@@ -1,0 +1,581 @@
+
+# common include 
+    #include <iostream>
+    using namespace std;
+
+# compile code
+    g++ -o example.exe example.cpp
+    g++ -o run_thread.out -std=c++0x run_thread.cpp
+    g++ -std=c++0x -lpthread test.cpp 
+    g++ -std=c++2a -pthread  -O2 -Wall -Wextra -pedantic -pthread -pedantic-errors main.cpp -lm  -latomic -lstdc++fs  && ./a.out
+    g++ -o w.out -std=c++2a -O2 -Wall -Wextra -pedantic -pthread -pedantic-errors shm_cbuf_w.cpp -lm -lboost_system 
+    g++ -o r.out -std=c++2a -O2 -Wall -Wextra -pedantic -pthread -pedantic-errors shm_cbuf_r.cpp -lm -lboost_system 
+    g++ -o cond.out -std=c++2a -O2 -Wall -Wextra -pedantic -pthread -pedantic-errors shm_cond.cpp -lm -lboost_system 
+
+# convert char to int and int to char 
+    char(currentColumn + int('A')) 
+
+# get line from cin to a string 
+    string str;
+    getline(cin, str);
+
+# change integer to string 
+    std::to_string(numInImages) 
+
+# pragma once
+     non-standard but widely supported preprocessor directive designed to cause the current source file to be included 
+     only once in a single compilation.
+
+# inline function 
+    When you call this function, the whole code of the inline function gets inserted 
+
+#ifndef
+     #define
+     #endif
+
+# abstract class 
+   a class having at least one pure virtual function is abstract class too.
+
+# new and malloc 
+    new is an operator;             malloc() is a function 
+    It calls the constructor        The malloc function doesn’t call the constructor 
+    no need to specify memory size  specify the memory size 
+    can be overloaded               can never be overloaded
+
+# friend function 
+    a friend function as a function that can access private, public and protect members of the class 
+
+# a copy constructor 
+    a member function that initializes an object using another object within the same class. 
+ 
+# Books 
+    Read Effective C++ by Scott Meyers
+    FAQ Lite C++ FAQ 
+
+# prefix and postfix  
+    ++i - first increments the value then assign 
+    i++ - firts assign then increment 
+
+# traverse STL map 
+    map<int, int> m; 
+    for (auto i : m) cout << i.first << "   " << i.second << endl; 
+    for (auto i = m.begin(); i != m.end(); i++) cout << i->first << "   " << i->second << endl;
+    for( auto keyval : cam) { auto srcname = keyval.first; ....}    // only access the key of the map  
+ 
+# map vs unordered_map 
+    a huge difference between maps and unordered maps 
+    Self balancing BST vs Hash Table 
+    log(n) vs O(1), O(n)    
+    if memory is no issue, unordered_map is always faster if you want single element access. 
+
+# ways to optimize C code 
+    eccess modifiers to define accessibility for the class members. (private, protected, 
+
+    - The very basic will be pass by constant reference instead of value except for builtin types (char, int, double..), 
+      iterators & function objects (classes deriving from *_function). This can have significant impact on both performance & 
+      memory consumption in case of passing large parameters like arrays & structs.
+
+    - Use of inline functions : Try to declare inline a couple of functions at a time, as long as you get significant speed improvements.
+    - declare extensively used variables like loop counters as register variables by just adding register in front of the declaration e.g register int x;
+
+    - As you said Completely unroll loops that have a small fixed loop count and a small loop body 
+
+    - Sort and pad C and C++ structures to achieve natural alignment :
+
+        Pad data structure to make their sizes a multiple of a word, doubleword or quadword. The best approach is to sort the structure 
+        members according to their type sizes, declaring members with larger type sizes first. Then, pad the structure so the size 
+        of the structure is a multiple of the largest member's type size. Natural alignment gives better performance by optimal 
+        use of caches & lesser memory calls
+
+    - proper array cells size, ensure that the size (resulting from the sizeof operator) of non-large cells of arrays or of vectors 
+        be a power of two, and that the size of large cells of arrays or of vectors be not a power of two.
+
+    - Using bit manipulation & other arithmetic tricks
+        If possible convert arithmetic to bit operations e.g. 
+        n=n/2;  ---> no 
+        n >= 1; ---> yes
+
+    - Importantly the above is anyway done by most of the modern compilers and you can change the amount of optimization by 
+        using the optimization flags for the gnu compiler, here's a list of available options 
+        http://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html 
+
+# concept of VTABLE and VPTR 
+
+    - If object of that class is created then a virtual pointer(VPTR) is inserted as a data member of the class to point to VTABLE of that class.
+    - For each new object created, a new virtual pointer is inserted as a data member of that class. 
+    - Irrespective of object is created or not, a static array of function pointer called VTABLE where each cell contains the address of each 
+      virtual function contained in that class.
+
+# Overhead of calling virtual function 
+    
+    - Virtual methods are commonly implemented via so-called virtual method tables (vtable for short), in which function pointers are stored. 
+      This adds indirection to the actual call 
+    - However, it is not necessarily the primary cause of slowness. The real problem is that the compiler (generally/usually) 
+      cannot know which function will be called. So it can't inline it or perform any other such optimizations.  
+    - 
+
+# Common C++ questions
+
+    # What is a Reference Variable in C++? 
+        A reference variable is an alias name for the existing variable. This means that both the variable name and the reference 
+        variable point to the same memory location.
+
+    # What is a Storage Class? Mention the Storage Classes in C++.
+        - Storage class determines the life or scope of symbols such as variable or functions. 
+        - C++ supports the following storage classes:
+            Auto
+            Static
+            Extern
+            Register
+            Mutable 
+
+        - Mutable Storage class specifier. The variable of a constant class object’s member cannot be changed. However, by 
+          declaring the variables as “mutable”, we can change the values of these variables.
+
+    # What is a Static Variable? 
+
+        A static variable is a local variable that retains its value across the function calls. Static variables are declared 
+        using the keyword “static”. Numeric variables which are static have the default value as zero.
+
+    # What is the purpose of the Extern Storage Specifier? 
+
+        “Extern” specifier is used to resolve the scope of a global symbol. 
+
+    # Explain Register Storage Specifier. 
+
+        - “Register” variable should be used whenever the variable is used. 
+        - When a variable is declared with a “register” specifier, then the compiler gives CPU register for its storage to 
+        speed up the lookup of the variable.
+
+    # When to use “const” reference arguments in a function? 
+
+        - “const” protects from programming errors that could alter data. 
+        - As a result of using “const”, the function is able to process both const and non-const actual arguments, 
+        which is not possible when “const” is not used.
+        - Using a const reference will allow the function to generate and use a temporary variable in an appropriate manner. 
+
+    # Difference between Class and Structure 
+
+        - In C language, the structure is used to bundle different types of data types together. The variables inside a structure 
+        are called the members of the structure. These members are by default public and can be accessed by using the structure name 
+        followed by a dot operator and then the member name.
+
+        - Class is a successor of the Structure. C++ extends the structure definition to include the functions that operate on its members. 
+        By default all the members inside the class are private.
+
+
+    # What is Namespace? 
+
+        - Namespace allows us to group a set of global classes, objects and/or functions under a specific name. 
+
+        - namespace identifier { namespace-body }
+
+        Where identifier is any valid identifier and the namespace-body is the set of classes, objects, and functions that 
+        are included within the namespace. Namespaces are especially useful in the case where there is a possibility for 
+        more than one object to have the same name, resulting in name clashes.
+
+    # What is Name Mangling? 
+
+        - C++ compiler encodes the parameter types with function/method into a unique name. This process is called name mangling. 
+        The inverse process is called as demangling.
+
+        A::b(int, long) const is mangled as ‘b__C3Ail’. 
+        That is A:: A(int, long) const is mangled as ‘C3Ail’. 
+
+    # What are the various Access Specifiers in C++? 
+
+        - Public: Data members and functions are accessible outside the class. 
+        - Private: Data members and functions are not accessible outside the class. The exception is the usage of a friend class.
+        - Protected: Data members and functions are accessible only to the derived classes. 
+
+    # What is a Constructor and how is it called? 
+
+        - Constructor is a member function of the class having the same name as the class. 
+        - It is mainly used for initializing the members of the class. 
+        - By default constructors are public.
+
+        There are two ways in which the constructors are called: 
+
+        - Implicitly: Constructors are implicitly called by the compiler when an object of the class is created. 
+        This creates an object on a Stack. 
+
+        - Explicit Calling: When the object of a class is created using new, constructors are called explicitly. 
+        This usually creates an object on a Heap. 
+
+    # What is a COPY CONSTRUCTOR and when is it called? 
+
+       - A copy constructor is a constructor that accepts an object of the same class as its parameter 
+       - It copies its data members to the object on the left part of the assignment. 
+       - It is useful when we need to construct a new object of the same class.
+
+        A::A( const A & p )
+        {
+              this->x = p.x;
+              this->y = p.y;
+              this->color = p.color;
+        } 
+
+    # What is a Default Constructor? 
+
+        Default constructor is a constructor that either has no arguments or if there are any, then all of them are default arguments.
+
+    # What is the role of the Static keyword for a class member variable? 
+
+        - The static member variable shares a common memory across all the objects created for the respective class. 
+        - We need not refer to the static member variable using an object. However, it can be accessed using the class name itself. 
+
+    # Explain the Static Member Function. 
+
+        - A static member function can access only the static member variable of the class. 
+        - Same as the static member variables, a static member function can also be accessed using the class name.
+
+    # What’s the order in which the local objects are destructed? 
+
+        They will be destructed in the same way in the reverse order of their creation. 
+
+    # Explain Function Overloading and Operator Overloading. 
+
+        - C++ supports OOPs concept Polymorphism which means “many forms”. 
+        - In C++ we have two types of polymorphism, i.e. Compile-time polymorphism, and Run-time polymorphism. 
+        - Compile-time polymorphism is achieved by using an Overloading technique. 
+        - Overloading simply means giving additional meaning to an entity by keeping its base meaning intact. 
+            - Function overloading is a technique that allows the programmer to have more than one function with 
+                the same name but different parameter list.
+            - In operator overloading, an operator is overloaded, so that it can operate on the user-defined types 
+                as well with the operands of the standard data type. 
+
+    # What is the difference between Method Overloading and Method Overriding in C++? 
+
+        - Method overloading is having functions with the same name but different argument lists. 
+            This is a form of compile-time polymorphism. 
+        - Method overriding comes into picture when we rewrite the method that is derived from a base class. 
+            Method overriding is used while dealing with run-time polymorphism or virtual functions.  
+
+    # What are the advantages of Inheritance? 
+
+        - Inheritance allows code re-usability, thereby saving time on code development.
+        - By inheriting, we make use of a bug-free high-quality software that reduces future problems.
+
+
+    # Does C++ support Multilevel and Multiple Inheritances? 
+        yes 
+
+    # What are Multiple Inheritances (virtual inheritance)? What are its advantages and disadvantages? 
+
+        - In multiple inheritances, we have more than one base classes from which a derived class can inherit.
+        - Hence, a derived class takes the features and properties of more than one base class.
+        - a class driver will have two base classes namely, employee and a person because a driver is an employee as well as a person.
+        - But in the case of an employee and a person, the class will have some properties in common. An ambiguous situation will 
+            arise as the driver class will not know the classes from which the common properties should be inherited.  This is the 
+            major disadvantage of multiple inheritances.
+    
+    # Explain the ISA and HASA class relationships. How would you implement each? 
+
+        - “ISA” relationship usually exhibits inheritance as it implies that a class “ISA” specialized version of another class.
+        - “HASA” relationship depicts that an entity may have another entity as its member or a class has another object embedded inside it.
+        - “HASA” relationship is best exhibited by containment or aggregation. 
+
+    # Does a derived class inherit or doesn’t inherit? 
+        
+        - When a derived class is constructed from a particular base class, it basically inherits all the features and 
+        ordinary members of the base class. 
+        - But there are some exceptions to this rule. For instance, a derived class does not inherit the base class’s 
+        constructors and destructors. 
+        - Each class has its own constructors and destructors. The derived class also does not inherit the assignment operator of the 
+        base class and friends of the class. 
+    
+    #  What is Polymorphism? 
+
+        The basic idea behind polymorphism is in many forms. In C++, we have two types of Polymorphism: 
+
+        Compile-time Polymorphism 
+
+        - achieve many forms by overloading. Hence, we have an Operator overloading and function overloading. 
+        
+        Run-time Polymorphism 
+
+        - This is the polymorphism for classes and objects. General idea is that a base class can be inherited by several classes. 
+        - A base class pointer can point to its child class and a base class array can store different child class objects. 
+        - This means, that an object reacts differently to the same function call. This type of polymorphism can use 
+        a virtual function mechanism. 
+
+
+    # What are Virtual Functions? 
+
+        - A virtual function allows the derived classes to replace the implementation provided by the base class. 
+
+        - Whenever we have functions with the same name in the base as well as derived class, there arises an ambiguity when we try 
+        to access the child class object using a base class pointer.
+
+        - To correct this ambiguity we use the keyword “virtual” before the function prototype in the base class. In other words, 
+        we make this polymorphic function Virtual. 
+
+        - By using a Virtual function, we can remove the ambiguity and we can access all the child class functions correctly 
+        using a base class pointer.
+
+    # What do you mean by Pure Virtual Functions?
+
+        - A Pure Virtual Member Function is a member function in which the base class forces the derived classes to override. 
+
+        - Normally this member function has no implementation. Pure virtual functions are equated to zero. 
+
+    # What are Virtual Constructors/Destructors? 
+
+        - When we use a base class pointer pointing to a derived class object and use it to destroy it, 
+        then instead of calling the derived class destructor, the base class destructor is called. 
+        - Constructors cannot be virtual. Declaring a constructor as a virtual function is a syntax error. 
+
+    # What is a friend function? 
+
+        - C++ class does not allow its private and protected members to be accessed outside the class. But this rule can be 
+        violated by making use of the “Friend” function.
+
+        - As the name itself suggests, friend function is an external function that is a friend of the class. For friend function 
+        to access the private and protected methods of the class, we should have a prototype of the friend function with the 
+        keyword “friend” included inside the class. 
+
+    # Templates - What is a template? 
+
+        - Templates allow creating functions that are independent of data type (generic) and can take any data type as parameters 
+        and return value without having to overload the function with all the possible data types. Templates nearly fulfill the 
+        functionality of a macro. 
+
+        -   template <class T>
+            class abc { void f(); }; 
+            
+            void abc<T>::f() { }
+
+    # class act as an interface 
+        By only providing all the functions as virtual functions in the class 
+ 
+    ## Exception Handling 
+    
+    # What is Exception Handling? Does C++ support Exception Handling?\
+    
+        - Yes C++ supports exception handling 
+
+        - When an exception has occurred, the compiler has to throw it so that we know an exception has occurred. 
+        When an exception has been thrown, the compiler has to ensure that it is handled properly, so that the program 
+        flow continues or terminates properly. 
+
+        - Thus in C++, we have three keywords i.e. try, throw and catch which are in exception handling.
+
+    # Comment on C++ standard exceptions? 
+
+        - C++ supports some standard exceptions that can be caught if we put the code inside the try block. 
+        These exceptions are a part of the base class “std:: exception”. This class is defined in the C++ header file <exception>.
+
+    # Questions to ask  
+        Understanding of pointers, through sample code.
+        Understanding of run time type identification. Through examples.
+        Understanding of static/ const etc. concepts.
+        STL understanding, selecting between various containers.
+        Function pointers .
+        Calling conventions.
+        OOP concepts.
+        Concepts like copy constructor and assignment operator. These questions bring many other concepts like shallow/ deep copy, memory allocation, shared resources.
+        Questions related to any of the performance optimization related real life problem solved by the candidate.
+        Give assignment based on design problem.
+        Writing code for multi threading.
+        Knowledge of standard algorithms available in std algorithms library.
+        How do someone iterates over containers. What is good way to do so.
+        C++ 11/ 14.
+
+
+	# Check if Xcode command line is installed 
+
+		xcode-select -p 
+		xcode-select -p 1>/dev/null;echo $?  0: exists, 2: not exists 
+
+	
+    # Objective-C Environment Setup 
+
+  
+    # run the command line in C++
+ 
+        std::string cmd;
+        cmd = "ffmpeg -hide_banner -f avfoundation -list_devices true -i \"\" >& device.txt ";
+        system(cmd.c_str());      
+
+    # shared pointer in C++ 
+
+        std::shared_ptr is a smart pointer that retains shared ownership of an object through a pointer. Several shared_ptr objects may own the same object. 
+        The object is destroyed and its memory deallocated when either of the following happens:
+
+            - the last remaining shared_ptr owning the object is destroyed;
+            - the last remaining shared_ptr owning the object is assigned another pointer via operator= or reset().
+        
+        example: 
+            struct ImageSource {
+                ...
+                static std::shared_ptr<ImageSource> newObject();
+                ...
+            }
+            // return a shared pointer of ImageSource object  
+            ImageSourcePtr ImageSource :: newObject()
+            {
+                return make_shared<ImageSource>();
+            }
+
+        using ImageTilePtr = std::shared_ptr<ImageTile>; 
+    # Use thread in C++ 
+
+        std::thread *workThread = nullptr; 
+        // assign the thread to process  in a class 
+        workThread =  new thread( &ImageMontage::process, this); 
+        // assign the thread to func 
+        workThread =  thread( func); 
+        // release thread 
+        if( workThread ) {
+            workThread->join();
+            delete workThread;
+            workThread = nullptr;
+        } 
+
+    # C++ profiler 
+        clion profiler 
+        https://plugins.jetbrains.com/plugin/8182-rust/docs/rust-profiler.html 
+ 
+        Instruments
+            https://stackoverflow.com/questions/11445619/profiling-c-on-mac-os-x  
+            https://newbedev.com/profiling-c-on-mac-os-x 
+            instruments -l 30000 -t Time\ Profiler -p 5773
+ 
+    # using lldb to debug 
+        (1) put Info.plist into working directory 
+        (2) defaults write Info.plist CFBundleExecutable -string imtile 
+        (3) lldb <executable file>
+        (4) run 
+        (5) bt 
+
+    # Google unit test
+
+        - https://github.com/google/googletest
+          https://google.github.io/googletest/primer.html 
+        - find_package( GTest REQUIRED)  #package 
+        - both ${GTEST_INCLUDE_DIR} and ${GTEST_LIBRARY} should be resolved with above pakage 
+        - #include "gtest/gtest.h" 
+            class ImageSourceTest : public::testing::Test 
+            {
+              public:
+                ImageSource source;     # test instance 
+              protected: 
+                virtual void SetUp(); TearDown(); 
+            } 
+            TEST_F(ImageSourceTest, test1)
+            {
+                EXPECT_EQ (1, source.isActive());
+                EXPECT_EQ (1, source.isEmpty());
+            } 
+        
+
+    # guard mutex
+        std::mutex mtx;
+        std::lock_guard<std::mutex> lck (mtx);
+        
+    # scoped_lock 
+        (1) When a scoped_lock object is created, it attempts to take ownership of the mutexes it is given. 
+        (2) When control leaves the scope in which the scoped_lock object was created, the scoped_lock is destructed and the mutexes are released.
+        (3) is a strictly superior version of lock_guard that locks an arbitrary number of mutexes all at once 
+            (using the same deadlock-avoidance algorithm as std::lock).  In new code, you should only ever use scoped_lock.
+        # acquire two locks without worrying about deadlock 
+        std::scoped_lock lock(e1.m, e2.m); 
+
+    # shared memory 
+        shmget, shmat, shmdt 
+
+        // shmget returns an identifier in shmid
+        int shmid = shmget(key,1024,0666|IPC_CREAT);
+        // shmat to attach to shared memory
+        char *str = (char*) shmat(shmid,(void*)0,0);
+        //detach from shared memory 
+        shmdt(str);
+        // destroy the shared memory
+        shmctl(shmid,IPC_RMID,NULL);
+
+    # named_mutex (boost::interprocess::named_mutex)
+        A mutex with a global name, so it can be found from different processes.  
+        #include <boost/interprocess/sync/named_mutex.hpp>
+        named_mutex mutex_video_bufffer(open_or_create, "avail_videobuffer_lock"); 
+      
+        # perform the scoped_lock 
+        boost::interprocess::scoped_lock<named_mutex> lock(mutex_video_bufffer); 
+
+        # shared memory IPCs  boost named_mutex, named_condition, interprocess_mutex, ...
+        https://stackoverflow.com/questions/50026772/boost-interprocess-mutexes-and-condition-variables 
+
+    # named_semaphore (boost::interprocess::named_semaphore)  
+        
+        # Shared memory IPC synchronization using semaphore for producer/consumer 
+        https://yajin.org/os2018fall/07_synchronization_examples.pdf 
+   
+    # diff between semaphore and mutex  
+        A mutex is an object but semaphore is an integer variable. ... A mutex object allows multiple process threads to access a single shared resource 
+        but only one at a time. On the other hand, semaphore allows multiple process threads to access the finite instance of the resource until available. 
+
+        https://stackoverflow.com/questions/62814/difference-between-binary-semaphore-and-mutex 
+ 
+    # memcpy 
+        void* memcpy( void* dest, const void* src, std::size_t count );
+
+    # ninja build  
+        ninja -C build -j 20 
+
+    # cmake clean 
+        rm -rf CMakeCache.txt CMakefiles cmake_install.cmake Makefile build 
+        ccmake ..       # interactive configuration 
+        set(CMAKE_CXX_FLAGS "-O0 -coverage")    # set coverage flag  
+  
+    # save image 
+        void  writeImg(cv::Mat img) { cv::imwrite("final.png", img); } 
+
+    # signal handling 
+
+        struct sigaction act;
+        memset(&act, 0, sizeof(act));
+        act.sa_handler = sighandler;
+
+        sigaction(SIGINT,  &act, 0);
+        sigaction(SIGTERM, &act, 0); 
+
+    # C++ const usage 
+    
+        - Always take const & as argument as to avoid extra copies of the same object 
+        - use unordered_map as its always faster to use 
+  
+    # C++ get epoch in milliseconds 
+
+        long ms = std::chrono::system_clock::now().time_since_epoch().count(); 
+ 
+    # traverse map 
+
+        std::unordered_map<string, int> mydata; 
+        ... 
+        for (auto const & [k, v] : mydata)  {...}
+
+    # use tuple 
+        std::make_tuple(fname, filename_t()) 
+        auto [has_intersect, intersect_roi] = find_intersect(img_bb, tile_bb);  # function return tuple 
+  
+    # use lldb to attach the running image 
+        build debug image first and run the image 
+        if image get stuck, run  
+            lldb -p pid 
+
+    # command of lldb 
+        bt
+        thread  36
+        thread list  
+        breakpoint set --file foo.c --line 12 
+        breakpoint set --file http_client.h --line 291 
+        thread continue 
+        s -- step in 
+        v -- frame variable 
+ 
+    # create debug build 
+        set(CMAKE_C_FLAGS, "-g") 
+        set(CMAKE_BUILD_TYPE Debug) 
+
+    # build static library in CMakeLists.txt  
+        add_library(nanodraw STATIC nanocanvas/Canvas.cpp nanocanvas/Image.cpp nanocanvas/Text.cpp nanovg/nanovg.c
+        nanodraw/NanoDraw.cpp)  

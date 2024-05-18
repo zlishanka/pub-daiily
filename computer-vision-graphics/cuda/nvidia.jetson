@@ -1,0 +1,79 @@
+# Nvidia Jetson (Robtics and edge computing)
+
+	## 
+
+	## Jetson Orin series
+ 
+		### AGX Series
+		- deliver up to 275 TOPS of AI performance
+		- power configurable between 15W and 60W
+	
+		### NX Series
+		- The NVIDIA Orin NX runs Jetson Linux (RTOS) 
+			- includes the Linux Kernel, UEFI bootloader, NVIDIA drivers, and a sample filesystem based on Ubuntu. 
+		- deliver up to 100 TOPS of AI performance in the smallest Jetson form factor
+		- power configurable between 10W and 25W
+
+		### Nano Series
+		- deliver up to 40 TOPS of AI performance in the smallest Jetson form-factor
+		- power options between 7W and 15W.
+		- consists Jetson Nano module and carrier board
+		- Uses microSD card with Nvidia Jetpack SDK
+		- Runs multiple Neural Networks in parallel, image classification/segmentation
+		- object detection, speech processing
+		- production Nano uses NVRAM instead of microSD
+
+		- 6-core Arm Cortex CPU
+		- 1024 Nvidia CUDA cores (Ampere architecture GPU), 32 Tensor Cors 
+		- High-speed memory, 8GB
+		- 40-pin GPIO plus I2C, SPI/UART
+		- 4 USB3 port and GigE
+		- CSI video camera Interface
+		- HDMI and display port (supports 4K video)
+		- WiFi and bluetooth adaptor 
+	
+
+	## JetPack SDK	
+
+		- Jetson Linux with bootloader
+		- Linux kernel, Ubuntu desktop environment
+		- a complete set of libraries for acceleration of GPU computing
+		- multimedia, graphics, and computer vision
+		- Support higher level SDKs such as DeepStream for streaming video analytics
+		- Support Isaac (ROS) for robotics
+	
+	## Jetson Software Architecture 
+		https://docs.nvidia.com/jetson/archives/r36.2/DeveloperGuide/AR/JetsonSoftwareArchitecture.html#computer-vision
+
+		### TensorRT
+			- provides a high-performance neural network inference engine
+
+		### NVIDIA DLA hardware 
+			- is a fixed-function accelerator engine targeted for deep learning operations.
+
+		### cuDNN
+			- CUDA Deep Neural Network library provides high-performance primitives for deep learning frameworks.
+			- forward/backward convolution, pooling, normalization, activation layers
+
+		### Multimedia API
+			- Camera application API
+			- ISP can be used with either libargus or GStreamer plugin. 
+			- V4L2 library: Supports the V4L2 (Video for Linux, version 2) API
+
+		### Computer Vision
+			- VPI (Vision Programing Interface) 
+			- software library that provides Computer Vision / Image Processing algorithms
+			- OpenCV: Provides a version of OpenCV that NVIDIA has optimized specifically for the Jetson platform
+
+		### Accelerated Computing 
+			- cuBLAS: CUDA Basic Linear Algebra Subroutines
+			- cuFFT: CUDA Fast Fourier Transforms
+
+		### Graphics
+			- Vulkan® 1.3
+			- OpenWF™ Display 1.0
+		
+
+	## Supported SDKs and Tools
+		- NVIDIA DeepStream SDK is a complete analytics toolkit for AI-based multi-sensor processing and video and audio understanding
+		- NVIDIA Isaac™ ROS  
