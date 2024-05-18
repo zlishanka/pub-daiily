@@ -3,7 +3,7 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 
 ## clone respository 
     # use SSH key 
-    git clone git@gitlab.com:availmedsys/avail-media/availcv.git -b release/6.5 soft-9826
+    git clone git@gitlab.com:avmedsys/al-media/avcv.git -b release/6.5 soft-9826
     # use https 
     git clone https://github.com/slivertv/backend-streaming-utils.git 
 
@@ -12,10 +12,10 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
     git config --list
     git config --global --list
     git config --global user.name "rzheng" 
-    git config --global user.email "rzheng@avail.io" 
+    git config --global user.email "rzheng@av.io" 
 
 ## set remote url
-    git remote set-url origin git@gitlab.com:availmedsys/avail-media/availcv.git
+    git remote set-url origin git@gitlab.com:avmedsys/av-media/avcv.git
 	git remote set-url origin git@github.com:zlishanka/daiily.git 
 	git remote -v  	# disply URLs of all remote repos, notes if it's https://, you won't be able to use ssh key authentication 
 	git remote get-url origin 
@@ -255,8 +255,8 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 
 ## gitlab clone branch directly 
 
-    git clone git@gitlab.com:availmedsys/avail-media/availcv.git -b dev/CS/MEDIA-2401_LZ4 
-    git clone https://gitlab.com/availmedsys/avail-media/availcv.git -b dev/CS/SOFT-8456 
+    git clone git@gitlab.com:avmedsys/av-media/avcv.git -b dev/CS/MEDIA-2401_LZ4 
+    git clone https://gitlab.com/avmedsys/av-media/avcv.git -b dev/CS/SOFT-8456 
 
 ## recover git reset wrong doing 
 
@@ -286,8 +286,8 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
         
 ## access the repo through access token 
 
-    git clone https://oauth2:ACCESS_TOKEN@gitlab.com/availmedsys/avail-media/availvideobuffer.git 
-    git clone https://oauth2:glpat-iMBWiPRUacy5NeLzqi_W@gitlab.com/availmedsys/avail-media/availcv.git  -b release/6.5 soft-9xxx 
+    git clone https://oauth2:ACCESS_TOKEN@gitlab.com/avmedsys/axxxxl-media/avr.git 
+    git clone https://oauth2:glpat-iMBWiPRNeLzqi_W@gitlab.com/avmedsys/av-media/av.git  -b release/6.5 soft-9xxx 
 
 ## revert recent merge request 
     git fetch upstream
@@ -305,7 +305,7 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 
 ## access the github(zlishanka) through access token 
 
-    git clone https://zlishanka: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@github.com/zlishanka/opencv-examples- -b opencv-examples-main 
+    git clone https://zlishanka:ghp_n2vTptE3VlDHBJ32DKbfqlgK1e10FjDY@github.com/zlishanka/opencv-examples- -b opencv-examples-main 
 
 ## use "beyond compare" to graphically view the differences of two git branch
 #
