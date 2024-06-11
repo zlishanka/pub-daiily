@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <assert.h>    
+#include <assert.h>
 #include <queue>
 #include <mutex>
 #include <condition_variable>
@@ -11,87 +11,136 @@ class BlockingQueue
 {
 public:
     BlockingQueue(int max_cap = 100)
-    :mtx(), full_(), empty_(), capacity_(max_cap) { }
+        :mtx(), fullQ(), emptyQ(), capacity(max_cap) { }
 
-    void push(const T& data){
+    void push(const T& data) {
         std::unique_lock<std::mutex> lock(mtx);
-        while(queue_.size() == capacity_){
-            full_.wait(lock );
+        while(container.size() == capacity) {
+            fullQ.wait(lock );
         }
 
-        assert(queue_.size() < capacity_);
-        queue_.push(data);
-        empty_.notify_all(); 
+        assert(container.size() < capacity);
+        container.push(data);
+        emptyQ.notify_all();
     }
 
-    T pop(){
+
+    bool try_push(const T& data) {
         std::unique_lock<std::mutex> lock(mtx);
-        while(queue_.empty()){
-            empty_.wait(lock );
+        if( container.size() < capacity) {
+            container.push(data);
+            emptyQ.notify_all();
+            return 0;
+        }
+        return 1;
+    }
+
+
+    T pop() {
+        std::unique_lock<std::mutex> lock(mtx);
+        while(container.empty()) {
+            emptyQ.wait(lock );
         }
 
-        assert(!queue_.empty());
-        T front(queue_.front());
-        queue_.pop();
-        full_.notify_all();
+        assert(!container.empty());
+        T front(container.front());
+        container.pop();
+        fullQ.notify_all();
         return front;
     }
 
-    T front(){
+    bool try_pop(T &item ) {
         std::unique_lock<std::mutex> lock(mtx);
-        while(queue_.empty()){
-            empty_.wait(lock );
+
+        T dummy;
+        if( container.empty()) {
+            item = dummy;
+            return 1;
         }
 
-        assert(!queue_.empty());
-        T front(queue_.front());
+        item = container.front();
+        container.pop();
+        fullQ.notify_all();
+        return 0;
+    }
+
+
+    T front() {
+        std::unique_lock<std::mutex> lock(mtx);
+        while(container.empty()) {
+            emptyQ.wait(lock );
+        }
+
+        assert(!container.empty());
+        T front(container.front());
         return front;
     }
 
-    T back(){
+    T back() {
         std::unique_lock<std::mutex> lock(mtx);
-        while(queue_.empty()){
-            empty_.wait(lock );
+        while(container.empty()) {
+            emptyQ.wait(lock );
         }
 
-        assert(!queue_.empty());
-        T back(queue_.back());
+        assert(!container.empty());
+        T back(container.back());
         return back;
     }
 
-    size_t size(){
+    size_t size() {
         std::lock_guard<std::mutex> lock(mtx);
-        return queue_.size();
+        return container.size();
     }
 
-    bool empty(){
+    bool empty() {
         std::unique_lock<std::mutex> lock(mtx);
-        return queue_.empty();
+        return container.empty();
     }
 
-    void setCapacity(const size_t cap){
-        capacity_ = cap;
+    void setCapacity(const size_t cap) {
+        capacity = cap;
     }
 
-    int getCapacity() const { return capacity_; }
+    int getCapacity() const {
+        return capacity;
+    }
 
-    void clear() 
+    void clear()
     {
         std::unique_lock<std::mutex> lock(mtx);
-	std::queue<T> emptyQ;
-	std::swap(queue_, emptyQ);
+        std::queue<T> emptyQ;
+        std::swap(container, emptyQ);
+        emptyQ.notify_all();
+    }
+
+    void unblock()
+    {
+        std::unique_lock<std::mutex> lock(mtx);
+
+        if (container.size() == 0) {
+            T item;
+            container.push(item);
+            emptyQ.notify_all();
+            return;
+        }
+
+        if (container.size() == capacity) {
+            container.pop();
+            fullQ.notify_all();
+        }
     }
 
 private:
     //DISABLE_COPY_AND_ASSIGN(BlockingQueue);
-    BlockingQueue(const BlockingQueue& rhs);
-    BlockingQueue& operator= (const BlockingQueue& rhs);
+    BlockingQueue(const BlockingQueue& rhs) = delete;
+    BlockingQueue(BlockingQueue&& rhs) = delete;
+    BlockingQueue& operator= (const BlockingQueue& rhs) = delete;
+    BlockingQueue& operator= (BlockingQueue&& rhs) = delete;
 
 private:
     mutable std::mutex mtx;
-    std::condition_variable full_;
-    std::condition_variable empty_;
-    std::queue<T> queue_;
-    size_t capacity_; 
+    std::condition_variable fullQ;
+    std::condition_variable emptyQ;
+    std::queue<T> container;
+    size_t capacity;
 };
-
