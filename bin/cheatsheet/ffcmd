@@ -126,6 +126,7 @@ ffmpeg -i SSTVUHD7WondersDocumentaryEp1Kor_15Mbps.mp4 \
 
 # list capture devices
  ffmpeg -f avfoundation -list_devices true -i ""
+ ffmpeg -list_devices true -f dshow -i dummy
  ffmpeg -f avfoundation -y -t 5 -r 3 -i "Give the external input" 
  ffmpeg -f avfoundation -framerate 30 -i "0" -target pal-vcd test.mp4  
  ffmpeg -f avfoundation -i video="FaceTime HD Camera":audio="MacBook Pro Microphone"  -target pal-vcd test.mp4  
