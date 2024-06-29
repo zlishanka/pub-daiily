@@ -548,3 +548,13 @@
 # size_t 
 	- It is an unsigned integer type, which means that it can only store positive values
 	- size_t is a useful type for representing the size of objects in memory
+
+# msvc compile code 
+
+ x64 command line: 
+   cl ffencdec.cpp /I "C:\ffmpeg-701\include" /I "C:\opencv\build\include" /link /LIBPATH:"C:\ffmpeg-701\lib" /LIBPATH:"C:\opencv\build\x64\vc16\lib" libavcodec.a libavformat.a libavutil.a libswscale.a libswresample.a opencv_world490.lib strmiids.lib mf.lib mfplat.lib mfuuid.lib mfreadwrite.lib bcrypt.lib Ole32.lib User32.lib
+
+
+
+
+

@@ -192,6 +192,10 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 ## merge pull request into other branches other than master
     GitHub allows changing the target branch of a pull request via the GUI
 
+## Create new branch and configure upstream repos to push to new branch
+    git checkout -b feature/resizing 
+    git push --set-upstream origin feature/resizing 
+
 ## squash and merge 
     Say your bug fix branch is called bugfix and you want to merge it into master:
 
@@ -261,6 +265,10 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 ## recover git reset wrong doing 
 
     git fsck --lost-found 
+
+
+## Resolve annoying ^M trailing character under Windows
+    git config --global core.autocrlf true
 
 ## mergetool 
 
