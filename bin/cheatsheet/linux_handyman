@@ -13,6 +13,10 @@
     sudo lshw -c display
     sudo lspci | grep VGA 
 
+# check linux GPU configuration, modinfo to check driver
+	lshw -c video
+	modinfo i915
+ 
 # check linux system modules 
     sudo lsmod 
 

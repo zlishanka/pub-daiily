@@ -1,4 +1,12 @@
-# Capture and Encode Pipeline
+## Installation/build
+
+	# Linux
+	https://gstreamer.freedesktop.org/documentation/installing/on-linux.html?gi-language=c
+
+	# Windows
+	https://gstreamer.freedesktop.org/documentation/installing/on-windows.html?gi-language=c
+
+## Capture and Encode Pipeline
 
 	gst-launch-1.0 dshowvideosrc device-name="OV02C10" ! videoconvert !  videoscale ! \
 	video/x-raw,width=1280,height=720 !  nvh264enc ! rtph264pay ! udpsink host=localhost port=5000
@@ -21,7 +29,7 @@
     nvh264enc ! queue ! h264parse ! appsink name=video_sink
 
 
-# Receive and Decode Pipeline
+## Receive and Decode Pipeline
 	gst-launch-1.0 udpsrc port=5000 ! application/x-rtp, payload=96 ! rtph264depay ! nvh264dec ! videoconvert ! autovideosink
 
 	gst-launch-1.0 udpsrc port=5000 ! queue ! application/x-rtp, payload=96 ! queue ! rtph264depay ! queue ! nvh264dec ! queue ! videoconvert ! queue ! d3dvideosink
@@ -37,7 +45,7 @@
 
 
 
-# Turn on debug on GStreamer output
+## Turn on debug on GStreamer output
 	GST_DEBUG=3 gst-launch-1.0 udpsrc port=5000 ! application/x-rtp, payload=96 ! rtph264depay ! nvh264dec ! videoconvert ! d3dvideosink
   
 # Install gst plugin on Linux
