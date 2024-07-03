@@ -20,6 +20,16 @@
 # check linux system modules 
     sudo lsmod 
 
+# Check cameras connected and supported formats (ubuntu)
+	v4l2-ctl  --list-devices
+	v4l2-ctl --list-formats-ext -d /dev/video0
+
+# find package on ubuntu
+	dpkg -l libgtk* | grep -e '^i' | grep -e 'libgtk-*[0-9]'
+	dpkg -l libgstreamer*
+	pkg-config --cflags gtk+-3.0
+	sudo apt-get install build-essential libgtk-3-dev  # install gtk-3 for dev
+
 # check and locate shared libraries 
     locate libGL.so. 
 

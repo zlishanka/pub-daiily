@@ -44,7 +44,6 @@
 	gst-launch-1.0 appsrc name=video_src ! h264parse ! nvh264dec ! videoconvert ! d3dvideosink
 
 
-
 ## Turn on debug on GStreamer output
 	GST_DEBUG=3 gst-launch-1.0 udpsrc port=5000 ! application/x-rtp, payload=96 ! rtph264depay ! nvh264dec ! videoconvert ! d3dvideosink
   
@@ -54,6 +53,26 @@
 
 # Quick test local video Capture and Playback
  	gst-launch-1.0 dshowvideosrc ! videoconvert ! d3dvideosink
+	gst-launch-1.0 videotestsrc pattern=11 ! videoconvert ! autovideosink
 
 # Verify the gstreamer plugin is available 
  	gst-inspect-1.0 dshowvideosrc
+
+# GStreamer tools
+	https://gstreamer.freedesktop.org/documentation/tutorials/basic/gstreamer-tools.html?gi-language=c
+	"gst-launch-1.0"
+		- accepts a textual description of a pipeline, instantiates it, and sets it to the PLAYING state. 
+		- primarily a debugging tool for developers. 
+		- 
+	gst-launch-1.0 dshowvideosrc ! videoconvert ! d3dvideosink
+	gst-launch-1.0 videotestsrc pattern=11 ! videoconvert ! autovideosink
+	gst-launch-1.0 videotestsrc ! videoconvert ! tee name=t ! queue ! autovideosink t. ! queue ! autovideosink 
+	
+	"gst-inspect-1.0"
+		- lists all available elements types
+		- gst-inspect-1.0 vp8dec
+		- 	
+	"gst-discoverer-1.0"
+		- gst-discoverer-1.0 https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm -v
+	gst-inspect-1.0 vp8dec 
+ 
