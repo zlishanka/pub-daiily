@@ -1,4 +1,34 @@
+# Build ffmpeg with CUDA, nvenc support
 
+	https://www.cyberciti.biz/faq/how-to-install-ffmpeg-with-nvidia-gpu-acceleration-on-linux/
+	(1) check nvidia driver installation & version
+		nvidia-smi 
+		inxi -G
+    	/usr/lib/x86_64-linux-gnu/libnvidia*
+
+	(2) check nvidia toolkit installation
+		nvcc --version
+    	/usr/lib/nvidia-cuda-toolkit/	
+		install toolkit - sudo apt install nvidia-cuda-toolkit
+		/usr/lib/cuda
+
+	(3) install ffnvcodec headers
+		cd nv-codec-headers && sudo make install
+		/usr/local/include/ffnvcodec/
+		/usr/local/lib/pkgconfig/
+	(4) get ffmpeg source code and run
+	(5) configuration
+		./configure --help | more 
+		apt-cache search libx265 
+	(6) install necessary codec libraries 
+	(7) nvtop - GPU top viewer tool
+	(8) cuda include and lib directories
+		header files - /usr/include
+		libraries - /usr/lib/x86_64-linux-gnu
+
+	(9) test build 
+		./configure --enable-nonfree --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/include --extra-ldflags=-L/usr/lib/x86_64-linux-gnu --enable-gpl --enable-gnutls --enable-libvpx --enable-libx264 --enable-libx265 --prefix=/home/qzheng/ffmpeg-cuda
+					
 # play back from cloud front, test  
 	ffplay http://ddwok94le1461.cloudfront.net/ 
 	ffplay -fflags nobuffer http://ddwok94le1461.cloudfront.net/
