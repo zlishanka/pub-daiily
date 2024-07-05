@@ -21,7 +21,7 @@
     sudo lsmod 
 
 # Check cameras connected and supported formats (ubuntu)
-	v4l2-ctl  --list-devices
+	v4l2-ctl --list-devices
 	v4l2-ctl --list-formats-ext -d /dev/video0
 
 # find package on ubuntu
@@ -30,6 +30,10 @@
 	pkg-config --cflags gtk+-3.0
 	sudo apt-get install build-essential libgtk-3-dev  # install gtk-3 for dev
 
+# remove held dependency on ubuntu
+	sudo apt-mark showhold
+	sudo apt-mark unhold <package-name>
+ 
 # check and locate shared libraries 
     locate libGL.so. 
 

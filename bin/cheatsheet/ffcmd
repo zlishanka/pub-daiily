@@ -22,13 +22,17 @@
 		apt-cache search libx265 
 	(6) install necessary codec libraries 
 	(7) nvtop - GPU top viewer tool
-	(8) cuda include and lib directories
-		header files - /usr/include
-		libraries - /usr/lib/x86_64-linux-gnu
+	(8) cuda include and lib directories after toolkit update
+		https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04
 
-	(9) test build 
+		header files - /usr/local/cuda/include
+		libraries - /usr/local/cuda/lib64
+
+	(9) build ffmpeg  
 		./configure --enable-nonfree --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/include --extra-ldflags=-L/usr/lib/x86_64-linux-gnu --enable-gpl --enable-gnutls --enable-libvpx --enable-libx264 --enable-libx265 --prefix=/home/qzheng/ffmpeg-cuda
-					
+				
+	(10) test build
+		~/ffmpeg-cuda/bin/ffmpeg -i 1006538_Stifelman_dVPN_clip1.mp4 -vcodec h264_nvenc -acodec copy 1006538_Stifelman_dVPN_clip1.h264_nvenc.mp4	
 # play back from cloud front, test  
 	ffplay http://ddwok94le1461.cloudfront.net/ 
 	ffplay -fflags nobuffer http://ddwok94le1461.cloudfront.net/
