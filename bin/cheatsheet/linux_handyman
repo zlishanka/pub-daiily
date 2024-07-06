@@ -1,15 +1,16 @@
 
-# check disk usage of directory 
+## check disk usage of directory 
     du -ah | sort -nr | head -20  
     du -sh | sort -nr | head -20  
     du -shx *  | sort -nr
     du -a . | sort -nr | head -n 100 
     # delete top files 
     du -a . | sort -nr | head -n 20 | tail -n +21 | cut -f 2- -d ' ' | xargs rm -f
-# check disk space usage 
+
+## check disk space usage 
     df -h  
 
-# check linux system display 
+## check linux system display 
     sudo lshw -c display
     sudo lspci | grep VGA 
 
@@ -17,7 +18,7 @@
 	lshw -c video
 	modinfo i915
  
-# check linux system modules 
+## check linux system modules 
     sudo lsmod 
 
 # Check cameras connected and supported formats (ubuntu)
@@ -558,6 +559,7 @@ DROP       tcp  --  anywhere             anywhere             tcp dpt:6008 ctsta
 
 # check if GPU is cuda capable
 	lspci | grep -i nvidia 
+	nvidia-smi --query-gpu=compute_cap --format=csv
 
 # install cuda 11.8 isntruction 
 	https://developer.nvidia.com/cuda-11-8-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=18.04
