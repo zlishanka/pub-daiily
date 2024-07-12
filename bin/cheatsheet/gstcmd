@@ -47,19 +47,19 @@
 ## Turn on debug on GStreamer output
 	GST_DEBUG=3 gst-launch-1.0 udpsrc port=5000 ! application/x-rtp, payload=96 ! rtph264depay ! nvh264dec ! videoconvert ! d3dvideosink
   
-# Install gst plugin on Linux
+## Install gst plugin on Linux
 	sudo apt-get install gstreamer1.0-plugins-bad
 	sudo apt install gstreamer1.0-libav
 
-# Quick test local video Capture and Playback
+## Quick test local video Capture and Playback
  	gst-launch-1.0 dshowvideosrc ! videoconvert ! d3dvideosink
 	gst-launch-1.0 videotestsrc pattern=11 ! videoconvert ! autovideosink
 	gst-launch-1.0 -v v4l2src device=/dev/video0 ! video/x-raw,format=YUY2,width=1280,height=720,framerate=10/1 ! queue ! xvimagesink
 
-# Verify the gstreamer plugin is available 
+## Verify the gstreamer plugin is available 
  	gst-inspect-1.0 dshowvideosrc
 
-# GStreamer tools
+## GStreamer tools
 	https://gstreamer.freedesktop.org/documentation/tutorials/basic/gstreamer-tools.html?gi-language=c
 	"gst-launch-1.0"
 		- accepts a textual description of a pipeline, instantiates it, and sets it to the PLAYING state. 
@@ -76,4 +76,17 @@
 	"gst-discoverer-1.0"
 		- gst-discoverer-1.0 https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm -v
 	gst-inspect-1.0 vp8dec 
+
+
+## gstreamer plugins 
+
+	"nvvidconv" - is used for video conversion and scaling on NVIDIA GPUs.  It can be used to convert video formats,  
+			    resize videos and performs other video processing tasks. 
+
+	"nvv4l2h264enc" - leverages the Video4Linux2 (V4L2) API to access the hardware encoder capabilities of NVIDIA GPUs.
+				commonly used for real-time video encoding tasks with low latency and high efficiency.
+	  
+	
+
+
  

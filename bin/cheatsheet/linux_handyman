@@ -1,4 +1,9 @@
-
+## launch msys2 shell under windows
+	c:\msys64\msys2_shell.cmd -mingw64 -use-full-path
+	
+	# install make, pkg-config, diffutils 
+	pacman -S make pkg-config diffutils
+	
 ## check disk usage of directory 
     du -ah | sort -nr | head -20  
     du -sh | sort -nr | head -20  

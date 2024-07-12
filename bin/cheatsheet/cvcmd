@@ -1,5 +1,23 @@
 ## OpenCV
 
+# BUILD opencv with CUDA support (Windows 10) 
+(1) Opencv, Opencv_contrib checkout, MSVC installation, cmake, Nvidia CUDA toolkit installation
+(2) install CUDNN, download installer from Nvidia Site and install it. Location on windows should be
+/c/Program Files/NVIDIA/CUDNN/v9.2 , copy the following dll, lib, header files to CUDA toolkit directories
+ cp bin/12.5/cudnn*.dll /c/Program\ Files/NVIDIA\ GPU\ Computing\ Toolkit/CUDA/v12.5/bin
+ cp include/12.5/cudnn*.h /c/Program\ Files/NVIDIA\ GPU\ Computing\ Toolkit/CUDA/v12.5/include
+ cp lib/12.5/cudnn*.lib /c/Program\ Files/NVIDIA\ GPU\ Computing\ Toolkit/CUDA/v12.5/lib/x64
+ 
+(3) open up cmake application , enter source code directory and where to build the binaries directory, specify the MSVC compiler by click configure button and the allow it to configure the build
+(4) select the build flags
+WITH_CUDA,  opencv_dnn_CUDA, build_opencv_dnn, ENABLE_FAST_MATH, Build_opencv_world, OPENCV_EXTRA_MODULES_PATH (/opencv_contrib/modules)  , click configure to wait for it completes configuration
+(5) search and select the build option CUDA_FAST_MATH , specify CUDA_ARCH_BIN to correct version (RTX A2000 8.6 ) , specify CMAKE_CONFIGURATION_TYPES to be Release , click configure again to generate configuration files
+(6) Note - install Nvidia Video Codec SDK if you haven't. Just copy header files and lib files to corresponding directories under  CUDA toolkits
+(7) click configure again and then Generate
+(8) run the build command from cmd prompt window
+cmake --build "c:\Users\qzheng\workArea\workspace\thirdparty\opencv-gpu\build" --target INSTALL --config Release 
+   
+
 # online tutorial
     https://docs.opencv.org/3.4/d9/df8/tutorial_root.html
 

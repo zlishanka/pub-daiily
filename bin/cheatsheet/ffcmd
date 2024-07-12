@@ -20,7 +20,7 @@
 	(5) configuration
 		./configure --help | more 
 		apt-cache search libx265 
-	(6) install necessary codec libraries 
+	(6) install necessary codec libraries - nasm libghc-gnutls-dev libvpx-dev libx264-dev libx265-dev 
 	(7) nvtop - GPU top viewer tool
 	(8) cuda include and lib directories after toolkit update
 		https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04
