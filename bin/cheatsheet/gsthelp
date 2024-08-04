@@ -52,6 +52,8 @@
 	pad = gst_element_get_static_pad (element, pad_name);
 	caps = gst_pad_get_current_caps (pad);
 
+	# gst pad add handler
+	`gst_pad_add_probe()` function in GStreamer is used to add a probe to a pad.
 
 ## gstreamer multithreading
 	

@@ -147,7 +147,7 @@
     pidstat -t -p 14716  
 
 #$ running background daemon under linux 
-    nohup python get_live_stats.py > /dev/null 2>&1 & 
+	nohup python get_live_stats.py > /dev/null 2>&1 & 
 
 # check file system on disk / mount disk  
     lsblk 
@@ -419,6 +419,7 @@ DROP       tcp  --  anywhere             anywhere             tcp dpt:6008 ctsta
     otool -L xxx
     ldd xxx
     otool -L availcvserver  | grep gflags
+	objdump -p /path/to/program 
 
 # macOS Shared memory tuning 
     sudo sysctl -w kern.sysv.shmmax=33554432 

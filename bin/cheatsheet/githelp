@@ -85,7 +85,8 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
     git clean -d -fx ""
     git pull  
 
-## clear the untracked files from the local 
+## list and clear the untracked files from the local 
+	git clean -d -n 
     git clean  -d  -f . 
 
 ## discards local changes and sync with repository 
@@ -256,6 +257,9 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 ## git log with graph logging  
     git log --oneline --graph
 
+## merge with cherry pick number
+	
+	git cherry-pick -m 1 2cc20b6cba
 
 ## gitlab clone branch directly 
 

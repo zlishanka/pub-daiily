@@ -77,6 +77,8 @@
 		- gst-discoverer-1.0 https://gstreamer.freedesktop.org/data/media/sintel_trailer-480p.webm -v
 	gst-inspect-1.0 vp8dec 
 
+	"./gst-device-monitor-1.0.exe Video/Source" 
+		- probe gst devices for Video
 
 ## gstreamer plugins 
 
