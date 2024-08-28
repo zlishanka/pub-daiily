@@ -9,7 +9,7 @@
 ## Capture and Encode Pipeline
 
 	gst-launch-1.0 dshowvideosrc device-name="OV02C10" ! videoconvert !  videoscale ! \
-	video/x-raw,width=1280,height=720 !  nvh264enc ! rtph264pay ! udpsink host=localhost port=5000
+	video/x-raw,width=1280,height=720 !  nvh264enc ! rtph264pay ! dpsink host=localhost port=5000
 
 	# Ensure formats (like I420) and adding queues to help dataflow and buffering
 	gst-launch-1.0 dshowvideosrc device-name="OV02C10" ! queue ! videoconvert ! queue \
@@ -46,7 +46,8 @@
 
 ## Turn on debug on GStreamer output
 	GST_DEBUG=3 gst-launch-1.0 udpsrc port=5000 ! application/x-rtp, payload=96 ! rtph264depay ! nvh264dec ! videoconvert ! d3dvideosink
-  
+ 	GST_DEBUG=3,*xvimagesink*:5 gst-launch-1.0
+ 
 ## Install gst plugin on Linux
 	sudo apt-get install gstreamer1.0-plugins-bad
 	sudo apt install gstreamer1.0-libav
@@ -88,7 +89,12 @@
 	"nvv4l2h264enc" - leverages the Video4Linux2 (V4L2) API to access the hardware encoder capabilities of NVIDIA GPUs.
 				commonly used for real-time video encoding tasks with low latency and high efficiency.
 	  
-	
+## h264 encoder caps conf
 
+	gst-launch-1.0 videotestsrc ! nvvidconv ! nvv4l2h264enc maxperf-enable=true insert-sps-pps=1 !  h264parse ! rtph264pay ! udpsink host=10.0.0.2 port=9560	
 
- 
+## fpssink to measure/display video fps
+
+	! fpsdisplaysink video-sink=autovideosink text-overlay=true
+	gst-launch-1.0 videotestsrc ! video/x-raw,framerate=60/1 ! fpsdisplaysink video-sink=autovideosink text-overlay=true	
+		 
