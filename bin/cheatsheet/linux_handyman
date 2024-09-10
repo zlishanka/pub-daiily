@@ -15,6 +15,9 @@
 ## check disk space usage 
     df -h  
 
+## check ubuntu terminal timeout 
+    grep -E "\bTMOUT=[0-9]+" /etc/bash.bashrc /etc/profile.d/*
+
 ## check linux system display 
     sudo lshw -c display
     sudo lspci | grep VGA 

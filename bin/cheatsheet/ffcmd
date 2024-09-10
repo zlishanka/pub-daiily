@@ -33,6 +33,30 @@
 				
 	(10) test build
 		~/ffmpeg-cuda/bin/ffmpeg -i 1006538_Stifelman_dVPN_clip1.mp4 -vcodec h264_nvenc -acodec copy 1006538_Stifelman_dVPN_clip1.h264_nvenc.mp4	
+
+# Streaming file to RTP using h264 codec 
+	ffmpeg -i input.mp4 -c:v h264_nvenc -f rtp rtp://<IP>:<Port>
+
+	ffmpeg -protocol_whitelist "file,udp,rtp" -i rtp://<IP>:<Port> -c:v h264_cuvid output.mp4
+	ffmpeg -protocol_whitelist "file,udp,rtp" -i rtp://<IP>:<Port> -c:v h264_cuvid -f x11grab :0.0
+
+	ffplay -protocol_whitelist "file,udp,rtp" -i session.sdp
+
+# list audio playback and recording devices 
+	aplay -l 
+	arecord --list-devices
+
+	# ubuntu list devices (PulseAudio instead of ALSA) 
+	pactl list sources short 
+
+# record the audio from audio device and save it to output.mp4
+
+    windows - 
+	ffmpeg -f dshow -i audio="Microphone Array (Intel® Smart Sound Technology for MIPI SoundWire® Audio)" -ar 16000 -acodec aac -b:a 128k output.mp4 
+
+	ubuntu - 
+	ffmpeg -f pulse -ac 1 -ar 16000 -i alsa_input.usb-EMEET_HD_Webcam_eMeet_C980_Pro_Ucamera002-02.mono-fallback -c:a aac -b:a 128k output.mp4
+	
 # play back from cloud front, test  
 	ffplay http://ddwok94le1461.cloudfront.net/ 
 	ffplay -fflags nobuffer http://ddwok94le1461.cloudfront.net/

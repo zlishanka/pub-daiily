@@ -1,6 +1,6 @@
 #eval "$(/opt/homebrew/bin/brew shellenv)"
 
-CHEATSHEET=/c/Users/qzheng/pub-daiily/bin/cheatsheet
+CHEATSHEET=/home/linuxdev/users/qzheng/pub-daiily/bin/cheatsheet
 
 alias ffcmd="vim $CHEATSHEET/ffcmd"
 alias handy="vim $CHEATSHEET/linux_handyman"
@@ -42,7 +42,7 @@ alias gsthelp="vim $CHEATSHEET/gsthelp"
 #export PATH="${JAVA_HOME}/bin:${PATH}"
 
 #export PATH="$PATH:/opt/homebrew/bin/"
-export PATH="$PATH:/c/Users/qzheng/pub-daiily/bin/"
+export PATH="$PATH:/home/linux/users/qzheng/pub-daiily/bin/"
 #export PATH="$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/"
 
 # <<< conda initialize <<<
