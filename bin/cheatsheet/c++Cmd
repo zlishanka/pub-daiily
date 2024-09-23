@@ -554,7 +554,25 @@
  x64 command line: 
    cl ffencdec.cpp /I "C:\ffmpeg-701\include" /I "C:\opencv\build\include" /link /LIBPATH:"C:\ffmpeg-701\lib" /LIBPATH:"C:\opencv\build\x64\vc16\lib" libavcodec.a libavformat.a libavutil.a libswscale.a libswresample.a opencv_world490.lib strmiids.lib mf.lib mfplat.lib mfuuid.lib mfreadwrite.lib bcrypt.lib Ole32.lib User32.lib
 
+# CMakeLists.txt find packages
+# cmake to find header files/library
+find_path(PORTAUDIO_INCLUDE_DIRS portaudio.h)
+find_library(PORTAUDIO_LIBRARIES portaudio)
 
+include_directories(${PORTAUDIO_INCLUDE_DIRS})
+target_link_libraries(your_target ${PORTAUDIO_LIBRARIES}
 
+target_include_directories(your_target PRIVATE ${PORTAUDIO_INCLUDE_DIRS})
+
+# macro
+	#define DEBUG_PRINT(msg) std::cout << "DEBUG: " << msg << std::endl
+
+	#define CHECK_ERROR(err, msg) \
+    if (err < 0) { \
+        char errbuf[AV_ERROR_MAX_STRING_SIZE]; \
+        av_strerror(err, errbuf, AV_ERROR_MAX_STRING_SIZE); \
+        std::cerr << msg << ": " << errbuf << std::endl; \
+        return 1; \
+    }
 
 

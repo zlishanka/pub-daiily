@@ -601,4 +601,12 @@ systemctl restart xrdp
 select virtual env
 shift + alt + p   ---> select interpreter 
 
+# cmake to find header files/library
+find_path(PORTAUDIO_INCLUDE_DIRS portaudio.h)
+find_library(PORTAUDIO_LIBRARIES portaudio)
+
+include_directories(${PORTAUDIO_INCLUDE_DIRS})
+target_link_libraries(your_target ${PORTAUDIO_LIBRARIES}
+
+target_include_directories(your_target PRIVATE ${PORTAUDIO_INCLUDE_DIRS}) 
 

@@ -37,14 +37,23 @@
 # Streaming file to RTP using h264 codec 
 	ffmpeg -i input.mp4 -c:v h264_nvenc -f rtp rtp://<IP>:<Port>
 
+	ffmpeg -f alsa -i hw:0 -c:a libmp3lame -ar 11025 -f rtp rtp://192.168.0.7:8099
+	ffmpeg -f alsa -i hw:5,0 -c:a libfdk-aac -ar 44100 -f rtp rtp://127.0.0.1:9603
+
 	ffmpeg -protocol_whitelist "file,udp,rtp" -i rtp://<IP>:<Port> -c:v h264_cuvid output.mp4
 	ffmpeg -protocol_whitelist "file,udp,rtp" -i rtp://<IP>:<Port> -c:v h264_cuvid -f x11grab :0.0
 
-	ffplay -protocol_whitelist "file,udp,rtp" -i session.sdp
+	ffplay -fflags nobuffer -protocol_whitelist "file,udp,rtp" -i session.sdp
+
+# print error code
+	char errbuf[100];
+    av_strerror(ret, errbuf, sizeof(errbuf));
+    std::cerr << "Could not open input device. Error: " << errbuf << std::endl;
 
 # list audio playback and recording devices 
 	aplay -l 
 	arecord --list-devices
+	arecord -D hw:4,0 --dump-hw-params  | more # dump hw parameters 
 
 	# ubuntu list devices (PulseAudio instead of ALSA) 
 	pactl list sources short 
@@ -56,11 +65,13 @@
 
 	ubuntu - 
 	ffmpeg -f pulse -ac 1 -ar 16000 -i alsa_input.usb-EMEET_HD_Webcam_eMeet_C980_Pro_Ucamera002-02.mono-fallback -c:a aac -b:a 128k output.mp4
+	ffmpeg -f alsa -ac 1 -ar 16000 -i hw:4,0 -c:a aac -b:a 128k output.mp4
 	
 # play back from cloud front, test  
 	ffplay http://ddwok94le1461.cloudfront.net/ 
 	ffplay -fflags nobuffer http://ddwok94le1461.cloudfront.net/
 
+	ffplay -v debug -protocol_whitelist file,rtp,udp -i ~/Desktop/stream.sdp
 # play back from cloud front, beta 
 	ffplay http://d3j0xy8o488abn.cloudfront.net/vidnas94wa8xp73s6hn/1920s/
 
