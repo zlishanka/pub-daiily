@@ -93,6 +93,8 @@
     date +%s 
     date -d@1479247731
 
+	while true; do printf '%s\r' "$(date +%H:%M:%S:%N)"; done
+
 # find files that get modified in last x minutes / x days 
     find . -mmin -60 -type f | xargs ls -l 
     find . -mmin -60 -type f -exec ls -l {} + 
