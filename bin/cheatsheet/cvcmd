@@ -35,6 +35,24 @@ cmake --build "c:\Users\qzheng\workArea\workspace\thirdparty\opencv-gpu\build" -
     # download source code
         git clone https://github.com/opencv/opencv.git
 
+# check the installed OpenCV packages
+   dpkg -l | grep opencv
+
+# remove the OpenCV packages
+	sudo apt-get remove --purge libopencv*
+   	sudo apt-get autoremove
+   	sudo apt-get clean
+
+# build opencv in light fashion
+	cmake -D CMAKE_BUILD_TYPE=Release \
+      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D BUILD_opencv_videoio=ON \
+      -D WITH_FFMPEG=ON \
+      -D FFMPEG_INCLUDE_DIR=/usr/local/include \
+      -D FFMPEG_LIB_DIR=/usr/local/lib \
+      -D WITH_CUDA=ON ..
+	   
 # display image
     image = imread( argv[1], 1 );
 
