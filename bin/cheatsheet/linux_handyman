@@ -612,3 +612,10 @@ target_link_libraries(your_target ${PORTAUDIO_LIBRARIES}
 
 target_include_directories(your_target PRIVATE ${PORTAUDIO_INCLUDE_DIRS}) 
 
+# Run to get the $ARCH variables
+execute_process(
+    COMMAND uname -m
+    OUTPUT_VARIABLE ARCH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+

@@ -51,6 +51,7 @@ cmake --build "c:\Users\qzheng\workArea\workspace\thirdparty\opencv-gpu\build" -
       -D WITH_FFMPEG=ON \
       -D FFMPEG_INCLUDE_DIR=/usr/local/include \
       -D FFMPEG_LIB_DIR=/usr/local/lib \
+	  -D WITH_GTK=ON \
       -D WITH_CUDA=ON ..
 	   
 # display image
