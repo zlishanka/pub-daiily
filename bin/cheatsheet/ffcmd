@@ -5,22 +5,36 @@
 		nvidia-smi 
 		inxi -G
     	/usr/lib/x86_64-linux-gnu/libnvidia*
+		
+		# update the nvidia driver
+		sudo apt install nvidia-driver-550
 
 	(2) check nvidia toolkit installation
 		nvcc --version
     	/usr/lib/nvidia-cuda-toolkit/	
-		install toolkit - sudo apt install nvidia-cuda-toolkit
+		# install toolkit 
+		sudo apt install nvidia-cuda-toolkit
+
 		/usr/lib/cuda
 
-	(3) install ffnvcodec headers
+	(3) install ffnvcodec headers (https://github.com/FFmpeg/nv-codec-headers)
 		cd nv-codec-headers && sudo make install
 		/usr/local/include/ffnvcodec/
 		/usr/local/lib/pkgconfig/
+		
 	(4) get ffmpeg source code and run
 	(5) configuration
 		./configure --help | more 
-		apt-cache search libx265 
-	(6) install necessary codec libraries - nasm libghc-gnutls-dev libvpx-dev libx264-dev libx265-dev 
+		apt-cache search libx265
+ 
+	(6) install necessary codec libraries - 
+
+		sudo apt-get install nasm libgnutls28-dev libvpx-dev libx264-dev libx265-dev 
+		sudo apt-get -y install autoconf automake build-essential libass-dev libfreetype6-dev libtheora-dev libtool libvorbis-dev pkg-config texinfo zlib1g-dev libfdk-aac-dev libvpx-dev
+		sudo apt-get -y install cmake nlohmann-json3-dev 
+		sudo apt-get -y install libsdl2-dev  # for ffplay
+		sudo apt-get install -y libv4l-dev 	 # for PCIE capture 
+				
 	(7) nvtop - GPU top viewer tool
 	(8) cuda include and lib directories after toolkit update
 		https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04
@@ -29,10 +43,34 @@
 		libraries - /usr/local/cuda/lib64
 
 	(9) build ffmpeg  
-		./configure --enable-nonfree --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/include --extra-ldflags=-L/usr/lib/x86_64-linux-gnu --enable-gpl --enable-gnutls --enable-libvpx --enable-libx264 --enable-libx265 --prefix=/home/qzheng/ffmpeg-cuda
-				
+		./configure --enable-nonfree --enable-cuda --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64 \
+         --enable-gpl --enable-gnutls --enable-libvpx --enable-nvenc --enable-nvdec --enable-cuvid --enable-libfdk-aac --enable-ffplay --disable-shared --enable-static \
+		--prefix=/home/linuxdev/ffmpeg-cuda-build
+
+
+			
+		build ffmpeg 4.4.5 for audio aac
+		./configure --enable-nonfree  --enable-gpl --enable-libfdk-aac --enable-libvpx --enable-libx264 --enable-ffplay --disable-shared --enable-static --prefix=/home/qzheng/ffmpeg-44-build	
+	
 	(10) test build
 		~/ffmpeg-cuda/bin/ffmpeg -i 1006538_Stifelman_dVPN_clip1.mp4 -vcodec h264_nvenc -acodec copy 1006538_Stifelman_dVPN_clip1.h264_nvenc.mp4	
+
+
+# upgrade nvidia driver on ubuntu
+	1. remove existing Nvidia driver
+		sudo apt-get purge nvidia*
+		sudo apt-get autoremove
+		sudo apt-get update
+ 
+	2. Add th official Nvidia PPA to ensure to have latest drivers 
+		sudo add-apt-repository ppa:graphics-drivers/ppa
+		sudo apt-get update
+
+		sudo apt-get install nvidia-driver-550
+		sudo reboot
+
+	3. if still encounter issues, force the installation 
+		sudo apt-get install nvidia-driver-550 --allow-downgrades
 
 # Streaming file to RTP using h264 codec 
 	ffmpeg -i input.mp4 -c:v h264_nvenc -f rtp rtp://<IP>:<Port>

@@ -43,16 +43,32 @@ cmake --build "c:\Users\qzheng\workArea\workspace\thirdparty\opencv-gpu\build" -
    	sudo apt-get autoremove
    	sudo apt-get clean
 
+# git  opencv 
+	git clone https://github.com/opencv/opencv.git
+	git clone https://github.com/opencv/opencv_contrib.git
+
+
+# install on ubuntu
+	sudo apt install libopencv-dev python3-opencv
+
+# ubuntu build opencv with CUDA 
+	sudo apt install nvidia-cuda-toolkit
+	sudo apt install nvidia-cudnn
+
 # build opencv in light fashion
 	cmake -D CMAKE_BUILD_TYPE=Release \
       -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
       -D CMAKE_INSTALL_PREFIX=/usr/local \
       -D BUILD_opencv_videoio=ON \
+	  -D WITH_GTK=ON \ 
       -D WITH_FFMPEG=ON \
       -D FFMPEG_INCLUDE_DIR=/usr/local/include \
       -D FFMPEG_LIB_DIR=/usr/local/lib \
-	  -D WITH_GTK=ON \
-      -D WITH_CUDA=ON ..
+      -D WITH_CUDA=ON \
+      -D WITH_CUDADNN=ON ..
+ 
+      -D CUDA_NVCC_FLAGS="-std=c++11" \
+	  -D CUDA_ARCH_BIN=8.6 ..
 	   
 # display image
     image = imread( argv[1], 1 );
