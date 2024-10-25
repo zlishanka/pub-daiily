@@ -575,4 +575,8 @@ target_include_directories(your_target PRIVATE ${PORTAUDIO_INCLUDE_DIRS})
         return 1; \
     }
 
+# set compiler and flags 
+	CXX = g++
+	CXXFLAGS = -std=c++17 -O2
 
+	
