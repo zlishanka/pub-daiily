@@ -269,10 +269,16 @@ check the kernal message that kill a process
 
     dmesg | grep -E -i -B100 'killed process'
 
-test bandwidth and bitrate between two network nodes (iperf3)  
+test bandwidth and bitrate between two network nodes (iperf3)
+	#https://chrisjhart.com/Install-iperf3-on-Ubuntu-22.04/  
 
     iperf3 -s -p 5908 (server) 
-    iperf3 -c remoteServer -i 1 -t 30 -p 5908 (client)   
+    iperf3 -c remoteServer -i 1 -t 30 -p 5908 (client)
+	# jitter, packet loss test 
+	iperf3 -c 10.0.0.41 -p 9600 -u -b 100000000 -t 100  	# test as client to remote ip 10.0.0.41 at port 9600 with udp port at bitrate 100 mbps 
+	# latency test
+	iperf3 -s
+	iperf3 -c <remote_ip> -u -b 0
 
 tmux to have multiple terminal sessions 
 
@@ -619,3 +625,7 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
+# get/set MTU of network interface
+	ip link show
+	sudo ip link set dev eth0 mtu 1400
+	ip link show wlp0s20f3

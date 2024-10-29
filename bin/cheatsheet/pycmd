@@ -358,10 +358,13 @@ http://quickref.me/python
     chunks = BytesIO(''.join(chunks)) 
 
 # argument parser
+	# type can be str, int, double etc.
+	# required=True
     import argparse 
     parser = argparse.ArgumentParser()
     parser.add_argument('--cascade_path', type=str)
-    parser.add_argument('video_file', type=file)
+    parser.add_argument('video_file', type=file, required=True)
+
     parser.add_argument('-s', '--show', action='store_true')
     parser.add_argument('-o', '--jpg_destination_path', type=str)
     args = parser.parse_args() 

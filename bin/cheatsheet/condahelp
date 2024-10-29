@@ -13,6 +13,7 @@
 
 # initialize shell so we can run conda directly 
 	~/miniconda3/bin/conda init 
+	conda init zsh
 	- OR -
 	source <path to conda>/bin/activate 
 	conda init zsh
@@ -37,3 +38,7 @@
 
 # remove the environment created 
 	conda remove --name d2l --all
+
+# List all installed conda packages
+	conda list
+	conda list -n your_environment_name
