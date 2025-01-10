@@ -154,7 +154,7 @@
 	m.erase(key) 	# erase the key from map
 
 	unordered_map<int, pair<int, list<int>::iterator>> cache; # design map to save the pointer of list
-	
+	unordered_map<char, char> m = {{'(' ,')'}, {'[' ,']'}, {'{' , '}'}};  # initialize map	
 	
 # vector operations
 	# C++ 11 initializer list
@@ -168,7 +168,8 @@
 	for (auto i: v) {}
 	for (auto &i:v) {} 	// change the values in v
 	# initialization 
-	vector<int> myVector(n + 1, 0);  # Initialize with zero
+	vector<int> myVector(n + 1, 0);  # i9nitialize with zero
+	vector<int> vset(9,0); # initialize vector vset with dimention of 9, all zeros		
 	vector<vector<bool>> flip(m, vector<bool>(n, false)); # 2D array
 	# summation 
 	accumulate(myVector.begin(), myVector.end(), 0);
