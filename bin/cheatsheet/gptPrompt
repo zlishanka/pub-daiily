@@ -219,6 +219,21 @@
 
 # Use first principle thinking
 	Prompt: "I have difficulty learning AI. Help me understand it better uing First Priciple Thinking" 
-   
 
+---- 
+# Kepner-Tregoe Problem Solving and Decision Making (KT)
+	Prompt: "You are an expert[mention niche] coach. I am [mention the the problem you're facing in details with background context], Help me analyze a problem using the 
+			Kepner-Tregoe framework. The issue involves [describe the problem]. Start by assisting me in assisting me in appraising the situation to identify the main 
+ 			concerns and prioritize them. Then guide me through defining the problem clearly, analyzing potential causes, and evaluating alternative solutions. Finally, 
+			let's discuss how we can anticipate and mitigate potential future problems. I want you to [mention how you want the output in detail with examples]." 
+
+# Root Cause Analysis (RCA)
+	Prompt: "You are an expert[...], Assist me with a Root Cause Analysis for a recurring problem. The problem is [describe the issue]. Begin by helping me clearly define 
+			 this problem and gather all necessary data related to its occurrence. Then, let's brainstorm possible causes and use techniques like the 5 Whys or Fishbone Diagram
+			 to pinpoint the root cause. Finally, suggest practical solutions to address this root cause and prevent the issue from recurring. I want you to [mention how you want 
+             the output in detail with examples]."
+
+
+ 
+			
 

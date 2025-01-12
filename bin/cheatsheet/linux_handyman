@@ -102,6 +102,8 @@
     find . -name \*.xml -mtime -4   # file with *.py changed   
     find . -name \*.log -mmin -60 | xargs ls -l  
     find . -name '*.so' 
+	# Remove all .class files
+	find . -name "*.class" -type f -delete
 
 # find system/shared libraries in linux 
     sudo find /usr -iname "*libGL.so*" -exec ls -l {} \; 
