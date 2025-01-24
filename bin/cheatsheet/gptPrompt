@@ -25,7 +25,7 @@
 		arrow filetype:png
 
 
-## Define ChatGPT Role 
+## Define ChatGPT Role. GPT LLM to take on a persona. 
 	Act as a Linux Terminal 
 	Act as "Position" interviewer ` 
 	Act as an Excel Sheet

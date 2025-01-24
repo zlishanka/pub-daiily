@@ -162,7 +162,7 @@
     sort(v.begin(), v.end()); 					# ascending
 	sort(v.begin(), v.end(), greater<int>()); 	# descending 
 	# vector traverse, use auto type
-	for (auto it = vec.begin(); it != vec.end(); ++ it)
+	for (auto it = vec.begin(); it != vec.end(); ++it)
 		m_vec.push_back(*it);
 	# for each, works on any class that has begin() and end()
 	for (auto i: v) {}
@@ -183,7 +183,8 @@
 	# remove the element 
 	vector<int>::iterator pos = find(myVector.begin(), myVector.end(), key);
     myVector.erase(pos);	
-
+	# swap the element at index i, j of vector nums
+		std::swap(nums[i], nums[j]);	
 	# get the last iterator of vector
 	prev(myVector.end()) 	# returns an iterator pointing to the last element in the container.
 	
@@ -221,6 +222,21 @@
 	order.push_back(key);
     cache[key] = {val, prev(order.end())};
 
+# queue operations
+	queue<TreeNode*> q;
+    q.push(root); 						# push
+	TreeNode* node = q.front(); 		# get front element;
+	void q.pop();						# remove front element;
+
+# deque operations (short for double-ended queue) 
+	deque<TreeNode*> q;
+	TreeNode* node = q.front();	# front of queue
+	TreeNode* node = q.back(); 	# end of queue
+	q.pop_front(); 
+	q.pop_back(); 
+	q.push_back(a);
+	q.push_front(a); 	# insert at front
+	 
 # map vs unordered_map
     # a huge difference between maps and unordered maps
     Self balancing BST vs Hash Table
@@ -479,9 +495,11 @@
 	vector<string>& bank;
 	unordered_set<string> bankSet(bank.begin(), bank.end());
 	# initialization
-    unordered_set<string>New_set({element1, element2, element3, element4}); 
+	unordered_set<string> math_op = {"+","-","/","*"};
     unordered_set<string>New_set = {element1, element2, element3, element4}; 
-	
+	# convert a vector<int> to unordered_set<int>
+	unordered_set<int> nums_set(nums.begin(), nums.end());
+		
 # swap function
 	swap(nums[i], nums[level])
 
