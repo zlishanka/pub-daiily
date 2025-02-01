@@ -21,29 +21,39 @@ http://quickref.me/python
     len(a)  # length  
     list(a) # get the list of set 
 
-# generate random number 
+# itertools - useful for permutations and combinations
+	## itertools functions are implemented in C, making them faster than equivalent Python loops.
+	s = "123"
+	perms = set(permutations(s)) 
+	{('1', '3', '2'), ('2', '1', '3'), ('3', '1', '2'), ('2', '3', '1'), ('1', '2', '3'), ('3', '2', '1')}
+	res = [''.join(p) for p in perms]
+ 	['123', '132', '213', '231', '312', '321']
+		
+	s1 = "abcd"
+	combs = list(combinations(s1,2))
+	[('a', 'b'), ('a', 'c'), ('a', 'd'), ('b', 'c'), ('b', 'd'), ('c', 'd')] 
+	res = [''.join(c) for c in combs]
+	['ab', 'ac', 'ad', 'bc', 'bd', 'cd']
 
-    from random import randrange 
-    randrange(10)   # random number 0,1,...,9
-    x = random.randint(0,50) 
+# generate random number 
+    import random 
+    x = random.randint(0,50)	# random number between 0 and 50
+	random.randrange(50)  
 
 # interactive shell for debugging, dev 
-
     python -i function.py   # say has def add(...): func 
     >>> add(1,2)
     3
-# use unverified ssl you can add following code
 
+# use unverified ssl you can add following code
     import ssl 
     ssl._create_default_https_context = ssl._create_unverified_context 
 
 # pdb debugger 
-    
     import pdb 
     pdb.set_trace() 
 
 # compile a Python script 
-
   python -m py_compile script.py 
   pylink 
   
@@ -57,7 +67,6 @@ http://quickref.me/python
 	import traceback 
         try: 
     	    [do sth] 
-        except IOError as e:
             print "I/O error({0}): {1}".format(e.errno, e.strerror)
         except: 
 	        traceback.print_exc() 
@@ -73,7 +82,6 @@ http://quickref.me/python
     'workArea/daily/python-lang/drills'
     
 # string  startswith() method
-
     # get chunks from chunk_paris where key starts with certain prefix
     chunks = [v for k, v in chunk_pairs if k.startswith(chunk_key_prefix)]
 
@@ -102,11 +110,9 @@ http://quickref.me/python
   '{:4d}'.format(42)        ----> '  42' 
 
 # install python pip on ubuntu 
-
   sudo apt-get install python-pip 
 
 # variables to swap values 
-
     a, b = b, a 
     a[1], a[3] = a[3], a[1]   # element in array to swap 
 
