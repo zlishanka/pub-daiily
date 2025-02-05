@@ -10,16 +10,27 @@ http://quickref.me/python
 
 # set operations 
 	resolutions = set(['source','1920s','1440s','960s']) 
-        r in resolutions 
     a = set() 
-    a.add(1), a.add(2)
-    a.remove(1)
-    a=set([1, 2]) 
+    a.add(1), a.add(2) a.remove(1) # add/remove element
+    a=set(num), a =set([1,2]) # create set based on existing array 
     a&b     # intersection 
     a|b     # union
     a-b     # deduction 
     len(a)  # length  
     list(a) # get the list of set 
+
+# add counter of map automatically
+	char_count = {} 
+	char_count[char] = char_count.get(char, 0) + 1
+
+# defaultdict op 
+	# Create a defaultdict with a default value of 0 (int)
+	# defaultdict is a subclass of the built-in dict class that provides a default value for missing keys
+	word_counts = defaultdict(int)
+	text = "hello world hello python"
+	words = text.split()
+	for word in words:
+    	word_counts[word] += 1
 
 # itertools - useful for permutations and combinations
 	## itertools functions are implemented in C, making them faster than equivalent Python loops.
@@ -241,7 +252,6 @@ http://quickref.me/python
 	[[1, 4], [2, 3], [3, 0]] 
 
 # sort on class object 
-
   list_objects = [Student('john', 'A', 15), Student('jane', 'B', 12), Student('dave', 'B', 10)] 
   sorted(list_objects, key=lambda, student: student.age) # sort by age, low to high  
   sorted(list_objects, key=lambda, student: student.age, reverse=True) # sort by age, high to low   
@@ -249,12 +259,10 @@ http://quickref.me/python
   intervals.sort(key=lambda x: x.start)
 
 # lambda expression 
-
   add2 = lambda x,y : x + y
   same def add2(x,y) 
 
 # check python library etc. 
-
   python3 -c "import jupyter, matplotlib, numpy"
   python3 -c "import pandas, scipy, sklearn"
 
@@ -268,15 +276,12 @@ http://quickref.me/python
   pip freeze
 
 # max, min integers 
-
-  sys.maxint, -sys.maxint   # python 2 
-  sys.maxsize, -sys.maxsize # python 3
-  float('int') # python3 
+  float('int'), -float('inf') # python3 
 
 # declare nonlocal variables
 	nonlocal min_val # for variable inside inner function 
 
-# dictionary  operation
+# dict operation, map operation
     ditc = {} 
     if key in dict: # has_key is moved out of python3 
     dict.values()
@@ -568,7 +573,7 @@ http://quickref.me/python
 
    xttps://stackoverflow.com/questions/29104107/upload-image-using-post-form-data-in-python-requests 
 
-## zip 
+## zip operation 
 	The zip() function in Python is used to combine two or more iterables into a single iterable
 	It is often used to combine data from multiple sources, or to iterate over multiple sequences in parallel.
 

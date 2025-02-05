@@ -1,30 +1,3 @@
-## Search tricks 
-	- limit keyword search 
-		"AGI threat"
-	- intitle, limit title 
-		intitle:iphone15 sale 
-	- intitle plus limited keywoard - 
-		intitle:"iphone 15 deal" 
-	- allintitle: multiple keywords
-		allintitle:word1 word2 word3
-	- intext 
-		intitle:"Elon MUSK" intext:"SpaceX Starship"
-		intitle:"Qigong Zheng" intext:"UMD"
-	- inurl : limited url 
-		Elon MUSK inurl:youtube intext:youtube
-	- site:
-		Elon Musk site:youtube.com 
-		Qigong Zheng site:umd.edu
-		little cat site:pexels.com
-		little cat site:pixabay.com
-		little cat site:gettyimages.com
-	- imagesize: size of image
-		elon musk imagesize:2560x1440 
-	- filetype
-		large language model filetype:pdf
-		arrow filetype:png
-
-
 ## Define ChatGPT Role. GPT LLM to take on a persona. 
 	Act as a Linux Terminal 
 	Act as "Position" interviewer ` 
@@ -34,12 +7,15 @@
 ## Learn from ChatGPT 
 	Explain clearly, uniquely, detailed like I'm 5, with examples, to 5th grades, like Elon Musk, detailed with example, to high schoolers 
 
+## Ask ChatGPT to help you become better at using ChatGPT:
+	"Create a beginner's guide to using ChatGPT. Topics should include prompts, priming, and personas. Include examples. The guide should be no longer than 500 words."
+
 ## Use temparature 
 	Give me short paragraph on why AI will continue to gain popularity. Use a temperature of 10.0
 	Give me short paragraph on why AI will continue to gain popularity. Use a temperature of 0.1 
 
 ## Train ChatGPT to write its own prompts for you 
-	What's the best prompt for chatGPT to learn my writing styles and respond to my emails for me? 
+	"What's the best prompt for chatGPT to learn my writing styles and respond to my emails for me?" 
 
 ## Create unique business ideas 
 	Generate unique angles or strategies for the topic 'How to increase your creative output.' 
@@ -64,15 +40,32 @@
 ## Chained Prompt 
 	write an article about ChatGPT, first give me the outline which consists of a headline, a teaser, and several subreadings
 	# after output 
-	now write 5 different subheadings 
+		now write 5 different subheadings 
 	# after output 
-	add 5 keywords for each subheadings 
+		add 5 keywords for each subheadings 
 
 ## Prompt for developers 
 	Develop an architecture and code for a <description> website with Javascript 
 	help me find mistakes in the following code <paste code below> 
 	I want to implement a stikcy header on my website, can you provide an example using CSS and Javascript 
 	please continue write code for Javascript <Paste code below> 
+
+	# Code Debugging & Optimization
+		Prompt: "Review the following [programming language] code for [specific functionality]: [paste code]. Identify bugs, inefficiencies, and security vulnerabilities. Propose optimized code" 
+				"with inline comments explaining fixes and adherence to [framework/library] best practices."
+
+	# Create Presentations using AI in seconds:
+		@meetgamma
+		The ultimate presentation creation tool.
+		Watch how http://gamma.app generated for me a complete presentation in seconds about "Top 10 Cell Phones of 2025"
+	
+	# Document Summarization
+		Prompt: "Summarize the attached [document/report] into a 10-point executive briefing. Extract key decisions, metrics, and recommendations." 
+				"Highlight sections requiring urgent attention and cross-reference with [related policy/regulation]."
+
+## Financial Forecasting
+	Prompt: "Analyze the attached financial statements for [company]. Perform a variance analysis vs. budget, identify liquidity risks," 
+			"and forecast [metric: e.g., EBITDA, cash flow] for the next 6 quarters. Visualize trends and recommend cost-optimization strategies."
 
 ## The way to learn a new concept or  
 
@@ -167,10 +160,30 @@
 
 # Generate regexes 
 
+
 ## improve your decision making ability
+# Summarise complex texts
+	Prompt: "I need to read a complicated article related to (topic). Can you help me summarise the key points and takeaways from the text?"
+# Connect with others.
+	Prompt: "Connect me with a community of learners and experts in (topic). How can I join a forum, social media group or other online community to share my knowledge and learn from others?"
+
 # Seek advice from industry experts 
     Prompt: "Imagine you could consult [industry expert] on [specific decision]. What questions would you ask them, " 
             "and what insights do you think they would share?"
+
+# Respond to emails in a professional manner.
+	Prompt: "As a customer service representative, you are tasked with handling a case involving [PROBLEM]. You must write an email responding to that problem," 
+			"no more than [NUMBER OF WORDS] words long, offering the customer [SOLUTION]."
+
+# Improve your writing by getting feedback:
+	[paste your writing]
+ 	Prompt: "Proofread my writing above. Fix grammar and spelling mistakes. And make suggestions that will improve the clarity of my writing"
+
+# Personalize your writing style.
+	Prompt: "Analyze the writing style of the text provided below: [TEXT] Now write an essay of [NUMBER OF WORDS] words on [SPECIFIC TOPIC]." 
+			"You do not have to mention anything related to the previous text, it is simply provided to elicit a response that "
+			"imitates the tone, structure, and vocabulary. Answer me only with the requested essay."
+
 # Improve your decision-making
     Prompt: "I am trying to decide if I should [insert decision]. Give me a list of pros and cons that will help me decide why I should or shouldn't make this decision."
 
@@ -233,7 +246,31 @@
 			 to pinpoint the root cause. Finally, suggest practical solutions to address this root cause and prevent the issue from recurring. I want you to [mention how you want 
              the output in detail with examples]."
 
+## Google Search tricks 
+	- limit keyword search 
+		"AGI threat"
+	- intitle, limit title 
+		intitle:iphone15 sale 
+	- intitle plus limited keywoard - 
+		intitle:"iphone 15 deal" 
+	- allintitle: multiple keywords
+		allintitle:word1 word2 word3
+	- intext 
+		intitle:"Elon MUSK" intext:"SpaceX Starship"
+		intitle:"Qigong Zheng" intext:"UMD"
+	- inurl : limited url 
+		Elon MUSK inurl:youtube intext:youtube
+	- site:
+		Elon Musk site:youtube.com 
+		Qigong Zheng site:umd.edu
+		little cat site:pexels.com
+		little cat site:pixabay.com
+		little cat site:gettyimages.com
+	- imagesize: size of image
+		elon musk imagesize:2560x1440 
+	- filetype
+		large language model filetype:pdf
+		arrow filetype:png
 
- 
 			
 
