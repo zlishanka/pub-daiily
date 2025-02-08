@@ -46,6 +46,14 @@ http://quickref.me/python
 	res = [''.join(c) for c in combs]
 	['ab', 'ac', 'ad', 'bc', 'bd', 'cd']
 
+# sortedcontainers - sorted collections library, written in pure-Python, and fast as C-extensions. 
+	sudo pip install sortedcontainers
+	## SortedList O(logn)
+		SortedList([10, 9, 8, 7, 6]) --> SortedList([6, 7, 8, 9, 10], load=1000) 
+	## SortedSet
+	## SortedDict - keys are maintained in sorted order
+		sorted_dict = SortedDict({'a': 1, 'c': 2, 'b':3})  --> SortedDict(None, 1000, {'a': 1, 'b': 3, 'c': 2}) 
+		
 # isalnum
 	for string s
 	s[i].isalnum()  # check letter is Alphanumeric characters or not (letters and numbers).
@@ -112,7 +120,7 @@ http://quickref.me/python
     
 # two dimentional arrays 
     m, n = 4, 3
-    a = [[0] * m for i in range(n)]   # use generators
+    a = [[0] * m for _ in range(n)]   # mxn array
     a = [[]]
     board[][] : mxn array 
     check_board = [[True] * len(board[0]) for _ in range(len(board))]
@@ -136,7 +144,7 @@ http://quickref.me/python
         i = 0, 1, 2, 3, 4
     for i in range(1,5): 
         i = 1, 2, 3, 4
-    for i in reversed(range(4)): 
+    for i in reversed(range(4)):	# reverse range,  
         i = 3,2,1,0 
     for i in range(6,-1,-1): 
         i = 6,5,4,3,2,1,0 
@@ -240,6 +248,8 @@ http://quickref.me/python
 	sorted_geos = sorted(geo_info, key = get_info.get, reverse=True) 
 	m = sorted(m.items(), key=lambda x: x[0]) 
 	m.sort(lambda x:x[0])
+	# sorted on strring
+	a = "eat" sorted(a) --> ['a', 'e', 't']
 
 # sort on list 
     s = ['ate', 'bat', 'eat', 'nat', 'tan', 'tea']
@@ -596,9 +606,16 @@ http://quickref.me/python
 	heapq.heappop(a)
 	2
 
+## OrderedDict
+	from collections import OrderedDict
+	cache = OrderedDict()
+	cache.move_to_end(key)
+	cache.popitem()	# from end of dict
+	cache.popitem(last=False) # from begining of dict
+
 ## graph 
 		from collections import defaultdict, deque
-		graph = defaultdict(list) 
+		graph = defaultdict(list) 	# each key --> list 
 		grpah[key].append(value)
 
 		from collections import defaultdict
