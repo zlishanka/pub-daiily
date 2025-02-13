@@ -8,6 +8,10 @@ http://quickref.me/python
 	ast.literal_eval raises an exception if the input isn't a valid Python datatype, so the code won't be executed if it's not. 
 	ast.literal_eval(m.get_body()) 
 
+# create shallow copy of entire array
+	original_array = [1, 2, 3, 4, 5]
+	copied_array = original_array[:]
+	
 # set operations 
 	resolutions = set(['source','1920s','1440s','960s']) 
     a = set() 
@@ -18,6 +22,10 @@ http://quickref.me/python
     a-b     # deduction 
     len(a)  # length  
     list(a) # get the list of set 
+
+# bisect.insort, bisect.bisect_left
+	window.pop(bisect.bisect_left(window, nums[i-k])) 	# window is sorted, Finds the position of an element to remove
+    bisect.insort(window, nums[i])	# Add the new element in correct position, keep window sorted
 
 # add counter of map automatically
 	char_count = {} 
@@ -244,12 +252,16 @@ http://quickref.me/python
 # dir function 
   dir(obj) is a powerful inbuilt function in Python3, which returns list of the attributes and methods of any object
 
-# sort on dict 
+# sort on dict, sorted on map 
 	sorted_geos = sorted(geo_info, key = get_info.get, reverse=True) 
-	m = sorted(m.items(), key=lambda x: x[0]) 
+	m = sorted(m.items(), key=lambda x: x[0])
 	m.sort(lambda x:x[0])
 	# sorted on strring
 	a = "eat" sorted(a) --> ['a', 'e', 't']
+	# sorted on map in descending order
+	freq_map = Counter(nums)
+    sorted_elements = sorted(freq_map.keys(), key=lambda x: -freq_map[x])
+	sorted_elements[:k]  # k largest
 
 # sort on list 
     s = ['ate', 'bat', 'eat', 'nat', 'tan', 'tea']

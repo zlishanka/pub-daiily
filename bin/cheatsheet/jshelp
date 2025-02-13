@@ -7,8 +7,8 @@ Node.js is a very powerful JavaScript-based framework/platform built on Google C
     many structures from those languages apply to JavaScript as well 
     
 ## object prototype 
-
-    JavaScript supports object-oriented programming with object prototypes, instead of classes (see more about prototypical inheritance and ES2015 classes). 
+    
+	JavaScript supports object-oriented programming with object prototypes, instead of classes (see more about prototypical inheritance and ES2015 classes). 
     JavaScript also supports functional programming — because they are objects, functions may be stored in variables and passed around like any other object.
 
 ## input and output
@@ -184,7 +184,6 @@ Node.js is a very powerful JavaScript-based framework/platform built on Google C
 ## File System 
 
     Node implements File I/O using simple wrappers around standard POSIX functions. 
-
     var fs = require("fs") 
 
     # Synchronous vs Asynchronous 
