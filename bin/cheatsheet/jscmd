@@ -1,8 +1,114 @@
+# Online resources 
+	https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
+	# Node JS Cheat Sheet by Zero To Mastery 
+		https://zerotomastery.io/cheatsheets/node-js-cheat-sheet/
+	# Complete Node.js CheatSheet by LeCoupa (GitHub Gist)
+		https://gist.github.com/LeCoupa/985b82968d8285987dc3
+	# The Ultimate Node.js Cheat Sheet for Developers (Dev.to)
+		https://dev.to/dipakahirav/the-ultimate-nodejs-cheat-sheet-for-developers-3pgf
+	# Learn Node.js: Introduction to Node.js Cheatsheet (Codecademy)
+		https://www.codecademy.com/learn/learn-node-js/modules/intro-to-node-js/cheatsheet
+	 
+# evenloop in node.js
+	- The event loop is what allows Node.js to perform non-blocking I/O operations, despite the fact that JavaScript is single-threaded. 
+	- It offloads operations to the system kernel whenever possible.
 
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
+# Difference between require and import
+	- require is used to import modules in CommonJS (Node.js's default module system), 
+	- import is used in ES6 modules
+	- import is not natively supported in Node.js without transpilation or using the .mjs extension.
+
+	# ES6 (import/export) vs CommonJS (require,module.exports)
+		- JavaScript ES6 modules, introduced in ECMAScript 2015 (ES6), are a standardized way to organize and share code in JavaScript applications. 
+	# Benefit of using ES6 
+		- A powerful and modern way to structure JavaScript code. 
+		- They provide better organization, reusability, and encapsulation compared to older module systems like CommonJS.
+		- Whether you're working on the front-end or back-end, mastering ES6 modules is essential for modern JavaScript development. 
+	 	
+# The purpose of the package.json file
+ 	- The package.json file is a manifest file that contains metadata about the project, including dependencies, scripts, 
+		version, and other configurations.
+	
+# Core modules in Node.js
+	- Core modules are built-in modules that come with Node.js, such as fs, http, path, os, events, and stream.
+	- fs module is used to interact with the file system. It provides functions to read, write, delete, and manipulate files and directories.	
+	- http module is used to create HTTP servers and make HTTP requests. It is the foundation for building web servers in Node.js.
+
+# Difference between process.nextTick() and setImmediate()
+	- process.nextTick() schedules a callback to be executed in the next iteration of the event loop
+	- setImmediate() schedules a callback to be executed in the check phase of the event loop.
+
+# Purpose of the Buffer class in Node.js 
+	- The Buffer class is used to handle binary data directly. It is particularly useful when working with streams, file systems, 
+		and network protocols.
+
+# What is a callback function?
+	- A callback function is a function passed as an argument to another function and is executed after some operation has been completed
+	- In Node.js, callbacks are commonly used for asynchronous operations.
+
+# What is a promise in Node.js?
+	- A promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. 
+	- Promises are used to handle asynchronous operations more elegantly than callbacks.
+
+# What is async/await in Node.js?
+	- async/await is syntactic sugar built on top of promises. 
+	- It allows you to write asynchronous code that looks like synchronous code, making it easier to read and maintain.
+
+# What is the difference between setTimeout and setInterval
+	- setTimeout schedules a single execution of a function after a specified delay, while 
+	- setInterval schedules repeated executions of a function at specified intervals.
+
+# How do you handle errors in Node.js?
+	- Errors in Node.js can be handled using try/catch blocks for synchronous code, and by passing errors as the first argument to 
+	  callback functions or 
+	- using .catch() with promises for asynchronous code.
+
+# What is the purpose of the error event in Node.js?
+	- The error event is emitted when an error occurs in a stream or an EventEmitter.
+	- If no listener is registered for the error event, the error will be thrown, which can crash the Node.js process.
+
+# What is the difference between cluster and child_process modules?
+	- The child_process module allows you to spawn child processes, 
+	- while the cluster module allows you to create child processes that share server ports, enabling you to scale your application 
+		across multiple CPU cores.
+
+	const cluster = require('cluster');
+	const http = require('http');
+	const numCPUs = require('os').cpus().length;
+	if (cluster.isMaster) {
+	  console.log(`Master process is running on PID ${process.pid}`);
+	  // Fork workers
+	  for (let i = 0; i < numCPUs; i++) {
+		cluster.fork();		# cluster.fork() child (worker) processes run on other CPUs
+	  }
+	} else {
+		// Workers can share any TCP connection
+  		http.createServer((req, res) => {		# workers can share any TCP connection
+		...
+	}
+
+# What is middleware in Express.js?
+	- Middleware in Express.js are functions that have access to the request object (req), the response object (res), and the 
+	  next middleware function in the application’s request-response cycle. They can execute any code, modify the request and response 
+	  objects, and end the request-response cycle.
+
+# What is the purpose of the stream module in Node.js
+	- The stream module provides an abstract interface for working with streaming data in Node.js. 
+	- Streams are used to handle reading/writing files, network communications, or any kind of end-to-end 
+		information exchange in an efficient way.
+
+# What is the difference between process.env and process.argv?
+	- process.env is an object containing the user environment variables, 
+	- process.argv is an array containing the command-line arguments passed when the Node.js process was launched.
+
+# Node.js is inherently single-threaded, which means it runs JavaScript code in a single thread. But it can utilize multiple CPU cores 
+	- Cluster Module: Creates multiple worker processes to handle incoming requests.
+	- Worker Threads: Allows running JavaScript in parallel using threads within the same process.
+	- Child Processes: Spawns separate processes to run other programs or scripts.
+	- Load Balancing: Distributes incoming requests evenly across worker processes.
+	- External Tools: Tools like PM2 can automate clustering and process management.
 
 # Variables 
-    
     let, const, var
 
     let -  allows you to declare block-level variables.

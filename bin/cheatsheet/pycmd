@@ -11,7 +11,11 @@ http://quickref.me/python
 # create shallow copy of entire array
 	original_array = [1, 2, 3, 4, 5]
 	copied_array = original_array[:]
-	
+
+# create tuple as key of dict
+	sig = [1, 1]
+	tuple(sig) # Signature (1, 1) of key of dict	
+
 # set operations 
 	resolutions = set(['source','1920s','1440s','960s']) 
     a = set() 
@@ -228,6 +232,8 @@ http://quickref.me/python
 
 # check if variable is instance of a class 
     isinstance(curr, TreeNode) 
+	isinstance(element, int) 	# check if it's integer
+	isinstance(element, list) 	# check if it's a list
 
 # check the data type 
     type(i) is int
@@ -252,15 +258,16 @@ http://quickref.me/python
 # dir function 
   dir(obj) is a powerful inbuilt function in Python3, which returns list of the attributes and methods of any object
 
-# sort on dict, sorted on map 
+# sort on dict, sort on map 
 	sorted_geos = sorted(geo_info, key = get_info.get, reverse=True) 
-	m = sorted(m.items(), key=lambda x: x[0])
+	m = sorted(m.items(), key=lambda x: x[0]) # sort on key x[0], sort on value x[1]
 	m.sort(lambda x:x[0])
 	# sorted on strring
 	a = "eat" sorted(a) --> ['a', 'e', 't']
 	# sorted on map in descending order
 	freq_map = Counter(nums)
     sorted_elements = sorted(freq_map.keys(), key=lambda x: -freq_map[x])
+    sorted_elements = sorted(freq_map.items(), key=lambda item: item[1], reverse=True) # sort map based on value, in descending order
 	sorted_elements[:k]  # k largest
 
 # sort on list 
@@ -642,7 +649,8 @@ http://quickref.me/python
 	Counter({'i': 4, 's': 4, 'p': 2, 'm': 1})
 	a = ['bob', 'far', 'boo', 'bob', 'far'] 	# input as list
 	Counter(a)
-	Counter({'bob': 2, 'far': 2, 'boo': 1}
+	freq = Counter({'bob': 2, 'far': 2, 'boo': 1}
+	list(freq.keys()) 		# get the list of keys of Counter, ['bob', 'far', 'boo']
 
 ## d2l torch library 
 	https://github.com/d2l-ai/d2l-en/blob/master/d2l/torch.py
