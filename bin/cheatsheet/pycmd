@@ -279,6 +279,8 @@ http://quickref.me/python
 	points = [[1,4], [2,3], [3,0]]
 	points.sort(key=lambda x:x[1])
 	[[1, 4], [2, 3], [3, 0]] 
+	# sort on two keys 
+	envelopes.sort(key=lambda x: (x[0], -x[1])) # sort on x[0] on ascending order and x[1] on descending order if x[0] equal
 
 # sort on class object 
   list_objects = [Student('john', 'A', 15), Student('jane', 'B', 12), Student('dave', 'B', 10)] 
