@@ -1,0 +1,34 @@
+# Online 
+	https://github.com/iamshaunjp/typescript-masterclass
+
+# Typescript 
+ 	- Superset of javaScript 
+	- Allow to use strict types
+	- Supports modern features (arrow function, let, const)
+	- Extra feature (generics, interfaces, tuples, etc)
+	- Just like JavaScript, with extra type annotations 
+ 
+	# Benefits
+		- better error feedback
+		- better autocompletion & codee hints
+		- custom types (i.e., "interface")
+		- self documented
+  
+# Installation
+	npm install -g typecript 
+
+# Compilation
+	tsc index.ts
+	tsc --init  	# Create config JSON
+	tsc --watch 	# keep compiler running in the background and watch file changes
+	node --watch index.js 	# run node automatically
+
+# data types
+	let names: string[] = ['mario', 'juan', 'lucas', 'bob']
+	let ages: number[] = [31, 35, 45, 47]	
+
+	let fruits = ['apple', 'orange', 'banana', 'peach'] # type infer as string
+
+# object literals
+	let user: {firstName: string, age: number, id: number} = {'john', 30, 123}
+	let person =  {name: 'john', score: 35}	
