@@ -28,7 +28,29 @@
 	let ages: number[] = [31, 35, 45, 47]	
 
 	let fruits = ['apple', 'orange', 'banana', 'peach'] # type infer as string
+	let x: any = 42; x = 'hello'; x = true; x = 34 	# any type
+	let title 	# any type 
 
 # object literals
 	let user: {firstName: string, age: number, id: number} = {'john', 30, 123}
-	let person =  {name: 'john', score: 35}	
+	let person =  {name: 'john', score: 35}
+
+# functions
+	function addTwoNumbers(a: number, b: number): number { return a + b }
+	const subtractTwoNumbers = (a: number, b: number): number => { return a - b }
+	function greet(name) { return `Hello, ${name}!`; } # return type inference 	
+
+# interfaces
+	interface Author {
+		name: string,
+		avatar: String
+	}
+	const authorOne: Author = {name: 'mario', avatar:'/img/mario.png'}
+	interface Post {
+		title: string, 
+		body: string, 
+		tags: string[],
+		createdAt: Date,
+		author: Author
+	}
+

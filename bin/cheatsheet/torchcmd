@@ -145,3 +145,24 @@
 		%load_ext tensorboard
 		%tensorboard --logdir experiments/runs
 
+## Convert pytorch model to ONNX, ONNX to tensorflow etc.
+	# Converting a PyTorch model to TensorFlow typically involves using the ONNX (Open Neural Network Exchange) format as an intermediary.
+	import torch
+    import torch.onnx
+
+	# Load your PyTorch model
+    model = YourModelClass(*args, **kwargs)
+    model.load_state_dict(torch.load('your_model.pth'))
+    model.eval()
+    # Create a dummy input with the correct shape
+    dummy_input = torch.randn(input_shape)
+    # Export the model to ONNX
+    torch.onnx.export(model, dummy_input, 'your_model.onnx', verbose=True)
+	# Convert the ONNX model to TensorFlow format:
+	from onnx_tf.backend import prepare
+    # Load the ONNX model
+    onnx_model = onnx.load('your_model.onnx')
+    # Prepare the model for TensorFlow
+    tf_rep = prepare(onnx_model)
+    # Export the model as a SavedModel
+    tf_rep.export_graph('your_tf_model') 

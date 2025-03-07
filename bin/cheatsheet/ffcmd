@@ -72,6 +72,11 @@
 	3. if still encounter issues, force the installation 
 		sudo apt-get install nvidia-driver-550 --allow-downgrades
 
+# Top ffmpeg GUIs to simplify Media Manifpulation
+
+	https://www.bannerbear.com/blog/top-5-ffmpeg-guis-to-simplify-media-manipulation/#shutter-encoder
+	HandBrake, Shutter Encoder, Shotcut, QWinFF, and StaxRip
+
 # Streaming file to RTP using h264 codec 
 	ffmpeg -i input.mp4 -c:v h264_nvenc -f rtp rtp://<IP>:<Port>
 

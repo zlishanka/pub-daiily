@@ -27,6 +27,10 @@ http://quickref.me/python
     len(a)  # length  
     list(a) # get the list of set 
 
+	s.update(t) 	s |= t			# return set s with elements added from t
+	s.intersection_update(t) 	s &= t	# return set s keeping only elements also found in t
+	s.difference_update(t) 		s -= t 	# return set s after removing elements found in t
+
 # bisect.insort, bisect.bisect_left
 	window.pop(bisect.bisect_left(window, nums[i-k])) 	# window is sorted, Finds the position of an element to remove
     bisect.insort(window, nums[i])	# Add the new element in correct position, keep window sorted
@@ -267,6 +271,7 @@ http://quickref.me/python
 	# sorted on map in descending order
 	freq_map = Counter(nums)
     sorted_elements = sorted(freq_map.keys(), key=lambda x: -freq_map[x])
+	sorted_words = sorted(freq.keys(), key = lambda x: (-freq[x],x))	# Sort the words first by frequency (descending), then lexicographically
     sorted_elements = sorted(freq_map.items(), key=lambda item: item[1], reverse=True) # sort map based on value, in descending order
 	sorted_elements[:k]  # k largest
 
