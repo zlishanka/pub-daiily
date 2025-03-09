@@ -323,6 +323,8 @@ http://quickref.me/python
     dict.values()
     dict.keys()
     del dict[key]   # delete a key in dictionary 
+	# Initialize the strobogrammatic map
+    num_map = {'6' : '9', '9' : '6', '8' : '8', '0' : '0', '1' : '1'}
 
 # use -1 index 
     a = [1,2,3,4]   # -1 to get last element of array  
