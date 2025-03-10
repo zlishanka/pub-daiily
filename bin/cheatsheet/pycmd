@@ -1,6 +1,18 @@
 # Python cheatsheet
 http://quickref.me/python
 
+# check if char  in a string is digit or not
+	if s[i].isdigit():
+		digit = int(s[i]) 
+
+# check if char in a string is ASCII or number
+	s[i].isalnum() 
+
+# sorted string into char, create anagram key
+	a = "eat" 
+	key = sorted(a) =  ['a', 'e', 't']
+	key = ''.join(key) = "aet"
+		
 # array fast iteration 
 	[f.strip() for f in a.split(',')]
 
@@ -293,6 +305,7 @@ http://quickref.me/python
   sorted(list_objects, key=lambda, student: student.age, reverse=True) # sort by age, high to low   
   # sort by start
   intervals.sort(key=lambda x: x.start)
+  intervals.sort(key=lambda x: x[0])
 
 # lambda expression 
   add2 = lambda x,y : x + y
