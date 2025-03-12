@@ -45,6 +45,7 @@ http://quickref.me/python
 
 # bisect.insort, bisect.bisect_left
 	window.pop(bisect.bisect_left(window, nums[i-k])) 	# window is sorted, Finds the position of an element to remove
+	bisect.bisect_left(window, val)	# window is sorted, Finds the position of an element to remove  
     bisect.insort(window, nums[i])	# Add the new element in correct position, keep window sorted
 
 # add counter of map automatically
@@ -247,10 +248,11 @@ http://quickref.me/python
         # do something else 
 
 # check if variable is instance of a class 
-    isinstance(curr, TreeNode) 
+    isinstance(curr, TreeNode)	# check if object is TreeNode 
 	isinstance(element, int) 	# check if it's integer
 	isinstance(element, list) 	# check if it's a list
-
+	
+	element.isInteger(), element.getInteger()
 # check the data type 
     type(i) is int
     type(i) is float
@@ -338,6 +340,8 @@ http://quickref.me/python
     del dict[key]   # delete a key in dictionary 
 	# Initialize the strobogrammatic map
     num_map = {'6' : '9', '9' : '6', '8' : '8', '0' : '0', '1' : '1'}
+	# Create inorder index map based sorted inorder list	
+	inorder_index_map = {val: idx for idx, val in enumerate(inorder)}
 
 # use -1 index 
     a = [1,2,3,4]   # -1 to get last element of array  
@@ -647,7 +651,7 @@ http://quickref.me/python
 	heapq.heappop(a)
 	2
 
-## OrderedDict
+## OrderedDict (good for LRU caching)
 	from collections import OrderedDict
 	cache = OrderedDict()
 	cache.move_to_end(key)
