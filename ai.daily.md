@@ -1,4 +1,19 @@
 # AI Daily Update
+## 03/13/25
+-[YOLOE: Open-Set Object Detection & Segmentation without Training](https://arxiv.org/abs/2503.07465)
+    - YOLO are fast and accurate but limited to predefined categories. 
+    - Open-set methods address this but often sacrifice efficiency. 
+    - YOLOE changes this by integrating text, visual, and prompt-free detection into a single, highly efficient model—achieving real-time “see anything” capability.
+    - **Text Prompts** – RepRTA refines embeddings with zero inference overhead.
+    - **Visual Prompts** – SAVPE enhances visual embeddings with minimal complexity.
+    - **Prompt-Free** – LRPC detects all objects efficiently, without language model dependencies.
+    - [github repo](https://github.com/THU-MIG/yoloe)
+
+-[Human Pose Estimation and Semantic Segmentation: Integrating Google MediaPipe with SAM2 for Enhanced Video Analytics](https://medium.com/@surajagrahari330/human-pose-estimation-and-semantic-segmentation-integrating-google-mediapipe-with-sam2-for-5ce950da5540)
+    - Human pose estimation and semantic segmentation are two critical tasks in computer vision, 
+        - particularly for applications in **sports analytics, augmented reality, and motion analysis**
+    - A multi-stage approach integrating Google MediaPipe for real-time pose estimation and SAM for precise segmentation, enabling enhanced video analytics. 
+    - System flow, underlying mathematical principles, and detailed implementation steps.
 
 ## 02/27/25
 - [AI headshot generator](betterpic.io/?via=farhan)

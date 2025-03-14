@@ -132,7 +132,14 @@
 		torch.backends.mps.is_available()
 
 	# check if cuda is used
-		torch.cuda.is_available() 
+		torch.cuda.is_available()
+		# set device type based on the query 
+		if torch.backends.mps.is_available():
+    		device = torch.device("mps")
+		elif torch.cuda.is_available():
+    		device = "cuda"
+		else:
+    		device = "cpu"
 
 	# Add tensor board in notebook and view the results of run
 		training_arguments = TrainingArguments(
