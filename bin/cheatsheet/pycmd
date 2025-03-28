@@ -659,15 +659,15 @@ http://quickref.me/python
 	cache.popitem(last=False) # from begining of dict
 
 ## graph 
-		from collections import defaultdict, deque
-		graph = defaultdict(list) 	# each key --> list 
-		grpah[key].append(value)
+	from collections import defaultdict, deque
+	graph = defaultdict(list) 	# each key --> list 
+	grpah[key].append(value)
 
-		from collections import defaultdict
-		graph = defaultdict(dict)
-		for (a,b), value in zip(equations, values):
-		  graph[a][b] = value
-		  graph[b][a] = 1.0/value
+	from collections import defaultdict
+	graph = defaultdict(dict)
+	for (a,b), value in zip(equations, values):
+	  graph[a][b] = value
+	  graph[b][a] = 1.0/value
 
 ## Counter
 	from collections import Counter
