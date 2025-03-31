@@ -2,8 +2,15 @@
 Write a python code to do the following:
 1) I have a list of genes as input: BRI3BP, ENDOD1, ASB8, TFPI, FBXO33 
 2) Use the list of genes above to send a query to the backend service through API like following: https://www.fobinf.com/?gene=BRI3BP&dataset=nl_human_data_HemaExp_v_1 
-3) Collect result for each query as a row of CSV, note result will be got by clicking on button and then result is downloaded as csv file at 
+3) Collect result for each query as a rows of a CSV file, note you need to create javascript event by clicking on button and result is downloaded as csv file at ~/Downloads/BRI3BP_log2.csv  
 4) Output row results into a CSV file
+
+Get the chromedriver from 
+https://googlechromelabs.github.io/chrome-for-testing/
+
+Need to pip install following packages 
+pip install selenium
+ 
 """
 
 import os
