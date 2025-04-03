@@ -161,7 +161,7 @@
   ffmpeg -i https://live1-slivertv.akamaized.net/hls/live/593044/hls_1_streamer_003@593044/chunklist.m3u8 -c copy test.m3u8  
 
 # cascading small clip into big file 
-        ffmpeg -f concat -i list.txt -c copy longplay_450minutes.mp4 
+    ffmpeg -f concat -i list.txt -c copy longplay_450minutes.mp4 
 	list.txt - file 'video.mp4' 
 		   file 'video1.mp4'.. 
 
@@ -203,8 +203,7 @@ ffmpeg -i input.mp4 -profile:v baseline -level 3.0 -s 1920x1080 -start_number 0 
   http://35.233.188.11:8080/hls/iemstream/index.m3u8
   http://35.233.188.11:8080/dash/iemstream.mpd   
 
-# enable dash playback in ffplay 
- ./configure --enable-demuxer=dash --enable-libxml2
+# enable dash playback in ffplay ./configure --enable-demuxer=dash --enable-libxml2
  ./configure --enable-shared --enable-libx264 --enable-libx265 --enable-gpl --enable-demuxer=dash --enable-libxml2 --enable-pic 
  make
 
@@ -451,3 +450,10 @@ brew install automake fdk-aac git lame libass libtool libvorbis libvpx opus sdl 
 		# extract scene change
 			time ./ffmpeg -i ./VIDEO.mp4 -vf "select=gt(scene\,0.4),scale=160:-1,tile=6x80" -frames:v 1 -qscale:v 3 preview.jpg
 			time ./ffmpeg -f lavfi -i "movie=VIDEO.mp4,scdet=s=1:t=14" -vf "scale=160:-1,tile=6x85" -frames:v 1 -qscale:v 3 preview.jpg
+
+# Convert raw pcm to wav audio
+	ffmpeg -i input.wav -f s16le -acodec pcm_s16le output.pcm
+	ffmpeg -f s16le -ar 48000 -ac 1 -i input.pcm output.wav
+
+# mix two pcm into single pcm
+	ffmpeg -f s16le -ar 48000 -ac 1 -i input1.raw -f s16le -ar 48000 -ac 1 -i input2.raw -filter_complex "[0:a][1:a]amix=inputs=2:duration=first:dropout_transition=0" -f s16le -ar 48000 -ac 1 output.raw
