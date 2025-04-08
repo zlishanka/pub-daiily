@@ -669,6 +669,12 @@ http://quickref.me/python
 	  graph[a][b] = value
 	  graph[b][a] = 1.0/value
 
+## deque
+	double side queue
+	queue = deque()
+	queue.append(val)
+	val = queue.popleft()
+
 ## Counter
 	from collections import Counter
 	Counter("mississippi")		# input as string

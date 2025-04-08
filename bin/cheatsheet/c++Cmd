@@ -598,4 +598,50 @@ target_include_directories(your_target PRIVATE ${PORTAUDIO_INCLUDE_DIRS})
 	CXX = g++
 	CXXFLAGS = -std=c++17 -O2
 
+# BLockingQueue 
+
+	#inlude <queue>
+	#include <mutex>
+	#include <condition_variable>
+
+	template<typename T>
+	class BlockingQueue
+	{
+	public:
+	   BlockingQueue(int max_cap = 100)
+		   :mtx(), fullQ(), emptyQ(), capacity(max_cap) { }
+
+
+	   void push(const T& data) {
+		   std::unique_lock<std::mutex> lock(mtx);
+		   while(container.size() == capacity) {
+			   fullQ.wait(lock );
+		   }
+
+
+		   assert(container.size() < capacity);
+		   container.push(data);
+		   emptyQ.notify_all();
+	   }
+
+	   T pop() {
+		   std::unique_lock<std::mutex> lock(mtx);
+		   while(container.empty()) {
+			   emptyQ.wait(lock );
+		   }
+
+
+		   assert(!container.empty());
+		   T front(container.front());
+		   container.pop();
+		   fullQ.notify_all();
+		   return front;
+	   }
+	private:
+	   mutable std::mutex mtx;
+	   std::condition_variable fullQ;
+	   std::condition_variable emptyQ;
+	   std::queue<T> container;
+	   size_t capacity;
+	};
 	
