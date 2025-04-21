@@ -1,6 +1,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <queue>
+<<<<<<< HEAD
 
 template <typename T>
 class SyncQueue {
@@ -21,10 +22,35 @@ public:
         }
         m_queue.push(item);
         emptyQ.notify_all(); return true;
+=======
+#include <thread>
+#include <atomic>
+
+template <typename T>
+class SyncQueue {
+
+private:
+    std::queue<T> container;
+    std::mutex mtx;
+    std::condition_variable fullQ, emptyQ;
+    int capacity;
+
+public:
+    SyncQueue(int size) : capacity(size) fullQ(), emptyQ() {}
+
+    void push(T& item) {
+        std::unique_lock<std::mutex> lock(mtx);
+        fullQ.wait(lock, [this] { return container.size() < capacity; });
+        container.push(item);
+        lock.unlock();
+        emptyQ.notify_all();
+ 
+>>>>>>> 281c4a177927d8c3f82a9f0f6eab9c843eaf760b
     }
 
     T pop() {
         std::unique_lock<std::mutex> lock(mtx);
+<<<<<<< HEAD
         if (m_shutdown.load()) {
             throw std::runtime_error("Queue is shutting down");
         }
@@ -78,3 +104,12 @@ try {
  * If you have control over the threads, consider adding a mechanism to join all threads after signaling shutdown. This ensures that the main thread 
  * waits for all worker threads to finish before proceeding.
  */
+=======
+        emptyQ.wait(lock, [this] { return container.size() > 0; });
+        T item = container.front();
+        container.pop();
+        lock.unlock();
+        fullQ.notify_all();
+    }
+};
+>>>>>>> 281c4a177927d8c3f82a9f0f6eab9c843eaf760b
