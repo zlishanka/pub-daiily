@@ -1,5 +1,37 @@
 # AI Daily Update
+
+## 05/02/25
+
+-[Why are some developers getting 10x more from AI coding assistants? (Sponsor)](https://getdx.com/guide/ai-assisted-engineering/?utm_source=tldr-ai)
+- What's inside:
+    - Meta-prompting techniques that elicit better responses
+    - The top 10 developer use cases ranked by time saved
+    - Leadership strategies for encouraging AI adoption
+
+- [Microsoft's Phi-4-reasoning](https://azure.microsoft.com/en-us/blog/one-year-of-phi-small-language-models-making-big-leaps-in-ai/?utm_source=tldrai)
+    - One year of Phi: Small language models making big leaps in AI
+    - One year ago, Microsoft introduced small language models (SLMs) to customers with the release of Phi-3
+    - Today, we are excited to introduce Phi-4-reasoning, Phi-4-reasoning-plus, and - Phi-4-mini-reasoning—marking 
+    - a new era for small language models and once again redefining what is possible with small and efficient AI.
+
+- [Claude Integrations](https://www.anthropic.com/news/integrations?utm_source=tldrai)
+    - Claude now connects to third-party apps, Google Workspace, and web search, 
+    - enabling long-form research and globally accessible web search for paid users.
+
+- [Why Developers Should Care About Generative AI (Even If They Aren't AI Experts)](https://hackread.com/why-developers-care-about-generative-ai-experts/?utm_source=tldrai)
+    - Generative AI, like GitHub Copilot and Claude, is set to transform software development by enhancing productivity and automating routine tasks. 
+    - While AI tools promise efficiency gains, they won't replace human developers, who are crucial for creative vision, quality assurance, and understanding complex requirements.
+    - Developers should embrace these tools to augment their skills and keep pace with technological advancements.
+
+- [Google's Medical AI Reading Images](https://research.google/blog/amie-gains-vision-a-research-ai-agent-for-multi-modal-diagnostic-dialogue/?utm_source=tldrai)
+    - An overview of how Google's AMIE now analyzes medical images during chat-based diagnosis, 
+    - improving its ability to suggest accurate treatments like a real doctor would.
+ 
+- [Federated LoRA Fine-Tuning](https://arxiv.org/abs/2502.15436v1?utm_source=tldrai)
+    - Fed-SB has introduced a scalable approach for federated fine-tuning of LLMs using LoRA-SB that drastically reduces communication costs.
+ 
 ## 03/13/25
+
 -[YOLOE: Open-Set Object Detection & Segmentation without Training](https://arxiv.org/abs/2503.07465)
     - YOLO are fast and accurate but limited to predefined categories. 
     - Open-set methods address this but often sacrifice efficiency. 
@@ -15,33 +47,8 @@
     - A multi-stage approach integrating Google MediaPipe for real-time pose estimation and SAM for precise segmentation, enabling enhanced video analytics. 
     - System flow, underlying mathematical principles, and detailed implementation steps.
 
-## 02/27/25
-- [AI headshot generator](betterpic.io/?via=farhan)
-- [Grok 3's DeepSearch](https://x.com/AlexFinnX/status/1894094168881869243) 
-    - Compare products before buying
-    - Planning an app ("What app should I build based on my content")
-    - Researching current events ("Who is Dan Bongino and what did he get hired to do?")
-    - `DeepSearch` is your researcher. `Think` is your problem solver
-    - When to use **Think**:
-        - Building an app ("Take this report and build code for the app")
-        - Solving complex technical issues ("Why won't this code work for me?)
-        - Solving complex business issues ("Why has my revenue dropped off?")
-    - **DeepSearch** Prompts you should save
-        - I write content about {niche} what are 5 problems my audience has and 5 software solutions I can build?
-        - What is the sentiment of $HOOD over the last year on X?
-        - Explain to me the basics of Quantum Computing and recent news on it
-    - Think prompts you should save
-        - Write me a Super Mario clone and show me how to run the code
-        - I'm a complete noob at Python. Build me a learning plan
-        - Give me a marketing plan for my app I'm building so I can make $1,000,000 in the first year
-
-- 36 AI Coding Agents & IDEs
-    [CreateXyz, Cursor, Softgen, Windsurf, Wrapifai, Copilot, Lovable, Bolt, v0, Replit, MarsX, AmazonQ, Pear, 
-     Devin, Github Spark, IDX, Webdraw, Claude 3.7 Sonnet & more]
-- [Transformer vs Mixture of Experts (MoE) in LLMs](https://x.com/_avichawla/status/1894273625681007010)
-
-
 ## 03/09/25
+
 - new AI agent called **'Manus'** 
     - People are calling this China's second DeepSeek moment.
     - Reports suggest it is more accurate than DeepSeek, capable of simultaneously handling financial transactions, research, purchasing, etc
@@ -80,4 +87,30 @@
     - Mistral OCR is an Optical Character Recognition API that sets a new standard in document understanding. 
     - Unlike other models, Mistral OCR comprehends each element of documents—media, text, tables, equations—with unprecedented accuracy and cognition. 
     - It takes images and PDFs as input and extracts content in an ordered interleaved text and images.  
+
+## 02/27/25
+
+- [AI headshot generator](betterpic.io/?via=farhan)
+- [Grok 3's DeepSearch](https://x.com/AlexFinnX/status/1894094168881869243) 
+    - Compare products before buying
+    - Planning an app ("What app should I build based on my content")
+    - Researching current events ("Who is Dan Bongino and what did he get hired to do?")
+    - `DeepSearch` is your researcher. `Think` is your problem solver
+    - When to use **Think**:
+        - Building an app ("Take this report and build code for the app")
+        - Solving complex technical issues ("Why won't this code work for me?)
+        - Solving complex business issues ("Why has my revenue dropped off?")
+    - **DeepSearch** Prompts you should save
+        - I write content about {niche} what are 5 problems my audience has and 5 software solutions I can build?
+        - What is the sentiment of $HOOD over the last year on X?
+        - Explain to me the basics of Quantum Computing and recent news on it
+    - Think prompts you should save
+        - Write me a Super Mario clone and show me how to run the code
+        - I'm a complete noob at Python. Build me a learning plan
+        - Give me a marketing plan for my app I'm building so I can make $1,000,000 in the first year
+
+- 36 AI Coding Agents & IDEs
+    [CreateXyz, Cursor, Softgen, Windsurf, Wrapifai, Copilot, Lovable, Bolt, v0, Replit, MarsX, AmazonQ, Pear, 
+     Devin, Github Spark, IDX, Webdraw, Claude 3.7 Sonnet & more]
+- [Transformer vs Mixture of Experts (MoE) in LLMs](https://x.com/_avichawla/status/1894273625681007010)
 

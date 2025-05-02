@@ -631,3 +631,7 @@ execute_process(
 	ip link show
 	sudo ip link set dev eth0 mtu 1400
 	ip link show wlp0s20f3
+
+# quick OCR (ocr) command
+	tesseract ~/Desktop/system-design/youtube-references.png ~/outputocr -l eng 
+	vim ~/outputocr.txt 
