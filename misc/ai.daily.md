@@ -29,7 +29,41 @@
  
 - [Federated LoRA Fine-Tuning](https://arxiv.org/abs/2502.15436v1?utm_source=tldrai)
     - Fed-SB has introduced a scalable approach for federated fine-tuning of LLMs using LoRA-SB that drastically reduces communication costs.
- 
+
+## 05/01/25
+
+-[Welcome to the new era of agentic commerce](https://www.paypal.ai/?utm_medium=tldremail&utm_source=partner&utm_campaign=agentic+ai&utm_content=get+started)
+    - PayPal provides developers and merchants with innovative tools, including the industry's first remote MCP server and PayPal Agent Toolkit, to create next-generation shopping experiences.
+    - Developers can now enable sophisticated agentic AI experiences, all powered by PayPal.
+    - Seamlessly integrate PayPal's comprehensive suite of APIs—including those for managing payments, invoices, disputes, shipment tracking, catalog, subscriptions, reporting and insights—into various AI frameworks. 
+
+- [Understanding Data at Scale](https://engineering.fb.com/2025/04/28/security/how-meta-understands-data-at-scale/?utm_source=tldrai)
+    - Meta manages vast, complex data ecosystems by embedding privacy considerations early in development and creating a unified privacy taxonomy to streamline compliance. 
+
+- [LLM Benchmarking for Global Health](https://research.google/blog/benchmarking-llms-for-global-health/?utm_source=tldrai)
+    - This article from Google discusses a new benchmark that uses synthetic personas to evaluate LLMs in diagnosing tropical and infectious diseases.
+
+- [YouTube tests its own version of AI Overviews](https://www.engadget.com/ai/youtube-is-testing-its-own-version-of-ai-overviews-145353147.html?utm_source=tldrai)
+    - YouTube has started testing AI Overviews to summarize video content for users.
+
+
+## 04/30/25
+
+- [Together Inference & Fine-Tuning on 200 + OSS Models—One API, Any Scale (Sponsor)](https://www.together.ai/inference)
+    - Together AI is The AI Acceleration Cloud, delivering turbocharged, production-grade inference, with an integrated code interpreter – as well as fine-tuning 
+      for the leading open source models.
+    - 200 + open-source models 
+    - Flexible deployment – Serverless API for pay-per-token usage or Dedicated Endpoints for single-tenant GPUs and consistent performance.
+    - Continuous Fine-Tuning of Fully-Owned Models 
+        - Evolve your AI models over time, using preference optimization and continued training. 
+        - Upload your data, run LoRA or full-parameter jobs, and push the tuned model straight to production
+
+- [Meta API for Llama](https://techcrunch.com/2025/04/29/meta-previews-an-api-for-its-llama-ai-models/?utm_source=tldrai)
+    - Meta revealed a limited preview of its Llama API at LlamaCon, giving developers tools to 
+        - fine-tune, 
+        - deploy, and 
+        - evaluate models from the Llama series.
+        
 ## 03/13/25
 
 -[YOLOE: Open-Set Object Detection & Segmentation without Training](https://arxiv.org/abs/2503.07465)
