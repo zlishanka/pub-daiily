@@ -63,7 +63,85 @@
         - fine-tune, 
         - deploy, and 
         - evaluate models from the Llama series.
-        
+
+## 04/29/25
+
+- [Hugging Face releases a 3D-printed robotic arm starting at $100](https://techcrunch.com/2025/04/28/hugging-face-releases-a-3d-printed-robotic-arm-starting-at-100/?utm_source=tldrai)   
+    - Hugging Face has released a 3D-printed robotic arm starting at $100,     
+    - Hugging Face is selling a programmable 3D-printable robotic arm called SO-101 that can pick up objects. 
+    - It is a camera-equipped robotic arm with improved assembly and motor performance.
+
+- [Generative Video Models for Driving](https://valeoai.github.io/vavim-vavam/?utm_source=tldrai)
+    - Valeo AI presents VaViM, an autoregressive video model that predicts spatio-temporal token sequences, and 
+    - `VaVAM`, a model that translates learned video representations into driving trajectories via imitation learning. 
+    - Open-source `autoregressive video model` (VaViM) and a companion `video-action model` (VaVAM).
+    - VaViM is a simple autoregressive model that predicts frames using spatio-temporal token sequences, while VaVAM leverages the learned representations to generate driving trajectories through imitation learning. 
+
+- [DeepMind showcased AlphaFold 3's expanded molecular prediction abilities](https://threadreaderapp.com/thread/1915077085325922785.html?utm_source=tldrai)
+    - DeepMind's AlphaFold 3 has new capabilities to predict DNA, RNA, and molecule structures. 
+    - It also has improved accuracy for complex molecular interactions. 
+    - The tool is now free for non-commercial use through EMBL-EBI. 
+
+- [Figma’s AI report tells us how designers and developers are navigating the changing landscape](https://www.figma.com/blog/figma-2025-ai-report-perspectives/?utm_source=tldrai)
+    - Agentic AI is the fastest growing product category 
+    - Success requires best practices—loosely held
+    - Smaller companies are going all in
+    - AI adoption is deepening across workflows, but there’s a quality perception gap between developers and designers
+    - The future is AI—but how do we get there?
+
+## 04/28/25
+
+- [DeepSeek-R2](https://deepseek.ai/blog/deepseek-r2-ai-model-launch-2025?utm_source=tldrai)
+    - Major advancements in multilingual reasoning, code generation, and multimodal capabilities.
+    - DeepSeek-R2 combines innovative training techniques with efficient resource usage, positioning itself as a serious global competitor to Silicon Valley's top AI technologies.
+    - With its unique approach to training, multilingual capabilities, and resource efficiency
+    - R2 aims to push these boundaries significantly further while introducing new capabilities that could challenge the dominance of models like GPT-4 and Claude.
+
+- [Tiny Agents: an MCP-powered agent in 50 lines of code](https://huggingface.co/blog/tiny-agents?utm_source=tldrai)
+    - MCP is a standard API to expose sets of Tools that can be hooked to LLMs.
+    - A walkthrough on how to build a compact MCP-powered agent in just 50 lines of Typescript.
+    - [Code Repo](https://github.com/huggingface/huggingface.js/tree/main/packages/mcp-client) 
+
+- [Pippo: High-Resolution Multi-View Humans from a Single Image](https://github.com/facebookresearch/pippo?utm_source=tldrai)
+    - a generative model capable of producing 1K resolution dense turnaround videos of a person from a single casually clicked photo. 
+    - Pippo is a `multi-view diffusion transformer` and does not require any additional inputs — e.g., a fitted parametric model or camera parameters of the input image.
+
+- [Resilient AI Infrastructure](https://www.harvey.ai/blog/resilient-ai-infrastructure?utm_source=tldrai)
+    - Harvey uses a centralized Python library for managing AI model interactions to ensure reliable deployments through active load balancing and real-time monitoring
+    - It implements a distributed rate limiting system to handle bursty traffic and maintain performance while allowing seamless model upgrades.
+    - The setup enhances security, optimizes resource utilization, and supports rapid deployment, performance tracking, and failure detection to provide a consistent user experience.
+
+
+## 04/25/25
+
+- [Deploying Agents as Real-time APIs ](https://decodingml.substack.com/p/deploying-agents-as-real-time-apis?utm_source=tldrai)
+    - PhiloAgents lesson shows how to turn game simulation agents into API-ready, real-time interactive characters for more immersive environments.
+    - [Github Repo](https://github.com/neural-maze/philoagents-course)
+    - The fourth lesson of the open-source PhiloAgents course
+    - Create AI agents that authentically embody historical philosophers.
+    - Master building real-world agentic applications.
+    - Architect and implement a production-ready RAG, LLM, and LLMOps system.
+
+- [Achieve real-time interaction: Build with the Live API](https://developers.googleblog.com/en/achieve-real-time-interaction-build-with-the-live-api/?utm_source=tldrai)
+    - Google's Live API lets developers build real-time interactive apps by processing live audio, video, and text with minimal delay.
+    - The Live API equips developers with the essential tools to craft applications and intelligent agents capable of processing streaming audio, video, and text with incredibly low latency
+    - "Until the Live API, no other LLM offered a developer interface that could directly ingest streaming video.” – Russell d’Sa, CEO
+    - [Google Gemini uses vision to take a Harry Potter quiz](https://www.youtube.com/watch?v=gigP-IQiEiI)
+    - [Bubba.ai](https://bubba.ai/):  an agentic, voice-first AI application specifically developed for truck drivers. 
+        - The Live API powers both driver interaction (leveraging function calling and context caching for queries like future pickups) 
+
+## 04/24/25
+
+- [Grok Vision Available for iOS Users](https://threadreaderapp.com/thread/1914820712092852430.html?utm_source=tldrai)
+    - xAI's Grok chatbot has gained the ability to interpret visual inputs, allowing users to ask questions about what they saw, similar to features in ChatGPT and Gemini.
+   - Introducing Grok Vision, multilingual audio, and realtime search in Voice Mode. Available now.
+
+- [High Throughput MoE Systems](https://www.perplexity.ai/hub/blog/lower-latency-and-higher-throughput-with-multi-node-deepseek-deployment?utm_source=tldrai)
+    - MoE models like DeepSeek-V3/R1 simultaneously achieve higher throughput and lower latency when utilizing more GPUs in multi-node deployments across most scenarios.
+
+- [LMLT: Low-to-high Multi-Level Vision Transformer for Image Super-Resolution](https://arxiv.org/abs/2409.03516v1?utm_source=tldrai)
+    - LMLT is a novel multi-level vision transformer that leverages the power of language modeling to enhance image super-resolution. 
+     
 ## 03/13/25
 
 -[YOLOE: Open-Set Object Detection & Segmentation without Training](https://arxiv.org/abs/2503.07465)
