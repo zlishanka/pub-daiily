@@ -636,3 +636,6 @@ https://medium.com/python-every-day/python-development-on-macos-with-pyenv-virtu
 
     # find the import path
     	importlib.util.find_spec('supervision')
+
+# How to run Python in production
+	https://ashishb.net/programming/python-in-production-2/?utm_source=tldrnewsletter

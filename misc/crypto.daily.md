@@ -45,3 +45,13 @@
 
 - [Crypto FIFA video game launching in June](https://www.theblock.co/post/351731/crypto-fifa-video-game-launching-on-mobile-devices-in-june?utm_source=tldrcrypto)
     - A new crypto-integrated FIFA video game developed by Mythical Games, “FIFA Rivals”, is set to launch on mobile devices in June.
+
+
+## 04/23/25 
+
+- [How Stablecoins Profit From U.S. Debt & Interest Rates](https://x.com/threesigmaxyz/status/1912824158804648389?utm_source=tldrcrypto)
+    - Stablecoins like USDT and USDC generate revenue by investing their dollar-backed reserves in interest-bearing instruments like US treasuries, making their profitability highly sensitive to interest rates.
+    - In a 0% interest scenario, treasury-backed assets face severe revenue compression unless they diversify into alternative assets or products, whereas algorithmic protocols could maintain or boost yields through increased market leverage.
+
+- [ECB fears 'contagion' risk from Trump's crypto embrace, MiCA rules may not be strong enough: Politico](https://www.theblock.co/post/351485/ecb-trump-crypto-contagion?utm_source=tldrcrypto)
+    - The European Central Bank is concerned that President Trump's pro-crypto stance could trigger financial contagion in Europe, arguing that U.S. stablecoin laws might weaken EU safeguards under MiCA.

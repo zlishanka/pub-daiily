@@ -141,7 +141,34 @@
 
 - [LMLT: Low-to-high Multi-Level Vision Transformer for Image Super-Resolution](https://arxiv.org/abs/2409.03516v1?utm_source=tldrai)
     - LMLT is a novel multi-level vision transformer that leverages the power of language modeling to enhance image super-resolution. 
-     
+
+## 04/23/25
+
+- [Pi-0.5: Robots in the Wild](https://www.pi.website/blog/pi05?utm_source=tldrai)
+    - The Physical Intelligence team has tested its house cleaning robot in novel unseen environments and found it performs quite well. 
+    - The team achieved this with a mixture of VLM training and action tokenization. 
+
+- [Embed 4: Multimodal search for business ](https://cohere.com/blog/embed-4?utm_source=tldrai)    
+    - Cohere's Embed 4 is a state-of-the-art multimodal embedding model that enables enterprises to add powerful search and retrieval capabilities to agentic AI applications.
+    - Embed 4 offers leading multimodal and multilingual performance in 100+ languages, breakthrough context length up to 128k tokens, 
+    - and domain-specific understanding for regulated industries like finance, healthcare, and manufacturing.
+
+- [An Introduction to Graph Transformers](https://kumo.ai/research/introduction-to-graph-transformers/?utm_source=tldrai)
+    - Protein folding and drug discovery
+    - Fraud detection in financial transaction graphs
+    - Social network recommendations
+    - Knowledge graph reasoning and search
+    - Relational Deep Learning
+
+- [Questions about the Future of AI](https://mail.yahoo.com/n/search/keyword=TLDR/messages/397190?.src=ym&reason=myc)
+    - This article raises questions about AI's future, focusing on challenges with agency development, reinforcement learning, and economic impacts.
+    - It discusses the strategic direction of AI capabilities, the implications of open-source models, and the alignment challenges posed by advanced AI technologies.
+    - It also explores post-AGI scenarios, including potential economic growth and geopolitical influences.
+
+- [Personalized Multi-Agent Systems (GitHub Repo)](https://github.com/sail-sg/flowreasoner?utm_source=tldrai)
+    - FlowReasoner is a reasoning-based meta-agent that uses reinforcement learning and external feedback to generate custom multi-agent systems for user queries.
+    - Our core idea is to incentivize a reasoning-based meta-agent via external execution feedback.
+    
 ## 03/13/25
 
 -[YOLOE: Open-Set Object Detection & Segmentation without Training](https://arxiv.org/abs/2503.07465)
