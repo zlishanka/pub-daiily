@@ -1,4 +1,15 @@
 # Crypto Daily Update
+## 05/09/25 
+
+- [Meta in talks to deploy stablecoins](https://fortune.com/crypto/2025/05/08/meta-stablecoins-exploration-usdc-circle-diem-libra/?utm_source=tldrcrypto)
+    - Meta is revisiting stablecoins three years after shelving its Diem project. 
+    - The company is expploring YSD-pegged stablecoins for cross-border and creator payments.
+    - Meta's renewed interest comes as enterprise adoption accelerates and U.S. lawmakers move closer to stablecoin legislation.
+
+- [Crypto's New Realities: HODL is Dead, DAOs are LMAOs, Bye DeFi and More](https://www.ignasdefi.com/p/cryptos-new-realities-hodl-is-dead?utm_source=tldrcrypto)
+    - The "HODL" era has ended for all but Bitcoin, which remains the only crypto asset with macro-level status.
+    - DeFi's decentralization ideal has mostly given way to institutional “on-chain finance” using vault strategies and tokenized RWAs,
+    - while DAOs are increasingly centralized, prompting critiques of them becoming oligarchic or ineffective.
 
 ## 05/02/25
 
