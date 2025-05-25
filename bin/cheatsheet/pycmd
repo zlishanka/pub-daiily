@@ -703,4 +703,27 @@ http://quickref.me/python
 	
 	def MultiplyVectors(a,b):
 		return a*b
-	
+
+## typing in python 
+	from typing import List, Dict, Set, Optional, Any, Sequence, Tuple, Callable, TypeVar
+	mypy source.py 	# to do static analysis to check the typing
+	https://www.youtube.com/watch?v=QORvB-_mbZ0 
+
+## asyncio
+	https://www.youtube.com/watch?v=t5Bo1Je9EmE
+	import asyncio
+	async def main():
+		print("Roy")
+		#await foo('text')	# await coroutine
+		task = asyncio.create_task(foo('text')) 	# create asyncio task
+		#await task
+		print('Finished')
+		 
+
+	# to run a coroutine in asyncio way
+	asyncio.run(main())
+	# to have await inside async func
+	async def foo(text):
+		print(text)
+		await asyncio.sleep(1)
+	- main returns a coroutine obj
