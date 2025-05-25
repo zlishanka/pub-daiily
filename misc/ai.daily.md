@@ -32,7 +32,7 @@
 
 ## 05/01/25
 
--[Welcome to the new era of agentic commerce](https://www.paypal.ai/?utm_medium=tldremail&utm_source=partner&utm_campaign=agentic+ai&utm_content=get+started)
+- [Welcome to the new era of agentic commerce](https://www.paypal.ai/?utm_medium=tldremail&utm_source=partner&utm_campaign=agentic+ai&utm_content=get+started)
     - PayPal provides developers and merchants with innovative tools, including the industry's first remote MCP server and PayPal Agent Toolkit, to create next-generation shopping experiences.
     - Developers can now enable sophisticated agentic AI experiences, all powered by PayPal.
     - Seamlessly integrate PayPal's comprehensive suite of APIs—including those for managing payments, invoices, disputes, shipment tracking, catalog, subscriptions, reporting and insights—into various AI frameworks. 
@@ -168,7 +168,7 @@
 - [Personalized Multi-Agent Systems (GitHub Repo)](https://github.com/sail-sg/flowreasoner?utm_source=tldrai)
     - FlowReasoner is a reasoning-based meta-agent that uses reinforcement learning and external feedback to generate custom multi-agent systems for user queries.
     - Our core idea is to incentivize a reasoning-based meta-agent via external execution feedback.
-    
+
 ## 03/13/25
 
 -[YOLOE: Open-Set Object Detection & Segmentation without Training](https://arxiv.org/abs/2503.07465)
