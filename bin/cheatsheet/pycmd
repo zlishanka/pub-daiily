@@ -706,6 +706,14 @@ http://quickref.me/python
 
 ## typing in python 
 	from typing import List, Dict, Set, Optional, Any, Sequence, Tuple, Callable, TypeVar
+
+	my_dict: Dict[str, int] = {"a": 1, "b": 2, "c": 3}
+	my_set: Set[str] = {"apple", "banana", "cherry"}
+	my_tuple: Tuple[str, int, float] = ("hello", 10, 3.14)
+	Optional[T]:  # value might be None or of type T
+	Any:  # type not specified or can be any type
+	Callable: indicates a function type
+ 
 	mypy source.py 	# to do static analysis to check the typing
 	https://www.youtube.com/watch?v=QORvB-_mbZ0 
 
