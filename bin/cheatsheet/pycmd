@@ -735,3 +735,46 @@ http://quickref.me/python
 		print(text)
 		await asyncio.sleep(1)
 	- main returns a coroutine obj
+
+## invoke utility/tool 
+	- "invoke" lets you define tasks in Python using decorators and then run them from the command line.
+	- It’s part of the broader ecosystem of Python task runners and is often used in DevOps, CI/CD pipelines, and project scaffolding.
+	- Convenient "development pipeline" is enabled using `invoke` utility.
+
+	pip install invoke
+
+	# command line 	
+	invoke build
+	invoke deploy 
+
+	# create tasks.py file 
+	tasks.py 
+
+	@task
+	def build(c):
+    	c.run("python setup.py sdist bdist_wheel")
+	@task
+	def deploy(c):
+		c.run("twine upload dist/*")
+
+## poetry utility/tool
+	- "poetry" is designed to handle everything related to Python packaging in a consistent and reliable way.
+	- It replaces tools like "pip, virtualenv, and setuptools" with a unified interface.	
+
+	- Dependency management with automatic resolution
+	- Project scaffolding (create new projects easily)
+	- Virtual environment management
+	- Build and publish Python packages to PyPI
+	- Uses a single pyproject.toml file for configuration
+
+	brew install poetry
+	poetry new my_project
+	
+	Install/update Python dependencies per the "pyproject.toml" and "poetry.lock" files: like "poetry install --no-root"
+
+	# Standard development process pipeline:
+	- "poetry shell" - initialize Poetry venv
+	- "poetry install" - install Python dependencies (required only when Poetry venv is created for the first time)
+	- "inv test" - installs pre-commit Git hook
+
+	

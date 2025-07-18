@@ -16,6 +16,10 @@ EXPOSE 8080
     docker pull swaggerapi/swagger-editor
     docker run -d -p 80:8080 swaggerapi/swagger-editor
 
+# start/shutdown docker image 
+	docker-compose up cluster-of-apps 
+    docker-compose down 
+
 # Build docker 
     docker build . -t muxinc/chunked-transfer-demo
     docker build - < Dockerfile>
@@ -25,6 +29,9 @@ EXPOSE 8080
 	# inside dir that has Dockerfile
 	docker build -t avail-media-api-test:latest .
 	docker run -p 5002:5002 avail-media-api-test:latest
+
+	# build 
+	docker-compose up cluster-of-apps --build
 
 # run docker image 
     docker run -p 8080:8080 muxinc/chunked-transfer-demo:latest 
