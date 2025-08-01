@@ -634,4 +634,8 @@ execute_process(
 
 # quick OCR (ocr) command
 	tesseract ~/Desktop/system-design/youtube-references.png ~/outputocr -l eng 
-	vim ~/outputocr.txt 
+	vim ~/outputocr.txt
+
+# check macos memory usage 
+	top -l 1 | grep -E "^CPU|^Phys"
+ 

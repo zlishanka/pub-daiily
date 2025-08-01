@@ -328,6 +328,11 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 ## verify the fingerprint of the ssh keys 
     ssh-keygen -l -E md5 -f ~/.ssh/id_ed25519 
 
+## check git latest commit for a file 
+	git log -1 --oneline app/check_file.py
+	git show --stat 7842c033
+	git show 7842c033 -- app/check_file.py
+
 ## two-factor recovery code 
     335e9476d1359bce
     e01e274ed9c8c2a2
