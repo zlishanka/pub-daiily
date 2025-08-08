@@ -5,7 +5,7 @@
 - Use screenshot, simply drag screenshot file to terminal as a dialog context
 - Use the web link as context
 - Ask to Double check its work (can you make sure it doesn't break things...)
-- Select Claude model :  Opus, Sonnet, etc. If you paid $200/month, use Opus
+- Select Claude model :  Opus, Sonnet, etc. If you paid over $200, use Opus
 
 ### Start claude and bypass frequent trivial permission prompts
 ```bash
@@ -27,20 +27,20 @@ claude --dangerously-skip-permissions
 ```bash
 cd ../sub-dir; claude --create CLAUDE.md
 ```
-- Batch creation with instructions
+#### Batch creation with instructions
 ```bash
 claude "Create CLAUDE.md files in each major subdirectory (src/components, src/services, src/utils, etc.) with architecture overviews for each module. Each CLAUDE.md should document the purpose, key files, dependencies, and architecture patterns specific to that directory."
 ```
-- Structured approach code analysis 
-	- Start with root-level architecture overview
+#### Structured approach code analysis 
+- Start with root-level architecture overview
 ```bash
 claude "Analyze this repository structure and create a main CLAUDE.md with overall architecture, then create specific CLAUDE.md files in major subdirectories"
 ```
-	- Then ask for specific subdirectory documentation
+- Then ask for specific subdirectory documentation
 ```bash
 claude "Create detailed CLAUDE.md files in src/components/, src/api/, and src/utils/ directories focusing on their specific responsibilities and internal structure"
 ```
-- Other prompts
+### Other prompts
 ```bash
 claude "Create CLAUDE.md files in each major subdirectory (src/components, src/services, src/utils, etc.) with architecture overviews for each module. Each CLAUDE.md should document the purpose, key files, dependencies, and architecture patterns specific to that directory."
 claude "Analyze this repository structure and create a main CLAUDE.md with overall architecture, then create specific CLAUDE.md files in major subdirectories"
