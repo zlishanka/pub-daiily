@@ -1,3 +1,7 @@
+## Pro plan limit
+Average users can send approximately 45 messages with Claude every five hours, 
+OR send approximately 10-40 prompts with Claude Code every five hours
+
 ## Claude code workflow
 - Use plan mode first , shift + tab to switch to plan mode. Think through first and won't generate any codes. it will create a game plan . Review the plan thoroughly.
 - Generate CLAUDE.md file , /init command in any directory
@@ -46,7 +50,46 @@ claude "Create CLAUDE.md files in each major subdirectory (src/components, src/s
 claude "Analyze this repository structure and create a main CLAUDE.md with overall architecture, then create specific CLAUDE.md files in major subdirectories"
 ```
 
+### Use CC as a bash CLI
+```bash
+claude -p "HOw many files are in this project?"
+cat data.csv | claude -p "Who won the most games"
+```
+
+### CC + Images 
+- Drag directly 
+- shift + cmd + 4 to capture image and ctrl + v to paste it in claude
+ 
+### Import misc knowledge with URLs
+```bash
+claude Write pseudo code to describe the rules of uno based on there: https://www.unorules.com
+```
+- Use screenshots are feedback
+- Automate feedback with Puppeteer (MCP server)
+	- Let's set up Puppeteer and navigate to the game.
+
+### Use CC as an MCP client/server
+```bash
+# Install the filesystem MCP server
+npm install -g @modelcontextprotocol/server-filesystem
+# In your project directory, tell Claude Code to connect to the MCP server
+claude --mcp-server stdio://npx @modelcontextprotocol/server-filesystem $(pwd)
+claude "What files are in my project? Show me the directory structure."
+claude "Read my main.py file and explain what it does."
+claude "Find all files that contain 'TODO' comments and list them."
+claude "Create a new README.md file with a project overview based on the code you can see."
+
+# Database MCP server
+claude --mcp-server stdio://npx @modelcontextprotocol/server-sqlite /path/to/database.db
+# Git MCP server  
+claude --mcp-server stdio://npx @modelcontextprotocol/server-git
+# Web scraping MCP server
+claude --mcp-server stdio://npx @modelcontextprotocol/server-brave-search
+```
+
+
+
 ## References
 [Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)
 [Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)
-
+[Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0)
