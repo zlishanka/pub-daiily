@@ -86,8 +86,25 @@ claude --mcp-server stdio://npx @modelcontextprotocol/server-git
 # Web scraping MCP server
 claude --mcp-server stdio://npx @modelcontextprotocol/server-brave-search
 ```
+### shift + tab 
+- swithc modes between "auto-accept edits on", "plan mode", etc.
 
+### Get usage
+```bash
+npx ccusage
+```
+### level of thinking 
+- prompt to `I want to add a support page to my app. Think harder about the implementation`
+- prompt to `I want to add a support page to my app. ultrathink about the implementation`
 
+### loop
+- run the build in a loop and fix all build errors as they get reported
+
+### clear and resume
+- `clear` to clear the context 
+- `resume` to restart the context of last few days
+
+ 
 
 ## References
 [Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)
