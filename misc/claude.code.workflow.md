@@ -4,7 +4,7 @@ OR send approximately 10-40 prompts with Claude Code every five hours
 
 ## Claude code workflow
 - Use plan mode first , shift + tab to switch to plan mode. Think through first and won't generate any codes. it will create a game plan . Review the plan thoroughly.
-- Generate CLAUDE.md file , /init command in any directory
+- Generate CLAUDE.md file , `/init` command in any directory
 - Use git as checkpoint system
 - Use screenshot, simply drag screenshot file to terminal as a dialog context
 - Use the web link as context
