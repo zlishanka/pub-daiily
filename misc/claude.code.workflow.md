@@ -107,6 +107,6 @@ npx ccusage
  
 
 ## References
-[Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)
-[Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)
-[Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0)
+[Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)  
+[Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)  
+[Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0)  
