@@ -12,6 +12,9 @@
     # delete top files 
     du -a . | sort -nr | head -n 20 | tail -n +21 | cut -f 2- -d ' ' | xargs rm -f
 
+## list all files in the current directory and its subdirectories, sorted in descending order by number of lines
+	find . -type f -name "*.py" -exec wc -l {} + | sort -nr
+
 ## check disk space usage 
     df -h  
 

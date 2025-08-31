@@ -1,6 +1,13 @@
 ## git cheatsheet 
 https://cheatography.com/itsellej/cheat-sheets/git-commands/ 
 
+## git agent prompts 
+	# for specific pull request 
+		- would you be able to analyze what fix pull request 1590 did?
+		- git log --grep="1590" --oneline
+		- git show e44b070e	
+
+
 ## clone respository 
     # use SSH key 
     git clone git@gitlab.com:avmedsys/al-media/avcv.git -b release/6.5 soft-9826
