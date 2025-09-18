@@ -59,7 +59,7 @@
 - **Internal HTTP(S)**: Proxy-based Layer 7 load balancer
 - **Use Cases**: Regional traffic distribution, internal communications
 
-![alt text](gcp-lb-types.png "GCP loadbalancing types")
+![alt text](gcp-lb-types.png "GCP loadbalancing types") 
 
 ### Network Endpoint Groups (NEG)
 
@@ -68,6 +68,7 @@ Four types of NEGs:
 2. **Internet**: Committed usage terms for cost savings
 3. **Hybrid Connectivity**: Traffic Director services outside Google Cloud
 4. **Serverless**: Cloud Run, App Engine, or Cloud Functions services
+
 
 ### Load Balancer Selection Criteria
 
@@ -133,15 +134,22 @@ Two types with different purposes:
 4. **Backend Services**: Manage instance groups and health checks
 5. **Instance Groups**: Collections of backend instances
 
+![alt-text](gcp-lb-architecture-http.png "GCP HTTP load balancer components")
+
 ### Cross-Region Load Balancing
 - Users from different regions (NA, EMEA) access same application
 - Traffic routed to nearest healthy backend
 - Automatic failover between regions
 
+![alt-text](gcp-lb-cross-region.png "GCP load balancer cross region")
+
 ### Content-Based Routing
 - Single load balancer routes different URLs to different backends
 - Example: `/video` requests go to video processing instances
 - Default route handles general web traffic
+
+![alt text](gcp-lb-content-based.png "GCP load balancer content based")
+![alt text](gcp-lb-backend-buckets.png "GCP load balancer backend buckets")
 
 ## Best Practices
 
