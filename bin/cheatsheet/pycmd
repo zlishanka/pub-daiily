@@ -777,4 +777,8 @@ http://quickref.me/python
 	- "poetry install" - install Python dependencies (required only when Poetry venv is created for the first time)
 	- "inv test" - installs pre-commit Git hook
 
+## Run python linter to avoid github action warning/error 
+	black youfile.py
+	isort yourfile.py
+	flake8 yourfile.py
 	

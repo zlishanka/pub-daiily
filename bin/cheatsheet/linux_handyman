@@ -14,6 +14,7 @@
 
 ## list all files in the current directory and its subdirectories, sorted in descending order by number of lines
 	find . -type f -name "*.py" -exec wc -l {} + | sort -nr
+	find . -name "*onboarding*"  # find file with name that has onboarding in it 
 
 ## check disk space usage 
     df -h  
@@ -110,6 +111,7 @@
 
 # find system/shared libraries in linux 
     sudo find /usr -iname "*libGL.so*" -exec ls -l {} \; 
+	find . -name "*onboarding*"  # find file with name that has onboarding in it
 
 # create symlink into /usr/bin 
     ln -s src dst  

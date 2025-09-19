@@ -1,6 +1,60 @@
+# Containers in Google Cloud 
+
+## Container fundamentals
+- What is a container?  A container is an invisible box around your code and its dependencies, with limited access to its own partition of the file system and hardware.
+- What makes containers flexible?  A container virtualizes the OS and dependencies to make your code ultra portable. This allows you to “code once and run anywhere”.
+- How do you develop application code?  You develop on hardware, while executing your final code on VMs free from typical software dependencies.
+
+### Container images
+- An application and its dependencies are called an image.
+- A container is a running instance of an image.
+- Building software into container images, means you can easily package and ship an application.
+- Docker is a open-source software in which you can build and run container images.
+
+![alt text](gcp-container-cloud-build.png "GCP Container Cloud Build") 
+
+## Google Kubernetes Engine
+
+### Orchestrating containers with Kubernetes
+- Kubernetes basics
+	- Kubernetes is an open-source platform for managing containerized workloads and services.
+	- It is a set of APIs for deploying containers on a set of nodes called a cluster.
+	- It is declarative, allowing you to describe a set of applications and how they should interact.
+- Kubernetes features 
+	- Workload types 
+		- Supports stateless and stateful applications 
+		- Supports batch jobs
+	- Autoscaling
+		- Automatically scales in and out containerized applications based on resource utilization and daemon tasks
+	- Resource controls 
+		- Specify resource request levels and resource limits for your workloads
+	- Portability
+		- Supports workload portability across on-premises or multiple cloud service providers
+		- Deploy anywhere and move workloads without vendor lock-in
+
+### Kubernetes concepts: Pod
+- A Pod is the smallest unit in Kubernetes that you create or deploy.
+	- Represents a running process on your cluster
+	- Provides a unique network IP address and set of ports for your containers and configurable options
+
+![alt text](gcp-container-gke-pod.png, "Pod")
+
+### Kubernetes concepts: Deployment
+- A Deployment represents a group of replicas of the same Pod and keeps your Pods running even when the nodes they run on fail.
+
+![alt text](gcp-container-gke-deploy.png, "Deploy")
+
+### Kubernetes concepts: Service
+- A Service is an abstraction that defines a logical set of Pods and a policy by which to access them.
+	- Kubernetes creates a Service with a fixed IP address for your Pods.
+	- A Service group is a set of Pods and provides a stable endpoint (or fixed IP address) for them.
+
+![alt text](gcp-container-gke-service.png, "Service")
+
 ## Start a Kubernetes cluster managed by Kubernetes Engine 
 
 ### Set project
+
 ```bash 
 gcloud config set project qwiklabs-gcp-04-d01c2c70cc92
 Updated property [core/project].
