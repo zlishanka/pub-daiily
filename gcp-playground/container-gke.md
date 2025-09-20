@@ -37,19 +37,19 @@
 	- Represents a running process on your cluster
 	- Provides a unique network IP address and set of ports for your containers and configurable options
 
-![alt text](gcp-container-gke-pod.png, "Pod")
+![alt text](gcp-container-gke-pod.png "Pod")
 
 ### Kubernetes concepts: Deployment
 - A Deployment represents a group of replicas of the same Pod and keeps your Pods running even when the nodes they run on fail.
 
-![alt text](gcp-container-gke-deploy.png, "Deploy")
+![alt text](gcp-container-gke-deploy.png "Deploy")
 
 ### Kubernetes concepts: Service
 - A Service is an abstraction that defines a logical set of Pods and a policy by which to access them.
 	- Kubernetes creates a Service with a fixed IP address for your Pods.
 	- A Service group is a set of Pods and provides a stable endpoint (or fixed IP address) for them.
 
-![alt text](gcp-container-gke-service.png, "Service")
+![alt text](gcp-container-gke-service.png "Service")
 
 ## Start a Kubernetes cluster managed by Kubernetes Engine 
 
