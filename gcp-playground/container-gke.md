@@ -51,6 +51,34 @@
 
 ![alt text](gcp-container-gke-service.png "Service")
 
+### Declarative configurations
+- Kubernetes’ key strength is that it allows you to work in a declarative way.
+- You provide Kubernetes with a config file that outlines your desired state; then, it determines how to achieve that state.
+- This is best achieved by using a Deployment config file.
+- You can update your app using the command
+line or by updating the config file.
+
+## Google Kubernetes Engine
+
+### GKE and EKS: Similarities
+- GKE and EKS are both based on Kubernetes.
+- Use a cluster of VMs to run and manage containers
+- Use a cluster of VMs to run and manage containers
+- Node agents are Kubelets
+- Group containers by Pods
+- Can run on a variety of clouds as well as physical hardware and VMs
+- Support containerd container runtimes on Kubernetes 1.24 or later
+- Support Docker container runtimes if running a Kubernetes version older than 1.24
+
+### GKE and EKS: Differences
+
+| Feature | AWS EKS | Google GKE |
+|---------|---------|------------|
+| **Running commands** | Done through a combination of kubectl, AWS CLI, and the Amazon EKS command line tool eksctl | Done through a combination of the open source kubectl command line and the gcloud CLI |
+| **Auto-repair nodes** | EKS Auto Mode helps keep the nodes in your EKS cluster in a healthy, running state | Node auto-repair helps keep the nodes in your GKE cluster in a healthy, running state |
+| **Control plane upgrades** | Node auto-upgrades keep the nodes in your cluster up-to-date with the cluster control plane version when your control plane is updated on your behalf | Node auto-upgrades keep the nodes in your cluster up-to-date with the cluster control plane version when your control plane is updated on your behalf |
+
+
 ## Start a Kubernetes cluster managed by Kubernetes Engine 
 
 ### Set project
