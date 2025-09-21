@@ -239,11 +239,175 @@ kubectl get deployment
 	- Regional clusters have a single API endpoint for the cluster.
 	- A cluster’s control planes and nodes are spread across multiple Compute Engine zones within a region.
 	- This maintains the availability of the application and control plane across multiple zones in a region.
+<div style="display: flex; align-items: flex-start;">
+  <img src="gcp-gke-zone-cluster.png" width="45%" style="margin-right: 10px;" />
+  <img src="gcp-gke-region-cluster.png" width="45%" />
+</div>
 
-<img src="gcp-gke-zone-cluster.png" width="45%" style="display:inline-block; margin-right:10px;" />
-<img src="gcp-gke-region-cluster.png" width="45%" style="display:inline-block;" />	
+## Deployments and Networking
 
-## Start a Kubernetes cluster managed by Kubernetes Engine 
+### Declaring the state of Pods
+- Deployment kind and name: The Deployment named my-app is created with three replicated Pods.
+- Spec.template: A Pod template defines the metadata and specification of each of the Pods in this ReplicaSet.
+- Pod specification: An image is pulled from Google Container Registry, and port 8080 is exposed to send and accept traffic for the container.
+
+### Deployment lifecycle states
+- Progressing state: A task is being performed.
+- Complete state: All replicas have been updated and are available.
+- Failed state: A new ReplicaSet could not becompleted.
+- Keeping your YAML files in a source code repository will help you manage some of the complexity of tracking fixes and revisions.
+
+### Creating Deployments 
+- Create the Deployment declaratively using a manifest file and a kubectl 'apply' command.
+```bash
+kubectl apply -f [DEPLOYMENT_FILE]
+```
+- Create a Deployment imperatively using a kubectl 'create deployment' command that specifies the parameters inline.
+```bash
+kubectl create deployment \
+[DEPLOYMENT_NAME] \
+	--image [IMAGE]:[TAG] \
+	--replicas 3\
+	--labels [KEY]=[VALUE] \
+	--ports 8080 \
+	--generator deployment/apps.v1 \
+	--save-config
+```
+- Use the GKE Workloads menu in the Cloud Console where you can:
+	- Specify the container image and version, or select it directly from Container Registry.
+	- Specify environment variables and initialization commands.
+	- Add an application name, namespace and labels.
+	- Use the View YAML button to view the Deployment specification in YAML format.
+
+### Inspect the state of a Deployment: kubectl and Cloud Console
+```bash
+kubectl get deployment [DEPLOYMENT_NAME]
+
+kubectl get deployment nginx-deployment
+
+NAME READY UP-TO-DATE AVAILABLE AGE
+nginx-deployment 3/3 3 3 18s
+
+kubectl get deployment [DEPLOYMENT_NAME] -o yaml > this.yaml
+
+```
+
+### Scale a Deployment: Manually and autoscaling
+- To manually scale a Deployment:
+	- Use a `kubectl` command.
+	- Define the total number of repl
+	- Change the manifest manually.
+- To autoscale a Deployment:
+	- Specify the minimum and maximum number of desired Pods and CPU utilization threshold.
+	- Use the kubectl 'autoscale' command or Cloud Console.
+```bash
+kubectl autoscale deployment [DEVELOPMENT_NAME] \
+	--min=1 --max=3 \
+	--cpu-percent=80
+```
+
+### Updating Deployments
+#### Ways to update deployments
+- kubectl ‘apply’ : Update other specifications of a Deployment.
+- kubectl ‘set’ : Change the Pod template specifications for the Deployment.
+- kubectl ‘edit’ : Open the specification file using the vim editor to make changes directly.
+- Cloud Console : Edit the Deployment manifest from the Cloud Console to perform a rolling update, and more.
+
+#### Update strategies: 
+- Rolling update
+  
+  ![alt text](gcp-gke-update-rolling.png "GKE Rolling Update")
+
+- Blue/green
+
+  ![alt text](gcp-gke-update-bluegreen.png "GKE blue/Green Update")
+
+- Canary
+	- The Service selector is based only on the application label and does not specify the version.
+	- This setting allows the Service to select and direct the traffic to the Pods from both Deployments.
+	- A subset of users will be directed to the new version.
+	- May require tools such as Istio to accurately shift the traffic.
+
+<table>
+<tr>
+<td><img src="gcp-gke-update-canary-1.png" alt="GKE Canary Update Step 1" width="600"/></td>
+<td><img src="gcp-gke-update-canary-2.png" alt="GKE Canary Update Step 2" width="600"/></td>
+</tr>
+</table>
+
+- Session affinity
+	- A Service configuration does not normally ensure that all requests from a single client will always connect to the same Pod.
+	- To prevent this, set the sessionAffinity field to ClientIP in the specification of the service if you need a client's first request to determine which Pod will be used for all subsequent connections.
+- A/B testing
+	- Test a hypothesis by using variant implementations.
+	- To perform an A/B test, you route a subset of users to new functionality based on routing rules.
+	- A/B testing is best used to measure the effectiveness of functionality in an application.
+
+  ![alt text](gcp-gke-update-abtesting.png "GKE A/B test update")
+
+- Shadow testing
+	- Deploy and run a new version alongside the current version.
+	- An incoming request is mirrored and replayed in a test environment.
+	- Ensure the shadow tests do not trigger side effects that can alter the existing production environment or the user state.
+	- It’s typically combined with other approaches like canary testing.
+	- Shadow testing offers many benefits.
+
+  ![alt text](gcp-gke-update-shadowtesting.png "GKE A/B test update")
+
+### Rolling back Deployments
+- Use the `kubectl rollout undo` command to return to a previous version, ensuring that you specify the revision number.
+- Inspect the rollout history using the `kubectl rollout history`command.
+- Start Cloud Shell from your Console to input these commands.
+- By default, the details of 10 previous ReplicaSets are retained, but you can change this limit under the Deployment specification.
+
+### Deployment actions
+- ‘rollout pause’ : Use the `kubectl rollout pause` command to allow the initial state of the Deployment to continue its function, while new updates will not have any effect while the rollout is paused.
+- ‘rollout resume’ : Use the `kubectl rollout resume` command to roll out new changes with a single revision.
+- 'rollout status' : Use the `kubectl rollout status` command to monitor the rollout status.
+- 'delete' : Use the `kubectl delete` command to delete a Deployment and delete it from Cloud Console.
+
+#### Example: kubectl rollout status command
+
+```bash
+kubectl rollout status deployment/my-app
+```
+
+**Output during a successful rollout:**
+```
+Waiting for deployment "my-app" rollout to finish: 1 of 3 updated replicas are available...
+Waiting for deployment "my-app" rollout to finish: 2 of 3 updated replicas are available...
+deployment "my-app" successfully rolled out
+```
+
+**Output when rollout is complete:**
+```
+deployment "my-app" successfully rolled out
+```
+
+**Output when rollout is paused:**
+```
+Waiting for deployment "my-app" rollout to finish: 1 out of 3 new replicas have been updated...
+deployment "my-app" rollout is paused
+```
+
+## Pod networking
+
+### Pod-to-Pod communication on the same node
+
+  ![GKE pop communication](gcp-gke-pop-communication.png)
+
+### Pod IP addresses in GKE
+- AWS : With the Amazon VPC CNI plugin, each pod is assigned an IP from the primary or secondary CIDR blocks of the VPC.
+- The container network interface uses existing VPC networking.
+- GKE: Nodes obtain the Pod IP addresses from secondary/alias IP address ranges assigned to your Virtual Private Cloud, or VPC.
+- When you deploy GKE, you can select a VPC along with a region or zone.
+
+### Alias IPs
+- An Alias IP range is reserved for approximately 4,000 IP addresses for cluster-wide services that you may create later.
+- A separate Alias IP range is created for entire clusters of Pod IPs in range /14 (> 250,000 IPs).
+- A much smaller /24 block is allocated to each node (256 IP addresses). For each node, the Pod IP range /24 allows GKE to assign the IP address to individual Pods.
+
+## Example: Start a Kubernetes cluster managed by Kubernetes Engine 
 
 ### Set project
 
