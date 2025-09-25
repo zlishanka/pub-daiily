@@ -92,6 +92,7 @@ claude --mcp-server stdio://npx @modelcontextprotocol/server-brave-search
 ### Get usage
 ```bash
 npx ccusage
+claude-monitor
 ```
 ### level of thinking 
 - prompt to `I want to add a support page to my app. Think harder about the implementation`
@@ -109,4 +110,5 @@ npx ccusage
 ## References
 [Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)  
 [Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)  
-[Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0)  
+[Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0) 
+[What makes Claude Code so damn good](https://minusx.ai/blog/decoding-claude-code/) 
