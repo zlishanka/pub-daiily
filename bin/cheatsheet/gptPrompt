@@ -246,6 +246,10 @@
 			 to pinpoint the root cause. Finally, suggest practical solutions to address this root cause and prevent the issue from recurring. I want you to [mention how you want 
              the output in detail with examples]."
 
+# Cursor prompt for codebase overview 
+The current github repo is to "specify main functionality of codebase and environment" (written in python fastAPI, etc.). 
+It uses "specify framework, etc.". Please analyze the codebase holistically and give me a comprehensive overview of the major functionality of codebase and its use cases.
+
 ## GPT research 
 	https://x.com/godofprompt/status/1923644667633205555
 	
