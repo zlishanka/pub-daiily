@@ -11,6 +11,13 @@ OR send approximately 10-40 prompts with Claude Code every five hours
 - Ask to Double check its work (can you make sure it doesn't break things...)
 - Select Claude model :  Opus, Sonnet, etc. If you paid over $200, use Opus
 
+### Install claude code
+```bash
+npm install -g @anthropic-ai/claude-code
+claude update
+```
+
+
 ### Start claude and bypass frequent trivial permission prompts
 ```bash
 claude --dangerously-skip-permissions
@@ -105,10 +112,27 @@ claude-monitor
 - `clear` to clear the context 
 - `resume` to restart the context of last few days
 
+
+### plugins
+- Combine `/` slash, subagents, MCP servers and Hooks features together
+- Can be packaged or pushed to github so it can be shared with others
+- Plugins make it very flexible to share claude workflow with developers
+- Anthropics github plugins : `anthropics/claude-code/plugins` 
+- Add marketplace, install "claude code plugins"
+```bash 
+/plugin marketplace add anthropics/claude-code
+```
+- Use agent SDK to create simple agent
+```bash
+/agent-sdk-dev:new-sdk-app [project_name]
+```
+
+
  
 
 ## References
 [Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)  
 [Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)  
 [Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0) 
-[What makes Claude Code so damn good](https://minusx.ai/blog/decoding-claude-code/) 
+[What makes Claude Code so damn good](https://minusx.ai/blog/decoding-claude-code/)
+[claude Agent SDK python](https://github.com/anthropics/claude-agent-sdk-python)  

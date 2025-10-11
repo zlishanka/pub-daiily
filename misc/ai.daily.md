@@ -1,5 +1,9 @@
 # AI Daily Update
 
+## 09/29/25
+- Understand tokenization and embedding of LLM, good youtube lecture in Chinese!
+https://www.youtube.com/watch?v=kDmUHCKmA8E 
+
 ## 09/25/25
 - AI Agents Intensive
 Day 1: Introduction to Agents & Agentic Architectures
