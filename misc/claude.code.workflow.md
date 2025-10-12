@@ -135,6 +135,35 @@ claude-monitor
 /plugin marketplace add user-or-org/repo-name
 ```
 
+- Add marketplace
+```bash
+/plugin marketplace add ./.claude-plugins-dev
+```
+
+- Install plugin
+```bash
+/plugin install code-review-pro@local-dev-marketplace
+```
+
+- Verify plugin installation
+```bash
+/help
+# Should see new command /review, /security-review, /performance-review
+```
+
+- Test plugin
+```bash
+/review src/main.js
+/security-review src/auth/
+/performance-review src/database/queries.js
+```
+
+- Check agents
+```bash
+/agents
+# Should see security-export and architecture-reviewer
+```
+
 ## References
 [Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)  
 [Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)  
