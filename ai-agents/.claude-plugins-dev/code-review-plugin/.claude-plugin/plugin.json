@@ -1,0 +1,11 @@
+{
+"name": "code-review-pro",
+"description": "A comprehensive code review toolkit that emphasizes on security, performance and code quality",
+"version": "1.0.0",
+"author": {
+"name": "Roy Zheng",
+"email" : "zlishanka@gmail.com"
+}, 
+"keywords" :["code-review", "security", "quality"],
+"license": "MIT"
+}

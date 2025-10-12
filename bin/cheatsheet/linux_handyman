@@ -647,3 +647,8 @@ execute_process(
 # get the json object length
 	 jq '. | length' big-json-config.json 
 	jq '[.[] | select(.updated_at > "2025-09-20")]' big-json-config.json
+
+# make json file pretty or urgly
+	cat file.json | jq . >> file1.json
+	cat file.json | jq -c . >> file1.json
+

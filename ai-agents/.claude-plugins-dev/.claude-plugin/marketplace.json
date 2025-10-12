@@ -1,0 +1,15 @@
+{
+  "name": "local-dev-marketplace",
+  "owner": {
+    "name": "Dev Team",
+    "email": "[email protected]"
+  },
+  "plugins": [
+    {
+      "name": "code-review-pro",
+      "source": "./code-review-plugin",
+      "description": "Dev Code review plugin",
+      "version": "1.0.0"
+    }
+  ]
+}

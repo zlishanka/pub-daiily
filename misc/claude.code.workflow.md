@@ -126,13 +126,19 @@ claude-monitor
 ```bash
 /agent-sdk-dev:new-sdk-app [project_name]
 ```
-
-
- 
+- Create new plugin
+	- Plugin marketplaces
+	- To host a marketplace, all you need is a git repository, GitHub repository, or URL with a properly formatted .claude-plugin/marketplace.json
+	- To use plugins from a marketplace, run /plugin marketplace add user-or-org/repo-name, then browse and install plugins using the /plugin menu.
+```bash
+.claude-plugin/marketplace.json
+/plugin marketplace add user-or-org/repo-name
+```
 
 ## References
 [Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)  
 [Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)  
 [Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0) 
 [What makes Claude Code so damn good](https://minusx.ai/blog/decoding-claude-code/)
-[claude Agent SDK python](https://github.com/anthropics/claude-agent-sdk-python)  
+[claude Agent SDK python](https://github.com/anthropics/claude-agent-sdk-python) 
+[Customize Claude Code with plugins](https://www.anthropic.com/news/claude-code-plugins)  
