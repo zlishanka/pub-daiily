@@ -119,13 +119,22 @@ claude-monitor
 - Plugins make it very flexible to share claude workflow with developers
 - Anthropics github plugins : `anthropics/claude-code/plugins` 
 - Add marketplace, install "claude code plugins"
+
+- Install claude-code plugins 
 ```bash 
 /plugin marketplace add anthropics/claude-code
 ```
-- Use agent SDK to create simple agent
+- Check installed plugin
 ```bash
-/agent-sdk-dev:new-sdk-app [project_name]
+/plugin
 ```
+
+- Use `agent-sdk-dev` plugin to create simple basic agent (either python or type.js)  
+```bash
+/agent-sdk-dev:new-sdk-app [agent_name]
+/agent-sdk-dev:new-sdk-app my-agent
+```
+
 - Create new plugin
 	- Plugin marketplaces
 	- To host a marketplace, all you need is a git repository, GitHub repository, or URL with a properly formatted .claude-plugin/marketplace.json
@@ -165,9 +174,9 @@ claude-monitor
 ```
 
 ## References
-[Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)  
-[Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)  
-[Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0) 
-[What makes Claude Code so damn good](https://minusx.ai/blog/decoding-claude-code/)
-[claude Agent SDK python](https://github.com/anthropics/claude-agent-sdk-python) 
-[Customize Claude Code with plugins](https://www.anthropic.com/news/claude-code-plugins)  
+[Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)   
+[Tips to use claude code](https://www.youtube.com/watch?v=n7iT5r0Sl_Y)   
+[Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0)   
+[What makes Claude Code so damn good](https://minusx.ai/blog/decoding-claude-code/)   
+[claude Agent SDK python](https://github.com/anthropics/claude-agent-sdk-python)   
+[Customize Claude Code with plugins](https://www.anthropic.com/news/claude-code-plugins)   
