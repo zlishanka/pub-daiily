@@ -3,6 +3,10 @@
 	
 	# install make, pkg-config, diffutils 
 	pacman -S make pkg-config diffutils
+
+## grep pattern 
+	# capture all abc=, *abc  =  
+	grep "abc\s*=" 
 	
 ## check disk usage of directory 
     du -ah | sort -nr | head -20  
@@ -15,6 +19,8 @@
 ## list all files in the current directory and its subdirectories, sorted in descending order by number of lines
 	find . -type f -name "*.py" -exec wc -l {} + | sort -nr
 	find . -name "*onboarding*"  # find file with name that has onboarding in it 
+	find . -iname "*sync*"  # find file with name that has sync in it , case insensitive
+	find . -type f -iname "*sync*"  # only find files not directory
 
 ## check disk space usage 
     df -h  

@@ -172,6 +172,29 @@ claude-monitor
 /agents
 # Should see security-export and architecture-reviewer
 ```
+### Skills
+- Skills are modular capabilities that extend Claude's functionality. There are three types:
+ 	- 1. Personal Skills: ~/.claude/skills/ (available across all projects)
+  	- 2. Project Skills: .claude/skills/ (project-specific)
+  	- 3. Plugin Skills: Bundled with plugins
+- Creating a Skill
+  - Basic Structure
+  - Create a directory with a SKILL.md file:
+  .claude/skills/your-skill-name/
+  └── SKILL.md
+```bash
+mkdir -p .claude/skills/code-review
+```
+- `SKILL.md` Format
+  ---
+  name: your-skill-name
+  description: Brief description of what this Skill does (max 1024 chars)
+  ---
+  Skill Details
+
+- Skill vs MCP
+	- MCP exposes external services
+	- Skill exposes and contains internal services
 
 ## References
 [Claude Code Beginner Guide](https://www.youtube.com/watch?v=iYiuzAsWnHU)   
@@ -179,4 +202,6 @@ claude-monitor
 [Claude Code pro tips](https://www.youtube.com/watch?v=TiNpzxoBPz0)   
 [What makes Claude Code so damn good](https://minusx.ai/blog/decoding-claude-code/)   
 [claude Agent SDK python](https://github.com/anthropics/claude-agent-sdk-python)   
-[Customize Claude Code with plugins](https://www.anthropic.com/news/claude-code-plugins)   
+[Customize Claude Code with plugins](https://www.anthropic.com/news/claude-code-plugins)  
+[Agent skills - create, manage and share skills to extend Claude's capabilities](https://docs.claude.com/en/docs/claude-code/skills.md)  
+[Anthropic skills repo](https://github.com/anthropics/skills)     

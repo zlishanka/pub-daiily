@@ -162,3 +162,11 @@
 	sam deploy 
 
 	sam deploy --image-repositories PhiTextFunction=537850345630.dkr.ecr.us-west-2.amazonaws.com/avail-cv-ml-phi-text-lambda-test:latest
+
+# dynamodb 
+	aws dynamodb list-tables
+	
+	aws dynamodb get-item \
+    	--table-name YourTableName \
+    	--key '{"PrimaryKeyName": {"S": "PrimaryKeyValue"}}'
+

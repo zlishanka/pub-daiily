@@ -43,6 +43,24 @@ http://quickref.me/python
 	s.intersection_update(t) 	s &= t	# return set s keeping only elements also found in t
 	s.difference_update(t) 		s -= t 	# return set s after removing elements found in t
 
+# generator, yield
+	def gen_test(): --> Generator[...]
+		for item in items:
+			yeild item
+
+	gen_col = list(gen_test) 
+
+	- Memory efficiency: With potentially thousands of channels across many orgs, yielding avoids building a massive list in memory
+	- Start processing immediately: The caller can start working on items as soon as the first item's data arrives, 
+		rather than waiting for all orgs to be fetched
+	- Pipeline processing: Allows the caller to process items in a streaming fashion (e.g., write to database, 
+		transform data) while the next org's data is being fetched
+
+	list() converts the generator into a list by:
+	- Exhausting the generator - calling it repeatedly until it's done
+	- Storing all results in memory - building a list with all channels from all orgs
+	- Blocking execution - the program waits here until every org has been processed
+
 # bisect.insort, bisect.bisect_left
 	window.pop(bisect.bisect_left(window, nums[i-k])) 	# window is sorted, Finds the position of an element to remove
 	bisect.bisect_left(window, val)	# window is sorted, Finds the position of an element to remove  
@@ -333,7 +351,7 @@ http://quickref.me/python
 	nonlocal min_val # for variable inside inner function 
 
 # dict operation, map operation
-    ditc = {} 
+    dict = {} 
     if key in dict: # has_key is moved out of python3 
     dict.values()
     dict.keys()
@@ -342,6 +360,8 @@ http://quickref.me/python
     num_map = {'6' : '9', '9' : '6', '8' : '8', '0' : '0', '1' : '1'}
 	# Create inorder index map based sorted inorder list	
 	inorder_index_map = {val: idx for idx, val in enumerate(inorder)}
+	# safe initialization, if 'attrs' not found, return {} as default
+	adict['attrs'] = adict.get('attrs', {}) 	
 
 # use -1 index 
     a = [1,2,3,4]   # -1 to get last element of array  
@@ -781,4 +801,6 @@ http://quickref.me/python
 	black youfile.py
 	isort yourfile.py
 	flake8 yourfile.py
+
+	python -m flake8 myfilr.py --max-line-length=100 --extend-ignore=E203,W503
 	
