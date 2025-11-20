@@ -269,7 +269,8 @@ http://quickref.me/python
     isinstance(curr, TreeNode)	# check if object is TreeNode 
 	isinstance(element, int) 	# check if it's integer
 	isinstance(element, list) 	# check if it's a list
-	
+	isinstance(element, Exception) # check if it's an exception
+		
 	element.isInteger(), element.getInteger()
 # check the data type 
     type(i) is int
@@ -755,6 +756,59 @@ http://quickref.me/python
 		print(text)
 		await asyncio.sleep(1)
 	- main returns a coroutine obj
+
+	# create semaphore to limit concurrent requests
+		semaphore = asyncio.Semaphore(8)
+
+		# launch multiple coroutines as list comprehension	
+		asyncio.gather(
+			*[func_call(item) for item in items], 
+			return_exceptions=True,		# if one org fails, don't crash the entire job
+		) 
+
+		# only 8 concurrent routines limitted by semaphore 	
+		async def func_call(args):
+			async with semaphore:
+				abc = await 
+				return abc
+
+## ThreadPoolExecutor
+	# part of the concurrent.futures module and provides a high-level interface 
+	# for asynchronously executing callables using a pool of threads.
+
+	from concurrent.futures import ThreadPoolExecutor
+	
+	def _fetch_pplus_all_events_chunk(
+		start_date_iso: str,
+		end_date_iso: str,
+		fields: tuple,
+		chunk_id: int,
+		view_id: str,
+	) -> List[Dict[str, Any]]:	
+
+	all_events = []
+	with ThreadPoolExecutor(max_workers=3) as executor:
+		# Submit all chunk fetch tasks
+        future_to_chunk = {
+            executor.submit(
+                _fetch_pplus_all_events_chunk,
+                date_range['start'],
+                date_range['end'],
+                fields_tuple,
+                date_range['id'],
+                settings.SUPPORT_AIRTABLE_PPLUS_PCV_VIEW_ID
+            ): date_range['id']
+            for date_range in date_ranges
+        }
+
+		# collect result as they complete
+		for future in as_completed(future_to_chunk):
+            chunk_id = future_to_chunk[future]
+			try:
+                chunk_events = future.result()
+                all_events.extend(chunk_events)
+            except Exception as exc:
+                log_error(f"Chunk {chunk_id} generated an exception: {exc}")
 
 ## invoke utility/tool 
 	- "invoke" lets you define tasks in Python using decorators and then run them from the command line.
