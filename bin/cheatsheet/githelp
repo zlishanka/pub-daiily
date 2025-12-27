@@ -343,6 +343,9 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 ## check git commit of a file in last 12 months 
 	git log --since="12 months ago" --pretty=format:"%h %ad %s" --date=short --follow -- app/jobs/abc.py
 
+## git push after fixing linter
+	git push --force-with-lease 
+
 ## two-factor recovery code 
     335e9476d1359bce
     e01e274ed9c8c2a2
