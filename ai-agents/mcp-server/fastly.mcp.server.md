@@ -18,4 +18,5 @@
 
 ## References
 [Fastly MCP server repo](https://github.com/fastly/mcp)  
+[Yahoo developer oauth2 guide: access, refresh token etc](https://developer.yahoo.com/oauth2/guide/flows_authcode/#refresh-token-label)  
 
