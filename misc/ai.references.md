@@ -1,5 +1,7 @@
 ## Github repos for good knowledge sharing
 
+[LLM Course](https://github.com/mlabonne/llm-course)
+
 [cracking-the-data-science-interview](https://github.com/khanhnamle1994/cracking-the-data-science-interview/tree/master)  
 
 [Designing Machine Learning Systems](https://github.com/chiphuyen/dmls-book)  

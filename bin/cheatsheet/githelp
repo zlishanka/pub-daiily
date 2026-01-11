@@ -6,8 +6,10 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 		- would you be able to analyze what fix pull request 1590 did?
 		- git log --grep="1590" --oneline
 		- git show e44b070e	
-
-
+		# show the change committed by ca07352b
+		- git show ca07352b2a0a1867c542e8809747f24e27cb2069 -p
+		# show the commit related to PR 2182  
+		  git log --all --oneline --grep="#2182" 2>/dev/null | head -20
 ## clone respository 
     # use SSH key 
     git clone git@gitlab.com:avmedsys/al-media/avcv.git -b release/6.5 soft-9826
