@@ -7,6 +7,9 @@
 ## grep pattern 
 	# capture all abc=, *abc  =  
 	grep "abc\s*=" 
+
+	# find patterns in certain files
+	grep -r "dictionar" --include="*.py"
 	
 ## check disk usage of directory 
     du -ah | sort -nr | head -20  

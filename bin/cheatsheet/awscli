@@ -170,3 +170,25 @@
     	--table-name YourTableName \
     	--key '{"PrimaryKeyName": {"S": "PrimaryKeyValue"}}'
 
+# retrieve service 
+
+	# Search for EKS clusters
+	aws eks list-clusters --region us-east-1
+
+	# Search for ECS clusters
+	aws ecs list-clusters --region us-east-1
+
+	# Search for ALBs with "bakery" in name or tags
+	aws elbv2 describe-load-balancers \
+	  --region us-east-1 \
+	  --query 'LoadBalancers[?contains(LoadBalancerName, `bakery`) || contains(LoadBalancerName, `airspace`)].{Name:LoadBalancerName,DNS:DNSName,State:State.Code}'
+
+	# Search for target groups
+	aws elbv2 describe-target-groups \
+	  --region us-east-1 \
+	  --query 'TargetGroups[?contains(TargetGroupName, `bakery`) || contains(TargetGroupName, `ing`)].{Name:TargetGroupName,Protocol:Protocol,Port:Port}'
+
+	# Search CloudWatch log groups
+	aws logs describe-log-groups \
+	  --region us-east-1 \
+	  --query 'logGroups[?contains(logGroupName, `bakery`) || contains(logGroupName, `ing`)].logGroupName'
