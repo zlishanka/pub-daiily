@@ -1,0 +1,215 @@
+## Test MySQL installation 
+	service mysql status
+	mysqladmin -p -u root version
+	systemctl status mysql.service 
+
+## restart the service 
+ 
+	service mysql restart 
+
+## Basic MySQL admin
+
+# Shutdown mysql 
+   	/usr/bin/mysqladmin -u root -p shutdown
+
+# Login mysql console as user or root
+	mysql -h host -u user -p menagerie
+	mysql -p -u root
+
+# character settings in connection and database 
+	show variables like '%charac%';
+	show variables like '%charac%';
+
+# change column character type to utf8mb4
+    alter table clients convert to CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+# create new user for database (.e.g. cloudfront) and grant all rights 
+	mysql> CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass'; 
+	mysql> grant all privileges on cloudfront.* to 'roy' identified by 'xxxxx123'; 
+	mysql> flush privileges;
+	mysql> show grants for 'sliverbot'@'%'; 
+
+# grant all rights to a bot user on a database  
+	mysql> grant all privileges on streaming_manager_beta.* to 'sliverbot'@'%'; 
+	mysql> flush privileges;
+	
+# grant/change user read-only access 
+	mysql> grant select, show view on *.* to 'sliver'@'%' identified by 'sliver' with grant option;
+	mysql> grant select, show view on *.* to 'sliver'@'50.78.105.170' identified by 'sliver' with grant option;
+	mysql> flush privileges; 
+
+# rename a sql table  name 
+	mysql > alter table iem_oak_offline rename to iem_oak_nov2016;  
+
+# Show the grants for a user 
+	mysql> show grants for sliver; 
+	mysql> show grants for sliver@'50.78.105.170';
+
+
+# Get all mysql Users 
+	mysql> select user from mysql.user;
+ 
+# Create mysql database 
+	mysql> create database cloudfront;
+# Use database 
+	mysql> use cloudfront;
+# Show databases 
+	mysql> show databases;
+	mysql> show columns from database; 
+
+# Create table 
+    mysql> create table esl_nyc_oct2016 (
+        d date,    
+        t time,    
+        ts timestamp, 
+        edge_location varchar(10), 
+        bytes int, 
+        ip varchar(15), 
+        method varchar(15), 
+        domain tinytext,
+        uri tinytext, 
+        status int, 
+        user_agent tinytext, 
+        uri_query tinytext, 
+        edge_result varchar(15), 
+        protocol varchar(10), 
+        time_taken float(7,3)  
+ );     
+
+
+# create index for table 
+	create index ts_idx on esl_nyc_oct2016 (ts);       
+	create index d_idx on esl_nyc_oct2016 (d);  
+	create index t_idx on esl_nyc_oct2016 (t);
+	create index ip_idx on esl_nyc_oct2016 (ip);
+
+# drop index from table 
+	alter table clients drop index cip_idx;  
+	
+# add unique index in table 
+	alter table clients add unique index cip_idx (cip); 
+
+# add column to a table 
+    alter table midtiers add update_ts timestamp default current_timestamp; 
+
+# create new table from with info from a query 
+
+	create table iem_vr_clients select cip, edge_location, uri_query from existing_tbl where....  
+
+# create unique index for table 
+	create unique index ip_addr_idx on office_ip_list (ip_addr); 
+     	alter table office_ip_list add unique index (ip_addr);
+
+# show index for table 
+	show index from esl_nyc_oct2016;
+
+# delete one row from table 
+	delete from ingestors where external_ip = '35.157.173.204';
+
+# drop or delete tables 
+	drop table esl_newyork_oct2016;
+
+# change/modify column of the table 
+	ALTER TABLE testalter_tbl MODIFY c CHAR(10);
+	ALTER TABLE testalter_tbl CHANGE i j BIGINT;
+    	ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000; 
+	alter table midtiers modify udpate_ts timestamp default current_timestamp on update current_timestamp; 
+
+# dump databases/tables on a file 
+	mysqldump --databases db1 db2 db3 > dump.sql 
+        mysqldump -u root -p cloudfront iem_oak_offline > iem_oak_nov2016.sql  
+	mysqldump -u root -p mydb tb1 tb2 tb3 > mydb_tbls.sql  
+        mysqldump -u sliverbot -p cloudfront edge_locations iem_android_clients iem_ios_clients iem_oak_nov2016 iem_vr_clients office_ip_list vr_clients > iem_oakland_nov2016.sql 
+
+# import databases from a file 
+	mysql -u username -p database_name < file.sql 
+
+# insert row into database table 
+ 	INSERT INTO table_name ( field1, field2,...fieldN ) VALUES ( value1, value2,...valueN );	
+  	insert into office_ip_list (ip_addr) values ('50.78.105.170'); 
+
+# upudate a column in the table  
+        update ingestors set external_ip = '52.53.227.156' where ingestor_ip = '172.31.31.42';
+
+# show tables 
+	mysql> show tables;
+
+# show schema
+	mysql> desc mysql_table;   
+
+
+# set password for a user 
+	mysql > set password for 'sliver' = password('sliver'); 
+	Mysql > FLUSH PRIVILEGES;
+
+# show parameters of the configuration  
+	mysql > Show variables like 'max_allowed_packet';
+ 
+# show the table size (given database name, shows the size of all table in database)  
+  mysql > SELECT table_schema "DB Name", Round(Sum(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB" FROM   information_schema.tables GROUP  BY table_schema; 
+	mysql > SELECT table_name AS "Table", round(((data_length + index_length) / 1024 / 1024), 2) "size in MB" from information_schema.TABLES where table_schema = "cloudfront"; 
+
+
+	SELECT table_name AS "Table", round(((data_length + index_length) / 1024 / 1024), 2) "size in MB" from information_schema.TABLES where table_schema = "cloudfront" and table_name = "iem_oak_offline";
+
+# sort on one column of table 
+	select count(country_name), country_name from clients group by country_name order by count(country_name) desc; 
+	select count(edge_city), edge_city from clients group by edge_city  order by count(edge_city) desc; 
+	select count(country_name), country_name from clients where ts > 1493584159 - 3*86400 group by country_name order by count(country_name) desc;
+
+# Configuration setting of mysql 
+	file : /etc/mysql/mysql.conf.d/mysqld.cnf 
+	mysqld --help --verbose 2> /dev/null | grep -A1 'Default options' 	
+ 
+# innodb_buffer_pool_size 
+	when seeing error 'The total number of locks exceeds the lock table size' 
+	innodb_buffer_pool_size = 256M (default only 8M)  
+
+# enforce utf8mb4 encoding of column 
+	character-set-server=utf8mb4
+	collation-server=utf8mb4_unicode_ci 
+	alter database cloudfront CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+	SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation%'; 
+
+
+
+## POSTGRES SQL 
+
+# show schema of a Postgres DB table 
+ 
+  select column_name, data_type, character_maximum_length from information_schema.columns where table_name = 'activity_log'; 
+  select column_name, data_type, character_maximum_length from information_schema.columns where table_name = 'diamond_xact'; 
+  select column_name, data_type, character_maximum_length from information_schema.columns where table_name = 'user_profile'; 
+
+# show tables of a Postgres DB 
+
+  SELECT table_name FROM information_schema.tables WHERE table_schema='public'; 
+
+# show number of records before a timestamp, verify the migration 
+
+  select count(*) from activity_log where activity_time <= '2017-09-01 09:00:29.464066+00:00';"
+
+
+## BigQuery 
+
+
+  select count(*) from sliver_tv_analytics.user_activity  where activity_time <= '2017-09-01 09:00:29.464066+00:00';"
+
+
+ 
+#standardSQL 
+   
+    # monthly offload 
+ 
+    select sum (bytes_from_peer) as from_peer, sum(bytes_from_cdn) as from_cdn from
+    (
+        select id, report_time, user_id, bytes_from_peer, bytes_from_cdn, continent  from sliver_tv_client_stats.video_player a 
+        INNER JOIN (select id as peerid,  max(report_time) as mrt from sliver_tv_client_stats.video_player
+        where  Date(report_time) >= '2019-07-01' and Date(report_time) <= '2019-07-31' and bytes_from_cdn != 0 
+        group by id) b on a.id = b.peerid and a.report_time = b.mrt
+    )
+
+    # inner join is such type of join that returns all rows from both the participating tables where the key record of one table 
+      is equal to the key records of another table.  This type of join required a comparison operator to match
+
+      outer join will return every row from one specified table, even if the join condition fails. 

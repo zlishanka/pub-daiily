@@ -150,3 +150,7 @@ Source - https://k21academy.com/docker-kubernetes/kubectl-cheatsheet/?gc_id=2103
 # apply ingress rule
 	kubectl apply -f dashboard-ingress.yaml
 	kubectl get ingress -n kubernetes-dashboard
+
+# set namespace 
+	kubectl config set-context --current --namespace=airspace
+

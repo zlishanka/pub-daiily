@@ -2,6 +2,7 @@
 .vscode/
 .idea/
 *.swp
+.tool_versions
 
 # Vagrant
 .vagrant/

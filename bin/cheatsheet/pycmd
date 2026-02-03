@@ -43,6 +43,24 @@ http://quickref.me/python
 	s.intersection_update(t) 	s &= t	# return set s keeping only elements also found in t
 	s.difference_update(t) 		s -= t 	# return set s after removing elements found in t
 
+# generator, yield
+	def gen_test(): --> Generator[...]
+		for item in items:
+			yeild item
+
+	gen_col = list(gen_test) 
+
+	- Memory efficiency: With potentially thousands of channels across many orgs, yielding avoids building a massive list in memory
+	- Start processing immediately: The caller can start working on items as soon as the first item's data arrives, 
+		rather than waiting for all orgs to be fetched
+	- Pipeline processing: Allows the caller to process items in a streaming fashion (e.g., write to database, 
+		transform data) while the next org's data is being fetched
+
+	list() converts the generator into a list by:
+	- Exhausting the generator - calling it repeatedly until it's done
+	- Storing all results in memory - building a list with all channels from all orgs
+	- Blocking execution - the program waits here until every org has been processed
+
 # bisect.insort, bisect.bisect_left
 	window.pop(bisect.bisect_left(window, nums[i-k])) 	# window is sorted, Finds the position of an element to remove
 	bisect.bisect_left(window, val)	# window is sorted, Finds the position of an element to remove  
@@ -251,7 +269,8 @@ http://quickref.me/python
     isinstance(curr, TreeNode)	# check if object is TreeNode 
 	isinstance(element, int) 	# check if it's integer
 	isinstance(element, list) 	# check if it's a list
-	
+	isinstance(element, Exception) # check if it's an exception
+		
 	element.isInteger(), element.getInteger()
 # check the data type 
     type(i) is int
@@ -333,7 +352,7 @@ http://quickref.me/python
 	nonlocal min_val # for variable inside inner function 
 
 # dict operation, map operation
-    ditc = {} 
+    dict = {} 
     if key in dict: # has_key is moved out of python3 
     dict.values()
     dict.keys()
@@ -342,6 +361,8 @@ http://quickref.me/python
     num_map = {'6' : '9', '9' : '6', '8' : '8', '0' : '0', '1' : '1'}
 	# Create inorder index map based sorted inorder list	
 	inorder_index_map = {val: idx for idx, val in enumerate(inorder)}
+	# safe initialization, if 'attrs' not found, return {} as default
+	adict['attrs'] = adict.get('attrs', {}) 	
 
 # use -1 index 
     a = [1,2,3,4]   # -1 to get last element of array  
@@ -703,4 +724,137 @@ http://quickref.me/python
 	
 	def MultiplyVectors(a,b):
 		return a*b
+
+## typing in python 
+	from typing import List, Dict, Set, Optional, Any, Sequence, Tuple, Callable, TypeVar
+
+	my_dict: Dict[str, int] = {"a": 1, "b": 2, "c": 3}
+	my_set: Set[str] = {"apple", "banana", "cherry"}
+	my_tuple: Tuple[str, int, float] = ("hello", 10, 3.14)
+	Optional[T]:  # value might be None or of type T
+	Any:  # type not specified or can be any type
+	Callable: indicates a function type
+ 
+	mypy source.py 	# to do static analysis to check the typing
+	https://www.youtube.com/watch?v=QORvB-_mbZ0 
+
+## asyncio
+	https://www.youtube.com/watch?v=t5Bo1Je9EmE
+	import asyncio
+	async def main():
+		print("Roy")
+		#await foo('text')	# await coroutine
+		task = asyncio.create_task(foo('text')) 	# create asyncio task
+		#await task
+		print('Finished')
+		 
+
+	# to run a coroutine in asyncio way
+	asyncio.run(main())
+	# to have await inside async func
+	async def foo(text):
+		print(text)
+		await asyncio.sleep(1)
+	- main returns a coroutine obj
+
+	# create semaphore to limit concurrent requests
+		semaphore = asyncio.Semaphore(8)
+
+		# launch multiple coroutines as list comprehension	
+		asyncio.gather(
+			*[func_call(item) for item in items], 
+			return_exceptions=True,		# if one org fails, don't crash the entire job
+		) 
+
+		# only 8 concurrent routines limitted by semaphore 	
+		async def func_call(args):
+			async with semaphore:
+				abc = await 
+				return abc
+
+## ThreadPoolExecutor
+	# part of the concurrent.futures module and provides a high-level interface 
+	# for asynchronously executing callables using a pool of threads.
+
+	from concurrent.futures import ThreadPoolExecutor
+	
+	def _fetch_pplus_all_events_chunk(
+		start_date_iso: str,
+		end_date_iso: str,
+		fields: tuple,
+		chunk_id: int,
+		view_id: str,
+	) -> List[Dict[str, Any]]:	
+
+	all_events = []
+	with ThreadPoolExecutor(max_workers=3) as executor:
+		# Submit all chunk fetch tasks
+        future_to_chunk = {
+            executor.submit(
+                _fetch_pplus_all_events_chunk,
+                date_range['start'],
+                date_range['end'],
+                fields_tuple,
+                date_range['id'],
+                settings.SUPPORT_AIRTABLE_PPLUS_PCV_VIEW_ID
+            ): date_range['id']
+            for date_range in date_ranges
+        }
+
+		# collect result as they complete
+		for future in as_completed(future_to_chunk):
+            chunk_id = future_to_chunk[future]
+			try:
+                chunk_events = future.result()
+                all_events.extend(chunk_events)
+            except Exception as exc:
+                log_error(f"Chunk {chunk_id} generated an exception: {exc}")
+
+## invoke utility/tool 
+	- "invoke" lets you define tasks in Python using decorators and then run them from the command line.
+	- It’s part of the broader ecosystem of Python task runners and is often used in DevOps, CI/CD pipelines, and project scaffolding.
+	- Convenient "development pipeline" is enabled using `invoke` utility.
+
+	pip install invoke
+
+	# command line 	
+	invoke build
+	invoke deploy 
+
+	# create tasks.py file 
+	tasks.py 
+
+	@task
+	def build(c):
+    	c.run("python setup.py sdist bdist_wheel")
+	@task
+	def deploy(c):
+		c.run("twine upload dist/*")
+
+## poetry utility/tool
+	- "poetry" is designed to handle everything related to Python packaging in a consistent and reliable way.
+	- It replaces tools like "pip, virtualenv, and setuptools" with a unified interface.	
+
+	- Dependency management with automatic resolution
+	- Project scaffolding (create new projects easily)
+	- Virtual environment management
+	- Build and publish Python packages to PyPI
+	- Uses a single pyproject.toml file for configuration
+
+	brew install poetry
+	poetry new my_project
+	
+	Install/update Python dependencies per the "pyproject.toml" and "poetry.lock" files: like "poetry install --no-root"
+
+	# Standard development process pipeline:
+	- "poetry shell" - initialize Poetry venv
+	- "poetry install" - install Python dependencies (required only when Poetry venv is created for the first time)
+	- "inv test" - installs pre-commit Git hook
+
+## Run python linter to avoid github action warning/error 
+	black youfile.py
+	isort yourfile.py
+	flake8 yourfile.py
+
+	python -m flake8 myfilr.py --max-line-length=100 --extend-ignore=E203,W503
 	

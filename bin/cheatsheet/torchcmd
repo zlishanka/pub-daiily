@@ -183,4 +183,11 @@
 	4B: 4 bytes, expressing the bytes used for each parameters
 	1.2: represent a 20% overhead of loading additional things in GPU memory
 	32: there are 32 bits in 4 bytes
-	Q: The amount of bits that should be used for loading the model: 16 bits, 8 bits, 4 bits 
+	Q: The amount of bits that should be used for loading the model: 16 bits, 8 bits, 4 bits
+
+## Memory usage of traning and serving
+	10B parameter Model = 160GB!
+	
+	Parameters(FP16): 20GB
+ 	Gradients(FP16): 20GB # Training purpose
+	Optimizer States, Momentum Variance (FP32): 120GB

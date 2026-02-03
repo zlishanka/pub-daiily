@@ -3,6 +3,13 @@
 	
 	# install make, pkg-config, diffutils 
 	pacman -S make pkg-config diffutils
+
+## grep pattern 
+	# capture all abc=, *abc  =  
+	grep "abc\s*=" 
+
+	# find patterns in certain files
+	grep -r "dictionar" --include="*.py"
 	
 ## check disk usage of directory 
     du -ah | sort -nr | head -20  
@@ -11,6 +18,12 @@
     du -a . | sort -nr | head -n 100 
     # delete top files 
     du -a . | sort -nr | head -n 20 | tail -n +21 | cut -f 2- -d ' ' | xargs rm -f
+
+## list all files in the current directory and its subdirectories, sorted in descending order by number of lines
+	find . -type f -name "*.py" -exec wc -l {} + | sort -nr
+	find . -name "*onboarding*"  # find file with name that has onboarding in it 
+	find . -iname "*sync*"  # find file with name that has sync in it , case insensitive
+	find . -type f -iname "*sync*"  # only find files not directory
 
 ## check disk space usage 
     df -h  
@@ -107,6 +120,7 @@
 
 # find system/shared libraries in linux 
     sudo find /usr -iname "*libGL.so*" -exec ls -l {} \; 
+	find . -name "*onboarding*"  # find file with name that has onboarding in it
 
 # create symlink into /usr/bin 
     ln -s src dst  
@@ -631,3 +645,19 @@ execute_process(
 	ip link show
 	sudo ip link set dev eth0 mtu 1400
 	ip link show wlp0s20f3
+
+# quick OCR (ocr) command
+	tesseract ~/Desktop/system-design/youtube-references.png ~/outputocr -l eng 
+	vim ~/outputocr.txt
+
+# check macos memory usage 
+	top -l 1 | grep -E "^CPU|^Phys"
+
+# get the json object length
+	 jq '. | length' big-json-config.json 
+	jq '[.[] | select(.updated_at > "2025-09-20")]' big-json-config.json
+
+# make json file pretty or urgly
+	cat file.json | jq . >> file1.json
+	cat file.json | jq -c . >> file1.json
+
