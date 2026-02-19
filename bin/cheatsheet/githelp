@@ -38,7 +38,9 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 
 ## unstages the file, but preserve its contents 
     git reset [file] 
-    git restore --staged [file] 
+    git restore --staged [file]
+	#Unstage everything currently staged: 
+	git restore --staged .
 
 ## records file snapshots premanently in version history 
     git commit -m "[descriptive message]" 

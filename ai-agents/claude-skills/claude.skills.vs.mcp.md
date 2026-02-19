@@ -72,5 +72,5 @@ skill-name/
 [Claude Skills Explained in 23 Minutes](https://www.youtube.com/watch?v=vEvytl7wrGM)  
 [Claude Skills Explained: 4 Skills to 10x Your Coding Workflow](https://www.youtube.com/watch?v=bFC1QGEQ2E8)  
 [What are agent skills](https://medium.com/@tahirbalarabe2/what-are-agent-skills-c7793b206daf)  
-[Claude Code plugins github](https://github.com/anthropics/claude-code/tree/main/plugins)  
-
+[Claude Code plugins github](https://github.com/anthropics/claude-code/tree/main/plugins)   
+[Claude Code full course: 4 hours](https://www.youtube.com/watch?v=QoQBzR1NIqI)   
