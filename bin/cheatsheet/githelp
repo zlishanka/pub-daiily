@@ -29,8 +29,15 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 	git remote -v  	# disply URLs of all remote repos, notes if it's https://, you won't be able to use ssh key authentication 
 	git remote get-url origin 
 
+## list only modified files (not include untracked files) 
+	git ls-files --modified
+	git status -s | grep "^ M" | cut -c4-
+
 ## snaphots the file in preparation of versioning 
     git add [file]
+
+## stage all modified and deleted files only
+	git add -u
 
 ## discard all commits in a branch  
 
@@ -349,6 +356,11 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 
 ## git push after fixing linter
 	git push --force-with-lease 
+
+## python lint check/fix
+	poetry run black --check ./src
+	poetry run isort --check ./src
+	poetry run flake8 ./src --count --show-source --statistics
 
 ## two-factor recovery code 
     335e9476d1359bce

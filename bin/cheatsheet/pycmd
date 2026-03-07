@@ -28,6 +28,11 @@ http://quickref.me/python
 	sig = [1, 1]
 	tuple(sig) # Signature (1, 1) of key of dict	
 
+# repo lint check/fix
+	poetry run black --check ./src
+	poetry run isort --check ./src
+	poetry run flake8 ./src --count --show-source --statistics
+
 # set operations 
 	resolutions = set(['source','1920s','1440s','960s']) 
     a = set() 
