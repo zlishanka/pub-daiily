@@ -1,6 +1,12 @@
 ## git cheatsheet 
 https://cheatography.com/itsellej/cheat-sheets/git-commands/ 
 
+## github CLI
+	
+	# list my PRs
+	gh pr list --author @me
+	gh pr list --repo cbsinteractive/airspace --author @me
+
 ## git agent prompts 
 	# for specific pull request 
 		- would you be able to analyze what fix pull request 1590 did?
@@ -46,7 +52,7 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 ## unstages the file, but preserve its contents 
     git reset [file] 
     git restore --staged [file]
-	#Unstage everything currently staged: 
+	#Unstage everything currently staged: (if you wrongly did "git add .")  
 	git restore --staged .
 
 ## records file snapshots premanently in version history 

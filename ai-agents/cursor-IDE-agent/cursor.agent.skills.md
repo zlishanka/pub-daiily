@@ -22,6 +22,7 @@
 | `.claude/skills/` | Project-level (Claude compatibility) |
 | `.codex/skills/` | Project-level (Codex compatibility) |
 | `~/.cursor/skills/` | User-level (global) |
+| `~/.cursor/skills-cursor/` | User-level (global; Cursor may use this instead of `skills/`) |
 | `~/.claude/skills/` | User-level (global, Claude compatibility) |
 | `~/.codex/skills/` | User-level (global, Codex compatibility) |
 
