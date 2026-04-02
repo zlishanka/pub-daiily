@@ -223,10 +223,43 @@ claude --resume my-feature   # From CLI before starting
 
 ---
 
+### `/plan`
+**What it is:** Switch into **Plan mode** — Claude outlines and reasons through the approach before making edits. Use when you want a structured plan, architecture sketch, or step list first.
+
+**Use cases:**
+- Large or ambiguous tasks where you want alignment before code changes
+- Reviewing tradeoffs and sequencing before implementation
+- Pair with `/code` when you’re ready to execute
+
+**Example:**
+```
+/plan   # Enter plan mode (keyboard: Shift+Tab repeatedly to cycle modes, depending on version)
+```
+
+> **Tip:** Plan mode reduces surprise edits; switch to `/code` when you want normal implementation flow.
+
+---
+
+### `/code`
+**What it is:** Switch into **Code mode** (standard implementation) — Claude applies changes and runs tools as usual. Exits plan-only / “think first” style behavior.
+
+**Use cases:**
+- After `/plan`, when the plan is agreed and you want execution
+- Returning to normal agent behavior if you were stuck in a planning-only flow
+
+**Example:**
+```
+/code   # Enter standard code / execution mode
+```
+
+> **Tip:** Same mode toggles are often available via **Shift+Tab** in the UI; slash commands are explicit and scriptable.
+
+---
+
 ## Built-in vs Bundled Skills
 
 | Type | Examples | Notes |
 |------|----------|-------|
-| **Built-in commands** | `/rewind`, `/branch`, `/export`, `/remote-control`, `/cost`, `/resume`, `/diff`, `/compact` | Fixed logic, always available |
+| **Built-in commands** | `/rewind`, `/branch`, `/export`, `/remote-control`, `/cost`, `/resume`, `/diff`, `/compact`, `/plan`, `/code` | Fixed logic, always available |
 | **Bundled skills** | `/simplify`, `/loop`, `/claude-api` | Prompt-based; Claude orchestrates using its tools |
 | **Custom skills** | User-created in `.claude/skills/` | Same invocation as bundled |

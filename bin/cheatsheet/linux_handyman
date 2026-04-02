@@ -10,6 +10,10 @@
 
 	# find patterns in certain files
 	grep -r "dictionar" --include="*.py"
+	grep -r -i "gamma" /Users/qigong.zheng/workArea --include="*.md" --include="*.txt" --include="*.yaml" --include="*.json" -l 2>/dev/null | head -20
+
+## check if env variable set or unset
+	test -n "$XYZ_TOKEN_SECRET" && echo set || echo unset
 	
 ## check disk usage of directory 
     du -ah | sort -nr | head -20  

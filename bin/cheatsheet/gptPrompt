@@ -310,5 +310,8 @@ It uses "specify framework, etc.". Please analyze the codebase holistically and 
 		large language model filetype:pdf
 		arrow filetype:png
 
-			
+### Jira briefing 
+
+it's the quick note for vde grooming meeting.  Please use jira ticket number like vde-5xxx to retrieve each specific task and use short sentence to give briefing on what that jir ticket 
+is about and who is the reporter, what is current status and when ticket is expected to be done			
 
