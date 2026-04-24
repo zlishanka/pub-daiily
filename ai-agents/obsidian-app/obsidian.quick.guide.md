@@ -134,3 +134,4 @@ A spatial whiteboard for visual brainstorming — map connections between notes 
 
 - [Obsidian Ideaverse Overview (YouTube)](https://www.youtube.com/watch?v=z4AbijUCoKU)
 - [Andrej Karpathy Just 10x'd Everyone's Claude Code](https://www.youtube.com/watch?v=sboNwYmH3AY)
+- Obsidian [Claudian plugin](https://github.com/YishenTu/claudian)

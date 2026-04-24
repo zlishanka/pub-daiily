@@ -28,7 +28,11 @@
 - **Self-Improving Learning Loop:** Unlike static agents, it features a built-in cycle where it autonomously creates new skills from experience, searches its own past conversation history using FTS5, and builds a persistent model of the user to improve across sessions.
 - **Universal Multi-Platform Gateway:** It is uniquely designed to live where the user does, offering a unified gateway that connects a single agent process to Telegram, Discord, Slack, WhatsApp, Signal, and a full-featured Terminal UI (TUI) simultaneously.
 - **Serverless Persistence & Portability:** It supports advanced terminal backends like [Daytona](https://github.com/daytonaio/daytona) and [Modal](https://www.modal.com/), allowing the agent’s entire environment to hibernate when idle and wake on demand, providing cloud-scale persistence with near-zero idle costs.
-
+- 
+[Stanford lecture on LLM agentic systems](https://www.youtube.com/watch?v=k1njvbBmfsw&t=5640s)
+- **Optimizing LLMs through Prompt Engineering:** Rather than relying on resource-intensive fine-tuning, developers can significantly enhance base models using advanced prompting techniques. The lecture highlights strategies like **few-shot prompting** to align the model with specific expectations, **chain-of-thought** to break down reasoning step-by-step, and **chaining complex prompts** to separate tasks for easier debugging and control.
+- **Solving Hallucinations and Knowledge Gaps with RAG:** To address base LLM limitations such as outdated knowledge, context window restrictions, and a lack of verifiable sources, the lecture details **Retrieval-Augmented Generation (RAG)**. RAG grounds the LLM by embedding external documents into a vector database, retrieving relevant context based on user queries, and feeding it to the model to generate accurate, sourced answers.
+- **Building Autonomous Agentic Workflows:** The lecture explains how to transition from single-prompt applications to multi-step **agentic AI workflows**, where models act autonomously to solve complex tasks. These systems equip LLMs with **memory management** (working and archival) and **external tools** (like APIs or Model Context Protocols) to retrieve data and execute actions, sometimes even utilizing **multi-agent systems** running specialized tasks in parallel
 ## Research
 [Karparthy Autoresearch](https://github.com/karpathy/autoresearch)  
 
@@ -43,25 +47,18 @@
 
 
 ## Github repos for learning 
+
 [LLMs-from-scratch](https://github.com/rasbt/LLMs-from-scratch)  
-
 [LLM Course](https://github.com/mlabonne/llm-course)  
-
 [cracking-the-data-science-interview](https://github.com/khanhnamle1994/cracking-the-data-science-interview/tree/master)  
-
 [Designing Machine Learning Systems](https://github.com/chiphuyen/dmls-book)    
-
 [ML Questions](https://github.com/andrewekhalel/MLQuestions)   
-
 [ML concepts](https://github.com/jayinai/ml-interview?tab=readme-ov-file#machine-learning)    
-
 [MLE-Flashcards](https://github.com/b7leung/MLE-Flashcards/tree/main)    
-
 [Quick Notes for ML, DS, MLOps, LLMOps](https://github.com/ashishtele/Quick-Notes-for-ML-DS?tab=readme-ov-file)  
- 
 [Advanced RAG Techniques: Elevating Your Retrieval-Augmented Generation Systems](https://github.com/NirDiamant/RAG_Techniques)  
-
 [Introduction to Machine Learning Interviews Book](https://github.com/chiphuyen/ml-interviews-book)  
+[Claudian plugin for obsidian](https://github.com/YishenTu/claudian)
 
 
 
