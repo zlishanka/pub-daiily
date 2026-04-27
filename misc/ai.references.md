@@ -11,12 +11,22 @@
 - **3-file markdown persistence**: stores plan, findings, and progress in files so agent memory survives context resets and `/clear`
 - **Hook-driven workflow**: pre/post-tool hooks auto-reload the plan before decisions and prompt status updates after each action
 - **14x benchmark improvement**: formal evals show 96.7% task completion vs 6.7% baseline — measurable, not just structural  
-[llm-wiki-skill]( https://github.com/sdyckjq-lab/llm-wiki-skill)
+[llm-wiki-skill](https://github.com/sdyckjq-lab/llm-wiki-skill)
+- **Knowledge Base Augmentation**: Enables LLMs to build and maintain a persistent wiki-style knowledge base, allowing agents to capture learnings and reference them across sessions
+- **Context-Aware Retrieval**: Uses semantic search over accumulated knowledge to ground agent responses in documented patterns and prior solutions
+
+[Addy Osmani's agent-skills](https://github.com/addyosmani/agent-skills)
+- **Developer-Centric Agent Design**: Curated collection of skills optimized for engineering workflows, focusing on real developer productivity patterns from a performance-focused perspective
+- **Composable Capability Modules**: Modular skills that can be mixed and matched to create specialized agent behaviors tailored to frontend, backend, or full-stack development tasks
 
 [GStack:Garry Tan's exact Claude Code setup: 23 opinionated tools ](https://github.com/garrytan/gstack)  
 - **Opinionated Multi-Role Framework:** It transforms Claude Code into a 23-specialist engineering team (CEO, Eng Manager, Designer, QA) using structured "Skills" that enforce professional startup workflows.
 - **Comprehensive "Think-to-Ship" Lifecycle:** It manages the entire development process—from stress-testing product ideas in `/office-hours` to automated browser-based testing with `/qa` and one-command deployment via `/ship`.
 - **AI-Enhanced Tooling Integration:** It features a custom "GStack Browser" with anti-bot stealth and a multi-agent coordinator (`/pair-agent`) that allows different AI models (Claude, Gemini, Codex) to collaborate in a shared browser session.
+
+[andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills)
+- **CLAUDE.md guideline for AI coding**: Framework based on Karpathy's observations about LLM pitfalls (unfounded assumptions, overcomplexity) to improve Claude Code behavior
+- **Four core principles**: Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution—each targeting specific weaknesses in AI-assisted development
 
 ## Agents
 
@@ -36,6 +46,12 @@
 ## Research
 [Karparthy Autoresearch](https://github.com/karpathy/autoresearch)  
 
+## Tutorials
+[spelled-out intro to neural networks and backpropagation: building micrograd](https://www.youtube.com/watch?v=VMj-3S1tku0)
+- **From-scratch neural nets**: Build a tiny autograd engine to understand backpropagation and gradient computation at the core level
+
+[Deep Dive into LLMs like chatGPT](https://www.youtube.com/watch?v=7xTGNNLPyMI)
+- **LLM internals demystified**: Understand transformer architecture, tokenization, and inference mechanics that power large language models
 
 ## Books
 [Build a Large Language Model (From Scratch)](https://www.amazon.com/gp/product/1633437167)

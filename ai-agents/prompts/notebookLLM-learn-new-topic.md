@@ -7,6 +7,7 @@
 ### What to ask initially
 - Ask NotebookLM one question:
     - "What are the 5 core mental models that every expert in this field shares?"
+    - or "what major paradigm shift—which serves as a foundational concept or "mental model" for [subject/area] experts"
     - Not "summarize this." Not "explain this topic."
 - followed up with
     - "Now show me the 3 places where experts in this field fundamentally disagree, and what each side's strongest argument is."
