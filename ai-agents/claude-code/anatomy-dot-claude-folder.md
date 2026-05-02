@@ -1,6 +1,6 @@
 ## Anatomy of the `.claude/` Folder
 
-![Anatomy of the .claude/ folder](anatomy-dot-claude-folder.jpg)
+![Anatomy of the .claude/ folder](../_media/claude-code/anatomy-dot-claude-folder.jpg)
 
 The `.claude/` folder is the **control center** for your Claude Code project. It holds everything Claude needs to understand your project, follow your team's standards, and automate your workflows.
 

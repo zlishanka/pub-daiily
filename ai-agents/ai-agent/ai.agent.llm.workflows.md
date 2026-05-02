@@ -9,8 +9,8 @@
     - `Agentic workflow` = workflow with some level of agency
     - `AI agent` = workflow with full agency
 
-![alt text](workflows-rule-based.jpg "Rule based workflows")
-![alt text](workflows-llm-based.jpg "LLM based workflows")
+![alt text](../_media/ai-agent/workflows-rule-based.jpg)
+![alt text](../_media/ai-agent/workflows-llm-based.jpg)
 
 ### Design patterns for building workflows
 
@@ -23,13 +23,13 @@
 ### LLMs Aren't a Cure-All 
 
 - Strengths and weaknesses of 3 types of software
-![alt text](pros-cons-3-softwares.jpg "Strengths and weaknesses of 3 types of software")
+![alt text](../_media/ai-agent/pros-cons-3-softwares.jpg)
 
 ### Example: Artificial Virtual Assistants(AVA) 
 
 - System design
 
-![alt text](workflows-of-ava.jpg "System design of Artificial Virtual Assistants(AVA)")
+![alt text](../_media/ai-agent/workflows-of-ava.jpg)
 
 ####  Create agents
 - Imports 

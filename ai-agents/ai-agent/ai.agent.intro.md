@@ -20,7 +20,7 @@
     - Tools can be used to automate tasks whereas LLMs are limited to generating text
 - Test-time compute (i.e. Reasoning) 
 
-![alt text](LLM-not-enough-solve-problem.jpg "Llm not enough to solve problem")
+![alt text](../_media/ai-agent/LLM-not-enough-solve-problem.jpg)
 
 ## 3 levels of Agents
 
@@ -48,9 +48,9 @@
 
 |Agent LLM workflow example|Agent LLM workflow common patterns|
 |:-:|:-:|
-|![Agent LLM workflow example](agent-workflow-example.jpg)|![Agent LLM workflow common patterns](agent-llm-workflow-common-patterns.jpg)|
+|![Agent LLM workflow example](../_media/ai-agent/agent-workflow-example.jpg)|![Agent LLM workflow common patterns](../_media/ai-agent/agent-llm-workflow-common-patterns.jpg)|
 
-![alt text](agent-llm-in-loop.jpg "Agent LLM in a loop") 
+![alt text](../_media/ai-agent/agent-llm-in-loop.jpg) 
 
 
 ## Perceives its environment: 

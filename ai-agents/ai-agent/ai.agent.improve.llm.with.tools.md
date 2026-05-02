@@ -8,7 +8,7 @@
 - AI Agents 
     - Flexible, simple design
 
-![alt text](traditional-software-vs-ai-agent.jpg "Traditional software vs AI Agents")
+![alt text](../_media/ai-agent/traditional-software-vs-ai-agent.jpg)
 
 ### How does Tool-use work?
 
@@ -17,7 +17,7 @@
     - Pause generation and execute the tool call(with code)
     - Capture the response and pass it back to model
 
-![alt text](llm-tool-call-example.jpg "LLM Tool Call Example")
+![alt text](../_media/ai-agent/llm-tool-call-example.jpg)
 
 - How does LLMs know how to do tool calls?
     -  Prompting model 
@@ -31,8 +31,8 @@
         - Fine tuning: requires significant data to train the model than prompting
 
 
-![alt text](llm-tool-call-prompting.jpg "LLM Tool Call Prompting")
-![alt text](llm-tool-call-api.jpg "LLM Tool Call API")
+![alt text](../_media/ai-agent/llm-tool-call-prompting.jpg)
+![alt text](../_media/ai-agent/llm-tool-call-api.jpg)
 
 ### Example of using OpenAI's Agents SDK
 

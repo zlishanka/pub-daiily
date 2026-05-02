@@ -34,7 +34,8 @@ Quick reference for effective prompts, techniques, and use cases. Optimized for 
 | [[#Writing & Communication]] | Emails, proofreading, style, summaries |
 | [[#Problem-Solving Frameworks]] | KT, RCA, Six Hats |
 | [[#Utility & Formats]] | Checklists, regex, translation, contracts |
-
+- Short yet powerful formula for prompts - 6 words
+	- role, task, background, constraints, example, format
 ---
 
 ## Role & Persona

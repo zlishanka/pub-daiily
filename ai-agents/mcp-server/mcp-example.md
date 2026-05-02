@@ -3,7 +3,7 @@
 
 ### What is MCP? 
 - A standard way to connect tools and context to AI apps(like USB-C port of AI Apps)
-![alt text](mcp-ai-apps.jpg "MCP and AI Apps") 
+![alt text](../_media/mcp-server/mcp-ai-apps.jpg) 
 
 ### How MCP works?
 - client-server architecture
@@ -156,7 +156,7 @@ uv run mcp dev mcp-server-example.py
     - You should now be connected to the MCP server and can start using it to interact with LLM tools and resources
 
 
-![alt text](mcp-server-task-overview.jpg "MCP Server Task Overview")  
+![alt text](../_media/mcp-server/mcp-server-task-overview.jpg)  
 
 
 ## References

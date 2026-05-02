@@ -17,7 +17,7 @@
     - multi-modal systems.
 - This protocol is designed to provide better control, efficiency, and adaptability in real-time AI applications by managing the context dynamically based on user interactions and data flows.
 
-![alt text](mcp-diagram.jpg "MCP GeneralArchitecture")
+![alt text](../_media/mcp-server/mcp-diagram.jpg)
 
 ## Key Features of Model Context Protocol
 

@@ -60,7 +60,7 @@ skill-name/
 ```
 - **Progressive Disclosure** : give agent just enough context for the next step
 
-![alt text](agent.skills.progressive.disclosure.png "Agent Skill progressive disclosure")
+![alt text](../_media/skills/agent.skills.progressive.disclosure.png)
 
 | Level   | Content                              | Enters context window…        | Tokens   |
 |---------|--------------------------------------|--------------------------------|----------|

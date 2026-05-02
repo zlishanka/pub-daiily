@@ -28,7 +28,7 @@
 - Type 1: Rule-based:
     - Tests and metrics that can be built with simple code
     - binary rules: Error raised, Proper format?(linter), Contains, Correct answer
-    - Continous rules: Length, Faithfulness, NLP ROUGE BLEU, Readability score, etc. 
+    - Continuous rules: Length, Faithfulness, NLP ROUGE BLEU, Readability score, etc. 
     - Limitations: Some tests cannot be built with code
     
 - Type 2: LLM-based
@@ -155,8 +155,8 @@ while not all_passed and counter < max_iter:
 - Example: Twitter Agent, tweets become more emngaging based feedback of counters but also more toxic! 
 - Key point: Be careful what you optimize for 
 
-![alt text](reward-hacking-positive-feedback.jpg "Reward hacking positive feedback")  
-![alt text](reward-hacking-twitter-agent.jpg "Reward hacking twitter agent")  
+![alt text](../_media/ai-agent/reward-hacking-positive-feedback.jpg)  
+![alt text](../_media/ai-agent/reward-hacking-twitter-agent.jpg)  
 
 ## References
 [1] LLM in a loop: https://www.youtube.com/watch?v=6VcXukJuGA0  

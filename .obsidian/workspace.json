@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ai-agents/prompts/notebookLLM-learn-new-topic.md",
+                "file": "ai-agents/ai-agent/ai.agent.llm.workflows.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "notebookLLM-learn-new-topic"
+              "title": "ai.agent.llm.workflows"
             }
           }
         ]
@@ -180,7 +180,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 448.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -199,40 +199,51 @@
   },
   "active": "e4d53f26cfaecf5e",
   "lastOpenFiles": [
-    "ai-agents/prompts/break-down-academic-paper-into-insights.md",
-    "ai-agents/prompts/professional-prompts-plan-execution.md",
+    "ai-agents/agent-memory/agnet.memory.8.frameworks.md",
+    "ai-agents/agent-memory/agnet.memory.",
+    "ai-agents/_media/agent-memory/full-history-memory-stack-diagram.png",
+    "ai-agents/_media/agent-memory/full-history-memory-history-stack-diagram.png",
+    "ai-agents/agent-memory/agent.memory.eight.memory.strategies.md",
+    "ai-agents/agent-memory/agent.memory.eight.memory.stratergies.md",
+    "ai-agents/_media/agent-memory/zep-agent-user-llm-business-data-architecture.png",
+    "ai-agents/_media/agent-memory/letta-memgpt-finite-context-window.png",
+    "ai-agents/_media/agent-memory/memorybank-siliconfriend-architecture.png",
+    "ai-agents/_media/agent-memory/human-and-ai-agent-memory-parallels.png",
+    "ai-agents/_media/agent-memory/agent-memory-classification-by-storage-content.png",
+    "ai-agents/_media/agent-memory/human-memory-classification-by-content-nature.png",
+    "ai-agents/_media/agent-memory/human-brain-memory-cognitive-architecture-flow.png",
+    "ai-agents/_media/agent-memory/agent-environment-perception-brain-action-framework.png",
+    "ai-agents/_media/agent-memory",
+    "ai-agents/agent-memory/agent.memory.fundamentals.application.md",
+    "ai-agents/agent-memory",
+    "ai-agents/ai-agent/ai.agent.llm.in.the.loop.md",
+    "ai-agents/ai-agent/ai.agent.intro.md",
+    "ai-agents/ai-agent/ai.agent.improve.llm.with.tools.md",
+    "ai-agents/claude-code/The-Complete-Guide-to-Building-Skill-for-Claude.pdf",
+    "ai-agents/claude-code/Claude.Code.Memory.Architecture.Explained.md",
+    "ai-agents/claude-code/claude.code.hidden.commands.md",
+    "ai-agents/skills/top.skills.md",
+    "ai-agents/skills/skills.websites.md",
+    "ai-agents/skills/skills.vs.mcp.md",
+    "ai-agents/skills/agent.vs.skills.md",
+    "ai-agents/claude-code/claude.code.workflow.cheatsheet.md",
+    "ai-agents/claude-code/claude-mcp-server-guide.md",
+    "ai-agents/claude-skills/superpowers.skills.md",
+    "misc/ai.references.md",
     "ai-agents/prompts/notebookLLM-learn-new-topic.md",
     "ai-agents/prompts/coding-project-prompts.md",
     "ai-agents/prompts/ChatGPT-Prompt-Guide.md",
-    "ai-agents/prompts/Change-Writing-Style-Guide.md",
-    "ai-agents/prompts/Unlock-God-Mode-Prompts.md",
-    "misc/ai.references.md",
-    "misc/claude.code.workflow.md",
-    "misc/dev.daily.md",
-    "misc/cursor.workflow.md",
-    "misc/ai.daily.md",
-    "ai-agents/obsidian-app/obsidian.quick.guide.md",
-    "ai-agents/obsidian-app/obsidian.claude.code.integration.md",
-    "ai-agents/claude-code/claude.code.workflow.cheatsheet.md",
-    "ai-agents/claude-code/Claude.Code.Memory.Architecture.Explained.md",
-    "ai-agents/claude-code/claude.code.10.hidden.commands.md",
-    "ai-agents/claude-code/anatomy-dot-claude-folder.md",
-    "ai-agents/claude-code/anatomy-dot-claude-folder.jpg",
-    "ai-agents/ai-agent/ai.agent.improve.llm.with.tools.md",
-    "ai-agents/ai-agent/agent-workflow-example.jpg",
-    "ai-agents/ai-agent/agent-llm-workflow-common-patterns.jpg",
-    "ai-agents/ai-agent/agent-llm-in-loop.jpg",
-    "ai-agents/claude-skills/claude.agent+skills+computer.jpeg",
-    "ai-agents/claude-skills/claude.agent+skills+contextWindow.jpg",
+    "ai-agents/prompts/professional-prompts-plan-execution.md",
+    "ai-agents/obsidian-app/obsidian.ai.workflow.md",
+    "ai-agents/mcp-server/yahoo.fantasy.mcp.server.md",
     "ai-agents/mcp-server/README.md",
-    "ai-agents/mcp-server/mcp-ai-apps.jpg",
-    "ai-agents/mcp-server/fastly.mcp.server.md",
-    "ai-agents/everything-claude-code/ecc-install-guide.md",
-    "ai-agents/everything-claude-code/ecc-overview.md",
-    "2026-04-18.md",
-    "ai-agents/claude-skills/superpowers.skills.md",
-    "ai-agents/claude-skills/create.claude.skills.using.cursor.md",
-    "ai-agents/claude-code/The-Complete-Guide-to-Building-Skill-for-Claude.pdf",
-    "ai-agents/claude-code/claude-code-workflow-cheatsheet.jpg"
+    "ai-agents/mcp-server/mcp-example.md",
+    "ai-agents/mcp-server/mcp-basics.md",
+    "ai-agents/ai-agents",
+    "ai-agents/_media/skills",
+    "ai-agents/_media/mcp-server",
+    "ai-agents/_media/cursor-IDE-agent",
+    "ai-agents/_media/claude-skills",
+    "ai-agents/_media/claude-code"
   ]
 }

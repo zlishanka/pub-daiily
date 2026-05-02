@@ -256,6 +256,100 @@ claude --resume my-feature   # From CLI before starting
 
 ---
 
+### `/context`
+**What it is:** Display current context window usage — shows how many tokens are loaded and what's consuming them.
+
+**Use cases:**
+- Checking how much headroom you have before hitting limits
+- Diagnosing why responses feel slow or degraded (context bloat)
+- Deciding whether to `/clear` or `/compact` before starting a big task
+
+**Example:**
+```
+/context   # Show token usage breakdown for the current session
+```
+
+> **Tip:** Run this before long tasks to baseline your context. If you're already at 60–70%, consider clearing first.
+
+---
+
+### `/clear`
+**What it is:** Wipe the entire conversation history and start a fresh session.
+
+**Use cases:**
+- Starting a new, unrelated task — old context only hurts you
+- Recovering from a confused or degraded session
+- Freeing up tokens when you're near the limit
+
+**Example:**
+```
+/clear   # Nuke conversation history; Claude starts fresh
+```
+
+> **Tip:** Use `/clear` for simple reboots and use `/compact` if you want a summary preserved instead of a full wipe. Every time you start something new, clear the chat.
+
+---
+
+### `/agents`
+**What it is:** Manage subagent configurations — view, create, or configure specialized Claude instances that handle scoped sub-tasks.
+
+**Use cases:**
+- Viewing what agents are defined in `.claude/agents/`
+- Setting up agents for parallel workstreams (e.g., a test-runner agent, a research agent)
+- Keeping your main session's context clean by delegating isolated work
+
+**Example:**
+```
+/agents   # Open agent management interface
+```
+
+> **Tip:** Subagents are powerful for context isolation — farm out work to specialized agents that return only final answers, keeping your main context clean. Don't overuse them; if you make a PythonTests subagent, you've hidden all testing context from your main agent, which can no longer reason holistically about a change.
+
+---
+
+### `/chrome`
+**What it is:** Configure and launch the Chrome browser integration — opens an isolated Claude instance with Chrome DevTools MCP attached.
+
+**Use cases:**
+- Debugging UI bugs, checking console errors, or inspecting network requests
+- Running browser-based tests without polluting your main session's context
+- Any task requiring real browser interaction (screenshots, performance traces, auth flows)
+
+**Example:**
+```
+/chrome check the homepage for errors
+/chrome test the dashboard and verify widgets load
+```
+
+> **Tip:** Chrome DevTools MCP adds ~20k tokens of tool definitions to context. Isolating it in `/chrome` keeps that overhead out of your main session — each invocation launches, completes its task, and closes.
+
+---
+
+### `/permission`
+**What it is:** Cycle through permission modes mid-session to control how aggressively Claude asks for approval before running tools. Keyboard shortcut: `Shift+Tab`.
+
+**Use cases:**
+- Switching to acceptEdits to auto-approve file edits while still being prompted for shell commands
+- Dropping into plan mode to make Claude propose actions without executing them
+- Tightening back up after a burst of autonomous work
+
+**Permission Modes:**
+- default — prompts on first use of each tool type
+- acceptEdits — auto-approves all file modifications but still prompts for shell commands
+- plan — propose actions without executing
+- auto — appears when account meets requirements (not in default cycle)
+- bypassPermissions — appears only after starting with appropriate flag (not in default cycle)
+
+**Example:**
+```
+Shift+Tab   # Cycle modes; current mode shown in status bar
+/permission   # Open permission mode selector
+```
+
+> **Tip:** Your current permission mode is always visible in the status bar. Use Shift+Tab to quickly cycle through available modes or `/permission` to open the interactive selector.
+
+---
+
 ## Built-in vs Bundled Skills
 
 | Type | Examples | Notes |

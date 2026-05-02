@@ -18,7 +18,7 @@
 - The Composer agent shows approval prompts before executing MCP tools, including arguments and responses. [cursor.com]
 - Servers may elicit additional info mid‑flow (e.g., repo scope, credentials) and clients can specify roots (filesystem/repo boundaries) to scope access.
 
-![alt text](cursor-mcp-flow-diagram.png "call flow cursor agent, llm and mcp services")
+![alt text](../_media/cursor-IDE-agent/cursor-mcp-flow-diagram.png)
 
 ## Step‑by‑step call flow details
 

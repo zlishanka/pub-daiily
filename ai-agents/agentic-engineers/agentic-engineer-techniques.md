@@ -8,7 +8,7 @@
 	- treating every bug as an opportunity for system evolution. 
 
 - These are the skills that compound over time and make you genuinely dangerous with AI coding tools.
-![alt text](top-techniques-agentic-engineers.png "Top techinques for agentic engineers")
+![alt text](../_media/agentic-engineers/top-techniques-agentic-engineers.png)
 
 ## PRD-first Development
 
@@ -70,7 +70,7 @@
 /init-project	Install dependencies, start backend and frontend servers
 /create-prd	Generate Product Requirements Document from conversation
 ```
-![alt text](PIVLoopDiagram.png "Prime, Implement, Validation")
+![alt text](../_media/agentic-engineers/PIVLoopDiagram.png)
 
 ## The context reset
 

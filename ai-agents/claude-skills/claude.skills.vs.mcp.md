@@ -16,7 +16,7 @@
 - Think of it like this: Skills exist as directories on a virtual machine, and 
 - Claude interacts with them using the same bash commands you'd use to navigate files on your computer.
 
-![alt text](claude.agent+skills+computer.jpeg "Agent skills computer")
+![alt text](../_media/claude-skills/claude.agent+skills+computer.jpeg)
 
 ### How Claude accesses Skill content
 - When a Skill is triggered, Claude uses bash to read `SKILL.md` from the filesystem, bringing its instructions into the `context window`. 
@@ -50,7 +50,7 @@ skill-name/
     - Level 2: SKILL.md body, when Claude invokes the skill, <5k tokens
     - Level 3: Files and folders in skills direcftory, as needed by Claude, no limit
 
-![alt text](claude.agent+skills+contextWindow.jpg "Agent skills context window")
+![alt text](../_media/claude-skills/claude.agent+skills+contextWindow.jpg)
 
 
 ### Useful Claude agent skills
