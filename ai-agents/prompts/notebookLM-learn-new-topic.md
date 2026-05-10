@@ -428,6 +428,6 @@ Phase 5: Polish (30 min)
 ## Related Notes
 - [[ai-agents/prompts]] — Other prompt collections
 - [[writing-workflow]] — Writing methodology
-- [[notebooklLM-learn-new-topic]] — Learning with NotebookLLM
+- [[notebookLM-learn-new-topic]] — Learning with NotebookLLM
 
 #prompts #writing #editing #publishing #notebooklLM #refinement
