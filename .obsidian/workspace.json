@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ai-agents/ai-agent/ai.agent.llm.workflows.md",
+                "file": "ai-agents/prompts/Unlock-God-Mode-Prompts.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ai.agent.llm.workflows"
+              "title": "Unlock-God-Mode-Prompts"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 256.5
+    "width": 509.50312423706055
   },
   "right": {
     "id": "2d8a921a0c6708ac",
@@ -199,11 +199,30 @@
   },
   "active": "e4d53f26cfaecf5e",
   "lastOpenFiles": [
+    "ai-agents/prompts/notebookLM-learn-quick-prompts.md",
+    "ai-agents/prompts/notebookLM-learn-new-topic.md",
+    "ai-agents/prompts/break-down-academic-paper-into-insights.md",
+    "ai-agents/prompts/professional-prompts-plan-execution.md",
+    "ai-agents/prompts/coding-project-prompts.md",
+    "ai-agents/claude-code/claude.code.workflow.cheatsheet.md",
+    "ai-agents/claude-code/The-Complete-Guide-to-Building-Skill-for-Claude.pdf",
+    "ai-agents/claude-code/workflow.orchestration.md",
+    "misc/ai.references.md",
+    "ai-agents/agent-memory/agent.memory.eight.memory.strategies.md",
+    "ai-agents/agentic-engineers/structured.thinking.guide.md",
+    "ai-agents/agentic-engineers/Structured_Thinking_Guide.pdf",
+    "ai-agents/agentic-engineers/prompt.vs.context.engineering.md",
+    "ai-agents/agentic-engineers/professional-prompts-plan-execution.md",
+    "ai-agents/agentic-engineers/notebookLLM-learn-new-topic.md",
+    "ai-agents/agentic-engineers/agentic-engineer-techniques.md",
+    "Untitled.canvas",
+    "2026-05-01.md",
+    "ai-agents/claude-code/claude.code.hidden.commands.md",
+    "ai-agents/ai-agent/ai.agent.llm.workflows.md",
     "ai-agents/agent-memory/agnet.memory.8.frameworks.md",
     "ai-agents/agent-memory/agnet.memory.",
     "ai-agents/_media/agent-memory/full-history-memory-stack-diagram.png",
     "ai-agents/_media/agent-memory/full-history-memory-history-stack-diagram.png",
-    "ai-agents/agent-memory/agent.memory.eight.memory.strategies.md",
     "ai-agents/agent-memory/agent.memory.eight.memory.stratergies.md",
     "ai-agents/_media/agent-memory/zep-agent-user-llm-business-data-architecture.png",
     "ai-agents/_media/agent-memory/letta-memgpt-finite-context-window.png",
@@ -219,31 +238,13 @@
     "ai-agents/ai-agent/ai.agent.llm.in.the.loop.md",
     "ai-agents/ai-agent/ai.agent.intro.md",
     "ai-agents/ai-agent/ai.agent.improve.llm.with.tools.md",
-    "ai-agents/claude-code/The-Complete-Guide-to-Building-Skill-for-Claude.pdf",
     "ai-agents/claude-code/Claude.Code.Memory.Architecture.Explained.md",
-    "ai-agents/claude-code/claude.code.hidden.commands.md",
     "ai-agents/skills/top.skills.md",
     "ai-agents/skills/skills.websites.md",
-    "ai-agents/skills/skills.vs.mcp.md",
-    "ai-agents/skills/agent.vs.skills.md",
-    "ai-agents/claude-code/claude.code.workflow.cheatsheet.md",
-    "ai-agents/claude-code/claude-mcp-server-guide.md",
-    "ai-agents/claude-skills/superpowers.skills.md",
-    "misc/ai.references.md",
-    "ai-agents/prompts/notebookLLM-learn-new-topic.md",
-    "ai-agents/prompts/coding-project-prompts.md",
-    "ai-agents/prompts/ChatGPT-Prompt-Guide.md",
-    "ai-agents/prompts/professional-prompts-plan-execution.md",
-    "ai-agents/obsidian-app/obsidian.ai.workflow.md",
-    "ai-agents/mcp-server/yahoo.fantasy.mcp.server.md",
-    "ai-agents/mcp-server/README.md",
-    "ai-agents/mcp-server/mcp-example.md",
-    "ai-agents/mcp-server/mcp-basics.md",
     "ai-agents/ai-agents",
     "ai-agents/_media/skills",
     "ai-agents/_media/mcp-server",
     "ai-agents/_media/cursor-IDE-agent",
-    "ai-agents/_media/claude-skills",
-    "ai-agents/_media/claude-code"
+    "ai-agents/_media/claude-skills"
   ]
 }

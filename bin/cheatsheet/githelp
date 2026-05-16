@@ -10,6 +10,9 @@ https://cheatography.com/itsellej/cheat-sheets/git-commands/
 	# List PR review with number and repo 
 	gh pr view 2291 --repo cbsinteractive/airspace 2>&1
 
+	# check PR deploy to dev/prod
+	gh api "repos/cbsinteractive/airspace-deploy/pulls?state=closed&base=prod&per_page=20" --jq '.[] | {number: .number, title: .title[:80], merged_at: .merged_at}' 2>/dev/null | head -40 
+
 ## git agent prompts 
 	# for specific pull request 
 		- would you be able to analyze what fix pull request 1590 did?
