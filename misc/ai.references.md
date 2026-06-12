@@ -28,6 +28,9 @@
 - **CLAUDE.md guideline for AI coding**: Framework based on Karpathy's observations about LLM pitfalls (unfounded assumptions, overcomplexity) to improve Claude Code behavior
 - **Four core principles**: Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution—each targeting specific weaknesses in AI-assisted development
 
+[mattpocock-real-engineer-skills](https://github.com/mattpocock/skills) 
+
+
 ## Agents
 
 [agency-agents](https://github.com/msitarzewski/agency-agents)  
@@ -43,8 +46,39 @@
 - **Optimizing LLMs through Prompt Engineering:** Rather than relying on resource-intensive fine-tuning, developers can significantly enhance base models using advanced prompting techniques. The lecture highlights strategies like **few-shot prompting** to align the model with specific expectations, **chain-of-thought** to break down reasoning step-by-step, and **chaining complex prompts** to separate tasks for easier debugging and control.
 - **Solving Hallucinations and Knowledge Gaps with RAG:** To address base LLM limitations such as outdated knowledge, context window restrictions, and a lack of verifiable sources, the lecture details **Retrieval-Augmented Generation (RAG)**. RAG grounds the LLM by embedding external documents into a vector database, retrieving relevant context based on user queries, and feeding it to the model to generate accurate, sourced answers.
 - **Building Autonomous Agentic Workflows:** The lecture explains how to transition from single-prompt applications to multi-step **agentic AI workflows**, where models act autonomously to solve complex tasks. These systems equip LLMs with **memory management** (working and archival) and **external tools** (like APIs or Model Context Protocols) to retrieve data and execute actions, sometimes even utilizing **multi-agent systems** running specialized tasks in parallel
+
+## Tools
+
+[markitdown](https://github.com/microsoft/markitdown) 
+- **Anything-to-Markdown for LLMs**: Microsoft's Python utility converts PDFs, Office docs, images (OCR), audio (transcription), HTML, and even YouTube URLs into Markdown — the format LLMs natively speak, keeping output semantically clear and token-efficient
+- **Structure-preserving conversion**: retains headings, lists, tables, and links so downstream LLM processing keeps document semantics, with a plugin system for third-party converters
+- **Enterprise extraction path**: optional Azure Document Intelligence integration for higher-quality cloud extraction beyond local processing
+
+[headroom](https://github.com/chopratejas/headroom)
+- **60-95% token reduction for agents**: compresses tool outputs, logs, RAG chunks, and conversation history before they hit the LLM, cutting cost and latency while maintaining answer quality
+- **Reversible, content-aware compression**: originals are cached locally and retrievable on demand (lossless in practice), with strategies picked per content type — JSON, code (AST-aware), and free text each get their own compressor
+- **Drops into any stack**: works as an inline library, transparent proxy, CLI wrapper, or MCP server with Claude/Codex/Cursor — no code changes required, all processing stays local
+
+[MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo)
+- **Topic-to-video pipeline**: give it a keyword and it auto-generates the script, sources footage, adds subtitles and music, and renders polished HD shorts in 9:16 or 16:9 — zero manual editing
+- **Model-agnostic**: works with OpenAI, Claude, Gemini, DeepSeek, and 700+ models, so you can optimize for cost or quality
+- **Built for content-at-scale**: batch generation for TikTok/Reels/Shorts, deployable via one-click Windows package, Docker, or Colab
+
+[Use Gemini Code Assist on GitHub]( https://developers.google.com/gemini-code-assist/docs/overview)
+- **Free AI PR reviews on GitHub**: a GitHub app that automatically reviews pull requests with Gemini 2.5, with setup and customization of review behavior per repo
+- **Full-SDLC assistant beyond GitHub**: same product covers code completion, generation, and agentic multi-step chat in VS Code, JetBrains, and Android Studio
+- **Enterprise codebase awareness**: Standard/Enterprise tiers customize suggestions from private codebases and integrate with Google Cloud services (Firebase, BigQuery, Apigee)
+
+[# Harness — The Team-Architecture Factory for Claude Code](https://github.com/revfactory/harness)
+- **Factory for agent teams, not an agent itself**: say "build a harness for this project" and it generates a coordinated multi-agent architecture plus specialized skills tailored to your domain — a meta-layer that produces harnesses rather than being one
+- **Six pre-built team patterns**: Pipeline, Fan-out/Fan-in, Expert Pool, Producer-Reviewer, Supervisor, and Hierarchical Delegation, so team designs don't start from scratch
+- **Measured quality gains**: author-run evals across 15 software engineering tasks show average quality score up 60% (49.5 → 79.3) with structured pre-configuration
+
 ## Research
 [Karparthy Autoresearch](https://github.com/karpathy/autoresearch)  
+- **Overnight autonomous ML research**: an agent modifies training code, runs experiments, evaluates validation metrics, and iterates ~100 times per night — you wake up to a log of optimized models
+- **Fixed 5-minute time budget**: every experiment trains exactly 5 minutes regardless of hardware, making runs directly comparable and optimizing for your actual platform rather than abstract benchmarks
+- **Program the researcher, not the code**: humans steer by editing a `program.md` "research org code" file instead of Python, while the agent only touches a single `train.py` — keeping modifications reviewable and the system minimal
 
 ## Tutorials
 [spelled-out intro to neural networks and backpropagation: building micrograd](https://www.youtube.com/watch?v=VMj-3S1tku0)
