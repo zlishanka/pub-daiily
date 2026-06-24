@@ -180,8 +180,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 448.5,
-    "collapsed": true
+    "width": 448.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -200,6 +199,10 @@
   },
   "active": "e4d53f26cfaecf5e",
   "lastOpenFiles": [
+    "misc/crypto.daily.md",
+    "misc/claude.code.workflow.md",
+    "misc/ai.references.md",
+    "().md",
     "ai-agents/stock-agent/README.md",
     "ai-agents/prompts.md",
     "ai-agents/skills/skills.websites.md",
@@ -208,8 +211,6 @@
     "distributed-computing/locking/redis.distributed.lock.md",
     "misc/dev.daily.md",
     "misc/cursor.workflow.md",
-    "misc/claude.code.workflow.md",
-    "misc/ai.references.md",
     "misc/ai.daily.md",
     "ai-agents/prompts/Unlock-God-Mode-Prompts.md",
     "ai-agents/prompts/professional-prompts-plan-execution.md",
@@ -226,8 +227,6 @@
     "ai-agents/ai-agent/ai.agent.llm.in.the.loop.md",
     "ai-agents/ai-agents/MEDIA_ORGANIZATION.md",
     "ai-agents/ai-agent/ai.agent.intro.md",
-    "ai-agents/ai-agent/ai.agent.improve.llm.with.tools.md",
-    "ai-agents/agent-memory/agnet.memory.8.frameworks.md",
     "ai-agents/claude-code/The-Complete-Guide-to-Building-Skill-for-Claude.pdf",
     "ai-agents/agentic-engineers/Structured_Thinking_Guide.pdf",
     "Untitled.canvas",

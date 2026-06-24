@@ -29,6 +29,24 @@
 - **Four core principles**: Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution—each targeting specific weaknesses in AI-assisted development
 
 [mattpocock-real-engineer-skills](https://github.com/mattpocock/skills) 
+- **Skills targeting AI-coding failure modes**: Matt Pocock's collection of small, composable Claude skills built around four problems — misalignment, verbosity, code quality, and architecture decay
+- **Discipline-enforcing workflows**: `/grill-me` and `/grill-with-docs` force the agent to confirm requirements before coding, while `/tdd` and `/diagnosing-bugs` drive red-green-refactor and systematic debugging
+- **Classical engineering principles**: emphasizes small deliberate steps with rapid feedback, plus a shared `CONTEXT.md` domain language to cut token waste
+
+[Open Design: The open-source Claude Design alternative](https://github.com/nexu-io/open-design)
+- **Agent-native design app**: local-first desktop tool that generates prototypes, dashboards, decks, images, and videos by driving 22+ coding agents already on your machine (Claude Code, Cursor, Copilot) — swap models with one click
+- **Brand-driven outputs**: every artifact reads from a structured `DESIGN.md` spec, shipping 150 pre-built design systems modeled on Linear, Stripe, Apple, and Figma
+- **Local-first & extensible**: runs entirely on your machine with zero telemetry, extended via 261 plugins and 100+ skills, Apache-2.0 licensed
+
+[**High-performance CLI proxy that reduces LLM token consumption**](https://github.com/rtk-ai/rtk)
+- **Token-killing output proxy**: single zero-dependency Rust binary that intercepts command output and compresses it before it hits the LLM context, cutting 60-90% of tokens via filtering, grouping, truncation, and dedup
+- **Measured savings**: a typical 30-min Claude Code session drops from ~118K to ~24K tokens (80% less) across `git status`, test runs, and file ops
+- **Transparent integration**: auto-rewrite hooks, plugin interception, or CLAUDE.md injection across 14 coding tools and 100+ commands — one `rtk init -g` to set up
+
+[HTML Anything](https://github.com/nexu-io/html-anything)
+- **Markdown/CSV/JSON/SQL → ship-ready HTML**: local-first desktop app that turns structured inputs into polished HTML through your existing coding-agent CLI — no API key needed, reuses your authenticated Claude Code/Cursor/Gemini session
+- **75 composable templates**: across nine surfaces — magazine articles, keynote decks, résumés, posters, social cards, web prototypes, data reports, and video scripts
+- **Design discipline built in**: live streaming render (interruptible), sandboxed iframe preview against XSS, and enforced CJK-first fonts, 8px grids, and WCAG contrast to avoid AI visual mediocrity
 
 
 ## Agents
@@ -41,11 +59,26 @@
 - **Self-Improving Learning Loop:** Unlike static agents, it features a built-in cycle where it autonomously creates new skills from experience, searches its own past conversation history using FTS5, and builds a persistent model of the user to improve across sessions.
 - **Universal Multi-Platform Gateway:** It is uniquely designed to live where the user does, offering a unified gateway that connects a single agent process to Telegram, Discord, Slack, WhatsApp, Signal, and a full-featured Terminal UI (TUI) simultaneously.
 - **Serverless Persistence & Portability:** It supports advanced terminal backends like [Daytona](https://github.com/daytonaio/daytona) and [Modal](https://www.modal.com/), allowing the agent’s entire environment to hibernate when idle and wake on demand, providing cloud-scale persistence with near-zero idle costs.
-- 
+
 [Stanford lecture on LLM agentic systems](https://www.youtube.com/watch?v=k1njvbBmfsw&t=5640s)
 - **Optimizing LLMs through Prompt Engineering:** Rather than relying on resource-intensive fine-tuning, developers can significantly enhance base models using advanced prompting techniques. The lecture highlights strategies like **few-shot prompting** to align the model with specific expectations, **chain-of-thought** to break down reasoning step-by-step, and **chaining complex prompts** to separate tasks for easier debugging and control.
 - **Solving Hallucinations and Knowledge Gaps with RAG:** To address base LLM limitations such as outdated knowledge, context window restrictions, and a lack of verifiable sources, the lecture details **Retrieval-Augmented Generation (RAG)**. RAG grounds the LLM by embedding external documents into a vector database, retrieving relevant context based on user queries, and feeding it to the model to generate accurate, sourced answers.
 - **Building Autonomous Agentic Workflows:** The lecture explains how to transition from single-prompt applications to multi-step **agentic AI workflows**, where models act autonomously to solve complex tasks. These systems equip LLMs with **memory management** (working and archival) and **external tools** (like APIs or Model Context Protocols) to retrieve data and execute actions, sometimes even utilizing **multi-agent systems** running specialized tasks in parallel
+
+[AutoGPT: Build, Deploy, and Run AI Agents](https://github.com/significant-gravitas/autogpt)
+- **Low-code visual agent builder**: construct continuous AI agents by wiring together single-action blocks in an intuitive interface, making sophisticated automation accessible to non-technical users
+- **Continuous, autonomous operation**: agents run continuously and can be triggered by external sources, rather than one-off tasks
+- **Marketplace & dev ecosystem**: deploy or customize pre-built agents from an integrated marketplace, backed by Forge (custom-agent toolkit) and agbenchmark (performance testing)
+
+[Omnigent: open-source **AI agent framework**](https://github.com/omnigent-ai/omnigent)
+- **Meta-harness for multiple agents**: orchestration layer that unifies Claude Code, Codex, Cursor, Pi, and custom agents, letting you swap runtimes without rewriting code
+- **Multi-agent coordination & sync**: supervisors delegate tasks across vendors (one agent reviews another's work), with sessions persisting in real time across terminals, browsers, and mobile
+- **Production governance**: approval gates, spending caps, and tool-access policies at server/agent/session levels, plus disposable cloud sandboxes via Modal, Daytona, or Islo
+
+[Openhands](https://github.com/OpenHands/openhands) 
+- **Self-hosted control center for coding agents**: run OpenHands' native agent alongside Claude Code, Codex, and Gemini, switching between local, remote, and cloud backends without interrupting workflows
+- **Flexible deployment**: hosts on a laptop, a dedicated Mac Mini, cloud VMs, or enterprise infra — addressing security and performance per use case
+- **Always-on automations**: scheduled and event-driven workflows integrate with Slack, GitHub, Linear, and Notion; model-agnostic with bring-your-own-LLM and custom agent profiles
 
 ## Tools
 
@@ -73,6 +106,16 @@
 - **Factory for agent teams, not an agent itself**: say "build a harness for this project" and it generates a coordinated multi-agent architecture plus specialized skills tailored to your domain — a meta-layer that produces harnesses rather than being one
 - **Six pre-built team patterns**: Pipeline, Fan-out/Fan-in, Expert Pool, Producer-Reviewer, Supervisor, and Hierarchical Delegation, so team designs don't start from scratch
 - **Measured quality gains**: author-run evals across 15 software engineering tasks show average quality score up 60% (49.5 → 79.3) with structured pre-configuration
+
+[Hoppscotch: **Open Source API Development Ecosystem**](https://github.com/hoppscotch/hoppscotch) 
+- **Lightweight Postman alternative**: fast, browser-based API client for building and testing requests across REST, GraphQL, WebSocket, SSE, Socket.IO, and MQTT — no heavy desktop install required
+- **Team-ready workspaces**: collections, environments, and request history with real-time collaboration, plus authentication helpers and pre-request scripting
+- **Self-hostable & extensible**: open-source under MIT, deployable via Docker for full data control, with a CLI for running collections in CI pipelines
+
+[Puppeteer: JavaScript library which provides a high-level API to control Chrome or Firefox](https://github.com/puppeteer/puppeteer) 
+- **Headless browser automation**: Node.js library driving Chrome/Firefox over the DevTools Protocol to script navigation, clicks, form fills, and page interactions programmatically
+- **Capture & extract**: generate screenshots and PDFs of pages, scrape rendered content, and crawl SPAs where the DOM is built client-side
+- **Testing & CI staple**: automate end-to-end UI tests and reproduce user flows in a real browser, with headless mode for fast, reliable runs in pipelines
 
 ## Research
 [Karparthy Autoresearch](https://github.com/karpathy/autoresearch)  
