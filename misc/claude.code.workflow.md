@@ -106,7 +106,33 @@ claude-monitor
 - prompt to `I want to add a support page to my app. ultrathink about the implementation`
 
 ### loop
-- run the build in a loop and fix all build errors as they get reported
+- `/loop <interval> <task>` re-runs a prompt or command on a time interval; omit the interval to let Claude self-pace.
+- **Fixed-interval examples**
+```bash
+/loop 30s npm run build     # rebuild every 30s, fix errors as they appear
+/loop 5m /babysit-prs       # run a slash command every 5 minutes
+/loop 10m check main for new commits
+```
+- **Self-paced examples**
+```bash
+/loop run the test suite and fix failures until every test passes
+/loop watch the deploy and tell me when it finishes or fails
+```
+
+### goal
+- `/goal <condition>` keeps Claude working until a verifiable condition is met (checked after each turn). Unlike `/loop` (time interval), `/goal` runs until the goal is achieved.
+- **Set a goal examples**
+```bash
+/goal all tests in test/auth pass and the lint step is clean
+/goal migrate every call site to the new API until the build compiles and tests pass
+/goal work through the labeled issue backlog until empty, or stop after 20 turns
+```
+- **Manage / non-interactive**
+```bash
+/goal              # check status
+/goal clear        # stop an active goal
+claude -p "/goal CHANGELOG.md has an entry for every PR merged this week"
+```
 
 ### clear and resume
 - `clear` to clear the context 

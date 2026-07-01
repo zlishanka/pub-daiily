@@ -80,6 +80,21 @@
 - **Flexible deployment**: hosts on a laptop, a dedicated Mac Mini, cloud VMs, or enterprise infra — addressing security and performance per use case
 - **Always-on automations**: scheduled and event-driven workflows integrate with Slack, GitHub, Linear, and Notion; model-agnostic with bring-your-own-LLM and custom agent profiles
 
+[cognee](https://github.com/topoteretes/cognee)
+- **Persistent AI agent memory**: builds a self-hosted knowledge graph that gives agents long-term memory across sessions, learning and evolving as data is continuously ingested
+- **Unified memory infrastructure**: consolidates graph database, vector embeddings, and session caching into a single Postgres-based system — no separate specialized services to run
+- **Multi-language & integrated**: ships Python, Rust, and TypeScript clients plus Claude Code and MCP integrations, so it drops into different agent frameworks
+
+**[Agent-Reach](https://github.com/Panniantong/Agent-Reach)**
+- **Internet access layer for agents**: a unified CLI that lets AI agents (Claude Code, Cursor, OpenClaw) read and search across Twitter, Reddit, YouTube, GitHub, Bilibili, and Xiaohongshu — no per-platform API keys or config
+- **Multi-backend routing**: each platform has a "first choice + backup" capability layer, auto-routing to the next backend when one integration breaks so it stays functional without manual fixes
+- **Zero-cost & privacy-first**: install via a single instruction to an agent, credentials stay local and are never transmitted, no API fees, plus an `agent-reach doctor` command to check which platforms are operational
+
+[ralph-loop](https://github.com/snarktank/ralph)
+- **Autonomous development loop**: runs repeatedly until all PRD items are done, spawning a fresh AI instance (Amp or Claude Code) each cycle to tackle a single user story and commit progress to git
+- **Memory across context windows**: persists knowledge through git history, a `progress.txt` of learnings, and a `prd.json` status tracker — so it handles complex features without relying on one long session
+- **Structured workflow with quality gates**: converts a markdown PRD into JSON, then automates implementation with typecheck, test, and CI feedback loops so quality compounds rather than degrades across iterations
+
 ## Tools
 
 [markitdown](https://github.com/microsoft/markitdown) 
@@ -116,6 +131,21 @@
 - **Headless browser automation**: Node.js library driving Chrome/Firefox over the DevTools Protocol to script navigation, clicks, form fills, and page interactions programmatically
 - **Capture & extract**: generate screenshots and PDFs of pages, scrape rendered content, and crawl SPAs where the DOM is built client-side
 - **Testing & CI staple**: automate end-to-end UI tests and reproduce user flows in a real browser, with headless mode for fast, reliable runs in pipelines
+
+[openMontage](https://github.com/calesthio/OpenMontage)
+- **Agentic video production system**: open-source pipeline that turns AI coding assistants (Claude, Cursor, Copilot) into a full production studio — orchestrating research, scripting, asset creation, editing, and composition rather than generating single clips
+- **Real footage, no paid video models**: semantically searches and assembles actual motion footage from free archives (Archive.org, NASA, Wikimedia, Pexels, Unsplash) into coherent timelines, instead of animating stills via expensive APIs
+- **Comprehensive ecosystem**: 12 pipelines, 52 tools (video, image, TTS, music, post), 400+ agent skills, and 14 video providers, with production-grade quality gates and cost governance
+
+[codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp)
+- **Ultra-fast code intelligence**: a single static binary that indexes an entire codebase into a persistent knowledge graph — the 28M-LOC Linux kernel in ~3 minutes — delivering sub-ms queries and ~99% fewer tokens than file-by-file exploration
+- **158 languages with smart type resolution**: vendored tree-sitter grammars for broad coverage plus hybrid LSP semantic type resolution for 9 major languages, tracing functions across packages and inheritance without a separate language server
+- **Zero-dependency multi-agent integration**: cross-platform, no API keys, auto-configures 11 coding agents (Claude Code, Gemini CLI, Zed) with 14 MCP tools for graph queries, architecture analysis, and dead-code detection
+
+[design.md](https://github.com/google-labs-code/design.md)
+- **Dual-layer format for AI agents**: combines machine-readable YAML tokens with human-readable markdown prose, so coding agents understand both exact design values and the reasoning behind them
+- **Validation & interoperability**: a CLI lints specs, compares versions, and exports to formats like Tailwind and W3C Design Tokens for seamless integration across design systems and frameworks
+- **Structured design documentation**: gives agents a persistent, structured understanding of a design system to apply consistently, instead of scattered guidelines
 
 ## Research
 [Karparthy Autoresearch](https://github.com/karpathy/autoresearch)  
