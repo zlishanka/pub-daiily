@@ -12,7 +12,7 @@ Need to pip install following packages
 pip install selenium
  
 """
-
+import glob
 import os
 import time
 from selenium import webdriver
@@ -23,12 +23,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import csv
 
-# Step 1: Define the list of genes
-genes = ["BRI3BP", "ENDOD1", "ASB8", "TFPI", "FBXO33"]
+# Step 1: Define the list of genes by reading the Genes column from an input CSV file
+input_csv_file = "B1402-candidate-8mer-autoantigens-8mer-pattern.csv"
+with open(input_csv_file, mode="r", newline="", encoding="utf-8") as f:
+    reader = csv.DictReader(f)
+    genes = [row["Gene"] for row in reader]
 
 # Step 2: Define the base URL and dataset parameter
 base_url = "https://www.fobinf.com/"
 dataset = "nl_human_data_HemaExp_v_1"
+
 
 # Step 3: Configure Chrome to automatically download files
 download_dir = os.path.expanduser("~/Downloads")  # Path to the Downloads directory
@@ -49,7 +53,7 @@ service = Service(chromedriver_path)
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Step 4: Initialize the CSV file and write the header
-output_file = "gene_expression_results.csv"
+output_file = "B1402-candidate-8mer_specific_genes_bloodspot.csv"
 csv_header = [
     "Gene",
     "log2",
@@ -71,8 +75,9 @@ csv_header = [
     "pDC", "pDC", "pDC", "pDC", "pDC"
 ]
 
-# delete old files
-os.system(f"rm {download_dir}/*.csv") 
+# delete old gene-download files only (avoid touching unrelated files in Downloads)
+for f in glob.glob(os.path.join(download_dir, "*_log2*.csv")):
+    os.remove(f)
 
 with open(output_file, mode="w", newline="", encoding="utf-8") as csvfile:
     writer = csv.writer(csvfile)
@@ -122,7 +127,7 @@ with open(output_file, mode="w", newline="", encoding="utf-8") as csvfile:
         except Exception as e:
             # Handle any errors during scraping
             print(f"Error processing gene {gene}: {e}")
-            writer.writerow([gene, "Error"])
+            writer.writerow([gene, "Error"] + [""] * (len(csv_header) - 2))
 
 # Step 10: Close the WebDriver
 driver.quit()
