@@ -12,6 +12,7 @@ Need to pip install following packages
 pip install selenium
  
 """
+
 import glob
 import os
 import time
@@ -24,15 +25,14 @@ from selenium.webdriver.chrome.options import Options
 import csv
 
 # Step 1: Define the list of genes by reading the Genes column from an input CSV file
-input_csv_file = "B1402-candidate-8mer-autoantigens-8mer-pattern.csv"
+input_csv_file = "B1402-candidate-8mer-autoantigens-8mer-pattern-first100.csv"
 with open(input_csv_file, mode="r", newline="", encoding="utf-8") as f:
     reader = csv.DictReader(f)
-    genes = [row["Gene"] for row in reader]
+    genes = [row["Gene"] for row in reader if row["Gene"]]
 
 # Step 2: Define the base URL and dataset parameter
 base_url = "https://www.fobinf.com/"
 dataset = "nl_human_data_HemaExp_v_1"
-
 
 # Step 3: Configure Chrome to automatically download files
 download_dir = os.path.expanduser("~/Downloads")  # Path to the Downloads directory
@@ -48,12 +48,13 @@ chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--no-sandbox")
 
 # Path to your chromedriver executable
+#chromedriver_path = os.path.expanduser("~/bin/chromedriver")
 chromedriver_path = "/usr/local/bin/chromedriver"  # Update this path
 service = Service(chromedriver_path)
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Step 4: Initialize the CSV file and write the header
-output_file = "B1402-candidate-8mer_specific_genes_bloodspot.csv"
+output_file = "B1402-candidate-8mer-autoantigens-8mer-output-first100.csv"
 csv_header = [
     "Gene",
     "log2",
@@ -84,49 +85,72 @@ with open(output_file, mode="w", newline="", encoding="utf-8") as csvfile:
     writer.writerow(csv_header)
 
     # Step 5: Loop through each gene and process the download
+    max_retries = 3  # only download timeouts are retried; other errors (e.g. "gene not
+                      # expressed/annotated" alerts) fail immediately since retrying can't help
     for gene in genes:
         # Construct the full URL with query parameters
         url = f"{base_url}?gene={gene}&dataset={dataset}"
-        
-        try:
-            # Load the webpage
-            driver.get(url)
-            time.sleep(3)  # Wait for JavaScript to load (adjust as needed)
 
-            # Step 6: Locate the button using its selector
-            button = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "button[onclick='exportDataAsText()']"))
-            )
+        last_error = None
+        for attempt in range(1, max_retries + 1):
+            try:
+                # Load the webpage
+                driver.get(url)
+                time.sleep(3)  # Wait for JavaScript to load (adjust as needed)
 
-            # Simulate a click on the button to trigger the download
-            button.click()
+                # Step 6: Locate the button using its selector
+                button = WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "button[onclick='exportDataAsText()']"))
+                )
 
-            # Step 7: Wait for the file to be downloaded
-            # Assume the file name is based on the gene name (e.g., BRI3BP.csv)
-            file_name = f"{gene}_log2.csv"
-            file_path = os.path.join(download_dir, file_name)
+                # Step 7: Snapshot existing files for this gene before triggering the download,
+                # since Chrome renames repeat downloads (e.g. "{gene}_log2 (1).csv") instead of
+                # overwriting, which a fixed filename check would miss.
+                glob_pattern = os.path.join(download_dir, f"{gene}_log2*.csv")
+                files_before = set(glob.glob(glob_pattern))
 
-            # Wait until the file exists in the download directory
-            timeout = 30  # Maximum wait time in seconds
-            start_time = time.time()
-            while not os.path.exists(file_path):
-                time.sleep(1)
-                if time.time() - start_time > timeout:
-                    raise TimeoutError(f"File {file_name} was not downloaded within {timeout} seconds.")
+                # Simulate a click on the button to trigger the download
+                button.click()
 
-            # Step 8: Read the downloaded CSV file and skip the first row
-            with open(file_path, mode="r", encoding="utf-8") as downloaded_file:
-                reader = csv.reader(downloaded_file)
-                rows = list(reader)[1:]  # Skip the first row (header)
+                # Wait until a new file for this gene appears in the download directory
+                timeout = 30  # Maximum wait time in seconds
+                start_time = time.time()
+                new_files = []
+                while not new_files:
+                    new_files = list(set(glob.glob(glob_pattern)) - files_before)
+                    if new_files:
+                        break
+                    time.sleep(1)
+                    if time.time() - start_time > timeout:
+                        raise TimeoutError(f"File for gene {gene} was not downloaded within {timeout} seconds.")
+                file_path = max(new_files, key=os.path.getmtime)
 
-            # Step 9: Write the data to the output CSV file
-            for row in rows:
-                writer.writerow([gene] + row)
-            print(f"Processed gene: {gene}")
+                # Step 8: Read the downloaded CSV file and skip the first row
+                with open(file_path, mode="r", encoding="utf-8") as downloaded_file:
+                    reader = csv.reader(downloaded_file)
+                    rows = list(reader)[1:]  # Skip the first row (header)
 
-        except Exception as e:
-            # Handle any errors during scraping
-            print(f"Error processing gene {gene}: {e}")
+                # Step 9: Write the data to the output CSV file
+                for row in rows:
+                    writer.writerow([gene] + row)
+                suffix = f" (attempt {attempt})" if attempt > 1 else ""
+                print(f"Processed gene: {gene}{suffix}")
+                last_error = None
+                break
+
+            except TimeoutError as e:
+                last_error = e
+                print(f"Timeout for gene {gene} on attempt {attempt}/{max_retries}: {e}")
+                # loop again for another attempt, unless retries are exhausted
+
+            except Exception as e:
+                # Non-timeout errors (e.g. "gene not expressed/annotated" alerts) won't be
+                # fixed by retrying, so fail immediately.
+                last_error = e
+                break
+
+        if last_error is not None:
+            print(f"Error processing gene {gene}: {last_error}")
             writer.writerow([gene, "Error"] + [""] * (len(csv_header) - 2))
 
 # Step 10: Close the WebDriver
